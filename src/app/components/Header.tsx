@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogIn } from 'lucide-react';
+import { Menu, X, LogIn, ExternalLink } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
 
@@ -22,6 +22,7 @@ export function Header() {
     { label: 'O nás', path: '/o-nas' },
     { label: 'Programy', path: '/programy' },
     { label: 'Události', path: '/udalosti' },
+    { label: 'Rozvrh', path: 'https://app.zenamu.com/tergarczechia', isExternal: true },
     { label: 'Komunita', path: '/komunita' },
     { label: 'Kontakt', path: '/kontakt' },
   ];
@@ -45,20 +46,33 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-10">
+        <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`text-[15px] font-medium transition-all duration-300 tracking-wide relative group ${
-                location.pathname === item.path
-                  ? 'text-tergar-blue'
-                  : 'text-deep-charcoal hover:text-tergar-blue'
-              }`}
-            >
-              {item.label}
-              <span className={`absolute -bottom-1 left-0 h-0.5 bg-tergar-blue transition-all duration-300 ${location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-            </Link>
+            item.isExternal ? (
+              <a
+                key={item.path}
+                href={item.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[15px] font-medium transition-all duration-300 tracking-wide relative group text-deep-charcoal hover:text-tergar-blue flex items-center gap-1"
+              >
+                {item.label}
+                <ExternalLink size={12} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+              </a>
+            ) : (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`text-[15px] font-medium transition-all duration-300 tracking-wide relative group ${
+                  location.pathname === item.path
+                    ? 'text-tergar-blue'
+                    : 'text-deep-charcoal hover:text-tergar-blue'
+                }`}
+              >
+                {item.label}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-tergar-blue transition-all duration-300 ${location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+              </Link>
+            )
           ))}
           
           <div className="pl-4 border-l border-divider-gray/50 ml-2">
@@ -91,17 +105,34 @@ export function Header() {
       >
         <nav className="flex flex-col gap-8 text-center">
           {navItems.map((item, idx) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-3xl font-serif text-deep-charcoal hover:text-tergar-blue transition-colors ${
-                 mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-              style={{ transitionDelay: `${idx * 50}ms`, transitionDuration: '500ms' }}
-            >
-              {item.label}
-            </Link>
+            item.isExternal ? (
+              <a
+                key={item.path}
+                href={item.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-3xl font-serif text-deep-charcoal hover:text-tergar-blue transition-colors flex items-center justify-center gap-3 ${
+                   mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                }`}
+                style={{ transitionDelay: `${idx * 50}ms`, transitionDuration: '500ms' }}
+              >
+                {item.label}
+                <ExternalLink size={24} className="opacity-50" />
+              </a>
+            ) : (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-3xl font-serif text-deep-charcoal hover:text-tergar-blue transition-colors ${
+                   mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                }`}
+                style={{ transitionDelay: `${idx * 50}ms`, transitionDuration: '500ms' }}
+              >
+                {item.label}
+              </Link>
+            )
           ))}
           <div className={`mt-8 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '300ms', transitionDuration: '500ms' }}>
              <Link 

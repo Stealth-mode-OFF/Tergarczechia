@@ -1,6 +1,6 @@
 // All pages for Tergar Česká republika - Vadžrajánová online platforma
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Mail, Users, BookOpen, Video, Star, Heart, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Calendar, Mail, Users, BookOpen, Video, Star, Heart, CheckCircle2, Youtube, Instagram, Facebook, ExternalLink, Play } from 'lucide-react';
 import communityImage from 'figma:asset/ee3557312d962ff84207c71d88a25a1563aea613.png'; // World/People illustration
 import mingyurPortrait from 'figma:asset/d0b3d5641727b1f2f947c8f27ae30b24d450fbdf.png'; // New High Quality Portrait
 
@@ -358,12 +358,29 @@ export function UdalostiPage() {
               </div>
 
               <div className="flex-shrink-0 w-full md:w-auto mt-4 md:mt-0">
-                <Link to="/kontakt" className="btn-secondary !py-3 !px-6 text-sm whitespace-nowrap w-full justify-center group-hover:bg-deep-charcoal group-hover:text-white">
-                  Rezervovat místo
-                </Link>
+                <a 
+                  href="https://app.zenamu.com/tergarczechia" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn-secondary !py-3 !px-6 text-sm whitespace-nowrap w-full justify-center group-hover:bg-deep-charcoal group-hover:text-white flex items-center gap-2"
+                >
+                  Rezervovat <ExternalLink size={14} />
+                </a>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <a 
+            href="https://app.zenamu.com/tergarczechia" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            <Calendar size={18} />
+            Otevřít kompletní rozvrh na Zenamu
+          </a>
         </div>
 
         <div className="mt-24 text-center bg-warm-sand/30 p-12 rounded-[2rem] max-w-3xl mx-auto">
@@ -441,6 +458,28 @@ export function ONasPage() {
                   </div>
                 </div>
              </div>
+
+             {/* ONLINE INSPIRATION (YOUTUBE) - NEW SECTION */}
+             <div className="bg-deep-charcoal text-white p-8 rounded-[2rem] shadow-xl mt-8 relative overflow-hidden group">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-tergar-gold/20 rounded-full blur-2xl group-hover:bg-tergar-gold/30 transition-colors" />
+                <h3 className="font-serif text-xl mb-4 relative z-10 flex items-center gap-3">
+                   <Youtube className="text-tergar-gold" size={24} />
+                   Digitální dharma
+                </h3>
+                <p className="text-white/70 font-light text-sm mb-6 relative z-10">
+                  Sledujte pravidelná učení, živá vysílání a krátké inspirace.
+                </p>
+                <div className="space-y-3 relative z-10">
+                   <a href="https://www.youtube.com/@MingyurRinpoche" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors group/link">
+                      <span className="font-medium text-sm">Mingyur Rinpoche</span>
+                      <ExternalLink size={14} className="text-white/50 group-hover/link:text-white" />
+                   </a>
+                   <a href="https://www.youtube.com/@TergarMeditationCommunity" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors group/link">
+                      <span className="font-medium text-sm">Tergar Community</span>
+                      <ExternalLink size={14} className="text-white/50 group-hover/link:text-white" />
+                   </a>
+                </div>
+             </div>
            </div>
         </div>
 
@@ -497,27 +536,46 @@ export function KontaktPage() {
       </section>
 
       <div className="container-custom py-24 relative -mt-20 z-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-24">
-           <div className="bg-white p-10 lg:p-14 text-center rounded-[2.5rem] shadow-xl shadow-black/5 hover:-translate-y-1 transition-transform duration-300">
-             <div className="bg-tergar-gold/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8">
-                <Mail className="text-tergar-gold" size={32} strokeWidth={1.5} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24">
+           {/* General Support */}
+           <div className="bg-white p-10 text-center rounded-[2.5rem] shadow-xl shadow-black/5 hover:-translate-y-1 transition-transform duration-300">
+             <div className="bg-tergar-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="text-tergar-gold" size={28} strokeWidth={1.5} />
              </div>
              <h3 className="text-2xl font-serif mb-3 text-deep-charcoal">Obecné dotazy</h3>
-             <p className="text-muted-gray mb-8 font-light">Pro informace o komunitě, akcích a studijních skupinách</p>
-             <a href="mailto:tergar.czechia@tergar.org" className="text-tergar-blue font-medium hover:text-deep-charcoal transition-colors border-b border-tergar-blue/30 pb-1 text-lg">
+             <p className="text-muted-gray mb-6 font-light text-sm">Informace o komunitě, akcích a studijních skupinách</p>
+             <a href="mailto:tergar.czechia@tergar.org" className="text-tergar-blue font-medium hover:text-deep-charcoal transition-colors border-b border-tergar-blue/30 pb-1">
                tergar.czechia@tergar.org
              </a>
            </div>
 
-           <div className="bg-white p-10 lg:p-14 text-center rounded-[2.5rem] shadow-xl shadow-black/5 hover:-translate-y-1 transition-transform duration-300">
-             <div className="bg-tergar-blue/5 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8">
-                <CheckCircle2 className="text-tergar-blue" size={32} strokeWidth={1.5} />
+           {/* Tech Support */}
+           <div className="bg-white p-10 text-center rounded-[2.5rem] shadow-xl shadow-black/5 hover:-translate-y-1 transition-transform duration-300">
+             <div className="bg-tergar-blue/5 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle2 className="text-tergar-blue" size={28} strokeWidth={1.5} />
              </div>
              <h3 className="text-2xl font-serif mb-3 text-deep-charcoal">Technická podpora</h3>
-             <p className="text-muted-gray mb-8 font-light">Pro problémy s online platformou, přihlášením a platbami</p>
-             <a href="mailto:podpora@tergar.cz" className="text-tergar-blue font-medium hover:text-deep-charcoal transition-colors border-b border-tergar-blue/30 pb-1 text-lg">
+             <p className="text-muted-gray mb-6 font-light text-sm">Problémy s online platformou, přihlášením a platbami</p>
+             <a href="mailto:podpora@tergar.cz" className="text-tergar-blue font-medium hover:text-deep-charcoal transition-colors border-b border-tergar-blue/30 pb-1">
                podpora@tergar.cz
              </a>
+           </div>
+
+           {/* Social Media - NEW CARD */}
+           <div className="bg-white p-10 text-center rounded-[2.5rem] shadow-xl shadow-black/5 hover:-translate-y-1 transition-transform duration-300">
+             <div className="bg-[#E1E5EC] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-deep-charcoal">
+                <Play className="text-deep-charcoal ml-1" size={28} strokeWidth={1.5} fill="currentColor" />
+             </div>
+             <h3 className="text-2xl font-serif mb-3 text-deep-charcoal">Sledujte nás</h3>
+             <p className="text-muted-gray mb-6 font-light text-sm">Buďte v obraze s novinkami a inspirací na sociálních sítích</p>
+             <div className="flex justify-center gap-4">
+               <a href="https://www.facebook.com/tergarcz/" target="_blank" rel="noopener noreferrer" className="p-3 bg-soft-white rounded-full hover:bg-tergar-blue hover:text-white transition-colors">
+                 <Facebook size={20} />
+               </a>
+               <a href="https://www.instagram.com/tergar_cz/" target="_blank" rel="noopener noreferrer" className="p-3 bg-soft-white rounded-full hover:bg-tergar-blue hover:text-white transition-colors">
+                 <Instagram size={20} />
+               </a>
+             </div>
            </div>
         </div>
 
