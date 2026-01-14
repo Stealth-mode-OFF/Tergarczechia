@@ -1,100 +1,119 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, LogIn } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
 
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { label: 'Domů', path: '/' },
-    { label: 'Co je meditace', path: '/co-je-meditace' },
-    { label: 'Cesta Tergar', path: '/cesta-tergar' },
-    { label: 'Programy', path: '/programy' },
-    { label: 'Komunita', path: '/komunita' },
-    { label: 'Události', path: '/udalosti' },
     { label: 'O nás', path: '/o-nas' },
+    { label: 'Programy', path: '/programy' },
+    { label: 'Události', path: '/udalosti' },
+    { label: 'Komunita', path: '/komunita' },
     { label: 'Kontakt', path: '/kontakt' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-sm border-b border-base-04">
-      <div className="container mx-auto px-4 lg:px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo - Primary horizontal version with safe zone */}
-          <Link to="/" className="flex items-center gap-3 py-2">
-            {/* Logo symbol + wordmark (min 100px width for horizontal) */}
-            <div className="flex items-center gap-2 min-w-[100px]">
-              {/* Dharma wheel symbol - simplified representation */}
-              <div className="w-10 h-10 bg-tergar-blue rounded-full flex items-center justify-center flex-shrink-0">
-                <div className="w-6 h-6 border-2 border-white rounded-full relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full" />
-                  </div>
-                </div>
-              </div>
-              {/* Wordmark */}
-              <span className="font-serif text-2xl font-semibold text-tergar-blue tracking-tight">
-                Tergar
-              </span>
-            </div>
-            <div className="hidden sm:block text-xs text-space-blue/70 border-l border-base-04 pl-3 ml-1">
-              Česká republika
-            </div>
-          </Link>
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+        scrolled 
+          ? 'bg-white/80 backdrop-blur-md border-b border-divider-gray/50 h-[80px] shadow-sm' 
+          : 'bg-transparent h-[100px]'
+      }`}
+    >
+      <div className="container-custom h-full flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-4 group relative z-50">
+          <img 
+            src={logoImage} 
+            alt="Tergar Logo" 
+            className={`transition-all duration-500 w-auto object-contain ${scrolled ? 'h-10' : 'h-12'}`}
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`text-sm font-semibold transition-colors hover:text-tergar-blue relative ${
-                  location.pathname === item.path
-                    ? 'text-tergar-blue'
-                    : 'text-space-blue'
-                }`}
-              >
-                {item.label}
-                {location.pathname === item.path && (
-                  <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-tergar-gold rounded-full" />
-                )}
-              </Link>
-            ))}
-          </nav>
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-10">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`text-[15px] font-medium transition-all duration-300 tracking-wide relative group ${
+                location.pathname === item.path
+                  ? 'text-tergar-blue'
+                  : 'text-deep-charcoal hover:text-tergar-blue'
+              }`}
+            >
+              {item.label}
+              <span className={`absolute -bottom-1 left-0 h-0.5 bg-tergar-blue transition-all duration-300 ${location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+            </Link>
+          ))}
+          
+          <div className="pl-4 border-l border-divider-gray/50 ml-2">
+            <Link 
+              to="/kontakt" 
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-tergar-gold hover:text-deep-charcoal transition-colors"
+            >
+              <LogIn size={16} strokeWidth={2} />
+              <span className="hidden xl:inline">Členská sekce</span>
+              <span className="xl:hidden">Vstoupit</span>
+            </Link>
+          </div>
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-space-blue hover:text-tergar-blue transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden text-deep-charcoal hover:text-tergar-blue transition-colors relative z-50 p-2"
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={32} strokeWidth={1} /> : <Menu size={32} strokeWidth={1} />}
+        </button>
       </div>
 
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-base-02 border-t border-base-04">
-          <nav className="container mx-auto px-4 py-6 flex flex-col gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-semibold py-3 px-4 rounded-lg transition-colors ${
-                  location.pathname === item.path
-                    ? 'text-tergar-blue bg-light-blue/20'
-                    : 'text-space-blue hover:text-tergar-blue hover:bg-base-03'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      {/* Mobile Navigation Overlay */}
+      <div 
+        className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 transition-all duration-500 flex items-center justify-center lg:hidden ${
+          mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        <nav className="flex flex-col gap-8 text-center">
+          {navItems.map((item, idx) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-3xl font-serif text-deep-charcoal hover:text-tergar-blue transition-colors ${
+                 mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
+              style={{ transitionDelay: `${idx * 50}ms`, transitionDuration: '500ms' }}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div className={`mt-8 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '300ms', transitionDuration: '500ms' }}>
+             <Link 
+              to="/kontakt"
+              onClick={() => setMobileMenuOpen(false)}
+              className="btn-primary text-lg px-10 py-4"
+            >
+              Vstoupit do aplikace
+            </Link>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
