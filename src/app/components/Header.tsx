@@ -29,9 +29,9 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out font-heading ${
         scrolled 
-          ? 'bg-white/80 backdrop-blur-md border-b border-divider-gray/50 h-[80px] shadow-sm' 
+          ? 'bg-white/95 backdrop-blur-md border-b border-gray-100 h-[80px] shadow-sm' 
           : 'bg-transparent h-[100px]'
       }`}
     >
@@ -54,19 +54,19 @@ export function Header() {
                 href={item.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[15px] font-medium transition-all duration-300 tracking-wide relative group text-deep-charcoal hover:text-tergar-blue flex items-center gap-1"
+                className="text-[15px] font-bold transition-all duration-300 tracking-wide relative group text-space-blue hover:text-tergar-blue flex items-center gap-1"
               >
                 {item.label}
-                <ExternalLink size={12} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                <ExternalLink size={12} className="opacity-50 group-hover:opacity-100 transition-opacity text-tergar-blue" />
               </a>
             ) : (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-[15px] font-medium transition-all duration-300 tracking-wide relative group ${
+                className={`text-[15px] font-bold transition-all duration-300 tracking-wide relative group ${
                   location.pathname === item.path
                     ? 'text-tergar-blue'
-                    : 'text-deep-charcoal hover:text-tergar-blue'
+                    : 'text-space-blue hover:text-tergar-blue'
                 }`}
               >
                 {item.label}
@@ -75,10 +75,10 @@ export function Header() {
             )
           ))}
           
-          <div className="pl-4 border-l border-divider-gray/50 ml-2">
+          <div className="pl-4 border-l border-gray-200 ml-2">
             <Link 
               to="/kontakt" 
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-tergar-gold hover:text-deep-charcoal transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-tergar-gold hover:text-tergar-blue transition-colors"
             >
               <LogIn size={16} strokeWidth={2} />
               <span className="hidden xl:inline">Členská sekce</span>
@@ -90,20 +90,20 @@ export function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-deep-charcoal hover:text-tergar-blue transition-colors relative z-50 p-2"
+          className="lg:hidden text-space-blue hover:text-tergar-blue transition-colors relative z-50 p-2"
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <X size={32} strokeWidth={1} /> : <Menu size={32} strokeWidth={1} />}
+          {mobileMenuOpen ? <X size={32} strokeWidth={1.5} /> : <Menu size={32} strokeWidth={1.5} />}
         </button>
       </div>
 
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 transition-all duration-500 flex items-center justify-center lg:hidden ${
+        className={`fixed inset-0 bg-white/98 backdrop-blur-xl z-40 transition-all duration-500 flex items-center justify-center lg:hidden ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <nav className="flex flex-col gap-8 text-center">
+        <nav className="flex flex-col gap-6 text-center">
           {navItems.map((item, idx) => (
             item.isExternal ? (
               <a
@@ -112,20 +112,20 @@ export function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-3xl font-serif text-deep-charcoal hover:text-tergar-blue transition-colors flex items-center justify-center gap-3 ${
+                className={`text-2xl font-bold text-space-blue hover:text-tergar-blue transition-colors flex items-center justify-center gap-3 ${
                    mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                 }`}
                 style={{ transitionDelay: `${idx * 50}ms`, transitionDuration: '500ms' }}
               >
                 {item.label}
-                <ExternalLink size={24} className="opacity-50" />
+                <ExternalLink size={20} className="text-tergar-blue opacity-70" />
               </a>
             ) : (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-3xl font-serif text-deep-charcoal hover:text-tergar-blue transition-colors ${
+                className={`text-2xl font-bold text-space-blue hover:text-tergar-blue transition-colors ${
                    mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                 }`}
                 style={{ transitionDelay: `${idx * 50}ms`, transitionDuration: '500ms' }}
