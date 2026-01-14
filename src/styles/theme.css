@@ -2,102 +2,87 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: #424A58;
-  --card: #ffffff;
-  --card-foreground: #424A58;
-  --popover: #ffffff;
-  --popover-foreground: #424A58;
-  --primary: #1B4087;
-  --primary-foreground: #ffffff;
-  --secondary: #E39F24;
-  --secondary-foreground: #ffffff;
-  --muted: #F7F7F7;
-  --muted-foreground: #67748A;
-  --accent: #F9F9FB;
-  --accent-foreground: #424A58;
-  --destructive: #8E1E1F;
+  
+  /* Primary Palette */
+  --deep-charcoal: #1C1C1C;
+  --soft-white: #FFFFFF;
+  --warm-sand: #F5F3EF;
+  
+  /* Accent Palette */
+  --tergar-gold: #C9A24D;
+  --muted-gray: #6F6F6F;
+  --divider-gray: #E5E5E5;
+  
+  /* Semantic Mappings */
+  --background: var(--soft-white);
+  --foreground: var(--deep-charcoal);
+  
+  --card: var(--soft-white);
+  --card-foreground: var(--deep-charcoal);
+  
+  --popover: var(--soft-white);
+  --popover-foreground: var(--deep-charcoal);
+  
+  --primary: var(--deep-charcoal);
+  --primary-foreground: var(--soft-white);
+  
+  --secondary: var(--warm-sand);
+  --secondary-foreground: var(--deep-charcoal);
+  
+  --muted: var(--warm-sand);
+  --muted-foreground: var(--muted-gray);
+  
+  --accent: var(--warm-sand);
+  --accent-foreground: var(--deep-charcoal);
+  
+  --destructive: #cc3333;
   --destructive-foreground: #ffffff;
-  --border: #C1C7D1;
-  --input: transparent;
-  --input-background: #F9F9FB;
-  --switch-background: #C1C7D1;
-  --font-weight-bold: 700;
-  --font-weight-semibold: 600;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --ring: #1B4087;
-  --radius: 0.5rem;
+  
+  --border: var(--divider-gray);
+  --input: var(--divider-gray);
+  --ring: var(--tergar-gold);
+  
+  --radius: 0px; /* Sharper or pill radii handled in components */
 }
 
 @theme inline {
-  /* Tergar Brand Colors - Core/Logo Palette */
-  --color-tergar-blue: #1B4087;
-  --color-space-blue: #424A58;
-  --color-tergar-gold: #E39F24;
+  /* Tergar Australia Palette */
+  --color-deep-charcoal: #1C1C1C;
+  --color-soft-white: #FFFFFF;
+  --color-warm-sand: #F5F3EF;
+  --color-tergar-gold: #C9A24D;
+  --color-tergar-blue: #1e3a8a; /* Matches standard Tergar Blue */
+  --color-muted-gray: #6F6F6F;
+  --color-divider-gray: #E5E5E5;
   
-  /* Sky Gradient Colors */
-  --color-peach: #FBE0C9;
-  --color-yellow: #F2D4A8;
-  --color-light-blue: #C0D6F6;
-  --color-blue: #8FB6F3;
+  /* Font Families */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
   
-  /* Base/Tint (Neutrals for UI) */
-  --color-base-01: #FFFFFF;
-  --color-base-02: #F9F9FB;
-  --color-base-03: #F7F7F7;
-  --color-base-04: #C1C7D1;
-  --color-base-05: #67748A;
-  
-  /* Accent Colors (use sparingly) */
-  --color-accent-warm-gold: #F2C37B;
-  --color-accent-teal: #88B5AC;
-  --color-accent-green: #C0E1C2;
-  --color-accent-purple: #5C6BC0;
-  --color-accent-sky: #F3FBFD;
-  --color-accent-slate: #60869F;
-  --color-accent-ocean: #477CA0;
-  --color-accent-lavender: #ACB5E0;
-  --color-accent-red: #8E1E1F;
-  --color-accent-coral: #F06663;
-  --color-accent-pink: #F4CCCA;
-  
-  /* Original theme colors mapped to brand */
+  /* Grid & Spacing */
+  --spacing-container-padding: 80px;
+  --spacing-section: 96px;
+
+  /* Semantic Colors */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-input-background: var(--input-background);
-  --color-switch-background: var(--switch-background);
-  --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  
-  /* Type Scale - Major Second 1.125, base 16px */
-  --text-h1: 52px;
-  --text-h2: 41px;
-  --text-h3: 32px;
-  --text-h4: 26px;
-  --text-h5: 23px;
-  --text-h6: 18px;
-  --text-p: 16px;
-  --text-small: 13px;
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 }
 
 @layer base {
@@ -106,133 +91,68 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: var(--text-p);
+    @apply bg-soft-white text-deep-charcoal;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Serif font for quotes and special elements */
-  .font-serif {
-    font-family: 'Source Serif Pro', serif;
-  }
-
-  /**
-  * Typography System - Tergar Brand Guidelines 2024
-  * Type Scale: Major Second 1.125, base 16px
-  */
-
-  html {
-    font-size: var(--font-size);
+  /* Typography System */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: var(--deep-charcoal);
+    line-height: 1.25;
   }
 
   h1 {
-    font-size: var(--text-h1);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: clamp(48px, 5vw, 56px);
+    font-weight: 500;
   }
 
   h2 {
-    font-size: var(--text-h2);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
+    font-size: clamp(36px, 4vw, 40px);
+    font-weight: 400;
   }
 
   h3 {
-    font-size: var(--text-h3);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.3;
-  }
-
-  h4 {
-    font-size: var(--text-h4);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.4;
-  }
-
-  h5 {
-    font-size: var(--text-h5);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.4;
-  }
-
-  h6 {
-    font-size: var(--text-h6);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5;
+    font-size: 28px;
+    font-weight: 400;
   }
 
   p {
-    font-size: var(--text-p);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--deep-charcoal);
   }
 
-  small {
-    font-size: var(--text-small);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.5;
+  /* Button Base Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full border border-tergar-gold text-tergar-gold font-medium bg-transparent transition-all duration-300 hover:bg-tergar-gold hover:text-white cursor-pointer;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-warm-sand text-deep-charcoal font-medium hover:bg-divider-gray transition-all duration-300 cursor-pointer;
   }
 
-  label {
-    font-size: var(--text-p);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5;
+  /* Utility Classes for Layout */
+  .container-custom {
+    @apply max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20;
   }
-
-  button {
-    font-size: var(--text-p);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5;
-  }
-
-  input, textarea {
-    font-size: var(--text-p);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.5;
+  
+  .section-padding {
+    @apply py-16 lg:py-24;
   }
 }
 
-/* Sky Gradient Utility - 45° angle with proper color stops */
-.bg-sky-gradient {
-  background: linear-gradient(
-    45deg,
-    var(--color-yellow) 0%,
-    var(--color-peach) 20%,
-    var(--color-light-blue) 60%,
-    var(--color-blue) 100%
-  );
+/* Card Component */
+.card-hover {
+  @apply transition-transform duration-300 hover:scale-[1.02];
 }
 
-.bg-sky-gradient-vertical {
-  background: linear-gradient(
-    180deg,
-    var(--color-yellow) 0%,
-    var(--color-peach) 20%,
-    var(--color-light-blue) 60%,
-    var(--color-blue) 100%
-  );
+.card-hover h3 {
+  @apply transition-colors duration-300;
 }
 
-.bg-sky-gradient-soft {
-  background: linear-gradient(
-    135deg,
-    var(--color-peach) 0%,
-    var(--color-light-blue) 50%,
-    var(--color-blue) 100%
-  );
-}
-
-/* Text gradient utility */
-.text-sky-gradient {
-  background: linear-gradient(
-    45deg,
-    var(--color-tergar-blue) 0%,
-    var(--color-blue) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.card-hover:hover h3 {
+  @apply text-tergar-gold underline decoration-1 underline-offset-4;
 }

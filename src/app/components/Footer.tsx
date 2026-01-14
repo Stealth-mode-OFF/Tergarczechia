@@ -1,172 +1,111 @@
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
+import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
 
 export function Footer() {
+  // Barva písma: #F5E6E0 (Jemná pudrová/narůžovělá)
   return (
-    <footer className="bg-base-02 border-t border-base-04">
-      <div className="container mx-auto px-4 lg:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div>
-            <Link to="/" className="inline-flex items-center gap-2 mb-6">
-              {/* Logo symbol */}
-              <div className="w-10 h-10 bg-tergar-blue rounded-full flex items-center justify-center flex-shrink-0">
-                <div className="w-6 h-6 border-2 border-white rounded-full relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full" />
-                  </div>
-                </div>
-              </div>
-              {/* Wordmark */}
-              <div>
-                <span className="font-serif text-xl font-semibold text-tergar-blue block">
-                  Tergar
-                </span>
-                <span className="text-xs text-space-blue/70">Česká republika</span>
-              </div>
+    <footer className="bg-[#383F4D] pt-16 pb-12 font-sans border-t border-[#F5E6E0]/10">
+      <div className="container-custom">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          
+          {/* Column 1: Logo & Legal (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col items-start">
+            <Link to="/" className="mb-6 block">
+              {/* Logo with filter to make it match the text color (rosy/white) */}
+              <img 
+                src={logoImage} 
+                alt="Tergar Logo" 
+                className="h-14 w-auto object-contain brightness-0 invert opacity-90 sepia-[.2] hue-rotate-[320deg] saturate-[.3]"
+                style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(373%) hue-rotate(314deg) brightness(106%) contrast(92%)' }} 
+              />
             </Link>
-            <p className="text-sm text-base-05 leading-relaxed">
-              Meditace pro moderní život. Objevte radost, klid a moudrost prostřednictvím
-              osvědčených meditačních technik.
-            </p>
+            <div className="text-[#F5E6E0]/60 text-xs leading-relaxed space-y-2 max-w-xs">
+              <p>2025© Tergar International.</p>
+              <p>The Tergar logo is a registered service mark of Tergar International.</p>
+              <p>Tergar Česká republika působí pod licencí Tergar International.</p>
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold text-space-blue mb-4">Rychlé odkazy</h3>
-            <ul className="space-y-2.5">
+          {/* Column 2: Navigation Links (2 cols) */}
+          <div className="lg:col-span-2">
+            <ul className="space-y-4 text-[15px] font-light tracking-wide text-[#F5E6E0]/90">
               <li>
-                <Link
-                  to="/co-je-meditace"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  Co je meditace
-                </Link>
+                <a href="https://tergar.org" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+                  Tergar International
+                </a>
               </li>
               <li>
-                <Link
-                  to="/cesta-tergar"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  Cesta Tergar
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/programy"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  Programy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/komunita"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  Komunita
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="font-semibold text-space-blue mb-4">Zdroje</h3>
-            <ul className="space-y-2.5">
-              <li>
-                <Link
-                  to="/udalosti"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  Události
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/o-nas"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  O nás
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/kontakt"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
+                <Link to="/kontakt" className="hover:text-white transition-colors">
                   Kontakt
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://tergar.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  Tergar International
-                </a>
+                <Link to="/programy" className="hover:text-white transition-colors">
+                  Programy
+                </Link>
+              </li>
+              <li>
+                <Link to="/komunita" className="hover:text-white transition-colors">
+                  Dobrovolnictví
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold text-space-blue mb-4">Kontakt</h3>
-            <ul className="space-y-3.5">
-              <li className="flex items-start gap-2.5">
-                <Mail size={16} className="text-tergar-gold mt-0.5 flex-shrink-0" />
-                <a
-                  href="mailto:info@tergar.cz"
-                  className="text-sm text-base-05 hover:text-tergar-blue transition-colors"
-                >
-                  info@tergar.cz
-                </a>
+          {/* Column 3: Policy Links (3 cols) */}
+          <div className="lg:col-span-3">
+            <ul className="space-y-4 text-[15px] font-light tracking-wide text-[#F5E6E0]/90">
+              <li>
+                <Link to="/vraceni-penez" className="hover:text-white transition-colors">
+                  Pravidla vracení peněz
+                </Link>
               </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin size={16} className="text-tergar-gold mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-base-05">Praha, Česká republika</span>
+              <li>
+                <Link to="/privacy" className="hover:text-white transition-colors">
+                  Ochrana soukromí
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-white transition-colors">
+                  Obchodní podmínky
+                </Link>
+              </li>
+              <li>
+                <Link to="/eticky-kodex" className="hover:text-white transition-colors">
+                  Etický kodex
+                </Link>
               </li>
             </ul>
+          </div>
 
-            {/* Social Media */}
-            <div className="flex items-center gap-3 mt-6">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-base-03 flex items-center justify-center text-space-blue hover:bg-tergar-blue hover:text-white transition-colors"
+          {/* Column 4: Social Icons (2 cols) */}
+          <div className="lg:col-span-2 flex lg:justify-end items-start">
+            <div className="flex gap-4">
+              <a 
+                href="#" 
+                className="bg-[#F5E6E0] text-[#383F4D] hover:bg-white transition-colors p-2 rounded-sm flex items-center justify-center w-9 h-9"
                 aria-label="Facebook"
               >
-                <Facebook size={18} />
+                <Facebook size={20} />
               </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-base-03 flex items-center justify-center text-space-blue hover:bg-tergar-blue hover:text-white transition-colors"
+              <a 
+                href="#" 
+                className="bg-[#F5E6E0] text-[#383F4D] hover:bg-white transition-colors p-2 rounded-sm flex items-center justify-center w-9 h-9"
                 aria-label="Instagram"
               >
-                <Instagram size={18} />
+                <Instagram size={20} />
               </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-base-03 flex items-center justify-center text-space-blue hover:bg-tergar-blue hover:text-white transition-colors"
+              <a 
+                href="#" 
+                className="bg-[#F5E6E0] text-[#383F4D] hover:bg-white transition-colors p-2 rounded-sm flex items-center justify-center w-9 h-9"
                 aria-label="YouTube"
               >
-                <Youtube size={18} />
+                <Youtube size={20} />
               </a>
             </div>
           </div>
-        </div>
 
-        <div className="border-t border-base-04 pt-8 text-center">
-          <p className="text-sm text-base-05">
-            © {new Date().getFullYear()} Tergar Česká republika. Všechna práva vyhrazena.
-          </p>
         </div>
       </div>
     </footer>
