@@ -1,6 +1,6 @@
 // All pages for Tergar Česká republika - Brand Compliant 2024
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Mail, Users, BookOpen, Video, Star, Heart, CheckCircle2, Youtube, Instagram, Facebook, ExternalLink, Play, MapPin, Clock } from 'lucide-react';
+import { ArrowRight, Calendar, Mail, Users, BookOpen, Video, Star, Heart, CheckCircle2, Youtube, Instagram, Facebook, ExternalLink, Play, Clock, MapPin, Banknote } from 'lucide-react';
 import communityImage from 'figma:asset/ee3557312d962ff84207c71d88a25a1563aea613.png';
 import mingyurPortrait from 'figma:asset/d0b3d5641727b1f2f947c8f27ae30b24d450fbdf.png';
 
@@ -295,48 +295,48 @@ export function UdalostiPage() {
     {
       month: 'Leden',
       events: [
-        { day: '21', dateFull: '21.1.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz I', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '21', dateFull: '21.1.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤' },
-        { day: '21', dateFull: '21.1.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
-        { day: '25', dateFull: '25.1.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠' },
-        { day: '26', dateFull: '26.1.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣' },
-        { day: '27', dateFull: '27.1.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵' },
-        { day: '28', dateFull: '28.1.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz I', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '28', dateFull: '28.1.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
-        { day: '30', dateFull: '30.1. - 1.2.', time: '16:30', title: 'Otevřené srdce', loc: 'PRAHA', color: 'bg-tergar-blue text-white', type: 'Workshop' },
+        { day: '21', dateFull: '21.1.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA, Milady Horákové 53', price: '2500 Kč', desc: 'Esence meditační praxe. Krátký, praktický kurz pro začátečníky i pokročilé.' },
+        { day: '21', dateFull: '21.1.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Vedené meditace a sdílení. Otevřené všem.' },
+        { day: '21', dateFull: '21.1.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House, Školská 28', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání otevřená všem. Meditace a sdílení.' },
+        { day: '25', dateFull: '25.1.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér, Krajinská 260/22', price: 'Doporučený příspěvek 100 Kč', desc: 'Každou 2. a 4. neděli. Vedené meditace a sdílení.' },
+        { day: '26', dateFull: '26.1.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣', address: 'Zoom (registrace emailem)', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3. Otevírání srdce a Probuzení moudrosti.' },
+        { day: '27', dateFull: '27.1.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵', address: 'Zoom (registrace emailem)', price: 'Zdarma', desc: 'Otevřené všem. Vedené meditace a sdílení.' },
+        { day: '28', dateFull: '28.1.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA, Milady Horákové 53', price: '2500 Kč', desc: 'Pokračování kurzu.' },
+        { day: '28', dateFull: '28.1.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House, Školská 28', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání otevřená všem.' },
+        { day: '30', dateFull: '30.1. - 1.2.', time: '16:30', title: 'Otevřené srdce', loc: 'PRAHA', color: 'bg-tergar-blue text-white', type: 'Workshop', address: 'Tibet Open House, Školská 28', price: '3200 Kč', desc: 'Víkendový workshop Radosti ze života 2. Rozvíjení lásky a soucitu.' },
       ]
     },
     {
       month: 'Únor',
       events: [
-        { day: '04', dateFull: '4.2.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz I', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '04', dateFull: '4.2.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤' },
-        { day: '04', dateFull: '4.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
-        { day: '08', dateFull: '8.2.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠' },
-        { day: '09', dateFull: '9.2.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣' },
-        { day: '10', dateFull: '10.2.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵' },
-        { day: '11', dateFull: '11.2.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz I', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '11', dateFull: '11.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
-        { day: '15', dateFull: '15.2.2026', time: '09:30 - 16:30', title: 'Jednodenní retreat v tichu', loc: 'PRAHA', color: 'bg-gray-800 text-white', type: 'Retreat' },
-        { day: '18', dateFull: '18.2.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '18', dateFull: '18.2.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤' },
-        { day: '18', dateFull: '18.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
-        { day: '22', dateFull: '22.2.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠' },
-        { day: '23', dateFull: '23.2.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣' },
-        { day: '24', dateFull: '24.2.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵' },
-        { day: '25', dateFull: '25.2.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '25', dateFull: '25.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
+        { day: '04', dateFull: '4.2.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA', price: '2500 Kč', desc: 'Pokračování kurzu.' },
+        { day: '04', dateFull: '4.2.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Vedené meditace a sdílení.' },
+        { day: '04', dateFull: '4.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání.' },
+        { day: '08', dateFull: '8.2.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér', price: 'Doporučený příspěvek 100 Kč', desc: 'Vedené meditace a sdílení.' },
+        { day: '09', dateFull: '9.2.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣', address: 'Zoom', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3.' },
+        { day: '10', dateFull: '10.2.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵', address: 'Zoom', price: 'Zdarma', desc: 'Otevřené všem.' },
+        { day: '11', dateFull: '11.2.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA', price: '2500 Kč', desc: 'Závěrečná lekce kurzu.' },
+        { day: '11', dateFull: '11.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání.' },
+        { day: '15', dateFull: '15.2.2026', time: '09:30 - 16:30', title: 'Jednodenní retreat v tichu', loc: 'PRAHA', color: 'bg-gray-800 text-white', type: 'Retreat', address: 'Tibet Open House', price: 'Dobrovolný příspěvek', desc: 'Celodenní meditační praxe.' },
+        { day: '18', dateFull: '18.2.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Zoom', price: 'Viz Zenamu', desc: 'Kurz pro začátečníky. Radost ze života 1.' },
+        { day: '18', dateFull: '18.2.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Vedené meditace a sdílení.' },
+        { day: '18', dateFull: '18.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání.' },
+        { day: '22', dateFull: '22.2.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér', price: 'Doporučený příspěvek 100 Kč', desc: 'Vedené meditace a sdílení.' },
+        { day: '23', dateFull: '23.2.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣', address: 'Zoom', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3.' },
+        { day: '24', dateFull: '24.2.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵', address: 'Zoom', price: 'Zdarma', desc: 'Otevřené všem.' },
+        { day: '25', dateFull: '25.2.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Zoom', price: 'Viz Zenamu', desc: 'Pokračování kurzu.' },
+        { day: '25', dateFull: '25.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání.' },
       ]
     },
     {
       month: 'Březen',
       events: [
-        { day: '04', dateFull: '4.3.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz' },
-        { day: '04', dateFull: '4.3.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤' },
-        { day: '04', dateFull: '4.3.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢' },
-        { day: '08', dateFull: '8.3.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠' },
-        { day: '09', dateFull: '9.3.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣' },
-        { day: '10', dateFull: '10.3.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵' },
+        { day: '04', dateFull: '4.3.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Zoom', price: 'Viz Zenamu', desc: 'Pokračování kurzu.' },
+        { day: '04', dateFull: '4.3.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-100 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Vedené meditace a sdílení.' },
+        { day: '04', dateFull: '4.3.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-100 text-green-800', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma / Dobrovolný příspěvek', desc: 'Pravidelná setkání.' },
+        { day: '08', dateFull: '8.3.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-100 text-orange-800', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér', price: 'Doporučený příspěvek 100 Kč', desc: 'Vedené meditace a sdílení.' },
+        { day: '09', dateFull: '9.3.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-100 text-purple-800', type: 'Praxe', icon: '🟣', address: 'Zoom', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3.' },
+        { day: '10', dateFull: '10.3.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-100 text-blue-800', type: 'Meditace', icon: '🔵', address: 'Zoom', price: 'Zdarma', desc: 'Otevřené všem.' },
       ]
     }
   ];
@@ -373,8 +373,8 @@ export function UdalostiPage() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-grow">
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <div className="flex-grow w-full">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
                         <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest font-heading ${event.color}`}>
                           {event.icon && <span>{event.icon}</span>}
                           {event.loc}
@@ -382,10 +382,24 @@ export function UdalostiPage() {
                         <span className="text-gray-400 text-xs font-bold flex items-center gap-1 font-heading">
                           <Clock size={12} /> {event.time}
                         </span>
+                        {event.price && (
+                           <span className="text-gray-400 text-xs font-bold flex items-center gap-1 font-heading ml-auto md:ml-0">
+                            <Banknote size={12} /> {event.price}
+                          </span>
+                        )}
                       </div>
-                      <h3 className="text-xl font-bold text-space-blue group-hover:text-tergar-blue transition-colors font-heading">
+                      <h3 className="text-xl font-bold text-space-blue group-hover:text-tergar-blue transition-colors font-heading mb-2">
                         {event.title}
                       </h3>
+                      {event.address && (
+                        <div className="flex items-center gap-1.5 text-sm text-gray-500 mb-2 font-medium">
+                           <MapPin size={14} className="text-tergar-gold" />
+                           {event.address}
+                        </div>
+                      )}
+                      <p className="text-sm text-space-blue/70 font-normal leading-relaxed max-w-xl">
+                        {event.desc}
+                      </p>
                     </div>
 
                     {/* Action */}
