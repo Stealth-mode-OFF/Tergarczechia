@@ -129,10 +129,9 @@
     font-weight: 600;
   }
 
-  /* Special Class for Editorial/Quotes if needed - Keeping Serif for specific quotes only if requested, 
-     but defaulting to Libre Franklin per new request unless overridden */
-  .font-serif-quote {
-    font-family: 'Libre Franklin', sans-serif; /* Changed to match body or could be kept as Serif if strictly needed, but let's stick to the 2 fonts requested */
+  /* Special Class for Editorial/Quotes */
+  .font-quote {
+    font-family: 'Libre Franklin', sans-serif;
     font-style: italic;
   }
 

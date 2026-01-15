@@ -35,66 +35,71 @@ export function Header() {
           : 'bg-transparent h-[100px]'
       }`}
     >
-      <div className="container-custom h-full flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-4 group relative z-50">
-          <img 
-            src={logoImage} 
-            alt="Tergar Logo" 
-            className={`transition-all duration-500 w-auto object-contain ${scrolled ? 'h-10' : 'h-12'}`}
-          />
-        </Link>
+      <div className="container-custom h-full flex items-center">
+        {/* Left Side: Logo and Navigation */}
+        <div className="flex items-center gap-10 xl:gap-12 flex-1">
+          {/* Logo */}
+          <Link to="/" className="flex items-center group relative z-50 shrink-0">
+            <img 
+              src={logoImage} 
+              alt="Tergar Logo" 
+              className={`transition-all duration-500 w-auto object-contain ${scrolled ? 'h-9' : 'h-11'}`}
+            />
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
-          {navItems.map((item) => (
-            item.isExternal ? (
-              <a
-                key={item.path}
-                href={item.path}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[15px] font-bold transition-all duration-300 tracking-wide relative group text-space-blue hover:text-tergar-blue flex items-center gap-1"
-              >
-                {item.label}
-                <ExternalLink size={12} className="opacity-50 group-hover:opacity-100 transition-opacity text-tergar-blue" />
-              </a>
-            ) : (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`text-[15px] font-bold transition-all duration-300 tracking-wide relative group ${
-                  location.pathname === item.path
-                    ? 'text-tergar-blue'
-                    : 'text-space-blue hover:text-tergar-blue'
-                }`}
-              >
-                {item.label}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-tergar-blue transition-all duration-300 ${location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-              </Link>
-            )
-          ))}
-          
-          <div className="pl-4 border-l border-gray-200 ml-2">
+          {/* Desktop Navigation - Aligned to Logo */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            {navItems.filter(item => item.label !== 'Kontakt').map((item) => (
+              item.isExternal ? (
+                <a
+                  key={item.path}
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[15px] font-bold transition-all duration-300 tracking-wide relative group text-space-blue hover:text-tergar-blue flex items-center gap-1"
+                >
+                  {item.label}
+                  <ExternalLink size={12} className="opacity-50 group-hover:opacity-100 transition-opacity text-tergar-blue" />
+                </a>
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`text-[15px] font-bold transition-all duration-300 tracking-wide relative group ${
+                    location.pathname === item.path
+                      ? 'text-tergar-blue'
+                      : 'text-space-blue hover:text-tergar-blue'
+                  }`}
+                >
+                  {item.label}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-tergar-blue transition-all duration-300 ${location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                </Link>
+              )
+            ))}
+          </nav>
+        </div>
+
+        {/* Right Side: CTA and Mobile Toggle */}
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:block pl-6">
             <Link 
               to="/kontakt" 
-              className="inline-flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-tergar-gold hover:text-tergar-blue transition-colors"
+              className="btn-primary px-6 py-2.5 text-xs"
             >
-              <LogIn size={16} strokeWidth={2} />
               <span className="hidden xl:inline">Členská sekce</span>
               <span className="xl:hidden">Vstoupit</span>
             </Link>
           </div>
-        </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-space-blue hover:text-tergar-blue transition-colors relative z-50 p-2"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X size={32} strokeWidth={1.5} /> : <Menu size={32} strokeWidth={1.5} />}
-        </button>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden text-space-blue hover:text-tergar-blue transition-colors relative z-50 p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={32} strokeWidth={1.5} /> : <Menu size={32} strokeWidth={1.5} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation Overlay */}
