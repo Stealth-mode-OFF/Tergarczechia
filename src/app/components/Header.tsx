@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogIn, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
+import { content } from '@/data/content';
 
 export function Header() {
   const location = useLocation();
@@ -17,15 +18,7 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { label: 'Domů', path: '/' },
-    { label: 'O nás', path: '/o-nas' },
-    { label: 'Programy', path: '/programy' },
-    { label: 'Události', path: '/udalosti' },
-    { label: 'Rozvrh', path: 'https://app.zenamu.com/tergarczechia', isExternal: true },
-    { label: 'Komunita', path: '/komunita' },
-    { label: 'Kontakt', path: '/kontakt' },
-  ];
+  const { nav, cta } = content.header;
 
   return (
     <header 
@@ -49,7 +42,7 @@ export function Header() {
 
           {/* Desktop Navigation - Aligned to Logo */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navItems.filter(item => item.label !== 'Kontakt').map((item) => (
+            {nav.filter(item => item.label !== 'Kontakt').map((item) => (
               item.isExternal ? (
                 <a
                   key={item.path}
@@ -86,8 +79,8 @@ export function Header() {
               to="/kontakt" 
               className="btn-primary px-6 py-2.5 text-xs"
             >
-              <span className="hidden xl:inline">Členská sekce</span>
-              <span className="xl:hidden">Vstoupit</span>
+              <span className="hidden xl:inline">{cta.memberSection}</span>
+              <span className="xl:hidden">{cta.enter}</span>
             </Link>
           </div>
 
@@ -109,7 +102,7 @@ export function Header() {
         }`}
       >
         <nav className="flex flex-col gap-6 text-center">
-          {navItems.map((item, idx) => (
+          {nav.map((item, idx) => (
             item.isExternal ? (
               <a
                 key={item.path}
@@ -145,7 +138,7 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="btn-primary text-lg px-10 py-4"
             >
-              Vstoupit do aplikace
+              {cta.enterApp}
             </Link>
           </div>
         </nav>
