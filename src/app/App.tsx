@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from '@/app/components/Header';
 import { Footer } from '@/app/components/Footer';
 import { HomePage } from '@/app/pages/HomePage';
 import { CoJeMeditacePage } from '@/app/pages/CoJeMeditacePage';
+import { NotFoundPage } from '@/app/pages/NotFoundPage';
 import {
   CestaTergarPage,
   ProgramyPage,
@@ -27,6 +28,9 @@ export default function App() {
             <Route path="/udalosti" element={<UdalostiPage />} />
             <Route path="/o-nas" element={<ONasPage />} />
             <Route path="/kontakt" element={<KontaktPage />} />
+            
+            {/* 404 Route */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
