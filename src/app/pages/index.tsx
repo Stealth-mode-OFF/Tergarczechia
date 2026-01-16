@@ -5,48 +5,10 @@ import communityImage from 'figma:asset/ee3557312d962ff84207c71d88a25a1563aea613
 import vajradharaImage from 'figma:asset/a248c2397f596c63df6208678b6a60bceff14370.png';
 import mingyurWavingImage from 'figma:asset/72312fce0245d3b51ee86da6f9a6003167a8e1e2.png';
 import lineageTreeImage from 'figma:asset/8a8c65298e950a77370a1c00b20804bd4d6a26d3.png';
+import { content } from '@/data/content';
 
 export function CestaTergarPage() {
-  const courses = [
-    {
-      title: 'Plány probuzení',
-      year: '2025–26',
-      desc: 'V tomto devítiměsíčním imerzním kurzu prozkoumáme základní principy neboli „plány“ vadžrajánové praxe. Odhalíme, jak i ty nejnáročnější emoce a překážky mohou být ve skutečnosti palivem pro probuzení. Kurz vrcholí hlubokou praxí sebeosvobození.',
-      teachers: 'S Mingjurem Rinpočhem, Robertem Thurmanem a Lamou Shenpen Hookham',
-      start: 'Začínáme v srpnu 2025',
-      active: true,
-    },
-    {
-      title: 'Buddhistická psychologie',
-      year: '2024–25',
-      desc: 'Abhidharma je buddhistická věda o mysli a realitě. Kurz nabízí živé webináře a studium Mingjurova Rinpočheho textu „Neposkvrněná prajňá“. Naučíte se používat analytickou meditaci k vykořenění utrpení a pochopení fungování vlastní mysli.',
-      teachers: 'S Mingjurem Rinpočhem, Danielem Aitkenem a Josephem Goldsteinem',
-    },
-    {
-      title: 'Mahámudra: Píseň realizace',
-      year: '2023–24',
-      desc: 'Mahámudra je považována za nejpřímější cestu k probuzení v tradici Kagyu. Budeme studovat kořenové verše Mahámudry Gangy od Tilopy, které nám hravým a hlubokým způsobem pomohou objevit naši pravou přirozenost.',
-      teachers: 'S Mingjurem Rinpočhem, Elizabeth Callahan a Karlem Brunnhölzlem',
-    },
-    {
-      title: 'Srdce tantry',
-      year: '2022–23',
-      desc: 'Prozkoumejte fáze rozvoje a završení vadžrajány. Tantra zde není chápána jako něco sexuálního, ale jako cesta ovoce – rozpoznání, že osvícení není v budoucnosti, ale je přítomno tady a teď. Naučíte se pracovat s imaginací a jemným tělem.',
-      teachers: 'S Džecunmou Tenzin Palmo a Coknji Rinpočhem',
-    },
-    {
-      title: 'Cesta bódhisattvy',
-      year: '2021–22',
-      desc: 'Jak zůstat trpělivý v těžkých časech? Jak pomáhat druhým a nevyhořet? Hluboké studium Šántidevova klasického textu s praktickými instrukcemi pro moderní život. Zasejeme semínko odvahy a soucitu, které časem poroste.',
-      teachers: 'Hloubková učení Šántidevy',
-    },
-    {
-      title: 'Dzogčhen: Tři slova',
-      year: '2020–21',
-      desc: 'Od Garaba Dordže k Mingjurovi Rinpočhemu: krok za krokem k rozpoznání čisté bdělosti. Dzogčhen („Velká dokonalost“) je přímá cesta k odhalení naší původní moudrosti, která je vždy přítomná, ale často přehlížená.',
-      teachers: 'Podstata dzogčhenu',
-    },
-  ];
+  const { courses } = content.cestaTergar;
 
   return (
     <div className="min-h-screen pt-[100px] bg-white">
@@ -129,14 +91,7 @@ export function CestaTergarPage() {
 }
 
 export function ProgramyPage() {
-  const levels = [
-    { title: 'Úroveň 1: Příprava na praxi', subtitle: 'Cesta osvobození', duration: '6 týdnů', icon: '🌱', desc: 'Čtyři myšlenky, které obracejí mysl k dharmě, a uvedení do povahy mysli (klid, pohyb, vědomí).' },
-    { title: 'Úroveň 2: Útočiště', subtitle: 'Cesta osvobození', duration: '4 týdny', icon: '🏠', desc: 'Vnější a vnitřní útočiště. Rozpoznání, že mysl je prázdnota. Očista a praxe.' },
-    { title: 'Úroveň 3: Bódhičitta', subtitle: 'Cesta osvobození', duration: '4 týdny', icon: '❤️', desc: 'Altruistická motivace stát se plně realizovaným buddhou pro dobro všech bytostí.' },
-    { title: 'Úroveň 4: Guru jóga', subtitle: 'Cesta osvobození', duration: '4 týdny', icon: '🙏', desc: 'Práce s principem gurua, synchronicitou a oddaností jako bránou k rozpoznání.' },
-    { title: 'Úroveň 5: Sádhana', subtitle: 'Cesta osvobození', duration: '4 týdny', icon: '📿', desc: 'Struktura sádhany, mantry, mudry a sjednocení fáze rozvoje a završení.' },
-    { title: 'Pokročilé: Mahámudra & Dzogčhen', subtitle: 'Imerze', duration: 'Průběžné', icon: '🏔️', desc: 'Přímé uvedení do podstaty mysli a stabilizace tohoto rozpoznání.' },
-  ];
+  const { levels } = content.programy;
 
   return (
     <div className="min-h-screen pt-[100px] bg-white">
@@ -312,75 +267,27 @@ export function KomunitaPage() {
 }
 
 export function UdalostiPage() {
-  const eventsByMonth = [
-    {
-      month: 'Leden',
-      events: [
-        { day: '21', dateFull: '21.1.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA, Milady Horákové 53', price: '2500 Kč', desc: 'Esence meditační praxe. Krátký, praktický kurz pro začátečníky i pokročilé.' },
-        { day: '21', dateFull: '21.1.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-50 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma', desc: 'Vedené meditace a sdílení. Otevřené všem.' },
-        { day: '21', dateFull: '21.1.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House, Školská 28', price: 'Zdarma', desc: 'Pravidelná setkání otevřená všem. Meditace a sdílení.' },
-        { day: '25', dateFull: '25.1.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-50 text-orange-900', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér, Krajinská 260/22', price: '100 Kč', desc: 'Každou 2. a 4. neděli. Vedené meditace a sdílení.' },
-        { day: '26', dateFull: '26.1.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-50 text-purple-900', type: 'Praxe', icon: '🟣', address: 'Zoom (registrace emailem)', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3. Otevírání srdce a Probuzení moudrosti.' },
-        { day: '27', dateFull: '27.1.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-50 text-blue-900', type: 'Meditace', icon: '🔵', address: 'Zoom (registrace emailem)', price: 'Zdarma', desc: 'Otevřené všem. Vedené meditace a sdílení.' },
-        { day: '28', dateFull: '28.1.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA, Milady Horákové 53', price: '2500 Kč', desc: 'Pokračování kurzu.' },
-        { day: '28', dateFull: '28.1.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House, Školská 28', price: 'Zdarma', desc: 'Pravidelná setkání otevřená všem.' },
-        { day: '30', dateFull: '30.1. - 1.2.', time: '16:30', title: 'Otevřené srdce', loc: 'PRAHA', color: 'bg-tergar-blue text-white', type: 'Workshop', address: 'Tibet Open House, Školská 28', price: '3200 Kč', desc: 'Víkendový workshop Radosti ze života 2. Rozvíjení lásky a soucitu.' },
-      ]
-    },
-    {
-      month: 'Únor',
-      events: [
-        { day: '04', dateFull: '4.2.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA', price: '2500 Kč', desc: 'Pokračování kurzu.' },
-        { day: '04', dateFull: '4.2.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-50 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma', desc: 'Vedené meditace a sdílení.' },
-        { day: '04', dateFull: '4.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma', desc: 'Pravidelná setkání.' },
-        { day: '08', dateFull: '8.2.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-50 text-orange-900', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér', price: '100 Kč', desc: 'Vedené meditace a sdílení.' },
-        { day: '09', dateFull: '9.2.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-50 text-purple-900', type: 'Praxe', icon: '🟣', address: 'Zoom', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3.' },
-        { day: '10', dateFull: '10.2.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-50 text-blue-900', type: 'Meditace', icon: '🔵', address: 'Zoom', price: 'Zdarma', desc: 'Otevřené všem.' },
-        { day: '11', dateFull: '11.2.2026', time: '17:15 - 19:00', title: 'AAM | 5-týdenní kurz', loc: 'PRAHA', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Studio MILADA', price: '2500 Kč', desc: 'Závěrečná lekce kurzu.' },
-        { day: '11', dateFull: '11.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma', desc: 'Pravidelná setkání.' },
-        { day: '15', dateFull: '15.2.2026', time: '09:30 - 16:30', title: 'Jednodenní retreat v tichu', loc: 'PRAHA', color: 'bg-gray-800 text-white', type: 'Retreat', address: 'Tibet Open House', price: 'Dobrovolný', desc: 'Celodenní meditační praxe.' },
-        { day: '18', dateFull: '18.2.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Zoom', price: 'Viz Zenamu', desc: 'Kurz pro začátečníky. Radost ze života 1.' },
-        { day: '18', dateFull: '18.2.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-50 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma', desc: 'Vedené meditace a sdílení.' },
-        { day: '18', dateFull: '18.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma', desc: 'Pravidelná setkání.' },
-        { day: '22', dateFull: '22.2.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-50 text-orange-900', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér', price: '100 Kč', desc: 'Vedené meditace a sdílení.' },
-        { day: '23', dateFull: '23.2.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-50 text-purple-900', type: 'Praxe', icon: '🟣', address: 'Zoom', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3.' },
-        { day: '24', dateFull: '24.2.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-50 text-blue-900', type: 'Meditace', icon: '🔵', address: 'Zoom', price: 'Zdarma', desc: 'Otevřené všem.' },
-        { day: '25', dateFull: '25.2.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Zoom', price: 'Viz Zenamu', desc: 'Pokračování kurzu.' },
-        { day: '25', dateFull: '25.2.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma', desc: 'Pravidelná setkání.' },
-      ]
-    },
-    {
-      month: 'Březen',
-      events: [
-        { day: '04', dateFull: '4.3.2026', time: '08:00 - 09:30', title: 'Klidná mysl | 8-týdenní kurz', loc: 'ONLINE', color: 'bg-blue-50 text-tergar-blue', type: 'Kurz', address: 'Zoom', price: 'Viz Zenamu', desc: 'Pokračování kurzu.' },
-        { day: '04', dateFull: '4.3.2026', time: '18:00 - 19:00', title: 'Středeční meditace', loc: 'ČESKÁ LÍPA', color: 'bg-amber-50 text-amber-900', type: 'Meditace', icon: '🟤', address: 'GAIA centrum', price: 'Zdarma', desc: 'Vedené meditace a sdílení.' },
-        { day: '04', dateFull: '4.3.2026', time: '18:30 - 20:00', title: 'Středeční meditace', loc: 'PRAHA', color: 'bg-green-50 text-green-900', type: 'Meditace', icon: '🟢', address: 'Tibet Open House', price: 'Zdarma', desc: 'Pravidelná setkání.' },
-        { day: '08', dateFull: '8.3.2026', time: '18:00 - 19:30', title: 'Nedělní meditace', loc: 'ČESKÉ BUDĚJOVICE', color: 'bg-orange-50 text-orange-900', type: 'Meditace', icon: '🟠', address: 'Čajový ateliér', price: '100 Kč', desc: 'Vedené meditace a sdílení.' },
-        { day: '09', dateFull: '9.3.2026', time: '20:00 - 21:00', title: 'Radost ze života 2+3', loc: 'ONLINE', color: 'bg-purple-50 text-purple-900', type: 'Praxe', icon: '🟣', address: 'Zoom', price: 'Zdarma', desc: 'Pro absolventy RZŽ 2 a 3.' },
-        { day: '10', dateFull: '10.3.2026', time: '19:00 - 20:00', title: 'Pravidelné meditace', loc: 'ONLINE', color: 'bg-blue-50 text-blue-900', type: 'Meditace', icon: '🔵', address: 'Zoom', price: 'Zdarma', desc: 'Otevřené všem.' },
-      ]
-    }
-  ];
+  const { hero, months } = content.eventsPage;
 
   return (
     <div className="min-h-screen pt-[100px] bg-white">
       <section className="bg-gray-50 section-padding text-center relative overflow-hidden border-b border-gray-100">
         <div className="container-custom relative z-10">
-          <span className="text-xs font-bold tracking-[0.2em] uppercase text-tergar-blue mb-4 block font-heading">Kalendář</span>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-tergar-blue mb-4 block font-heading">{hero.label}</span>
           <h1 className="mb-8 text-tergar-blue">
-            Živá setkání
+            {hero.title}
           </h1>
           <p className="text-xl text-space-blue/80 max-w-2xl mx-auto font-normal leading-relaxed">
-            Obohaťte své samostudium připojením k našim živým relacím a spojením s komunitou.
+            {hero.description}
           </p>
         </div>
       </section>
 
       <div className="container-custom py-20">
         <div className="max-w-4xl mx-auto space-y-20">
-          {eventsByMonth.map((monthData, mIdx) => (
+          {months.map((monthData, mIdx) => (
             <div key={mIdx}>
-              <h2 className="text-2xl font-bold text-tergar-blue mb-8 border-b border-gray-100 pb-4 font-heading">{monthData.month} 2026</h2>
+              <h2 className="text-2xl font-bold text-tergar-blue mb-8 border-b border-gray-100 pb-4 font-heading">{monthData.name} {monthData.year}</h2>
               <div className="space-y-4">
                 {monthData.events.map((event, i) => (
                   <div
@@ -390,7 +297,7 @@ export function UdalostiPage() {
                     {/* Date Badge - Visual Balance */}
                     <div className="flex-shrink-0 flex flex-row md:flex-col items-baseline md:items-center gap-2 md:gap-0 min-w-[70px] pt-1 md:pt-0">
                        <span className="text-3xl font-bold text-tergar-blue font-heading">{event.day}</span>
-                       <span className="text-xs font-bold uppercase tracking-wider text-gray-400 font-heading">{monthData.month.substring(0,3)}</span>
+                       <span className="text-xs font-bold uppercase tracking-wider text-gray-400 font-heading">{monthData.name.substring(0,3)}</span>
                     </div>
 
                     {/* Content */}
@@ -466,16 +373,18 @@ export function UdalostiPage() {
 }
 
 export function ONasPage() {
+  const { title, subtitle, description, bio, quote } = content.oNas;
+
   return (
     <div className="min-h-screen pt-[100px] bg-white">
       <section className="bg-gray-50 section-padding text-center border-b border-gray-100">
         <div className="container-custom">
-           <span className="text-xs font-bold tracking-[0.2em] uppercase text-tergar-gold mb-4 block font-heading">Učitel</span>
+           <span className="text-xs font-bold tracking-[0.2em] uppercase text-tergar-gold mb-4 block font-heading">{subtitle}</span>
           <h1 className="mb-8 text-tergar-blue">
-            Yongey Mingyur Rinpočhe
+            {title}
           </h1>
           <p className="text-xl text-space-blue/80 max-w-2xl mx-auto font-normal leading-relaxed">
-            Mistr meditace s výjimečným darem propojovat starodávnou moudrost s moderním životem. Autor bestsellerů New York Times.
+            {description}
           </p>
         </div>
       </section>
@@ -486,18 +395,14 @@ export function ONasPage() {
            <div className="prose prose-lg text-space-blue/80 font-normal leading-relaxed">
              <div className="border-l-2 border-tergar-blue pl-6 py-1 mb-8">
                 <p className="font-serif-quote italic text-xl text-space-blue mb-0">
-                 "Když se podíváte dovnitř, nenajdete nic pevného, čeho byste se mohli držet. A to je ta nejlepší zpráva, jakou jste kdy mohli slyšet."
+                 {quote}
                 </p>
              </div>
-             <p className="mb-6">
-               Narodil se v roce 1975 v himalájském pohraničí mezi Tibetem a Nepálem. Mingjur Rinpočhe je velmi milovaný a uznávaný mistr meditace. Od útlého věku ho přitahoval život v kontemplaci. Mnoho let svého dětství strávil v přísném ústraní.
-             </p>
-             <p className="mb-6">
-               Ve věku sedmnácti let byl pozván, aby se stal učitelem v tříletém meditačním centru svého kláštera, což je pozice, kterou tak mladý lama zastává jen zřídka. Dokončil také tradiční buddhistické vzdělání ve filozofii a psychologii, než založil mnišskou kolej ve svém domovském klášteře v severní Indii.
-             </p>
-             <p className="mb-6">
-               Kromě rozsáhlého výcviku v meditačních a filozofických tradicích tibetského buddhismu se Mingjur Rinpočhe celý život zajímá o západní vědu a psychologii. V roce 2002 byl Rinpočhe a několik dalších dlouholetých meditujících pozváni do Waismanovy laboratoře pro zobrazování mozku a chování na Wisconsinské univerzitě v Madisonu, kde Richard Davidson a další vědci zkoumali účinky meditace na mozek pokročilých meditujících.
-             </p>
+             {bio.map((paragraph, idx) => (
+               <p key={idx} className="mb-6">
+                 {paragraph}
+               </p>
+             ))}
            </div>
            <div className="space-y-8">
              <div className="relative group">
@@ -588,6 +493,8 @@ export function ONasPage() {
 }
 
 export function KontaktPage() {
+  const { hero, general, address, social } = content.contactPage;
+
   return (
     <div className="min-h-screen pt-[100px] bg-white">
       <section className="bg-space-blue text-white section-padding text-center relative overflow-hidden">
@@ -596,12 +503,12 @@ export function KontaktPage() {
         <div className="absolute bottom-0 left-0 w-full h-1.5 bg-tergar-gradient z-20" />
         
         <div className="container-custom relative z-10">
-          <span className="text-xs font-bold tracking-[0.2em] uppercase text-tergar-gold mb-4 block font-heading">Podpora</span>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-tergar-gold mb-4 block font-heading">{hero.label}</span>
           <h1 className="mb-8 text-white">
-            Jsme tu pro vás
+            {hero.title}
           </h1>
           <p className="text-xl text-white/80 max-w-2xl mx-auto font-normal leading-relaxed">
-            Máte dotazy k členství, technické problémy nebo hledáte radu k praxi?
+            {hero.description}
           </p>
         </div>
       </section>
@@ -613,23 +520,20 @@ export function KontaktPage() {
              <div className="bg-tergar-gold/10 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Mail className="text-tergar-gold" size={24} strokeWidth={1.5} />
              </div>
-             <h3 className="text-xl font-bold mb-3 text-space-blue font-heading">Obecné dotazy</h3>
-             <p className="text-space-blue/70 mb-6 font-normal text-sm">Informace o komunitě, akcích a studijních skupinách</p>
-             <a href="mailto:tergar.czechia@tergar.org" className="text-tergar-blue font-bold hover:text-space-blue transition-colors border-b border-tergar-blue/30 pb-0.5 font-heading text-sm">
-               tergar.czechia@tergar.org
+             <h3 className="text-xl font-bold mb-3 text-space-blue font-heading">{general.title}</h3>
+             <p className="text-space-blue/70 mb-6 font-normal text-sm">{general.desc}</p>
+             <a href={`mailto:${general.email}`} className="text-tergar-blue font-bold hover:text-space-blue transition-colors border-b border-tergar-blue/30 pb-0.5 font-heading text-sm">
+               {general.email}
              </a>
            </div>
 
-           {/* Tech Support */}
+           {/* Address */}
            <div className="bg-white p-10 text-center border border-gray-100 hover:border-tergar-blue transition-all duration-300 shadow-sm hover:shadow-md">
              <div className="bg-tergar-blue/10 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle2 className="text-tergar-blue" size={24} strokeWidth={1.5} />
+                <MapPin className="text-tergar-blue" size={24} strokeWidth={1.5} />
              </div>
-             <h3 className="text-xl font-bold mb-3 text-space-blue font-heading">Technická podpora</h3>
-             <p className="text-space-blue/70 mb-6 font-normal text-sm">Problémy s online platformou, přihlášením a platbami</p>
-             <a href="mailto:podpora@tergar.cz" className="text-tergar-blue font-bold hover:text-space-blue transition-colors border-b border-tergar-blue/30 pb-0.5 font-heading text-sm">
-               podpora@tergar.cz
-             </a>
+             <h3 className="text-xl font-bold mb-3 text-space-blue font-heading">{address.title}</h3>
+             <p className="text-space-blue/70 mb-6 font-normal text-sm whitespace-pre-line">{address.desc}</p>
            </div>
 
            {/* Social Media */}
@@ -637,13 +541,13 @@ export function KontaktPage() {
              <div className="bg-gray-50 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 text-space-blue border border-gray-100">
                 <Play className="text-space-blue ml-1" size={24} strokeWidth={1.5} fill="currentColor" />
              </div>
-             <h3 className="text-xl font-bold mb-3 text-space-blue font-heading">Sledujte nás</h3>
-             <p className="text-space-blue/70 mb-6 font-normal text-sm">Buďte v obraze s novinkami a inspirací na sociálních sítích</p>
+             <h3 className="text-xl font-bold mb-3 text-space-blue font-heading">{social.title}</h3>
+             <p className="text-space-blue/70 mb-6 font-normal text-sm">{social.desc}</p>
              <div className="flex justify-center gap-4">
-               <a href="https://www.facebook.com/tergarcz/" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-50 rounded-full hover:bg-tergar-blue hover:text-white transition-colors">
+               <a href={social.facebook} target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-50 rounded-full hover:bg-tergar-blue hover:text-white transition-colors">
                  <Facebook size={18} />
                </a>
-               <a href="https://www.instagram.com/tergar_cz/" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-50 rounded-full hover:bg-tergar-blue hover:text-white transition-colors">
+               <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-50 rounded-full hover:bg-tergar-blue hover:text-white transition-colors">
                  <Instagram size={18} />
                </a>
              </div>
