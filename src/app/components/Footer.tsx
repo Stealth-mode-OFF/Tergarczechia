@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
+import { content } from '@/data/content';
 
 export function Footer() {
+  const { copyright, disclaimer, menuTitle, legalTitle, socialTitle, links, legal } = content.footer;
+
   return (
     <footer className="bg-space-blue pt-16 pb-12 font-sans border-t border-white/10">
       <div className="container-custom">
@@ -19,8 +22,8 @@ export function Footer() {
               />
             </Link>
             <div className="text-white/60 text-[13px] leading-relaxed max-w-xs font-sans font-medium">
-              <p className="mb-3">© 2025 Tergar International</p>
-              <p>Tergar logo je registrovaná ochranná známka Tergar International. Tergar Česká republika působí pod oficiální licencí.</p>
+              <p className="mb-3">{copyright}</p>
+              <p>{disclaimer}</p>
             </div>
           </div>
 
@@ -29,66 +32,41 @@ export function Footer() {
 
           {/* Column 2: Navigation Links (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-white text-[13px] font-bold uppercase tracking-widest mb-8 opacity-50 font-heading">Menu</h4>
+            <h4 className="text-white text-[13px] font-bold uppercase tracking-widest mb-8 opacity-50 font-heading">{menuTitle}</h4>
             <ul className="space-y-4 text-[15px] font-medium tracking-wide text-white/90 font-heading">
-              <li>
-                <a href="https://tergar.org" target="_blank" rel="noreferrer" className="hover:text-tergar-gold transition-colors block">
-                  Tergar International
-                </a>
-              </li>
-              <li>
-                <Link to="/kontakt" className="hover:text-tergar-gold transition-colors block">
-                  Kontakt
-                </Link>
-              </li>
-              <li>
-                <Link to="/programy" className="hover:text-tergar-gold transition-colors block">
-                  Programy
-                </Link>
-              </li>
-              <li>
-                <Link to="/komunita" className="hover:text-tergar-gold transition-colors block">
-                  Komunita
-                </Link>
-              </li>
-              <li>
-                <a href="https://app.zenamu.com/tergarczechia" target="_blank" rel="noopener noreferrer" className="hover:text-tergar-gold transition-colors block flex items-center gap-2">
-                  Rozvrh akcí <span className="text-[9px] opacity-80 border border-white/30 rounded px-1 font-sans">ZENAMU</span>
-                </a>
-              </li>
+              {links.map((link) => (
+                <li key={link.label}>
+                  {link.isExternal ? (
+                    <a href={link.path} target="_blank" rel="noopener noreferrer" className="hover:text-tergar-gold transition-colors block flex items-center gap-2">
+                      {link.label} {link.note && <span className="text-[9px] opacity-80 border border-white/30 rounded px-1 font-sans">{link.note}</span>}
+                    </a>
+                  ) : (
+                    <Link to={link.path} className="hover:text-tergar-gold transition-colors block">
+                      {link.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Column 3: Policy Links (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-white text-[13px] font-bold uppercase tracking-widest mb-8 opacity-50 font-heading">Právní info</h4>
+            <h4 className="text-white text-[13px] font-bold uppercase tracking-widest mb-8 opacity-50 font-heading">{legalTitle}</h4>
             <ul className="space-y-4 text-[15px] font-medium tracking-wide text-white/90 font-heading">
-              <li>
-                <Link to="/vraceni-penez" className="hover:text-tergar-gold transition-colors block">
-                  Pravidla vracení peněz
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="hover:text-tergar-gold transition-colors block">
-                  Ochrana soukromí
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="hover:text-tergar-gold transition-colors block">
-                  Obchodní podmínky
-                </Link>
-              </li>
-              <li>
-                <Link to="/eticky-kodex" className="hover:text-tergar-gold transition-colors block">
-                  Etický kodex
-                </Link>
-              </li>
+              {legal.map((item) => (
+                <li key={item.path}>
+                  <Link to={item.path} className="hover:text-tergar-gold transition-colors block">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Column 4: Social Icons (1 col) */}
           <div className="lg:col-span-1 flex flex-col items-start lg:items-end">
-            <h4 className="text-white text-[13px] font-bold uppercase tracking-widest mb-8 opacity-50 lg:text-right w-full whitespace-nowrap font-heading">Sledujte nás</h4>
+            <h4 className="text-white text-[13px] font-bold uppercase tracking-widest mb-8 opacity-50 lg:text-right w-full whitespace-nowrap font-heading">{socialTitle}</h4>
             <div className="flex gap-4">
               <a 
                 href="https://www.facebook.com/tergarcz/" 
