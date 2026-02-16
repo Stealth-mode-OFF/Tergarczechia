@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import logoImage from '@/assets/f2309011161c7516084a49a21e639ac08d91a296.png';
+import { tergarLogo as logoImage } from '@/assets';
 import { content } from '@/data/content';
 
 export function Header() {
