@@ -1,8 +1,16 @@
-import communityImage from '@/assets/ee3557312d962ff84207c71d88a25a1563aea613.png';
-import mingyurWavingImage from '@/assets/72312fce0245d3b51ee86da6f9a6003167a8e1e2.png';
-import mingyurPortraitImage from '@/assets/d0b3d5641727b1f2f947c8f27ae30b24d450fbdf.png';
+import communityImage from '@/assets/IMG_0655.JPG';
+import mingyurWavingImage from '@/assets/IMG_0602.JPG';
+import mingyurPortraitImage from '@/assets/ymr-portrait-7.jpg';
 import vajradharaImage from '@/assets/a248c2397f596c63df6208678b6a60bceff14370.png';
 import lineageTreeImage from '@/assets/8a8c65298e950a77370a1c00b20804bd4d6a26d3.png';
+import eventAudienceImage from '@/assets/IMG_5024.jpg';
+import communityBlessingImage from '@/assets/IMG_5066.jpg';
+import communityGreetingImage from '@/assets/IMG_5196.jpg';
+import personalConnectionImage from '@/assets/IMG_4898.jpg';
+import communityLineUpImage from '@/assets/IMG_5150.jpg';
+import teachingInteractionImage from '@/assets/IMG_5200.jpg';
+import rinpocheOutdoorImage from '@/assets/kron-0093.jpg';
+import rinpocheFlagsImage from '@/assets/ymr-portrait-15.jpg';
 
 export const content = {
   header: {
@@ -161,6 +169,7 @@ export const content = {
     groups: {
       title: 'Skupiny',
       text: 'Najděte Tergar meditační skupinu poblíž vás. Pokud ve vašem okolí žádná není a chtěli byste ji založit, ozvěte se nám.',
+      email: 'czech@community.tergar.org',
       mapLocations: [
         { name: 'Praha', lat: 50.08, lng: 14.44, desc: 'Pravidelné středeční meditace · Tibet Open House, Školská 28', link: 'https://app.zenamu.com/tergarczechia' },
         { name: 'Brno', lat: 49.19, lng: 16.61, desc: 'Meditační skupina', link: 'mailto:brno@community.tergar.org' },
@@ -176,7 +185,17 @@ export const content = {
       youtube: 'https://www.youtube.com/@tergarczechia1847',
       instagram: 'https://instagram.com/tergar_cz',
       facebook: 'https://www.facebook.com/tergarcz/',
-    }
+    },
+    gallery: [
+      { src: eventAudienceImage, alt: 'Tergar Česko – setkání s učitelem', aspect: 'landscape' as const },
+      { src: communityBlessingImage, alt: 'Komunita – požehnání', aspect: 'landscape' as const },
+      { src: rinpocheOutdoorImage, alt: 'Mingyur Rinpočhe', aspect: 'portrait' as const },
+      { src: communityGreetingImage, alt: 'Setkání s Rinpočhem', aspect: 'landscape' as const },
+      { src: personalConnectionImage, alt: 'Osobní setkání s učitelem', aspect: 'landscape' as const },
+      { src: rinpocheFlagsImage, alt: 'Mingyur Rinpočhe s modlitebními praporky', aspect: 'landscape' as const },
+      { src: communityLineUpImage, alt: 'Komunita v řadě', aspect: 'landscape' as const },
+      { src: teachingInteractionImage, alt: 'Učení – interakce', aspect: 'portrait' as const },
+    ],
   },
   footer: {
     inclusionText: 'Mingyur Rinpoche a cela komunita Tergar vyjadruje podporu LGBTQ komunite.',

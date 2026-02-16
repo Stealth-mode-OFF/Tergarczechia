@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { ArrowRight, ChevronDown, MapPin, Mail, ExternalLink, Calendar, Heart, Youtube, Instagram, Facebook, Send, BookOpen } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { ArrowRight, ChevronDown, MapPin, Mail, ExternalLink, Calendar, Heart, Youtube, Instagram, Facebook, Send, BookOpen, X } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { content } from '@/data/content';
 
 /* ─── Easing & Animation Tokens ─────────────────────────────── */
@@ -39,6 +39,7 @@ export function HomePage() {
   const { hero, about, tergarPath, quote, lineage, rinpoche, support, program, groups, newsletter, social } = content.home;
   const { scrollYProgress } = useScroll();
   const [activePin, setActivePin] = useState<number | null>(null);
+  const [showZenamu, setShowZenamu] = useState(false);
 
   const heroY = useTransform(scrollYProgress, [0, 0.25], [0, 120]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
@@ -259,7 +260,7 @@ export function HomePage() {
       </section>
 
       {/* ── 4. PROGRAM — Events & Regular Meetings ──────────── */}
-      <section id="program" className="scroll-mt-24 py-28 md:py-36 bg-white relative">
+      <section id="program" className="scroll-mt-24 py-20 md:py-28 bg-white relative">
         <div className="container-custom">
           {/* Section header */}
           <motion.div
@@ -267,40 +268,40 @@ export function HomePage() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={stagger}
-            className="max-w-2xl mx-auto text-center mb-16"
+            className="max-w-2xl mx-auto text-center mb-12"
           >
             <motion.div variants={reveal}>
               <SectionLabel>Program</SectionLabel>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-space-blue font-heading tracking-tight mb-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-space-blue font-heading tracking-tight mb-4">
                 {program.title}
               </h2>
             </motion.div>
-            <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/55 leading-relaxed font-light">
+            <motion.p variants={reveal} className="text-sm sm:text-base text-space-blue/55 leading-relaxed font-light">
               {program.subtitle}
             </motion.p>
           </motion.div>
 
-          {/* Regular meetings — color-coded pills */}
+          {/* Regular meetings — compact pills */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-14"
+            className="mb-10"
           >
-            <h3 className="text-center text-[11px] font-bold uppercase tracking-[0.25em] text-space-blue/40 font-heading mb-6">
+            <h3 className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-space-blue/35 font-heading mb-4">
               Pravidelné meditace
             </h3>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2">
               {program.regularMeetings.map((meeting, i) => (
                 <a
                   key={i}
                   href={meeting.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-5 py-2.5 bg-white border border-gray-100 rounded-full text-sm text-space-blue/70 hover:border-tergar-blue/20 hover:text-tergar-blue transition-all group hover:shadow-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 rounded-full text-xs text-space-blue/70 hover:border-tergar-blue/20 hover:text-tergar-blue transition-all group hover:shadow-sm"
                 >
                   <span
-                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                    className="w-2 h-2 rounded-full flex-shrink-0"
                     style={{ backgroundColor: meeting.color }}
                   />
                   <span className="font-semibold font-heading">{meeting.location}</span>
@@ -311,13 +312,13 @@ export function HomePage() {
             </div>
           </motion.div>
 
-          {/* Upcoming event cards */}
+          {/* Upcoming event cards — compact */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10"
           >
             {program.upcomingEvents.map((event, i) => (
               <motion.a
@@ -326,78 +327,107 @@ export function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={reveal}
-                className="group relative bg-white border border-gray-100 rounded-2xl p-6 flex flex-col transition-all duration-300 hover:border-tergar-blue/20 hover:shadow-[0_8px_30px_-12px_rgba(27,64,135,0.12)]"
+                className="group relative bg-white border border-gray-100 rounded-xl p-5 flex flex-col transition-all duration-300 hover:border-tergar-blue/20 hover:shadow-[0_8px_30px_-12px_rgba(27,64,135,0.12)]"
               >
-                {/* Type badge */}
-                <span className={`self-start inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest font-heading mb-4 ${
-                  event.type === 'online'
-                    ? 'bg-tergar-blue/8 text-tergar-blue'
-                    : 'bg-tergar-gold/10 text-tergar-gold'
-                }`}>
-                  {event.type === 'online' ? 'Online' : 'Živě'}
-                </span>
-
-                {/* Date */}
-                <div className="flex items-center gap-2 text-[11px] text-space-blue/45 mb-3 font-heading font-semibold">
-                  <Calendar size={11} />
-                  {event.date}
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading ${
+                    event.type === 'online'
+                      ? 'bg-tergar-blue/8 text-tergar-blue'
+                      : 'bg-tergar-gold/10 text-tergar-gold'
+                  }`}>
+                    {event.type === 'online' ? 'Online' : 'Živě'}
+                  </span>
+                  <div className="flex items-center gap-1.5 text-[10px] text-space-blue/40 font-heading font-semibold">
+                    <Calendar size={10} />
+                    {event.date}
+                  </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-[15px] font-bold text-space-blue group-hover:text-tergar-blue transition-colors font-heading leading-snug mb-2 flex-grow">
+                <h3 className="text-sm font-bold text-space-blue group-hover:text-tergar-blue transition-colors font-heading leading-snug mb-1.5 flex-grow">
                   {event.title}
                 </h3>
+                <p className="text-xs text-space-blue/45 font-light">{event.desc}</p>
 
-                {/* Desc */}
-                <p className="text-sm text-space-blue/50 font-light mb-4">{event.desc}</p>
-
-                {/* Hover CTA */}
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-tergar-blue uppercase tracking-widest font-heading opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
-                  Registrace <ArrowRight size={10} />
+                <span className="inline-flex items-center gap-1.5 text-[9px] font-bold text-tergar-blue uppercase tracking-widest font-heading opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3">
+                  Registrace <ArrowRight size={9} />
                 </span>
               </motion.a>
             ))}
           </motion.div>
 
-          {/* CTA button */}
+          {/* CTA buttons */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <a
               href={program.registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-tergar-blue text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-space-blue transition-colors duration-300 shadow-lg shadow-tergar-blue/15 font-heading"
+              className="inline-flex items-center gap-2.5 bg-tergar-blue text-white px-7 py-3.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-space-blue transition-colors duration-300 shadow-lg shadow-tergar-blue/15 font-heading"
             >
-              Registrace na kurzy a rozvrh meditací
-              <ExternalLink size={13} />
+              Registrace na kurzy
+              <ExternalLink size={12} />
             </a>
-          </motion.div>
-
-          {/* Zenamu embed */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease }}
-            className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-[0_4px_40px_-12px_rgba(0,0,0,0.06)]"
-          >
-            <div className="h-px bg-gradient-to-r from-tergar-blue/20 via-tergar-gold/40 to-tergar-blue/20" />
-            <iframe
-              src={program.zenamuUrl}
-              width="100%"
-              height="800"
-              frameBorder="0"
-              title="Zenamu Rozvrh"
-              className="w-full h-[650px] md:h-[800px] bg-gray-50/30"
-              loading="lazy"
-            />
+            <button
+              onClick={() => setShowZenamu(true)}
+              className="inline-flex items-center gap-2.5 border border-gray-200 text-space-blue/70 px-7 py-3.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:border-tergar-blue/30 hover:text-tergar-blue transition-all duration-300 font-heading cursor-pointer"
+            >
+              <Calendar size={13} />
+              Zobrazit rozvrh
+            </button>
           </motion.div>
         </div>
       </section>
+
+      {/* ── Zenamu Schedule Modal ──────────────────────────── */}
+      <AnimatePresence>
+        {showZenamu && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setShowZenamu(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease }}
+              className="relative w-full max-w-4xl h-[85vh] sm:h-[80vh] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal header */}
+              <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 flex-shrink-0">
+                <div className="flex items-center gap-3">
+                  <Calendar size={16} className="text-tergar-blue" />
+                  <h3 className="text-sm font-bold font-heading text-space-blue">Rozvrh meditací a kurzů</h3>
+                </div>
+                <button
+                  onClick={() => setShowZenamu(false)}
+                  className="w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-space-blue/50 hover:text-space-blue transition-colors cursor-pointer"
+                  aria-label="Zavřít"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              {/* Iframe */}
+              <iframe
+                src={program.zenamuUrl}
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                title="Zenamu Rozvrh"
+                className="flex-1 w-full"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── 5. QUOTE ────────────────────────────────────────── */}
       <section className="py-24 md:py-32 bg-[#fafbfc] relative">
@@ -696,64 +726,79 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── 9. NEWSLETTER + SOCIAL + INCLUSION ──────────────── */}
-      <section className="py-24 md:py-32 bg-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+      {/* ── 9. FINAL CTA — Conversion section ──────────────── */}
+      <section className="relative overflow-hidden bg-space-blue">
+        {/* Background Rinpoche photo with overlay */}
+        <div className="absolute inset-0">
+          <img
+            src={rinpoche.image}
+            alt="Yongey Mingyur Rinpočhe"
+            className="w-full h-full object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-space-blue via-space-blue/85 to-space-blue/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-space-blue/90 via-transparent to-space-blue/30" />
+        </div>
 
-            {/* Newsletter */}
-            <motion.a
-              href={newsletter.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="group bg-space-blue text-white rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 hover:shadow-xl"
-            >
-              <div className="w-12 h-12 rounded-full bg-white/8 flex items-center justify-center mb-5 group-hover:bg-white/15 transition-colors">
-                <Send size={20} strokeWidth={1.5} />
-              </div>
-              <h3 className="text-base font-bold font-heading mb-2">{newsletter.title}</h3>
-              <p className="text-white/50 text-sm font-light mb-5 leading-relaxed">
-                Novinky, pozvánky a inspirace přímo do vaší schránky.
-              </p>
-              <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-tergar-gold group-hover:gap-3 transition-all font-heading mt-auto">
-                Přihlásit se <ArrowRight size={12} />
-              </span>
-            </motion.a>
-
-            {/* Social */}
+        <div className="container-custom relative z-10 py-28 md:py-36">
+          <div className="max-w-xl">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.08 }}
-              className="bg-[#fafbfc] border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center"
+              transition={{ duration: 0.8, ease }}
             >
-              <h3 className="text-base font-bold font-heading text-space-blue mb-5">Sledujte nás</h3>
-              <div className="flex gap-3 mb-5">
-                {[
-                  { href: social.facebook, icon: Facebook, label: 'Facebook' },
-                  { href: social.instagram, icon: Instagram, label: 'Instagram' },
-                  { href: social.youtube, icon: Youtube, label: 'YouTube' },
-                ].map(({ href, icon: Icon, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-space-blue/60 hover:bg-tergar-blue hover:text-white hover:border-tergar-blue transition-all duration-300"
-                    aria-label={label}
-                  >
-                    <Icon size={19} strokeWidth={1.5} />
-                  </a>
-                ))}
+              <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+                Připojte se k nám
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white leading-tight mb-6">
+                Začněte meditovat<br />s&nbsp;Tergar&nbsp;Česko
+              </h2>
+              <p className="text-white/60 text-base md:text-lg font-light leading-relaxed mb-10 max-w-md">
+                Přidejte se ke komunitě praktikujících po celé České republice. Pravidelné meditace, kurzy a setkání — živě i online.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <a
+                  href={newsletter.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-3 bg-tergar-gold hover:bg-tergar-gold/90 text-space-blue font-bold text-sm px-7 py-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-tergar-gold/20 font-heading"
+                >
+                  <Send size={16} strokeWidth={2} />
+                  Chci dostávat novinky
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="#program"
+                  className="group inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold text-sm px-7 py-4 rounded-xl transition-all duration-300 hover:bg-white/5 font-heading"
+                >
+                  Zobrazit program
+                </a>
               </div>
-              <p className="text-xs text-space-blue/40 font-light">@tergar_cz</p>
+
+              {/* Social row */}
+              <div className="flex items-center gap-5">
+                <span className="text-white/30 text-xs font-light">Sledujte nás</span>
+                <div className="flex gap-2.5">
+                  {[
+                    { href: social.facebook, icon: Facebook, label: 'Facebook' },
+                    { href: social.instagram, icon: Instagram, label: 'Instagram' },
+                    { href: social.youtube, icon: Youtube, label: 'YouTube' },
+                  ].map(({ href, icon: Icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:bg-white hover:text-space-blue hover:border-white transition-all duration-300"
+                      aria-label={label}
+                    >
+                      <Icon size={15} strokeWidth={1.5} />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </motion.div>
-
-
           </div>
         </div>
       </section>
