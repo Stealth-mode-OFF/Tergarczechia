@@ -36,7 +36,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 /* ═══════════════════════════════════════════════════════════════ */
 export function HomePage() {
-  const { hero, about, tergarPath, quote1, lineage, rinpoche, support, program, groups, newsletter, social } = content.home;
+  const { hero, about, tergarPath, quote, lineage, rinpoche, support, program, groups, newsletter, social } = content.home;
   const { scrollYProgress } = useScroll();
   const [activePin, setActivePin] = useState<number | null>(null);
 
@@ -410,10 +410,10 @@ export function HomePage() {
         >
           <div className="text-tergar-gold/30 text-7xl md:text-8xl font-serif leading-none select-none mb-4">&ldquo;</div>
           <blockquote className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-[2.1rem] text-space-blue leading-[1.5] tracking-tight mb-8">
-            {quote1.text}
+            {quote.text}
           </blockquote>
           <cite className="block text-[11px] font-bold uppercase tracking-[0.3em] text-tergar-gold not-italic font-heading">
-            {quote1.author}
+            {quote.author}
           </cite>
         </motion.div>
       </section>
@@ -699,7 +699,7 @@ export function HomePage() {
       {/* ── 9. NEWSLETTER + SOCIAL + INCLUSION ──────────────── */}
       <section className="py-24 md:py-32 bg-white">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
 
             {/* Newsletter */}
             <motion.a
@@ -753,26 +753,7 @@ export function HomePage() {
               <p className="text-xs text-space-blue/40 font-light">@tergar_cz</p>
             </motion.div>
 
-            {/* Inclusion */}
-            <motion.a
-              href={content.home.inclusion.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.16 }}
-              className="group bg-[#fafbfc] border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 hover:border-tergar-blue/15 hover:shadow-sm"
-            >
-              <div className="text-3xl mb-5">🏳️‍🌈</div>
-              <h3 className="text-base font-bold font-heading text-space-blue mb-2">Inkluze</h3>
-              <p className="text-sm text-space-blue/50 leading-relaxed font-light mb-4">
-                {content.home.inclusion.text}
-              </p>
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-tergar-blue opacity-0 group-hover:opacity-100 transition-opacity font-heading mt-auto">
-                Více <ExternalLink size={10} />
-              </span>
-            </motion.a>
+
           </div>
         </div>
       </section>

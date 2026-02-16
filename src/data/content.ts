@@ -51,7 +51,7 @@ export const content = {
       ],
       image: vajradharaImage,
     },
-    quote1: {
+    quote: {
       text: 'Vše, po čem jste kdy toužili, je právě tady, v tomto přítomném okamžiku bdělého vědomí.',
       author: 'Mingyur Rinpočhe'
     },
@@ -161,7 +161,6 @@ export const content = {
     groups: {
       title: 'Skupiny',
       text: 'Najděte Tergar meditační skupinu poblíž vás. Pokud ve vašem okolí žádná není a chtěli byste ji založit, ozvěte se nám.',
-      email: 'czech@community.tergar.org',
       mapLocations: [
         { name: 'Praha', lat: 50.08, lng: 14.44, desc: 'Pravidelné středeční meditace · Tibet Open House, Školská 28', link: 'https://app.zenamu.com/tergarczechia' },
         { name: 'Brno', lat: 49.19, lng: 16.61, desc: 'Meditační skupina', link: 'mailto:brno@community.tergar.org' },
@@ -173,10 +172,6 @@ export const content = {
       title: 'Chci dostávat Tergar newsletter',
       link: 'https://bit.ly/zajima_me_tergar',
     },
-    inclusion: {
-      text: 'Mingyur Rinpočhe a celá komunita Tergar vyjadřuje podporu LGBTQ komunitě.',
-      link: 'https://learning.tergar.org/2020/07/16/mingyur-rinpoche-addresses-tergars-support-of-the-lgbtq-community/',
-    },
     social: {
       youtube: 'https://www.youtube.com/@tergarczechia1847',
       instagram: 'https://instagram.com/tergar_cz',
@@ -184,6 +179,8 @@ export const content = {
     }
   },
   footer: {
+    inclusionText: 'Mingyur Rinpoche a cela komunita Tergar vyjadruje podporu LGBTQ komunite.',
+    inclusionLink: 'https://learning.tergar.org/2020/07/16/mingyur-rinpoche-addresses-tergars-support-of-the-lgbtq-community/',
     copyright: '© 2026 Tergar Česko',
     contact: {
       email: 'czech@community.tergar.org',

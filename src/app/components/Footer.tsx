@@ -1,9 +1,9 @@
-import { Facebook, Instagram, Youtube, Mail, MapPin, Send } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, MapPin, Send, ExternalLink } from 'lucide-react';
 import { tergarLogo as logoImage } from '@/assets';
 import { content } from '@/data/content';
 
 export function Footer() {
-  const { copyright, contact, newsletterLink } = content.footer;
+  const { copyright, contact, newsletterLink, inclusionText, inclusionLink } = content.footer;
 
   return (
     <footer className="bg-space-blue text-white relative">
@@ -88,6 +88,25 @@ export function Footer() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Inclusion + copyright bar */}
+        <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          {inclusionText && inclusionLink && (
+            <a
+              href={inclusionLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white/35 hover:text-white/60 text-xs font-light transition-colors group"
+            >
+              <span>🏳️‍🌈</span>
+              <span>{inclusionText}</span>
+              <ExternalLink size={9} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
+          )}
+          <p className="text-white/25 text-xs font-light">
+            {copyright}
+          </p>
         </div>
       </div>
     </footer>
