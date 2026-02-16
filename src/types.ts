@@ -77,6 +77,12 @@ export interface HomeContent {
     text: string;
     buttonText: string;
     buttonLink: string;
+    backgroundImage?: string;
+  };
+  gallery?: {
+    title: string;
+    subtitle: string;
+    images: { src: string; alt: string }[];
   };
   program: {
     title: string;
