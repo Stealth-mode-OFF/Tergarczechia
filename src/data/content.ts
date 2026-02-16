@@ -2,6 +2,7 @@ import communityImage from '@/assets/ee3557312d962ff84207c71d88a25a1563aea613.pn
 import mingyurWavingImage from '@/assets/72312fce0245d3b51ee86da6f9a6003167a8e1e2.png';
 import mingyurPortraitImage from '@/assets/d0b3d5641727b1f2f947c8f27ae30b24d450fbdf.png';
 import vajradharaImage from '@/assets/a248c2397f596c63df6208678b6a60bceff14370.png';
+import lineageTreeImage from '@/assets/8a8c65298e950a77370a1c00b20804bd4d6a26d3.png';
 
 export const content = {
   header: {
@@ -53,6 +54,12 @@ export const content = {
     quote1: {
       text: 'Vše, po čem jste kdy toužili, je právě tady, v tomto přítomném okamžiku bdělého vědomí.',
       author: 'Mingyur Rinpočhe'
+    },
+    lineage: {
+      label: 'Linie',
+      title: 'Živá linie Kagjü',
+      text: 'Učení Tergar vychází z nepřerušené linie tibetského buddhismu Karma Kagjü a Ňingma, předávané po staletí od učitele k žákovi. Mingyur Rinpočhe je držitelem této živé tradice a spojuje hlubokou moudrost starověkých mistrů se současným porozuměním mysli.',
+      image: lineageTreeImage,
     },
     rinpoche: {
       title: 'Yongey Mingyur Rinpočhe',

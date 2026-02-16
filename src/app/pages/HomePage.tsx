@@ -36,7 +36,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 /* ═══════════════════════════════════════════════════════════════ */
 export function HomePage() {
-  const { hero, about, tergarPath, quote1, rinpoche, support, program, groups, newsletter, social } = content.home;
+  const { hero, about, tergarPath, quote1, lineage, rinpoche, support, program, groups, newsletter, social } = content.home;
   const { scrollYProgress } = useScroll();
   const [activePin, setActivePin] = useState<number | null>(null);
 
@@ -416,6 +416,66 @@ export function HomePage() {
             {quote1.author}
           </cite>
         </motion.div>
+      </section>
+
+      {/* ── 5b. LINEAGE — Kagyü tradition ───────────────────── */}
+      <section className="py-28 md:py-36 lg:py-44 bg-white relative overflow-hidden">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+            {/* Text */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
+              className="order-2 lg:order-1 space-y-6"
+            >
+              <motion.div variants={reveal}>
+                <SectionLabel>{lineage.label}</SectionLabel>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-space-blue font-heading tracking-tight leading-[1.15]">
+                  {lineage.title}
+                </h2>
+              </motion.div>
+
+              <motion.div variants={reveal} className="w-16 h-px bg-tergar-gold/60" />
+
+              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/65 leading-[1.8] font-light">
+                {lineage.text}
+              </motion.p>
+
+              <motion.a
+                variants={reveal}
+                href="https://tergar.org/about/lineage/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-tergar-blue text-sm font-semibold group"
+              >
+                <span className="border-b border-tergar-blue/20 group-hover:border-tergar-blue transition-colors pb-px">
+                  Více o linii na Tergar.org
+                </span>
+                <ExternalLink size={12} className="transition-transform group-hover:translate-x-0.5" />
+              </motion.a>
+            </motion.div>
+
+            {/* Lineage tree image — square (742×742) */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, ease }}
+              className="order-1 lg:order-2 relative"
+            >
+              <div className="relative aspect-square overflow-hidden rounded-2xl max-w-[480px] mx-auto">
+                <img
+                  src={lineage.image}
+                  alt="Strom linie Kagyü"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/8 to-transparent" />
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* ── 6. RINPOČHE BIO — Portrait image ────────────────── */}
