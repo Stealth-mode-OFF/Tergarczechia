@@ -24,37 +24,41 @@ export { default as vajradhara } from './a248c2397f596c63df6208678b6a60bceff1437
 /** Strom linie Kagju */
 export { default as lineageTree } from './8a8c65298e950a77370a1c00b20804bd4d6a26d3.png';
 
+/* Note: JPG photo files are not yet added to the repository.
+ * Uncomment these exports once the photo files are uploaded to src/assets/
+ */
+
 /* --- JPG — Fotky Rinpocheho --- */
-export { default as rinpochePhoto01 } from './Yongey Mingyur Rinpoche (7).jpg';
-export { default as rinpochePhoto02 } from './Yongey Mingyur Rinpoche (15).jpg';
+// export { default as rinpochePhoto01 } from './Yongey Mingyur Rinpoche (7).jpg';
+// export { default as rinpochePhoto02 } from './Yongey Mingyur Rinpoche (15).jpg';
 
 /* --- JPG — Profesionalni fotky (KRoN) --- */
-export { default as eventPro01 } from './KRoN GR 0088.jpg';
-export { default as eventPro02 } from './KRoN GR 0093.jpg';
+// export { default as eventPro01 } from './KRoN GR 0088.jpg';
+// export { default as eventPro02 } from './KRoN GR 0093.jpg';
 
 /* --- JPG — Serie IMG_06xx --- */
-export { default as photo0602 } from './IMG_0602.JPG';
-export { default as photo0655 } from './IMG_0655.JPG';
+// export { default as photo0602 } from './IMG_0602.JPG';
+// export { default as photo0655 } from './IMG_0655.JPG';
 
 /* --- JPG — Serie IMG_45xx --- */
-export { default as photo4521 } from './IMG_4521.jpg';
-export { default as photo4559 } from './IMG_4559.jpg';
-export { default as photo4567 } from './IMG_4567.jpg';
-export { default as photo4898 } from './IMG_4898.jpg';
+// export { default as photo4521 } from './IMG_4521.jpg';
+// export { default as photo4559 } from './IMG_4559.jpg';
+// export { default as photo4567 } from './IMG_4567.jpg';
+// export { default as photo4898 } from './IMG_4898.jpg';
 
 /* --- JPG — Serie IMG_50xx --- */
-export { default as photo5024 } from './IMG_5024.jpg';
-export { default as photo5026 } from './IMG_5026.jpg';
-export { default as photo5032 } from './IMG_5032.jpg';
-export { default as photo5037 } from './IMG_5037.jpg';
-export { default as photo5045 } from './IMG_5045.jpg';
-export { default as photo5048 } from './IMG_5048.jpg';
-export { default as photo5066 } from './IMG_5066.jpg';
-export { default as photo5114 } from './IMG_5114.jpg';
-export { default as photo5150 } from './IMG_5150.jpg';
+// export { default as photo5024 } from './IMG_5024.jpg';
+// export { default as photo5026 } from './IMG_5026.jpg';
+// export { default as photo5032 } from './IMG_5032.jpg';
+// export { default as photo5037 } from './IMG_5037.jpg';
+// export { default as photo5045 } from './IMG_5045.jpg';
+// export { default as photo5048 } from './IMG_5048.jpg';
+// export { default as photo5066 } from './IMG_5066.jpg';
+// export { default as photo5114 } from './IMG_5114.jpg';
+// export { default as photo5150 } from './IMG_5150.jpg';
 
 /* --- JPG — Serie IMG_51xx-52xx --- */
-export { default as photo5180 } from './IMG_5180.jpg';
-export { default as photo5187 } from './IMG_5187.jpg';
-export { default as photo5196 } from './IMG_5196.jpg';
-export { default as photo5200 } from './IMG_5200.jpg';
+// export { default as photo5180 } from './IMG_5180.jpg';
+// export { default as photo5187 } from './IMG_5187.jpg';
+// export { default as photo5196 } from './IMG_5196.jpg';
+// export { default as photo5200 } from './IMG_5200.jpg';
