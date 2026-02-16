@@ -59,6 +59,12 @@ export interface HomeContent {
     text: string;
     author: string;
   };
+  lineage: {
+    label: string;
+    title: string;
+    text: string;
+    image: string;
+  };
   rinpoche: {
     title: string;
     image: string;
