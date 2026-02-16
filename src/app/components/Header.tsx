@@ -1,139 +1,126 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ExternalLink } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { clsx } from 'clsx';
-import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
+import logoImage from '@/assets/f2309011161c7516084a49a21e639ac08d91a296.png';
 import { content } from '@/data/content';
 
 export function Header() {
-  const location = useLocation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { nav } = content.header;
 
-  // Handle scroll effect for glassmorphism
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  const scrollTo = useCallback((e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    document.getElementById(path.replace('/', ''))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setMenuOpen(false);
+  }, []);
+
+  const linkClass =
+    'text-[12px] font-semibold uppercase tracking-[0.18em] transition-colors relative group py-1 block cursor-pointer font-heading';
 
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
+        initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={clsx(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500 font-heading',
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-white/80 backdrop-blur-md border-b border-gray-100/50 h-[80px] shadow-sm py-0'
-            : 'bg-transparent h-[120px] py-4'
-        )}
+            ? 'bg-white/85 backdrop-blur-xl border-b border-gray-100/60 h-[72px] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+            : 'bg-transparent h-[100px]'
+        }`}
       >
         <div className="container-custom h-full flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="relative z-50 group block">
-            <motion.img
-              layoutId="logo"
+          <Link
+            to="/"
+            className="relative z-50"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <img
               src={logoImage}
-              alt="Tergar Logo"
-              className={clsx(
-                'transition-all duration-500 object-contain',
-                scrolled ? 'h-10' : 'h-14'
-              )}
+              alt="Tergar"
+              className={`transition-all duration-500 object-contain ${scrolled ? 'h-8' : 'h-11'}`}
             />
           </Link>
 
-          {/* Desktop Navigation - Premium & Minimal */}
-          <nav className="hidden lg:flex items-center gap-12">
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-10">
             {nav.map((item, i) => (
               <motion.div
                 key={item.label}
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * i + 0.3, duration: 0.5 }}
+                transition={{ delay: 0.05 * i + 0.3, duration: 0.4 }}
               >
                 {item.isExternal ? (
                   <a
                     href={item.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13px] font-bold text-space-blue/80 hover:text-tergar-blue transition-colors uppercase tracking-[0.15em] flex items-center gap-2 group relative overflow-hidden"
+                    className={`${linkClass} text-space-blue/70 hover:text-tergar-blue flex items-center gap-1.5`}
                   >
-                    <span className="relative z-10">{item.label}</span>
-                    <ExternalLink size={12} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-tergar-gold translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+                    {item.label}
+                    <ExternalLink size={10} className="opacity-30 group-hover:opacity-70 transition-opacity" />
+                    <span className="absolute bottom-0 left-0 w-full h-px bg-tergar-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                   </a>
                 ) : (
                   <a
                     href={`#${item.path.replace('/', '')}`}
-                    className={clsx(
-                      'text-[13px] font-bold uppercase tracking-[0.15em] transition-colors relative group py-1 block',
-                      location.pathname === item.path ? 'text-tergar-blue' : 'text-space-blue/80 hover:text-tergar-blue'
-                    )}
+                    onClick={(e) => scrollTo(e, item.path)}
+                    className={`${linkClass} text-space-blue/70 hover:text-tergar-blue`}
                   >
                     {item.label}
-                    <span className={clsx(
-                      "absolute bottom-0 left-0 w-full h-[1px] bg-tergar-blue transition-transform duration-300 ease-out origin-left",
-                      location.pathname === item.path ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    )} />
+                    <span className="absolute bottom-0 left-0 w-full h-px bg-tergar-blue origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                   </a>
                 )}
               </motion.div>
             ))}
           </nav>
 
-          {/* Mobile Toggle */}
+          {/* Mobile toggle */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-space-blue hover:text-tergar-blue transition-colors relative z-50 p-2"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden relative z-50 p-2 -mr-2 text-space-blue"
+            aria-label="Menu"
           >
-            <motion.div
-              animate={mobileMenuOpen ? "open" : "closed"}
-              className="w-8 h-8 flex flex-col justify-center items-center gap-1.5"
-            >
-              <motion.span 
-                variants={{ open: { rotate: 45, y: 8 }, closed: { rotate: 0, y: 0 } }}
-                className="w-full h-0.5 bg-current block origin-center transition-all" 
-              />
-              <motion.span 
-                variants={{ open: { opacity: 0 }, closed: { opacity: 1 } }}
-                className="w-full h-0.5 bg-current block transition-all" 
-              />
-              <motion.span 
-                variants={{ open: { rotate: -45, y: -8 }, closed: { rotate: 0, y: 0 } }}
-                className="w-full h-0.5 bg-current block origin-center transition-all" 
-              />
-            </motion.div>
+            <div className="w-6 flex flex-col gap-[5px]">
+              <span className={`block h-[1.5px] bg-current transition-all duration-300 ${menuOpen ? 'translate-y-[6.5px] rotate-45' : ''}`} />
+              <span className={`block h-[1.5px] bg-current transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+              <span className={`block h-[1.5px] bg-current transition-all duration-300 ${menuOpen ? '-translate-y-[6.5px] -rotate-45' : ''}`} />
+            </div>
           </button>
         </div>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile overlay */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col pt-32 px-8 lg:hidden"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center lg:hidden"
           >
-            <nav className="flex flex-col gap-8 text-center">
+            <nav className="flex flex-col gap-6 text-center">
               {nav.map((item, i) => (
                 <motion.a
                   key={item.label}
-                  href={item.isExternal ? item.path : item.path}
-                  target={item.isExternal ? "_blank" : undefined}
-                  onClick={() => setMobileMenuOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
+                  href={item.isExternal ? item.path : `#${item.path.replace('/', '')}`}
+                  target={item.isExternal ? '_blank' : undefined}
+                  onClick={item.isExternal ? () => setMenuOpen(false) : (e) => scrollTo(e as any, item.path)}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * i, duration: 0.5 }}
-                  className="text-3xl font-bold text-space-blue font-heading"
+                  transition={{ delay: 0.06 * i, duration: 0.4 }}
+                  className="text-2xl font-bold text-space-blue font-heading tracking-tight"
                 >
                   {item.label}
                 </motion.a>
