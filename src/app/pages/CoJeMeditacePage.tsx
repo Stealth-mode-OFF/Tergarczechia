@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Brain, Heart, Zap, Sparkles } from 'lucide-react';
-import mingyurPortrait from 'figma:asset/d0b3d5641727b1f2f947c8f27ae30b24d450fbdf.png';
+import mingyurPortrait from '@/assets/d0b3d5641727b1f2f947c8f27ae30b24d450fbdf.png';
 
 export function CoJeMeditacePage() {
   return (
