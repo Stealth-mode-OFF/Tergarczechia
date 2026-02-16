@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Youtube, Mail, MapPin, Send } from 'lucide-react';
-import logoImage from '@/assets/f2309011161c7516084a49a21e639ac08d91a296.png';
+import { tergarLogo as logoImage } from '@/assets';
 import { content } from '@/data/content';
 
 export function Footer() {
@@ -60,14 +60,14 @@ export function Footer() {
               className="inline-flex items-center gap-2.5 text-white/55 hover:text-white transition-colors text-sm font-light group"
             >
               <Send size={13} className="text-white/30 group-hover:text-tergar-gold transition-colors" />
-              Přihlásit se k odběru
+              Prihlasit se k odberu
             </a>
           </div>
 
           {/* Social */}
           <div className="space-y-5 flex flex-col items-center lg:items-end">
             <h5 className="text-[10px] font-bold uppercase tracking-[0.25em] text-tergar-gold/70 font-heading w-full text-center lg:text-right">
-              Sledujte nás
+              Sledujte nas
             </h5>
             <div className="flex gap-3">
               {[
