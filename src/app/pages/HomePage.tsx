@@ -1,7 +1,10 @@
 import { useState, useCallback } from 'react';
-import { ArrowRight, ChevronDown, MapPin, Mail, ExternalLink, Calendar, Heart, Youtube, Instagram, Facebook, Send, BookOpen } from 'lucide-react';
+import { ArrowRight, ChevronDown, MapPin, Mail, ExternalLink, Calendar, Heart, Youtube, Instagram, Facebook, Send, BookOpen, Timer } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { content } from '@/data/content';
+import { MeditationTimer } from '@/app/components/MeditationTimer';
+import { GroupPracticeWidget } from '@/app/components/GroupPracticeWidget';
+import { MeditationResources } from '@/app/components/MeditationResources';
 
 /* ─── Easing & Animation Tokens ─────────────────────────────── */
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
@@ -39,6 +42,7 @@ export function HomePage() {
   const { hero, about, tergarPath, quote1, lineage, rinpoche, support, program, groups, newsletter, social } = content.home;
   const { scrollYProgress } = useScroll();
   const [activePin, setActivePin] = useState<number | null>(null);
+  const [showTimer, setShowTimer] = useState(false);
 
   const heroY = useTransform(scrollYProgress, [0, 0.25], [0, 120]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
@@ -399,6 +403,13 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── 4b. GROUP PRACTICE WIDGET ───────────────────────── */}
+      <section className="py-20 bg-gradient-to-b from-white to-slate-50">
+        <div className="container-custom max-w-4xl">
+          <GroupPracticeWidget />
+        </div>
+      </section>
+
       {/* ── 5. QUOTE ────────────────────────────────────────── */}
       <section className="py-24 md:py-32 bg-[#fafbfc] relative">
         <motion.div
@@ -477,6 +488,9 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── 5c. MEDITATION RESOURCES ────────────────────────── */}
+      <MeditationResources />
 
       {/* ── 6. RINPOČHE BIO — Portrait image ────────────────── */}
       <section className="py-28 md:py-36 lg:py-44 bg-white relative overflow-hidden">
@@ -776,6 +790,33 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── FLOATING MEDITATION TIMER BUTTON ─────────────────── */}
+      <motion.button
+        onClick={() => setShowTimer(true)}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1 }}
+        className="fixed bottom-8 right-8 z-40 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all flex items-center justify-center group"
+        aria-label="Open meditation timer"
+      >
+        <Timer className="w-7 h-7 group-hover:scale-110 transition-transform" />
+      </motion.button>
+
+      {/* ── MEDITATION TIMER MODAL ──────────────────────────── */}
+      {showTimer && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          onClick={() => setShowTimer(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()}>
+            <MeditationTimer onClose={() => setShowTimer(false)} />
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
