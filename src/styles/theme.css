@@ -102,7 +102,7 @@
   /* Typography System - Scale Update */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif; /* Heading font */
-    color: var(--tergar-blue);
+    color: var(--space-blue);
     font-weight: 700; /* Bold by default for Montserrat headings */
     line-height: 1.2;
     letter-spacing: -0.02em; /* Slightly tighter for Montserrat */
@@ -129,16 +129,9 @@
     font-weight: 600;
   }
 
-  /* Special Class for Editorial/Quotes */
-  .font-quote {
-    font-family: 'Libre Franklin', sans-serif;
-    font-style: italic;
-  }
-
   p {
-    margin-bottom: 1.5rem;
     color: var(--space-blue);
-    font-weight: 400; /* Regular */
+    font-weight: 400;
   }
 
   /* Gradient Background Utility */
@@ -166,10 +159,6 @@
   /* Utility Classes */
   .container-custom {
     @apply max-w-[1140px] mx-auto px-6 md:px-10 lg:px-16;
-  }
-  
-  .section-padding {
-    @apply py-20 lg:py-28;
   }
 }
 

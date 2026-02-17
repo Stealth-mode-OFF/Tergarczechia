@@ -11,6 +11,17 @@ import communityLineUpImage from '@/assets/IMG_5150.jpg';
 import teachingInteractionImage from '@/assets/IMG_5200.jpg';
 import rinpocheOutdoorImage from '@/assets/kron-0093.jpg';
 import rinpocheFlagsImage from '@/assets/ymr-portrait-15.jpg';
+import rinpocheCloseupImage from '@/assets/kron-0088.jpg';
+import communityWideImage from '@/assets/IMG_4521.jpg';
+import translationDetailImage from '@/assets/IMG_5048.jpg';
+import communityCircleImage from '@/assets/IMG_5114.jpg';
+import audienceCloseupImage from '@/assets/IMG_4567.jpg';
+import audienceSideImage from '@/assets/IMG_4559.jpg';
+import translationWideImage from '@/assets/IMG_5045.jpg';
+import communityWalkingImage from '@/assets/IMG_5180.jpg';
+import meditationHallImage from '@/assets/IMG_5032.jpg';
+import audienceFrontImage from '@/assets/IMG_5026.jpg';
+import communityOutdoorImage from '@/assets/IMG_5187.jpg';
 
 export const content = {
   header: {
@@ -195,10 +206,30 @@ export const content = {
       { src: rinpocheFlagsImage, alt: 'Mingyur Rinpočhe s modlitebními praporky', aspect: 'landscape' as const },
       { src: communityLineUpImage, alt: 'Komunita v řadě', aspect: 'landscape' as const },
       { src: teachingInteractionImage, alt: 'Učení – interakce', aspect: 'portrait' as const },
+      { src: communityWideImage, alt: 'Meditační komunita pohromadě', aspect: 'landscape' as const },
+      { src: translationDetailImage, alt: 'Překládání učení', aspect: 'landscape' as const },
+      { src: communityCircleImage, alt: 'Společné setkání komunity', aspect: 'landscape' as const },
+      { src: audienceCloseupImage, alt: 'Pozorní posluchači', aspect: 'landscape' as const },
+      { src: audienceSideImage, alt: 'Účastníci meditace', aspect: 'landscape' as const },
+      { src: translationWideImage, alt: 'Učení a překlad dharmy', aspect: 'landscape' as const },
+      { src: communityWalkingImage, alt: 'Komunita na procházce', aspect: 'landscape' as const },
+      { src: meditationHallImage, alt: 'Meditační sál', aspect: 'landscape' as const },
+      { src: audienceFrontImage, alt: 'Účastníci zepředu', aspect: 'landscape' as const },
+      { src: communityOutdoorImage, alt: 'Komunita venku', aspect: 'landscape' as const },
+      { src: rinpocheCloseupImage, alt: 'Mingyur Rinpočhe – portrét', aspect: 'portrait' as const },
     ],
+    photoStrip: [
+      communityWideImage,
+      communityBlessingImage,
+      audienceCloseupImage,
+      communityWalkingImage,
+      meditationHallImage,
+    ],
+    quoteBackground: communityCircleImage,
+    supportBackground: rinpocheCloseupImage,
   },
   footer: {
-    inclusionText: 'Mingyur Rinpoche a cela komunita Tergar vyjadruje podporu LGBTQ komunite.',
+    inclusionText: 'Mingyur Rinpočhe a celá komunita Tergar vyjadřuje podporu LGBTQ komunitě.',
     inclusionLink: 'https://learning.tergar.org/2020/07/16/mingyur-rinpoche-addresses-tergars-support-of-the-lgbtq-community/',
     copyright: '© 2026 Tergar Česko',
     contact: {

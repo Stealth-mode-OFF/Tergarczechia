@@ -23,3 +23,16 @@ export { default as teachingInteraction } from './IMG_5200.jpg';
 export { default as rinpochePortraitPro } from './ymr-portrait-7.jpg';
 export { default as rinpocheOutdoor } from './kron-0093.jpg';
 export { default as rinpocheFlags } from './ymr-portrait-15.jpg';
+
+/* --- JPG (additional community & event photography) --- */
+export { default as rinpocheCloseup } from './kron-0088.jpg';
+export { default as communityWide } from './IMG_4521.jpg';
+export { default as translationDetail } from './IMG_5048.jpg';
+export { default as communityCircle } from './IMG_5114.jpg';
+export { default as audienceCloseup } from './IMG_4567.jpg';
+export { default as audienceSide } from './IMG_4559.jpg';
+export { default as translationWide } from './IMG_5045.jpg';
+export { default as communityWalking } from './IMG_5180.jpg';
+export { default as meditationHall } from './IMG_5032.jpg';
+export { default as audienceFront } from './IMG_5026.jpg';
+export { default as communityOutdoor } from './IMG_5187.jpg';

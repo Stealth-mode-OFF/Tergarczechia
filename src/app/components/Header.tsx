@@ -47,7 +47,7 @@ export function Header() {
             <img
               src={logoImage}
               alt="Tergar"
-              className={`transition-all duration-500 object-contain ${scrolled ? 'h-8' : 'h-11'}`}
+              className={`transition-all duration-500 object-contain ${scrolled ? 'h-8' : 'h-11 brightness-0 invert'}`}
             />
           </Link>
 
@@ -65,7 +65,7 @@ export function Header() {
                     href={item.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${linkClass} text-space-blue/70 hover:text-tergar-blue flex items-center gap-1.5`}
+                    className={`${linkClass} ${scrolled ? 'text-space-blue/70 hover:text-tergar-blue' : 'text-white/80 hover:text-white'} flex items-center gap-1.5`}
                   >
                     {item.label}
                     <ExternalLink size={10} className="opacity-30 group-hover:opacity-70 transition-opacity" />
@@ -75,10 +75,10 @@ export function Header() {
                   <a
                     href={`#${item.path.replace('/', '')}`}
                     onClick={(e) => scrollTo(e, item.path)}
-                    className={`${linkClass} text-space-blue/70 hover:text-tergar-blue`}
+                    className={`${linkClass} ${scrolled ? 'text-space-blue/70 hover:text-tergar-blue' : 'text-white/80 hover:text-white'}`}
                   >
                     {item.label}
-                    <span className="absolute bottom-0 left-0 w-full h-px bg-tergar-blue origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    <span className={`absolute bottom-0 left-0 w-full h-px ${scrolled ? 'bg-tergar-blue' : 'bg-white/60'} origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
                   </a>
                 )}
               </motion.div>
@@ -88,7 +88,7 @@ export function Header() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden relative z-50 p-2 -mr-2 text-space-blue"
+            className={`lg:hidden relative z-50 p-2 -mr-2 transition-colors ${scrolled || menuOpen ? 'text-space-blue' : 'text-white'}`}
             aria-label="Menu"
           >
             <div className="w-6 flex flex-col gap-[5px]">

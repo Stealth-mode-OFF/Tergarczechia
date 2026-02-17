@@ -60,14 +60,14 @@ export function Footer() {
               className="inline-flex items-center gap-2.5 text-white/55 hover:text-white transition-colors text-sm font-light group"
             >
               <Send size={13} className="text-white/30 group-hover:text-tergar-gold transition-colors" />
-              Prihlasit se k odberu
+              Přihlásit se k odběru
             </a>
           </div>
 
           {/* Social */}
           <div className="space-y-5 flex flex-col items-center lg:items-end">
             <h5 className="text-[10px] font-bold uppercase tracking-[0.25em] text-tergar-gold/70 font-heading w-full text-center lg:text-right">
-              Sledujte nas
+              Sledujte nás
             </h5>
             <div className="flex gap-3">
               {[

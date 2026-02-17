@@ -16,8 +16,8 @@ const stagger = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
 };
 
-/* ─── Czech Republic Map ─────────────────────────────────────── */
-const CZ_MAP_PATH = "M122,2 L135,8 L148,5 L160,12 L175,8 L188,15 L200,10 L215,18 L228,14 L242,22 L255,18 L268,25 L282,20 L295,28 L308,24 L322,32 L335,28 L348,35 L362,30 L375,38 L385,42 L392,50 L398,58 L405,52 L415,58 L425,55 L435,62 L442,70 L448,78 L452,88 L448,98 L442,108 L435,115 L425,120 L418,128 L410,135 L400,140 L390,148 L378,152 L368,158 L355,162 L342,168 L330,172 L318,178 L305,175 L292,180 L278,178 L265,182 L252,178 L238,182 L225,178 L212,175 L198,178 L185,172 L172,168 L158,165 L145,160 L132,155 L118,150 L105,145 L92,140 L80,135 L68,128 L58,120 L48,112 L40,105 L35,95 L32,85 L30,75 L32,65 L38,55 L45,48 L55,40 L65,32 L78,25 L88,18 L100,12 L112,6 Z";
+/* ─── Czech Republic Map (realistic border outline) ──────────── */
+const CZ_MAP_PATH = "M30,60 L32,48 L52,39 L79,31 L102,24 L127,20 L152,20 L167,12 L178,3 L198,9 L219,16 L252,23 L274,29 L304,48 L339,57 L368,71 L395,89 L431,101 L462,112 L482,112 L450,132 L406,153 L366,164 L330,169 L298,166 L264,173 L224,178 L191,182 L171,177 L144,169 L121,158 L97,145 L81,132 L72,118 L61,103 L49,89 L39,74 Z";
 
 function geoToMap(lat: number, lng: number) {
   const x = ((lng - 12.09) / (18.86 - 12.09)) * 452 + 30;
@@ -36,7 +36,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 /* ═══════════════════════════════════════════════════════════════ */
 export function HomePage() {
-  const { hero, about, tergarPath, quote, lineage, rinpoche, support, program, groups, newsletter, social } = content.home;
+  const { hero, about, tergarPath, quote, lineage, rinpoche, support, program, groups, newsletter, social, gallery, photoStrip, quoteBackground, supportBackground } = content.home;
   const { scrollYProgress } = useScroll();
   const [activePin, setActivePin] = useState<number | null>(null);
   const [showZenamu, setShowZenamu] = useState(false);
@@ -156,7 +156,7 @@ export function HomePage() {
 
               <motion.div variants={reveal} className="w-16 h-px bg-tergar-gold/60" />
 
-              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/65 leading-[1.8] font-light">
+              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/60 leading-[1.8] font-light">
                 {about.text}
               </motion.p>
 
@@ -174,6 +174,30 @@ export function HomePage() {
               </motion.a>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ── PHOTO STRIP — Horizontal community photos ──────── */}
+      <section className="py-0 bg-white overflow-hidden">
+        <div className="flex gap-2 md:gap-3">
+          {photoStrip.map((src, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 1.05 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease }}
+              className="flex-1 min-w-0"
+            >
+              <div className="aspect-[3/2] overflow-hidden">
+                <img
+                  src={src}
+                  alt="Tergar Česko komunita"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -213,6 +237,7 @@ export function HomePage() {
                   src={tergarPath.image}
                   alt="Vajradhara"
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
               </div>
@@ -429,16 +454,21 @@ export function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* ── 5. QUOTE ────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-[#fafbfc] relative">
+      {/* ── 5. QUOTE — With community photo background ──── */}
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        {/* Community photo background */}
+        <div className="absolute inset-0">
+          <img src={quoteBackground} alt="" className="w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-white/88 backdrop-blur-[2px]" />
+        </div>
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={reveal}
-          className="container-custom max-w-3xl text-center"
+          className="container-custom max-w-3xl text-center relative z-10"
         >
-          <div className="text-tergar-gold/30 text-7xl md:text-8xl font-serif leading-none select-none mb-4">&ldquo;</div>
+          <div className="text-tergar-gold/40 text-7xl md:text-8xl font-serif leading-none select-none mb-4">&ldquo;</div>
           <blockquote className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-[2.1rem] text-space-blue leading-[1.5] tracking-tight mb-8">
             {quote.text}
           </blockquote>
@@ -448,8 +478,8 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      {/* ── 5b. LINEAGE — Kagyü tradition ───────────────────── */}
-      <section className="py-28 md:py-36 lg:py-44 bg-white relative overflow-hidden">
+      {/* ── 5. LINEAGE — Kagyü tradition ───────────────────── */}
+      <section className="py-28 md:py-36 lg:py-44 bg-[#fafbfc] relative overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
             {/* Text */}
@@ -469,7 +499,7 @@ export function HomePage() {
 
               <motion.div variants={reveal} className="w-16 h-px bg-tergar-gold/60" />
 
-              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/65 leading-[1.8] font-light">
+              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/60 leading-[1.8] font-light">
                 {lineage.text}
               </motion.p>
 
@@ -500,6 +530,7 @@ export function HomePage() {
                   src={lineage.image}
                   alt="Strom linie Kagyü"
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/8 to-transparent" />
               </div>
@@ -525,6 +556,7 @@ export function HomePage() {
                   src={rinpoche.image}
                   alt={rinpoche.title}
                   className="w-full h-full object-cover object-top"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
               </div>
@@ -548,7 +580,7 @@ export function HomePage() {
               <motion.div variants={reveal} className="w-16 h-px bg-tergar-gold/60" />
 
               {rinpoche.text.split('\n\n').map((paragraph, i) => (
-                <motion.p key={i} variants={reveal} className="text-base sm:text-lg text-space-blue/65 leading-[1.8] font-light">
+                <motion.p key={i} variants={reveal} className="text-base sm:text-lg text-space-blue/60 leading-[1.8] font-light">
                   {paragraph}
                 </motion.p>
               ))}
@@ -582,9 +614,64 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── PHOTO GALLERY — Community mosaic ───────────── */}
+      <section className="py-20 md:py-28 bg-[#fafbfc]">
+        <div className="container-custom">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="text-center mb-12"
+          >
+            <motion.div variants={reveal}>
+              <SectionLabel>Naše komunita</SectionLabel>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-space-blue font-heading tracking-tight mb-4">
+                Společné chvíle
+              </h2>
+            </motion.div>
+            <motion.p variants={reveal} className="text-sm sm:text-base text-space-blue/50 font-light max-w-lg mx-auto">
+              Meditace, setkání, učení a komunita — momenty, které nás spojují.
+            </motion.p>
+          </motion.div>
+
+          {/* Masonry-style photo grid */}
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 space-y-3 md:space-y-4">
+            {gallery.map((photo, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: (i % 4) * 0.08, ease }}
+                className="break-inside-avoid"
+              >
+                <div className={`overflow-hidden rounded-xl group relative ${
+                  photo.aspect === 'portrait' ? 'aspect-[2/3]' : i % 5 === 0 ? 'aspect-[4/5]' : 'aspect-[3/2]'
+                }`}>
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="text-white text-xs font-light">{photo.alt}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── 7. SUPPORT ──────────────────────────────────────── */}
       <section className="py-28 md:py-36 bg-space-blue text-white relative overflow-hidden isolate">
-        <div className="absolute inset-0 bg-gradient-to-br from-tergar-blue/90 via-space-blue to-[#1a1f2e]" />
+        <div className="absolute inset-0">
+          <img src={supportBackground} alt="" className="w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-br from-tergar-blue/92 via-space-blue/90 to-[#1a1f2e]/95" />
+        </div>
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-tergar-blue/15 rounded-full blur-[140px] -translate-y-1/3 translate-x-1/4" />
 
         <motion.div
@@ -734,6 +821,7 @@ export function HomePage() {
             src={rinpoche.image}
             alt="Yongey Mingyur Rinpočhe"
             className="w-full h-full object-cover object-top"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-space-blue via-space-blue/85 to-space-blue/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-space-blue/90 via-transparent to-space-blue/30" />
@@ -762,7 +850,7 @@ export function HomePage() {
                   href={newsletter.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 bg-tergar-gold hover:bg-tergar-gold/90 text-space-blue font-bold text-sm px-7 py-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-tergar-gold/20 font-heading"
+                  className="group inline-flex items-center justify-center gap-3 bg-tergar-gold hover:bg-tergar-gold/90 text-space-blue font-bold text-sm px-7 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-tergar-gold/20 font-heading"
                 >
                   <Send size={16} strokeWidth={2} />
                   Chci dostávat novinky
@@ -770,7 +858,7 @@ export function HomePage() {
                 </a>
                 <a
                   href="#program"
-                  className="group inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold text-sm px-7 py-4 rounded-xl transition-all duration-300 hover:bg-white/5 font-heading"
+                  className="group inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold text-sm px-7 py-4 rounded-full transition-all duration-300 hover:bg-white/5 font-heading"
                 >
                   Zobrazit program
                 </a>
