@@ -341,14 +341,14 @@ export function HomePage() {
             </motion.p>
           </motion.div>
 
-          {/* Upcoming event cards — colorful */}
+          {/* Upcoming event cards — subtle white with colored accent */}
           {(() => {
-            const eventColors = [
-              { gradient: 'from-[#1B4087] to-[#2a5caa]', text: 'text-[#1B4087]' },
-              { gradient: 'from-[#7B1A1A] to-[#a82828]', text: 'text-[#7B1A1A]' },
-              { gradient: 'from-[#E39F24] to-[#d4890a]', text: 'text-[#b07a10]' },
-              { gradient: 'from-[#1a6b4a] to-[#238c62]', text: 'text-[#1a6b4a]' },
-              { gradient: 'from-[#6b3fa0] to-[#8555c0]', text: 'text-[#6b3fa0]' },
+            const eventAccents = [
+              { border: 'border-l-[#1B4087]', badge: 'bg-[#1B4087]/8 text-[#1B4087]', text: 'text-[#1B4087]' },
+              { border: 'border-l-[#7B1A1A]', badge: 'bg-[#7B1A1A]/8 text-[#7B1A1A]', text: 'text-[#7B1A1A]' },
+              { border: 'border-l-[#b07a10]', badge: 'bg-[#b07a10]/8 text-[#b07a10]', text: 'text-[#b07a10]' },
+              { border: 'border-l-[#1a6b4a]', badge: 'bg-[#1a6b4a]/8 text-[#1a6b4a]', text: 'text-[#1a6b4a]' },
+              { border: 'border-l-[#6b3fa0]', badge: 'bg-[#6b3fa0]/8 text-[#6b3fa0]', text: 'text-[#6b3fa0]' },
             ];
             return (
               <motion.div
@@ -359,7 +359,7 @@ export function HomePage() {
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
               >
                 {program.upcomingEvents.map((event, i) => {
-                  const color = eventColors[i % eventColors.length];
+                  const accent = eventAccents[i % eventAccents.length];
                   return (
                     <motion.a
                       key={i}
@@ -367,28 +367,26 @@ export function HomePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       variants={reveal}
-                      className="group relative overflow-hidden rounded-2xl flex flex-col shadow-[0_2px_16px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-1 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.18)] transition-all duration-500"
+                      className={`group relative overflow-hidden rounded-2xl bg-white border border-gray-100/80 ${accent.border} border-l-[3px] flex flex-col shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.12)] transition-all duration-500`}
                     >
-                      {/* Colored header strip */}
-                      <div className={`bg-gradient-to-r ${color.gradient} px-5 py-4 text-white`}>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading bg-white/20 text-white backdrop-blur-sm">
+                      <div className="px-5 pt-5 pb-2">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading ${accent.badge}`}>
                             {event.type === 'online' ? 'Online' : 'Živě'}
                           </span>
-                          <div className="flex items-center gap-1.5 text-[10px] text-white/70 font-heading font-semibold">
+                          <div className="flex items-center gap-1.5 text-[10px] text-space-blue/40 font-heading font-semibold">
                             <Calendar size={10} />
                             {event.date}
                           </div>
                         </div>
-                        <h3 className="text-base font-bold font-heading leading-snug">
+                        <h3 className="text-base font-bold font-heading leading-snug text-space-blue">
                           {event.title}
                         </h3>
                       </div>
 
-                      {/* White body */}
-                      <div className="bg-white px-5 py-4 flex-grow flex flex-col rounded-b-2xl">
-                        <p className="text-sm text-space-blue/55 font-light flex-grow">{event.desc}</p>
-                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${color.text} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}>
+                      <div className="px-5 pb-5 pt-1 flex-grow flex flex-col">
+                        <p className="text-sm text-space-blue/50 font-light flex-grow">{event.desc}</p>
+                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${accent.text} opacity-50 group-hover:opacity-100 transition-opacity duration-300`}>
                           Registrace <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
                         </span>
                       </div>
@@ -886,7 +884,7 @@ export function HomePage() {
 
         <div className="container-custom relative z-10 py-20 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Event cards — grid with colored shadows */}
+            {/* Event cards — subtle white with accent */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -895,8 +893,14 @@ export function HomePage() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
             >
               {program.upcomingEvents.map((event, i) => {
-                const color = event.color || 'from-[#1B4087] to-[#2a5caa]';
-                const shadowColor = event.shadowColor || 'rgba(27,64,135,0.18)';
+                const accents = [
+                  { border: 'border-l-[#1B4087]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
+                  { border: 'border-l-[#7B1A1A]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
+                  { border: 'border-l-[#b07a10]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
+                  { border: 'border-l-[#1a6b4a]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
+                  { border: 'border-l-[#6b3fa0]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
+                ];
+                const accent = accents[i % accents.length];
                 return (
                   <motion.a
                     key={i}
@@ -904,34 +908,23 @@ export function HomePage() {
                     href={event.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative overflow-visible rounded-2xl flex flex-col transition-all duration-500"
-                    style={{ zIndex: 1 }}
+                    className={`group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 ${accent.border} border-l-[3px] flex flex-col hover:-translate-y-1 hover:bg-white/15 transition-all duration-500`}
                   >
-                    {/* Colored shadow behind card */}
-                    <div
-                      className="absolute inset-0 rounded-2xl"
-                      style={{
-                        zIndex: 0,
-                        boxShadow: `0 8px 40px 0 ${shadowColor}`,
-                        opacity: 0.7,
-                        filter: 'blur(8px)',
-                      }}
-                    />
-                    <div className={`relative bg-gradient-to-r ${color} px-5 py-4 text-white rounded-t-2xl`} style={{ zIndex: 1 }}>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading bg-white/20 text-white backdrop-blur-sm">
+                    <div className="px-5 pt-5 pb-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading ${accent.badge}`}>
                           {event.type}
                         </span>
-                        <div className="flex items-center gap-1.5 text-[10px] text-white/70 font-heading font-semibold">
+                        <div className="flex items-center gap-1.5 text-[10px] text-white/40 font-heading font-semibold">
                           <Calendar size={10} strokeWidth={2} />
                           {event.date}
                         </div>
                       </div>
-                      <h3 className="text-base font-bold font-heading leading-snug">{event.title}</h3>
+                      <h3 className="text-base font-bold font-heading leading-snug text-white">{event.title}</h3>
                     </div>
-                    <div className="relative bg-white px-5 py-4 flex-grow flex flex-col rounded-b-2xl" style={{ zIndex: 1 }}>
-                      <p className="text-sm text-space-blue/55 font-light flex-grow">{event.desc}</p>
-                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${event.textColor || 'text-[#1B4087]'} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}>
+                    <div className="px-5 pb-5 pt-1 flex-grow flex flex-col">
+                      <p className="text-sm text-white/45 font-light flex-grow">{event.desc}</p>
+                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${accent.text} group-hover:text-white transition-all duration-300`}>
                         Registrace <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
                       </span>
                     </div>
