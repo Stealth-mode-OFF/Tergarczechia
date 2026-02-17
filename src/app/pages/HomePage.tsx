@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import czechiaMapOsm from '@/assets/czechia-map-osm.png';
 import { ArrowRight, ChevronDown, MapPin, Mail, ExternalLink, Calendar, Heart, Youtube, Instagram, Facebook, Send, BookOpen, X } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { content } from '@/data/content';
@@ -805,7 +806,7 @@ export function HomePage() {
             >
               <div className="relative w-full h-[320px] md:h-[380px]">
                 <img
-                  src={require('@/assets/czechia-map-osm.png')}
+                  src={czechiaMapOsm}
                   alt="Mapa České republiky (open source podklad)"
                   className="absolute inset-0 w-full h-full object-cover rounded-2xl border border-gray-100/80"
                   draggable={false}
@@ -849,21 +850,20 @@ export function HomePage() {
               </div>
             </motion.div>
 
-            {/* Contact card — spans 2 columns */}
+            {/* Contact card — simplified */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.15, ease }}
-              className="lg:col-span-2 bg-gradient-to-br from-[#1B4087] to-[#2a5caa] rounded-2xl p-8 md:p-10 text-white shadow-lg"
+              className="lg:col-span-2 bg-gradient-to-br from-[#1B4087] to-[#2a5caa] rounded-2xl p-8 md:p-10 text-white shadow-lg flex flex-col items-start justify-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-5">
+              <div className="mb-4">
                 <Mail size={22} strokeWidth={1.5} />
               </div>
-              <h3 className="font-bold font-heading text-xl mb-3">Chcete založit skupinu?</h3>
-              <p className="text-white/60 text-sm leading-relaxed mb-6">
-                Pokud ve vašem okolí žádná skupina není a chtěli byste ji založit, ozvěte se nám. Rádi pomůžeme.
-              </p>
+              <div className="mb-6 text-base font-medium">
+                Kontaktujte nás na e-mailu nebo telefonicky v případě potřeby.
+              </div>
               <a
                 href={`mailto:${groups.email}`}
                 className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 group"
@@ -886,64 +886,58 @@ export function HomePage() {
 
         <div className="container-custom relative z-10 py-20 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Text side */}
+            {/* Event cards — grid with colored shadows */}
             <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease }}
+              variants={stagger}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
             >
-              <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
-                Připojte se k nám
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white leading-tight mb-6">
-                Začněte meditovat<br />s&nbsp;Tergar&nbsp;Česko
-              </h2>
-              <p className="text-white/55 text-base md:text-lg font-light leading-relaxed mb-10 max-w-md">
-                Přidejte se ke komunitě praktikujících po celé České republice. Pravidelné meditace, kurzy a setkání — živě i online.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <a
-                  href={newsletter.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 bg-tergar-gold hover:bg-tergar-gold/90 text-space-blue font-bold text-sm px-7 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-tergar-gold/20 font-heading"
-                >
-                  <Send size={16} strokeWidth={2} />
-                  Chci dostávat novinky
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a
-                  href="#program"
-                  className="group inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold text-sm px-7 py-4 rounded-full transition-all duration-300 hover:bg-white/5 font-heading"
-                >
-                  Zobrazit program
-                </a>
-              </div>
-
-              {/* Social row */}
-              <div className="flex items-center gap-5">
-                <span className="text-white/30 text-xs font-light">Sledujte nás</span>
-                <div className="flex gap-2.5">
-                  {[
-                    { href: social.facebook, icon: Facebook, label: 'Facebook' },
-                    { href: social.instagram, icon: Instagram, label: 'Instagram' },
-                    { href: social.youtube, icon: Youtube, label: 'YouTube' },
-                  ].map(({ href, icon: Icon, label }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:bg-white hover:text-space-blue hover:border-white transition-all duration-300"
-                      aria-label={label}
-                    >
-                      <Icon size={15} strokeWidth={1.5} />
-                    </a>
-                  ))}
-                </div>
-              </div>
+              {program.events.map((event, i) => {
+                const color = event.color || 'from-[#1B4087] to-[#2a5caa]';
+                const shadowColor = event.shadowColor || 'rgba(27,64,135,0.18)';
+                return (
+                  <motion.a
+                    key={i}
+                    variants={reveal}
+                    href={event.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative overflow-visible rounded-2xl flex flex-col transition-all duration-500"
+                    style={{ zIndex: 1 }}
+                  >
+                    {/* Colored shadow behind card */}
+                    <div
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        zIndex: 0,
+                        boxShadow: `0 8px 40px 0 ${shadowColor}`,
+                        opacity: 0.7,
+                        filter: 'blur(8px)',
+                      }}
+                    />
+                    <div className={`relative bg-gradient-to-r ${color} px-5 py-4 text-white rounded-t-2xl`} style={{ zIndex: 1 }}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading bg-white/20 text-white backdrop-blur-sm">
+                          {event.type}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-[10px] text-white/70 font-heading font-semibold">
+                          <Calendar size={10} strokeWidth={2} />
+                          {event.date}
+                        </div>
+                      </div>
+                      <h3 className="text-base font-bold font-heading leading-snug">{event.title}</h3>
+                    </div>
+                    <div className="relative bg-white px-5 py-4 flex-grow flex flex-col rounded-b-2xl" style={{ zIndex: 1 }}>
+                      <p className="text-sm text-space-blue/55 font-light flex-grow">{event.desc}</p>
+                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${event.textColor || 'text-[#1B4087]'} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}>
+                        Registrace <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </motion.a>
+                );
+              })}
             </motion.div>
 
             {/* Rinpoche image — fully visible */}
