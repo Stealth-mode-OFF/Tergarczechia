@@ -894,9 +894,9 @@ export function HomePage() {
               variants={stagger}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
             >
-              {program.events.map((event, i) => {
-                const color = event.color || 'from-[#1B4087] to-[#2a5caa]';
-                const shadowColor = event.shadowColor || 'rgba(27,64,135,0.18)';
+              {program.upcomingEvents.map((event, i) => {
+                const color = 'from-[#1B4087] to-[#2a5caa]';
+                const shadowColor = 'rgba(27,64,135,0.18)';
                 return (
                   <motion.a
                     key={i}
@@ -931,7 +931,7 @@ export function HomePage() {
                     </div>
                     <div className="relative bg-white px-5 py-4 flex-grow flex flex-col rounded-b-2xl" style={{ zIndex: 1 }}>
                       <p className="text-sm text-space-blue/55 font-light flex-grow">{event.desc}</p>
-                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${event.textColor || 'text-[#1B4087]'} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}>
+                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 text-[#1B4087] opacity-60 group-hover:opacity-100 transition-opacity duration-300`}>
                         Registrace <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
                       </span>
                     </div>
