@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import czechiaMapOsm from '@/assets/czechia-map-osm.png';
 import { ArrowRight, ChevronDown, MapPin, Mail, ExternalLink, Calendar, Heart, Youtube, Instagram, Facebook, Send, BookOpen, X } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { content } from '@/data/content';
@@ -21,12 +20,6 @@ const stagger = {
 // Highly accurate SVG outline of Czech Republic from Wikimedia Commons (public domain)
 // Source: https://commons.wikimedia.org/wiki/File:Czech_Republic_location_map.svg
 const CZ_MAP_PATH = "M 60.5,19.5 66.5,13.5 74.5,13.5 80.5,8.5 90.5,10.5 99.5,4.5 110.5,7.5 120.5,2.5 132.5,7.5 143.5,2.5 154.5,7.5 164.5,2.5 175.5,7.5 186.5,2.5 197.5,7.5 208.5,2.5 219.5,7.5 230.5,2.5 241.5,7.5 252.5,2.5 263.5,7.5 274.5,2.5 285.5,7.5 296.5,2.5 307.5,7.5 318.5,2.5 329.5,7.5 340.5,2.5 351.5,7.5 362.5,2.5 373.5,7.5 384.5,2.5 395.5,7.5 406.5,2.5 417.5,7.5 428.5,2.5 439.5,7.5 450.5,2.5 461.5,7.5 472.5,2.5 483.5,7.5 494.5,13.5 494.5,24.5 489.5,35.5 494.5,46.5 489.5,57.5 494.5,68.5 489.5,79.5 494.5,90.5 489.5,101.5 494.5,112.5 489.5,123.5 494.5,134.5 489.5,145.5 494.5,156.5 489.5,167.5 494.5,178.5 483.5,184.5 472.5,189.5 461.5,184.5 450.5,189.5 439.5,184.5 428.5,189.5 417.5,184.5 406.5,189.5 395.5,184.5 384.5,189.5 373.5,184.5 362.5,189.5 351.5,184.5 340.5,189.5 329.5,184.5 318.5,189.5 307.5,184.5 296.5,189.5 285.5,184.5 274.5,189.5 263.5,184.5 252.5,189.5 241.5,184.5 230.5,189.5 219.5,184.5 208.5,189.5 197.5,184.5 186.5,189.5 175.5,184.5 164.5,189.5 154.5,184.5 143.5,189.5 132.5,184.5 120.5,189.5 110.5,184.5 99.5,189.5 90.5,184.5 80.5,186.5 74.5,181.5 66.5,181.5 60.5,175.5 60.5,164.5 65.5,153.5 60.5,142.5 65.5,131.5 60.5,120.5 65.5,109.5 60.5,98.5 65.5,87.5 60.5,76.5 65.5,65.5 60.5,54.5 65.5,43.5 60.5,32.5 Z";
-
-function geoToMap(lat: number, lng: number) {
-  const x = ((lng - 12.09) / (18.86 - 12.09)) * 452 + 30;
-  const y = ((51.06 - lat) / (51.06 - 48.55)) * 180 + 2;
-  return { x, y };
-}
 
 /* ─── Tiny reusable section label ────────────────────────────── */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -792,70 +785,14 @@ export function HomePage() {
             })()}
           </motion.div>
 
-          {/* Map + contact row */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-            {/* Map — spans 3 columns */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease }}
-              className="lg:col-span-3 bg-white rounded-2xl border border-gray-100/80 p-8 md:p-10 shadow-sm"
-            >
-              <div className="relative w-full h-[320px] md:h-[380px]">
-                <img
-                  src={czechiaMapOsm}
-                  alt="Mapa České republiky (open source podklad)"
-                  className="absolute inset-0 w-full h-full object-cover rounded-2xl border border-gray-100/80"
-                  draggable={false}
-                  style={{ pointerEvents: 'none', userSelect: 'none' }}
-                />
-                {/* Piny a popisky */}
-                <svg viewBox="0 0 500 200" className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
-                  {groups.mapLocations.map((loc, i) => {
-                    const pos = geoToMap(loc.lat, loc.lng);
-                    const isActive = activePin === i;
-                    return (
-                      <g key={i} style={{ pointerEvents: 'auto' }}>
-                        <circle cx={pos.x} cy={pos.y} r="14" fill="rgba(27,64,135,0.06)">
-                          <animate attributeName="r" from="8" to="20" dur="2.5s" repeatCount="indefinite" />
-                          <animate attributeName="opacity" from="0.3" to="0" dur="2.5s" repeatCount="indefinite" />
-                        </circle>
-                        <circle
-                          cx={pos.x}
-                          cy={pos.y}
-                          r={isActive ? 6.5 : 4.5}
-                          fill="#1B4087"
-                          stroke="white"
-                          strokeWidth="2"
-                          className="cursor-pointer transition-all duration-300"
-                          onMouseEnter={() => setActivePin(i)}
-                          onMouseLeave={() => setActivePin(null)}
-                        />
-                        <text
-                          x={pos.x}
-                          y={pos.y - 11}
-                          textAnchor="middle"
-                          className={`text-[8px] font-bold uppercase tracking-wider fill-space-blue transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-50'}`}
-                          style={{ fontFamily: 'Montserrat, sans-serif' }}
-                        >
-                          {loc.name}
-                        </text>
-                      </g>
-                    );
-                  })}
-                </svg>
-              </div>
-            </motion.div>
-
-            {/* Contact card — simplified */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.15, ease }}
-              className="lg:col-span-2 bg-gradient-to-br from-[#1B4087] to-[#2a5caa] rounded-2xl p-8 md:p-10 text-white shadow-lg flex flex-col items-start justify-center"
-            >
+          {/* Contact card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease }}
+            className="max-w-xl mx-auto bg-gradient-to-br from-[#1B4087] to-[#2a5caa] rounded-2xl p-8 md:p-10 text-white shadow-lg flex flex-col items-start justify-center"
+          >
               <div className="mb-4">
                 <Mail size={22} strokeWidth={1.5} />
               </div>
@@ -869,8 +806,7 @@ export function HomePage() {
                 <span>{groups.email}</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </a>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
