@@ -18,6 +18,9 @@ export interface UpcomingEvent {
   type: 'online' | 'live';
   desc: string;
   link: string;
+  color?: string;
+  shadowColor?: string;
+  textColor?: string;
 }
 
 export interface RegularMeeting {
