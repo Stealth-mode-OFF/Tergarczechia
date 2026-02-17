@@ -820,53 +820,64 @@ export function HomePage() {
 
         <div className="container-custom relative z-10 py-20 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Event cards — subtle white with accent */}
+            {/* Text side */}
             <motion.div
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              variants={stagger}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
+              transition={{ duration: 0.8, ease }}
             >
-              {program.upcomingEvents.map((event, i) => {
-                const accents = [
-                  { border: 'border-l-[#1B4087]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
-                  { border: 'border-l-[#7B1A1A]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
-                  { border: 'border-l-[#b07a10]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
-                  { border: 'border-l-[#1a6b4a]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
-                  { border: 'border-l-[#6b3fa0]', badge: 'bg-white/15 text-white/90', text: 'text-white/70' },
-                ];
-                const accent = accents[i % accents.length];
-                return (
-                  <motion.a
-                    key={i}
-                    variants={reveal}
-                    href={event.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 ${accent.border} border-l-[3px] flex flex-col hover:-translate-y-1 hover:bg-white/15 transition-all duration-500`}
-                  >
-                    <div className="px-5 pt-5 pb-2">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading ${accent.badge}`}>
-                          {event.type}
-                        </span>
-                        <div className="flex items-center gap-1.5 text-[10px] text-white/40 font-heading font-semibold">
-                          <Calendar size={10} strokeWidth={2} />
-                          {event.date}
-                        </div>
-                      </div>
-                      <h3 className="text-base font-bold font-heading leading-snug text-white">{event.title}</h3>
-                    </div>
-                    <div className="px-5 pb-5 pt-1 flex-grow flex flex-col">
-                      <p className="text-sm text-white/45 font-light flex-grow">{event.desc}</p>
-                      <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${accent.text} group-hover:text-white transition-all duration-300`}>
-                        Registrace <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </div>
-                  </motion.a>
-                );
-              })}
+              <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+                Připojte se k nám
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white leading-tight mb-6">
+                Začněte meditovat<br />s&nbsp;Tergar&nbsp;Česko
+              </h2>
+              <p className="text-white/55 text-base md:text-lg font-light leading-relaxed mb-10 max-w-md">
+                Přidejte se ke komunitě praktikujících po celé České republice. Pravidelné meditace, kurzy a setkání — živě i online.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <a
+                  href={newsletter.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-3 bg-tergar-gold hover:bg-tergar-gold/90 text-space-blue font-bold text-sm px-7 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-tergar-gold/20 font-heading"
+                >
+                  <Send size={16} strokeWidth={2} />
+                  Chci dostávat novinky
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="#program"
+                  className="group inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold text-sm px-7 py-4 rounded-full transition-all duration-300 hover:bg-white/5 font-heading"
+                >
+                  Zobrazit program
+                </a>
+              </div>
+
+              {/* Social row */}
+              <div className="flex items-center gap-5">
+                <span className="text-white/30 text-xs font-light">Sledujte nás</span>
+                <div className="flex gap-2.5">
+                  {[
+                    { href: social.facebook, icon: Facebook, label: 'Facebook' },
+                    { href: social.instagram, icon: Instagram, label: 'Instagram' },
+                    { href: social.youtube, icon: Youtube, label: 'YouTube' },
+                  ].map(({ href, icon: Icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:bg-white hover:text-space-blue hover:border-white transition-all duration-300"
+                      aria-label={label}
+                    >
+                      <Icon size={15} strokeWidth={1.5} />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Rinpoche image — fully visible */}
