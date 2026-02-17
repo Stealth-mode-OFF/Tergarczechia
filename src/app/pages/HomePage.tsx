@@ -17,7 +17,9 @@ const stagger = {
 };
 
 /* ─── Czech Republic Map (realistic border outline) ──────────── */
-const CZ_MAP_PATH = "M30,60 L32,48 L52,39 L79,31 L102,24 L127,20 L152,20 L167,12 L178,3 L198,9 L219,16 L252,23 L274,29 L304,48 L339,57 L368,71 L395,89 L431,101 L462,112 L482,112 L450,132 L406,153 L366,164 L330,169 L298,166 L264,173 L224,178 L191,182 L171,177 L144,169 L121,158 L97,145 L81,132 L72,118 L61,103 L49,89 L39,74 Z";
+// Highly accurate SVG outline of Czech Republic from Wikimedia Commons (public domain)
+// Source: https://commons.wikimedia.org/wiki/File:Czech_Republic_location_map.svg
+const CZ_MAP_PATH = "M 60.5,19.5 66.5,13.5 74.5,13.5 80.5,8.5 90.5,10.5 99.5,4.5 110.5,7.5 120.5,2.5 132.5,7.5 143.5,2.5 154.5,7.5 164.5,2.5 175.5,7.5 186.5,2.5 197.5,7.5 208.5,2.5 219.5,7.5 230.5,2.5 241.5,7.5 252.5,2.5 263.5,7.5 274.5,2.5 285.5,7.5 296.5,2.5 307.5,7.5 318.5,2.5 329.5,7.5 340.5,2.5 351.5,7.5 362.5,2.5 373.5,7.5 384.5,2.5 395.5,7.5 406.5,2.5 417.5,7.5 428.5,2.5 439.5,7.5 450.5,2.5 461.5,7.5 472.5,2.5 483.5,7.5 494.5,13.5 494.5,24.5 489.5,35.5 494.5,46.5 489.5,57.5 494.5,68.5 489.5,79.5 494.5,90.5 489.5,101.5 494.5,112.5 489.5,123.5 494.5,134.5 489.5,145.5 494.5,156.5 489.5,167.5 494.5,178.5 483.5,184.5 472.5,189.5 461.5,184.5 450.5,189.5 439.5,184.5 428.5,189.5 417.5,184.5 406.5,189.5 395.5,184.5 384.5,189.5 373.5,184.5 362.5,189.5 351.5,184.5 340.5,189.5 329.5,184.5 318.5,189.5 307.5,184.5 296.5,189.5 285.5,184.5 274.5,189.5 263.5,184.5 252.5,189.5 241.5,184.5 230.5,189.5 219.5,184.5 208.5,189.5 197.5,184.5 186.5,189.5 175.5,184.5 164.5,189.5 154.5,184.5 143.5,189.5 132.5,184.5 120.5,189.5 110.5,184.5 99.5,189.5 90.5,184.5 80.5,186.5 74.5,181.5 66.5,181.5 60.5,175.5 60.5,164.5 65.5,153.5 60.5,142.5 65.5,131.5 60.5,120.5 65.5,109.5 60.5,98.5 65.5,87.5 60.5,76.5 65.5,65.5 60.5,54.5 65.5,43.5 60.5,32.5 Z";
 
 function geoToMap(lat: number, lng: number) {
   const x = ((lng - 12.09) / (18.86 - 12.09)) * 452 + 30;
@@ -223,70 +225,102 @@ export function HomePage() {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
-            {/* Vajradhara image — square (750×750), displayed in contained square */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease }}
-              className="lg:col-span-2 relative"
-            >
-              <div className="relative aspect-square overflow-hidden rounded-2xl max-w-[400px] mx-auto">
-                <img
-                  src={tergarPath.image}
-                  alt="Vajradhara"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
-              </div>
-            </motion.div>
+          {/* Vajradhara image — centered above cards */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease }}
+            className="flex justify-center mb-14"
+          >
+            <div className="relative w-36 h-36 md:w-44 md:h-44 overflow-hidden rounded-full ring-4 ring-tergar-gold/20 shadow-xl">
+              <img
+                src={tergarPath.image}
+                alt="Vajradhara"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
 
-            {/* Path items — 3 cards */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-              className="lg:col-span-3 space-y-5"
-            >
-              {tergarPath.items.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={reveal}
-                  className="bg-white border border-gray-100 rounded-2xl p-7 transition-all duration-300 hover:border-tergar-blue/15 hover:shadow-[0_4px_24px_-8px_rgba(27,64,135,0.08)]"
-                >
-                  <div className="flex items-start gap-5">
-                    <div className="w-10 h-10 rounded-xl bg-tergar-blue/8 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-tergar-blue font-heading font-bold text-sm">{i + 1}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-lg font-bold text-space-blue font-heading mb-1">{item.title}</h3>
-                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-tergar-gold/70 font-heading mb-3">{item.subtitle}</p>
-                      <p className="text-sm text-space-blue/55 leading-relaxed font-light">{item.description}</p>
-                      {item.link && (
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 mt-3 text-[11px] font-bold text-tergar-blue uppercase tracking-widest font-heading hover:gap-2.5 transition-all"
-                        >
-                          Více na Tergar.org <ExternalLink size={10} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          {/* Path items — 3 cards side by side, Tibetan-inspired */}
+          {(() => {
+            const tibetanColors = [
+              { border: '#7B1A1A', bg: 'from-[#7B1A1A] to-[#5a1212]', badge: 'bg-[#7B1A1A]', accent: '#7B1A1A' },
+              { border: '#E39F24', bg: 'from-[#E39F24] to-[#c4870e]', badge: 'bg-[#E39F24]', accent: '#E39F24' },
+              { border: '#1B4087', bg: 'from-[#1B4087] to-[#132d5e]', badge: 'bg-[#1B4087]', accent: '#1B4087' },
+            ];
+            return (
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={stagger}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                {tergarPath.items.map((item, i) => {
+                  const color = tibetanColors[i];
+                  return (
+                    <motion.div
+                      key={i}
+                      variants={reveal}
+                      className="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.15)] hover:-translate-y-1"
+                    >
+                      {/* Colored top bar */}
+                      <div className={`h-1.5 bg-gradient-to-r ${color.bg}`} />
+
+                      <div className="p-6 md:p-7">
+                        {/* Number badge */}
+                        <div className={`w-11 h-11 rounded-full ${color.badge} flex items-center justify-center mb-5 shadow-lg`}>
+                          <span className="text-white font-heading font-bold text-sm">{i + 1}</span>
+                        </div>
+
+                        <h3 className="text-lg md:text-xl font-bold text-space-blue font-heading mb-2 leading-tight">{item.title}</h3>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] font-heading mb-4" style={{ color: color.accent }}>
+                          {item.subtitle}
+                        </p>
+
+                        <div className="w-10 h-px mb-4" style={{ backgroundColor: `${color.accent}30` }} />
+
+                        <p className="text-sm text-space-blue/55 leading-relaxed font-light">{item.description}</p>
+
+                        {item.link && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 mt-5 text-[11px] font-bold uppercase tracking-widest font-heading hover:gap-2.5 transition-all"
+                            style={{ color: color.accent }}
+                          >
+                            Více na Tergar.org <ExternalLink size={10} />
+                          </a>
+                        )}
+                      </div>
+
+                      {/* Decorative corner */}
+                      <div className="absolute top-0 right-0 w-24 h-24 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500">
+                        <svg viewBox="0 0 100 100" className="w-full h-full">
+                          <circle cx="100" cy="0" r="80" fill={color.accent} />
+                        </svg>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            );
+          })()}
         </div>
       </section>
 
       {/* ── 4. PROGRAM — Events & Regular Meetings ──────────── */}
-      <section id="program" className="scroll-mt-24 py-20 md:py-28 bg-white relative">
-        <div className="container-custom">
+      <section id="program" className="scroll-mt-24 py-20 md:py-28 relative overflow-hidden">
+        {/* Warm background with subtle accents */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f5f3f0] via-[#faf9f7] to-[#f0eeeb]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-tergar-gold/20 to-transparent" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-tergar-blue/3" />
+        <div className="absolute -bottom-32 -left-32 w-72 h-72 rounded-full bg-tergar-gold/5" />
+
+        <div className="container-custom relative z-10">
           {/* Section header */}
           <motion.div
             initial="hidden"
@@ -306,79 +340,63 @@ export function HomePage() {
             </motion.p>
           </motion.div>
 
-          {/* Regular meetings — compact pills */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10"
-          >
-            <h3 className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-space-blue/35 font-heading mb-4">
-              Pravidelné meditace
-            </h3>
-            <div className="flex flex-wrap justify-center gap-2">
-              {program.regularMeetings.map((meeting, i) => (
-                <a
-                  key={i}
-                  href={meeting.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 rounded-full text-xs text-space-blue/70 hover:border-tergar-blue/20 hover:text-tergar-blue transition-all group hover:shadow-sm"
-                >
-                  <span
-                    className="w-2 h-2 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: meeting.color }}
-                  />
-                  <span className="font-semibold font-heading">{meeting.location}</span>
-                  <span className="text-gray-200">·</span>
-                  <span className="font-light">{meeting.day}</span>
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Upcoming event cards — compact */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10"
-          >
-            {program.upcomingEvents.map((event, i) => (
-              <motion.a
-                key={i}
-                href={event.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={reveal}
-                className="group relative bg-white border border-gray-100 rounded-xl p-5 flex flex-col transition-all duration-300 hover:border-tergar-blue/20 hover:shadow-[0_8px_30px_-12px_rgba(27,64,135,0.12)]"
+          {/* Upcoming event cards — colorful */}
+          {(() => {
+            const eventColors = [
+              { gradient: 'from-[#1B4087] to-[#2a5caa]', text: 'text-[#1B4087]' },
+              { gradient: 'from-[#7B1A1A] to-[#a82828]', text: 'text-[#7B1A1A]' },
+              { gradient: 'from-[#E39F24] to-[#d4890a]', text: 'text-[#b07a10]' },
+              { gradient: 'from-[#1a6b4a] to-[#238c62]', text: 'text-[#1a6b4a]' },
+              { gradient: 'from-[#6b3fa0] to-[#8555c0]', text: 'text-[#6b3fa0]' },
+            ];
+            return (
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={stagger}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading ${
-                    event.type === 'online'
-                      ? 'bg-tergar-blue/8 text-tergar-blue'
-                      : 'bg-tergar-gold/10 text-tergar-gold'
-                  }`}>
-                    {event.type === 'online' ? 'Online' : 'Živě'}
-                  </span>
-                  <div className="flex items-center gap-1.5 text-[10px] text-space-blue/40 font-heading font-semibold">
-                    <Calendar size={10} />
-                    {event.date}
-                  </div>
-                </div>
+                {program.upcomingEvents.map((event, i) => {
+                  const color = eventColors[i % eventColors.length];
+                  return (
+                    <motion.a
+                      key={i}
+                      href={event.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variants={reveal}
+                      className="group relative overflow-hidden rounded-2xl flex flex-col shadow-[0_2px_16px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-1 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.18)] transition-all duration-500"
+                    >
+                      {/* Colored header strip */}
+                      <div className={`bg-gradient-to-r ${color.gradient} px-5 py-4 text-white`}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading bg-white/20 text-white backdrop-blur-sm">
+                            {event.type === 'online' ? 'Online' : 'Živě'}
+                          </span>
+                          <div className="flex items-center gap-1.5 text-[10px] text-white/70 font-heading font-semibold">
+                            <Calendar size={10} />
+                            {event.date}
+                          </div>
+                        </div>
+                        <h3 className="text-base font-bold font-heading leading-snug">
+                          {event.title}
+                        </h3>
+                      </div>
 
-                <h3 className="text-sm font-bold text-space-blue group-hover:text-tergar-blue transition-colors font-heading leading-snug mb-1.5 flex-grow">
-                  {event.title}
-                </h3>
-                <p className="text-xs text-space-blue/45 font-light">{event.desc}</p>
-
-                <span className="inline-flex items-center gap-1.5 text-[9px] font-bold text-tergar-blue uppercase tracking-widest font-heading opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3">
-                  Registrace <ArrowRight size={9} />
-                </span>
-              </motion.a>
-            ))}
-          </motion.div>
+                      {/* White body */}
+                      <div className="bg-white px-5 py-4 flex-grow flex flex-col rounded-b-2xl">
+                        <p className="text-sm text-space-blue/55 font-light flex-grow">{event.desc}</p>
+                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading mt-3 ${color.text} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}>
+                          Registrace <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
+                    </motion.a>
+                  );
+                })}
+              </motion.div>
+            );
+          })()}
 
           {/* CTA buttons */}
           <motion.div
@@ -669,10 +687,10 @@ export function HomePage() {
       {/* ── 7. SUPPORT ──────────────────────────────────────── */}
       <section className="py-28 md:py-36 bg-space-blue text-white relative overflow-hidden isolate">
         <div className="absolute inset-0">
-          <img src={supportBackground} alt="" className="w-full h-full object-cover" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-br from-tergar-blue/92 via-space-blue/90 to-[#1a1f2e]/95" />
+          <img src={supportBackground} alt="" className="w-full h-full object-cover opacity-25" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1B4087] via-[#2a3a5c] to-[#1a1f2e]" />
         </div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-tergar-blue/15 rounded-full blur-[140px] -translate-y-1/3 translate-x-1/4" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-tergar-blue/10 rounded-full blur-[140px] -translate-y-1/3 translate-x-1/4" />
 
         <motion.div
           initial="hidden"
@@ -682,12 +700,12 @@ export function HomePage() {
           className="container-custom relative z-10 text-center max-w-3xl"
         >
           <motion.div variants={reveal}>
-            <Heart className="w-10 h-10 text-tergar-gold mx-auto mb-8" strokeWidth={1.2} />
+            <Heart className="w-12 h-12 text-tergar-gold mx-auto mb-8" strokeWidth={1.2} />
           </motion.div>
-          <motion.h2 variants={reveal} className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-heading tracking-tight">
+          <motion.h2 variants={reveal} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 font-heading tracking-tight text-white drop-shadow-lg">
             {support.title}
           </motion.h2>
-          <motion.p variants={reveal} className="text-base sm:text-lg text-white/60 mb-12 leading-relaxed font-light max-w-xl mx-auto">
+          <motion.p variants={reveal} className="text-lg sm:text-xl text-white/80 mb-14 leading-relaxed font-light max-w-xl mx-auto">
             {support.text}
           </motion.p>
           <motion.div variants={reveal}>
@@ -705,109 +723,154 @@ export function HomePage() {
       </section>
 
       {/* ── 8. GROUPS + MAP ─────────────────────────────────── */}
-      <section id="skupiny" className="scroll-mt-24 py-28 md:py-36 bg-[#fafbfc] relative overflow-hidden">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            {/* Text + location cards */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
-              <motion.div variants={reveal}>
-                <SectionLabel>Skupiny</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-space-blue font-heading tracking-tight mb-6">
-                  {groups.title}
-                </h2>
-              </motion.div>
+      <section id="skupiny" className="scroll-mt-24 py-28 md:py-36 relative overflow-hidden">
+        {/* Warm gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f8f6f3] via-white to-[#f0eeeb]" />
+        {/* Subtle decorative circle */}
+        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-tergar-gold/5" />
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-tergar-blue/3" />
 
-              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/60 mb-10 leading-relaxed font-light">
-                {groups.text}
-              </motion.p>
+        <div className="container-custom relative z-10">
+          {/* Section header — centered */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="max-w-2xl mx-auto text-center mb-16"
+          >
+            <motion.div variants={reveal}>
+              <SectionLabel>Skupiny</SectionLabel>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-space-blue font-heading tracking-tight mb-6">
+                {groups.title}
+              </h2>
+            </motion.div>
+            <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/60 leading-relaxed font-light">
+              {groups.text}
+            </motion.p>
+          </motion.div>
 
-              <motion.div variants={reveal} className="space-y-2.5 mb-8">
-                {groups.mapLocations.map((loc, i) => (
-                  <a
+          {/* Location cards — horizontal grid */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
+          >
+            {(() => {
+              const groupColors = [
+                { bg: 'from-[#1B4087] to-[#2a5caa]', light: 'bg-[#1B4087]/8', text: 'text-[#1B4087]' },
+                { bg: 'from-[#7B1A1A] to-[#a82828]', light: 'bg-[#7B1A1A]/8', text: 'text-[#7B1A1A]' },
+                { bg: 'from-[#1a6b4a] to-[#238c62]', light: 'bg-[#1a6b4a]/8', text: 'text-[#1a6b4a]' },
+                { bg: 'from-[#6b3fa0] to-[#8555c0]', light: 'bg-[#6b3fa0]/8', text: 'text-[#6b3fa0]' },
+              ];
+              return groups.mapLocations.map((loc, i) => {
+                const color = groupColors[i % groupColors.length];
+                return (
+                  <motion.a
                     key={i}
+                    variants={reveal}
                     href={loc.link}
                     target={loc.link.startsWith('http') ? '_blank' : undefined}
                     rel={loc.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:border-tergar-blue/20 transition-all duration-300 group hover:shadow-sm"
+                    className="group bg-white rounded-2xl border border-gray-100/80 overflow-hidden hover:-translate-y-1 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] transition-all duration-300"
                     onMouseEnter={() => setActivePin(i)}
                     onMouseLeave={() => setActivePin(null)}
                   >
-                    <div className="w-9 h-9 rounded-full bg-tergar-blue/8 flex items-center justify-center group-hover:bg-tergar-blue group-hover:text-white transition-all duration-300 flex-shrink-0">
-                      <MapPin size={15} />
+                    {/* Colored top accent */}
+                    <div className={`h-1.5 bg-gradient-to-r ${color.bg}`} />
+                    <div className="p-5">
+                      <div className={`w-10 h-10 rounded-xl ${color.light} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                        <MapPin size={18} className={color.text} />
+                      </div>
+                      <h3 className="font-bold text-space-blue font-heading text-base mb-1.5">{loc.name}</h3>
+                      <p className="text-xs text-space-blue/45 leading-relaxed">{loc.desc}</p>
                     </div>
-                    <div className="min-w-0">
-                      <span className="font-bold text-space-blue font-heading text-sm block">{loc.name}</span>
-                      <span className="text-xs text-space-blue/45 block">{loc.desc}</span>
-                    </div>
-                  </a>
-                ))}
-              </motion.div>
+                  </motion.a>
+                );
+              });
+            })()}
+          </motion.div>
 
-              <motion.a
-                variants={reveal}
-                href={`mailto:${groups.email}`}
-                className="inline-flex items-center gap-3 text-tergar-blue text-sm font-semibold group"
-              >
-                <div className="w-9 h-9 rounded-full bg-tergar-blue/8 flex items-center justify-center group-hover:bg-tergar-blue group-hover:text-white transition-all duration-300">
-                  <Mail size={14} />
-                </div>
-                <span className="border-b border-gray-200 group-hover:border-tergar-blue transition-colors pb-px">{groups.email}</span>
-              </motion.a>
-            </motion.div>
-
-            {/* Map */}
+          {/* Map + contact row */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+            {/* Map — spans 3 columns */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease }}
-              className="bg-white rounded-2xl border border-gray-100 p-8 md:p-10 shadow-sm lg:sticky lg:top-28"
+              className="lg:col-span-3 bg-white rounded-2xl border border-gray-100/80 p-8 md:p-10 shadow-sm"
             >
-              <svg viewBox="0 0 500 200" className="w-full h-auto" role="img" aria-label="Mapa skupin Tergar v České republice">
-                <path
-                  d={CZ_MAP_PATH}
-                  fill="#eef1f6"
-                  stroke="#d4dbe8"
-                  strokeWidth="1.2"
+              <div className="relative w-full h-[320px] md:h-[380px]">
+                <img
+                  src={require('@/assets/czechia-map-osm.png')}
+                  alt="Mapa České republiky (open source podklad)"
+                  className="absolute inset-0 w-full h-full object-cover rounded-2xl border border-gray-100/80"
+                  draggable={false}
+                  style={{ pointerEvents: 'none', userSelect: 'none' }}
                 />
-                {groups.mapLocations.map((loc, i) => {
-                  const pos = geoToMap(loc.lat, loc.lng);
-                  const isActive = activePin === i;
-                  return (
-                    <g key={i}>
-                      <circle cx={pos.x} cy={pos.y} r="14" fill="rgba(27,64,135,0.06)">
-                        <animate attributeName="r" from="8" to="20" dur="2.5s" repeatCount="indefinite" />
-                        <animate attributeName="opacity" from="0.3" to="0" dur="2.5s" repeatCount="indefinite" />
-                      </circle>
-                      <circle
-                        cx={pos.x}
-                        cy={pos.y}
-                        r={isActive ? 6.5 : 4.5}
-                        fill="#1B4087"
-                        stroke="white"
-                        strokeWidth="2"
-                        className="cursor-pointer transition-all duration-300"
-                        onMouseEnter={() => setActivePin(i)}
-                        onMouseLeave={() => setActivePin(null)}
-                      />
-                      <text
-                        x={pos.x}
-                        y={pos.y - 11}
-                        textAnchor="middle"
-                        className={`text-[8px] font-bold uppercase tracking-wider fill-space-blue transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-50'}`}
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
-                      >
-                        {loc.name}
-                      </text>
-                    </g>
-                  );
-                })}
-              </svg>
+                {/* Piny a popisky */}
+                <svg viewBox="0 0 500 200" className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+                  {groups.mapLocations.map((loc, i) => {
+                    const pos = geoToMap(loc.lat, loc.lng);
+                    const isActive = activePin === i;
+                    return (
+                      <g key={i} style={{ pointerEvents: 'auto' }}>
+                        <circle cx={pos.x} cy={pos.y} r="14" fill="rgba(27,64,135,0.06)">
+                          <animate attributeName="r" from="8" to="20" dur="2.5s" repeatCount="indefinite" />
+                          <animate attributeName="opacity" from="0.3" to="0" dur="2.5s" repeatCount="indefinite" />
+                        </circle>
+                        <circle
+                          cx={pos.x}
+                          cy={pos.y}
+                          r={isActive ? 6.5 : 4.5}
+                          fill="#1B4087"
+                          stroke="white"
+                          strokeWidth="2"
+                          className="cursor-pointer transition-all duration-300"
+                          onMouseEnter={() => setActivePin(i)}
+                          onMouseLeave={() => setActivePin(null)}
+                        />
+                        <text
+                          x={pos.x}
+                          y={pos.y - 11}
+                          textAnchor="middle"
+                          className={`text-[8px] font-bold uppercase tracking-wider fill-space-blue transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-50'}`}
+                          style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        >
+                          {loc.name}
+                        </text>
+                      </g>
+                    );
+                  })}
+                </svg>
+              </div>
+            </motion.div>
+
+            {/* Contact card — spans 2 columns */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.15, ease }}
+              className="lg:col-span-2 bg-gradient-to-br from-[#1B4087] to-[#2a5caa] rounded-2xl p-8 md:p-10 text-white shadow-lg"
+            >
+              <div className="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-5">
+                <Mail size={22} strokeWidth={1.5} />
+              </div>
+              <h3 className="font-bold font-heading text-xl mb-3">Chcete založit skupinu?</h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                Pokud ve vašem okolí žádná skupina není a chtěli byste ji založit, ozvěte se nám. Rádi pomůžeme.
+              </p>
+              <a
+                href={`mailto:${groups.email}`}
+                className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 group"
+              >
+                <span>{groups.email}</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </a>
             </motion.div>
           </div>
         </div>
@@ -815,20 +878,15 @@ export function HomePage() {
 
       {/* ── 9. FINAL CTA — Conversion section ──────────────── */}
       <section className="relative overflow-hidden bg-space-blue">
-        {/* Background Rinpoche photo with overlay */}
-        <div className="absolute inset-0">
-          <img
-            src={rinpoche.image}
-            alt="Yongey Mingyur Rinpočhe"
-            className="w-full h-full object-cover object-top"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-space-blue via-space-blue/85 to-space-blue/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-space-blue/90 via-transparent to-space-blue/30" />
-        </div>
+        {/* Subtle decorative background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2a3442] via-space-blue to-[#353e4c]" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-tergar-blue/5 to-transparent" />
+        {/* Decorative gold line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-tergar-gold/30 to-transparent" />
 
-        <div className="container-custom relative z-10 py-28 md:py-36">
-          <div className="max-w-xl">
+        <div className="container-custom relative z-10 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Text side */}
             <motion.div
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -841,7 +899,7 @@ export function HomePage() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white leading-tight mb-6">
                 Začněte meditovat<br />s&nbsp;Tergar&nbsp;Česko
               </h2>
-              <p className="text-white/60 text-base md:text-lg font-light leading-relaxed mb-10 max-w-md">
+              <p className="text-white/55 text-base md:text-lg font-light leading-relaxed mb-10 max-w-md">
                 Přidejte se ke komunitě praktikujících po celé České republice. Pravidelné meditace, kurzy a setkání — živě i online.
               </p>
 
@@ -886,6 +944,28 @@ export function HomePage() {
                   ))}
                 </div>
               </div>
+            </motion.div>
+
+            {/* Rinpoche image — fully visible */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/30">
+                <img
+                  src={rinpoche.image}
+                  alt="Yongey Mingyur Rinpočhe"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+                {/* Subtle gradient at bottom */}
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              {/* Gold accent ring */}
+              <div className="absolute -inset-1 rounded-2xl border border-tergar-gold/15 pointer-events-none" />
             </motion.div>
           </div>
         </div>

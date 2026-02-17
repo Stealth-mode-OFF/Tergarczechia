@@ -23,21 +23,21 @@ export function Header() {
   }, []);
 
   const linkClass =
-    'text-[12px] font-semibold uppercase tracking-[0.18em] transition-colors relative group py-1 block cursor-pointer font-heading';
+    'text-[13px] font-semibold uppercase tracking-[0.16em] transition-colors relative group py-1 block cursor-pointer font-heading';
 
   return (
     <>
       <motion.header
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-white/85 backdrop-blur-xl border-b border-gray-100/60 h-[72px] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
-            : 'bg-transparent h-[100px]'
+            ? 'top-3 left-4 right-4 md:left-8 md:right-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[min(1020px,calc(100%-4rem))] h-[68px] bg-white/15 backdrop-blur-2xl border border-white/20 rounded-full shadow-[0_4px_40px_rgba(0,0,0,0.03),0_0_0_1px_rgba(255,255,255,0.15)_inset]'
+            : 'top-0 left-0 right-0 bg-transparent h-[100px]'
         }`}
       >
-        <div className="container-custom h-full flex items-center justify-between">
+        <div className={`h-full flex items-center justify-between ${scrolled ? 'px-5 md:px-7' : 'container-custom'}`}>
           {/* Logo */}
           <Link
             to="/"
@@ -52,7 +52,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center gap-8">
             {nav.map((item, i) => (
               <motion.div
                 key={item.label}
