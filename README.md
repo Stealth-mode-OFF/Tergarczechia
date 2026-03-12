@@ -1,11 +1,33 @@
+# Tergar Česká republika
 
-  # Tergar Česká republika Website
+Website for the Czech Tergar meditation community — an organization dedicated to making meditation accessible through the teachings of Yongey Mingyur Rinpoche.
 
-  This is a code bundle for Tergar Česká republika Website. The original project is available at https://www.figma.com/design/nA0yaOTcbUJX4IZkAr5mCO/Tergar-%C4%8Cesk%C3%A1-republika-Website.
+**Live:** [tergarczechia.vercel.app](https://tergarczechia.vercel.app) *(if deployed)*
 
-  ## Running the code
+## Tech Stack
 
-  Run `npm i` to install the dependencies.
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS 4
+- Radix UI + shadcn/ui components
+- React Router
+- Framer Motion
 
-  Run `npm run dev` to start the development server.
-  
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## Features
+
+- Homepage with community info, upcoming events, and teacher bio
+- "Co je meditace" (What is meditation) page
+- Group practice finder with Czech meditation groups
+- Responsive design with dark/light theme support
+- Newsletter signup and contact section
+
+## Credits
+
+UI components from [shadcn/ui](https://ui.shadcn.com/) (MIT license).
