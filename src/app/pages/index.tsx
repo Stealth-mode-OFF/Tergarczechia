@@ -1,10 +1,10 @@
-// All pages for Tergar Česká republika - Brand Compliant 2024 - FINAL POLISH
+
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Mail, Users, BookOpen, Video, Star, Heart, CheckCircle2, Youtube, Instagram, Facebook, ExternalLink, Play, Clock, MapPin, Banknote } from 'lucide-react';
-import communityImage from 'figma:asset/ee3557312d962ff84207c71d88a25a1563aea613.png';
-import vajradharaImage from 'figma:asset/a248c2397f596c63df6208678b6a60bceff14370.png';
-import mingyurWavingImage from 'figma:asset/72312fce0245d3b51ee86da6f9a6003167a8e1e2.png';
-import lineageTreeImage from 'figma:asset/8a8c65298e950a77370a1c00b20804bd4d6a26d3.png';
+import communityImage from '@/assets/community.png';
+import vajradharaImage from '@/assets/vajradhara.png';
+import mingyurWavingImage from '@/assets/mingyur-waving.png';
+import lineageTreeImage from '@/assets/lineage-tree.png';
 import { content } from '@/data/content';
 
 export function CestaTergarPage() {
@@ -137,7 +137,7 @@ export function ProgramyPage() {
           ))}
         </div>
 
-        {/* Live Sessions Info - Brand Compliant */}
+        
         <div className="bg-space-blue text-white rounded-none overflow-hidden relative">
           {/* Subtle overlay */}
           <div className="absolute inset-0 bg-tergar-blue/10 pointer-events-none" />
@@ -436,7 +436,7 @@ export function ONasPage() {
                 </div>
              </div>
 
-             {/* ONLINE INSPIRATION (YOUTUBE) - COMPLIANT */}
+             
              <div className="bg-space-blue text-white p-8 shadow-md mt-8 relative overflow-hidden group border-t border-tergar-gold/20">
                 <h3 className="font-bold text-lg mb-4 relative z-10 flex items-center gap-3 text-white font-heading">
                    <Youtube className="text-tergar-gold" size={20} />

@@ -3,7 +3,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Play, MapPin, Mail, ExternalLink
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
 import { clsx } from 'clsx';
 import { content } from '@/data/content';
-import mingyurWavingImage from 'figma:asset/72312fce0245d3b51ee86da6f9a6003167a8e1e2.png';
+import mingyurWavingImage from '@/assets/mingyur-waving.png';
 
 // Animation Variants
 const fadeInUp = {

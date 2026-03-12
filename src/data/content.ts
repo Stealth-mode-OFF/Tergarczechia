@@ -1,6 +1,6 @@
-import communityImage from 'figma:asset/ee3557312d962ff84207c71d88a25a1563aea613.png';
-import vajradharaImage from 'figma:asset/a248c2397f596c63df6208678b6a60bceff14370.png';
-import mingyurWavingImage from 'figma:asset/72312fce0245d3b51ee86da6f9a6003167a8e1e2.png';
+import communityImage from '@/assets/community.png';
+import vajradharaImage from '@/assets/vajradhara.png';
+import mingyurWavingImage from '@/assets/mingyur-waving.png';
 
 export const content = {
   header: {

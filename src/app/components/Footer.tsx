@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import logoImage from 'figma:asset/f2309011161c7516084a49a21e639ac08d91a296.png';
+import logoImage from '@/assets/logo.png';
 import { content } from '@/data/content';
 
 export function Footer() {
