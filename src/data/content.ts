@@ -25,12 +25,12 @@ export const content = {
       {
         text: 'Jste vítaní',
         subtext: 'ať už s meditací začínáte nebo se jí věnujete dlouhodobě.',
-        image: 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?q=80&w=2574&auto=format&fit=crop'
+        image: 'https://images.unsplash.com/photo-1447452001602-7090c7ab2db3?w=1920&h=1080&fit=crop'
       },
       {
         text: 'Tergar Česko pořádá',
         subtext: 'meditační workshopy, kurzy, pravidelná setkání a ústraní. Podívejte se na náš program.',
-        image: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=1920&h=1080&fit=crop'
+        image: 'https://images.unsplash.com/photo-1470115636492-6d2b56f9b754?w=1920&h=1080&fit=crop'
       }
     ],
     quote1: {
@@ -112,19 +112,19 @@ export const content = {
     },
     photoStrip: [
       communityImage,
-      'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop',
       mingyurWavingImage,
-      'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=400&fit=crop',
     ],
     gallery: [
       { src: communityImage, alt: 'Tergar komunita', aspect: 'landscape' as const },
       { src: mingyurWavingImage, alt: 'Mingyur Rinpočhe', aspect: 'portrait' as const },
-      { src: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&h=800&fit=crop', alt: 'Meditace v přírodě', aspect: 'portrait' as const },
-      { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=500&fit=crop', alt: 'Tibetský chrám', aspect: 'landscape' as const },
+      { src: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=800&fit=crop', alt: 'Meditace v přírodě', aspect: 'portrait' as const },
+      { src: 'https://images.unsplash.com/photo-1555169062-013468b47731?w=800&h=500&fit=crop', alt: 'Zlatý Buddha', aspect: 'landscape' as const },
       { src: mingyurPortrait, alt: 'Mingyur Rinpočhe portrét', aspect: 'portrait' as const },
-      { src: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&h=500&fit=crop', alt: 'Klidná meditace', aspect: 'landscape' as const },
+      { src: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&h=500&fit=crop', alt: 'Krajina z výšky', aspect: 'landscape' as const },
       { src: lineageTreeImage, alt: 'Strom linie Kagyü', aspect: 'landscape' as const },
-      { src: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=600&h=800&fit=crop', alt: 'Příroda a klid', aspect: 'portrait' as const },
+      { src: 'https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=600&h=800&fit=crop', alt: 'Jezero v mlze', aspect: 'portrait' as const },
     ],
     social: {
       facebook: 'https://www.facebook.com/tergarcz/',
