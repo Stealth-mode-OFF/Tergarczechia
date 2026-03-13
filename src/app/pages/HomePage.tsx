@@ -19,7 +19,7 @@ const stagger = {
 };
 
 export function HomePage() {
-  const { slider, quote1, rinpoche, support, program, groups } = content.home;
+  const { slider, quote1, rinpoche, support, groups } = content.home;
   const [currentSlide, setCurrentSlide] = useState(0);
   const { scrollYProgress } = useScroll();
   const heroTextY = useTransform(scrollYProgress, [0, 0.2], [0, 80]);
@@ -371,53 +371,10 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ PROGRAM ZENAMU ═══════ */}
-      <section className="py-24 md:py-32 bg-[#FAF8F4] relative">
-        <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-heading text-[#1C2B3A] mb-8 tracking-tight" style={{ fontWeight: 600 }}>
-              {program.title}
-            </motion.h2>
-            <motion.blockquote variants={fadeInUp} className="text-xl md:text-2xl text-[#2D3748]/50 italic font-heading leading-relaxed" style={{ fontWeight: 400 }}>
-              „{program.quote.text}"
-            </motion.blockquote>
-            <motion.cite variants={fadeInUp} className="block mt-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#C9962A] not-italic">
-              — {program.quote.author}
-            </motion.cite>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="w-full bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-[#E8E4DD]/50 overflow-hidden"
-          >
-            <div className="h-1 bg-gradient-to-r from-[#C9962A] via-[#F2D4A8] to-[#C9962A]" />
-            <div className="p-1">
-              <iframe
-                src="https://app.zenamu.com/tergarczechia?view=schedule"
-                width="100%"
-                height="800"
-                frameBorder="0"
-                title="Zenamu Rozvrh"
-                className="w-full h-[800px] rounded-2xl"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* ═══════ SUPPORT — WARM DARK ═══════ */}
       <section className="py-28 md:py-36 text-white relative overflow-hidden isolate">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1609766857326-18a204b63e81?w=1920&h=800&fit=crop" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1465056836900-8f1e940f3404?w=1920&h=800&fit=crop" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#1C2B3A]/85 bg-gradient-to-br from-[#1C2B3A]/90 via-[#243447]/85 to-[#0f1a24]/90" />
         </div>
         <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-[#C9962A]/10 rounded-full blur-[120px]" />

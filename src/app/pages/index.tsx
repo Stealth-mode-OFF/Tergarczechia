@@ -3,6 +3,7 @@ export { InspiracePage } from './InspiracePage';
 export { KontaktPage } from './KontaktPage';
 export { ONasPage } from './ONasPage';
 export { ProgramPage } from './ProgramPage';
+export { RozvrhPage } from './RozvrhPage';
 export { SkupinyPage } from './SkupinyPage';
 export { UdalostiPage } from './UdalostiPage';
 export { ZapojteSePage } from './ZapojteSePage';

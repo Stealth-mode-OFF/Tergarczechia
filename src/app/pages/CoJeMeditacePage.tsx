@@ -143,7 +143,7 @@ export function CoJeMeditacePage() {
       {/* NEUROSCIENCE */}
       <section className="py-24 md:py-32 text-white overflow-hidden relative">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=1920&h=1000&fit=crop" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1000&fit=crop" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#1C2B3A]/90" />
         </div>
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C9962A]/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />

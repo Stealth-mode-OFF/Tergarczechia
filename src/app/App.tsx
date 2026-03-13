@@ -12,6 +12,7 @@ import { CestaPage } from '@/app/pages/CestaPage';
 import { UdalostiPage } from '@/app/pages/UdalostiPage';
 import { InspiracePage } from '@/app/pages/InspiracePage';
 import { ZapojteSePage } from '@/app/pages/ZapojteSePage';
+import { RozvrhPage } from '@/app/pages/RozvrhPage';
 import { NotFoundPage } from '@/app/pages/NotFoundPage';
 
 function ScrollToTop() {
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/co-je-meditace" element={<CoJeMeditacePage />} />
             <Route path="/cesta" element={<CestaPage />} />
             <Route path="/program" element={<ProgramPage />} />
+            <Route path="/rozvrh" element={<RozvrhPage />} />
             <Route path="/udalosti-2026" element={<UdalostiPage />} />
             <Route path="/skupiny" element={<SkupinyPage />} />
             <Route path="/inspirace" element={<InspiracePage />} />
