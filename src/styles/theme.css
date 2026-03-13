@@ -2,48 +2,53 @@
 
 :root {
   /* Brand Core Palette */
-  --tergar-blue: #1B4087;
-  --space-blue: #424A58;
-  --tergar-gold: #E39F24;
-  
+  --tergar-blue: #1C2B3A;
+  --space-blue: #2D3748;
+  --tergar-gold: #C9962A;
+
   /* Brand Gradient Colors */
   --gradient-yellow: #F2D4A8;
   --gradient-peach: #FBE0C9;
-  --gradient-light-blue: #C0D6F6;
-  --gradient-blue: #8FB6F3;
+  --gradient-light-blue: #D4C5A9;
+  --gradient-blue: #B8A88A;
 
   /* Neutrals */
   --base-white: #FFFFFF;
-  --base-gray-light: #F4F6F8;
-  --base-gray-medium: #E1E5EC;
-  
+  --base-gray-light: #FAF8F4;
+  --base-gray-medium: #F4F1EC;
+
+  /* Warm Neutrals */
+  --warm-cream: #FAF8F4;
+  --warm-fog: #F4F1EC;
+  --warm-stone: #E8E4DD;
+
   /* Semantic Mappings */
-  --deep-charcoal: var(--space-blue); 
+  --deep-charcoal: var(--space-blue);
   --soft-white: var(--base-white);
   --warm-sand: var(--base-gray-light);
-  --divider-gray: var(--base-gray-medium);
-  
+  --divider-gray: var(--warm-stone);
+
   /* Standard Tailwind Base Vars */
   --background: var(--base-white);
   --foreground: var(--space-blue);
-  
-  --primary: var(--tergar-blue);
+
+  --primary: var(--tergar-gold);
   --primary-foreground: var(--base-white);
-  
+
   --secondary: var(--base-gray-light);
   --secondary-foreground: var(--tergar-blue);
-  
+
   --muted: var(--base-gray-light);
   --muted-foreground: var(--space-blue);
-  
+
   --accent: var(--tergar-gold);
   --accent-foreground: var(--base-white);
-  
-  --border: var(--base-gray-medium);
-  --input: var(--base-gray-medium);
-  --ring: var(--tergar-blue);
-  
-  --radius: 0px; 
+
+  --border: var(--warm-stone);
+  --input: var(--warm-fog);
+  --ring: var(--tergar-gold);
+
+  --radius: 16px;
 }
 
 @theme inline {
@@ -54,22 +59,25 @@
   --color-deep-charcoal: var(--space-blue);
   --color-soft-white: var(--base-white);
   --color-warm-sand: var(--base-gray-light);
+  --color-warm-cream: var(--warm-cream);
+  --color-warm-fog: var(--warm-fog);
+  --color-warm-stone: var(--warm-stone);
   --color-divider-gray: var(--divider-gray);
-  
+
   /* Gradient Colors */
   --color-grad-yellow: var(--gradient-yellow);
   --color-grad-peach: var(--gradient-peach);
   --color-grad-lblue: var(--gradient-light-blue);
   --color-grad-blue: var(--gradient-blue);
 
-  /* Font Families - UPDATED */
-  --font-sans: 'Libre Franklin', sans-serif; /* Body text */
-  --font-heading: 'Montserrat', sans-serif;   /* Headings & UI */
-  
+  /* Font Families */
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+
   /* Grid & Spacing */
   --spacing-container-padding: 80px;
   --spacing-section: 96px;
-  
+
   /* Standard Semantic Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -91,83 +99,102 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Libre Franklin', sans-serif; /* Body font */
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+  html {
+    scroll-behavior: smooth;
   }
 
-  /* Typography System - Scale Update */
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Typography System */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif; /* Heading font */
+    font-family: 'Playfair Display', serif;
     color: var(--tergar-blue);
-    font-weight: 700; /* Bold by default for Montserrat headings */
-    line-height: 1.2;
-    letter-spacing: -0.02em; /* Slightly tighter for Montserrat */
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
   }
 
   /* Type Scale */
   h1 {
-    font-size: clamp(42px, 5vw, 52px);
-    font-weight: 700;
+    font-size: clamp(38px, 5vw, 56px);
+    font-weight: 600;
   }
 
   h2 {
-    font-size: clamp(32px, 4vw, 41px);
-    font-weight: 700;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 600;
   }
 
   h3 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 600;
   }
-  
+
   h4 {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 600;
   }
 
   /* Special Class for Editorial/Quotes */
   .font-quote {
-    font-family: 'Libre Franklin', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
   }
 
   p {
     margin-bottom: 1.5rem;
     color: var(--space-blue);
-    font-weight: 400; /* Regular */
+    font-weight: 400;
   }
 
   /* Gradient Background Utility */
   .bg-tergar-gradient {
-    background: linear-gradient(45deg, #F2D4A8 0%, #FBE0C9 20%, #C0D6F6 60%, #8FB6F3 100%);
+    background: linear-gradient(135deg, #C9962A 0%, #F2D4A8 25%, #FBE0C9 55%, #E8E4DD 100%);
   }
-  
+
   .text-tergar-gradient {
-    background: linear-gradient(45deg, #1B4087 0%, #424A58 100%);
+    background: linear-gradient(135deg, #1C2B3A 0%, #C9962A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* Button Styles - UPDATED to Montserrat */
+  /* Button Styles */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-tergar-blue text-white font-bold text-sm tracking-wide uppercase transition-all duration-300 hover:bg-space-blue shadow-lg shadow-tergar-blue/20 cursor-pointer;
-    font-family: 'Montserrat', sans-serif;
+    @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-tergar-gold text-white font-semibold text-sm tracking-wider uppercase transition-all duration-300 shadow-lg cursor-pointer;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 14px 0 rgba(201, 150, 42, 0.2);
   }
-  
+
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px 0 rgba(201, 150, 42, 0.35);
+    filter: brightness(1.08);
+  }
+
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-transparent border-2 border-tergar-blue text-tergar-blue font-bold text-sm tracking-wide uppercase hover:bg-tergar-blue hover:text-white transition-all duration-300 cursor-pointer;
-    font-family: 'Montserrat', sans-serif;
+    @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-transparent border-2 text-sm tracking-wider uppercase transition-all duration-300 cursor-pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border-color: rgba(28, 43, 58, 0.2);
+    color: var(--tergar-blue);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--tergar-blue);
+    color: var(--base-white);
   }
 
   /* Utility Classes */
   .container-custom {
     @apply max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20;
   }
-  
+
   .section-padding {
     @apply py-20 lg:py-28;
   }

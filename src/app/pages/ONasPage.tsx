@@ -15,7 +15,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9962A] font-heading mb-6">
       {children}
     </span>
   );
@@ -25,10 +25,10 @@ export function ONasPage() {
   const { about, lineage, rinpoche, gallery, photoStrip } = content.home;
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#FAF8F4]">
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-[#f0f2f5] to-white overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-tergar-blue/5" />
+      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-white to-[#FAF8F4] overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#1C2B3A]/5" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -37,10 +37,10 @@ export function ONasPage() {
             className="max-w-3xl"
           >
             <SectionLabel>O nás</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-space-blue font-heading tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.08] mb-6">
               {about.title}
             </h1>
-            <p className="text-lg sm:text-xl text-space-blue/60 leading-relaxed font-light max-w-2xl">
+            <p className="text-lg sm:text-xl text-[#1C2B3A]/60 leading-relaxed font-light max-w-2xl">
               {about.text}
             </p>
           </motion.div>
@@ -48,7 +48,7 @@ export function ONasPage() {
       </section>
 
       {/* Photo strip */}
-      <section className="py-0 bg-white overflow-hidden">
+      <section className="py-0 bg-[#FAF8F4] overflow-hidden">
         <div className="flex gap-2 md:gap-3">
           {photoStrip.map((src, i) => (
             <motion.div
@@ -68,7 +68,7 @@ export function ONasPage() {
       </section>
 
       {/* About Rinpoche */}
-      <section className="py-28 md:py-36 lg:py-44 bg-white relative overflow-hidden">
+      <section className="py-28 md:py-36 lg:py-44 bg-[#FAF8F4] relative overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-start">
             <motion.div
@@ -93,37 +93,37 @@ export function ONasPage() {
             >
               <motion.div variants={reveal}>
                 <SectionLabel>O učiteli</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-space-blue font-heading tracking-tight leading-[1.15]">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.15]">
                   {rinpoche.title}
                 </h2>
               </motion.div>
-              <motion.div variants={reveal} className="w-16 h-px bg-tergar-gold/60" />
+              <motion.div variants={reveal} className="w-16 h-px bg-[#C9962A]/60" />
 
               {rinpoche.text.split('\n\n').map((paragraph, i) => (
-                <motion.p key={i} variants={reveal} className="text-base sm:text-lg text-space-blue/60 leading-[1.8] font-light">
+                <motion.p key={i} variants={reveal} className="text-base sm:text-lg text-[#1C2B3A]/60 leading-[1.8] font-light">
                   {paragraph}
                 </motion.p>
               ))}
 
               <motion.div variants={reveal} className="pt-4">
-                <h3 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-space-blue/40 font-heading mb-4">
+                <h3 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-[#1C2B3A]/40 font-heading mb-4">
                   <BookOpen size={13} />
                   Knihy
                 </h3>
                 <ul className="space-y-2">
                   {rinpoche.books.map((book, i) => (
-                    <li key={i} className="text-sm text-space-blue/55 font-light pl-4 border-l-2 border-tergar-gold/30">
+                    <li key={i} className="text-sm text-[#1C2B3A]/55 font-light pl-4 border-l-2 border-[#C9962A]/30">
                       {book}
                     </li>
                   ))}
                 </ul>
               </motion.div>
 
-              <motion.blockquote variants={reveal} className="bg-[#fafbfc] border-l-2 border-tergar-gold/40 p-5 rounded-r-xl mt-6">
-                <p className="text-base text-space-blue/70 italic leading-relaxed font-light">
+              <motion.blockquote variants={reveal} className="bg-[#F4F1EC] border-l-2 border-[#C9962A]/40 p-5 rounded-r-xl mt-6">
+                <p className="text-base text-[#1C2B3A]/70 italic leading-relaxed font-light">
                   &bdquo;{rinpoche.quote}&ldquo;
                 </p>
-                <cite className="block mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-tergar-gold not-italic font-heading">
+                <cite className="block mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#C9962A] not-italic font-heading">
                   Mingyur Rinpočhe
                 </cite>
               </motion.blockquote>
@@ -133,7 +133,7 @@ export function ONasPage() {
       </section>
 
       {/* Lineage */}
-      <section className="py-28 md:py-36 lg:py-44 bg-[#fafbfc] relative overflow-hidden">
+      <section className="py-28 md:py-36 lg:py-44 bg-[#F4F1EC] relative overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
             <motion.div
@@ -145,12 +145,12 @@ export function ONasPage() {
             >
               <motion.div variants={reveal}>
                 <SectionLabel>{lineage.label}</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-space-blue font-heading tracking-tight leading-[1.15]">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.15]">
                   {lineage.title}
                 </h2>
               </motion.div>
-              <motion.div variants={reveal} className="w-16 h-px bg-tergar-gold/60" />
-              <motion.p variants={reveal} className="text-base sm:text-lg text-space-blue/60 leading-[1.8] font-light">
+              <motion.div variants={reveal} className="w-16 h-px bg-[#C9962A]/60" />
+              <motion.p variants={reveal} className="text-base sm:text-lg text-[#1C2B3A]/60 leading-[1.8] font-light">
                 {lineage.text}
               </motion.p>
               <motion.a
@@ -158,9 +158,9 @@ export function ONasPage() {
                 href="https://tergar.org/about/lineage/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-tergar-blue text-sm font-semibold group"
+                className="inline-flex items-center gap-2 text-[#C9962A] text-sm font-semibold group"
               >
-                <span className="border-b border-tergar-blue/20 group-hover:border-tergar-blue transition-colors pb-px">
+                <span className="border-b border-[#C9962A]/20 group-hover:border-[#C9962A] transition-colors pb-px">
                   Více o linii na Tergar.org
                 </span>
                 <ExternalLink size={12} className="transition-transform group-hover:translate-x-0.5" />
@@ -184,7 +184,7 @@ export function ONasPage() {
       </section>
 
       {/* Gallery */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-[#FAF8F4]">
         <div className="container-custom">
           <motion.div
             initial="hidden"
@@ -195,11 +195,11 @@ export function ONasPage() {
           >
             <motion.div variants={reveal}>
               <SectionLabel>Naše komunita</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-space-blue font-heading tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C2B3A] font-heading tracking-tight mb-4">
                 Společné chvíle
               </h2>
             </motion.div>
-            <motion.p variants={reveal} className="text-sm sm:text-base text-space-blue/50 font-light max-w-lg mx-auto">
+            <motion.p variants={reveal} className="text-sm sm:text-base text-[#1C2B3A]/50 font-light max-w-lg mx-auto">
               Meditace, setkání, učení a komunita — momenty, které nás spojují.
             </motion.p>
           </motion.div>
@@ -230,9 +230,9 @@ export function ONasPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-[#fafbfc]">
+      <section className="py-16 bg-[#F4F1EC]">
         <div className="container-custom text-center">
-          <p className="text-space-blue/50 font-light mb-6">Chcete se dozvědět více o meditaci?</p>
+          <p className="text-[#1C2B3A]/50 font-light mb-6">Chcete se dozvědět více o meditaci?</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/co-je-meditace" className="btn-primary inline-flex items-center gap-2">
               Co je meditace

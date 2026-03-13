@@ -13,7 +13,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9962A] font-heading mb-6">
       {children}
     </span>
   );
@@ -66,10 +66,10 @@ const volunteerQuotes = [
 
 export function ZapojteSePage() {
   return (
-    <div className="bg-white">
+    <div className="bg-[#FAF8F4]">
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-b from-[#f0f2f5] to-white overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-tergar-blue/5" />
+      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-white to-[#FAF8F4] overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#1C2B3A]/5" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -78,10 +78,10 @@ export function ZapojteSePage() {
             className="max-w-3xl"
           >
             <SectionLabel>Zapojte se</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-space-blue font-heading tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.08] mb-6">
               Staňte se součástí komunity
             </h1>
-            <p className="text-lg sm:text-xl text-space-blue/60 leading-relaxed font-light max-w-2xl">
+            <p className="text-lg sm:text-xl text-[#1C2B3A]/60 leading-relaxed font-light max-w-2xl">
               Tergar funguje díky dobrovolníkům, kteří věnují svůj čas a energii šíření meditace. Každý příspěvek — ať už časem nebo finančně — pomáhá budovat komunitu.
             </p>
           </motion.div>
@@ -89,7 +89,7 @@ export function ZapojteSePage() {
       </section>
 
       {/* A) Dobrovolnictví — Role */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-[#FAF8F4]">
         <div className="container-custom">
           <motion.div
             initial="hidden"
@@ -100,11 +100,11 @@ export function ZapojteSePage() {
           >
             <motion.div variants={reveal}>
               <SectionLabel>Dobrovolnictví</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-space-blue font-heading tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C2B3A] font-heading tracking-tight mb-4">
                 Jak můžete pomoci
               </h2>
             </motion.div>
-            <motion.p variants={reveal} className="text-sm sm:text-base text-space-blue/55 font-light max-w-lg mx-auto">
+            <motion.p variants={reveal} className="text-sm sm:text-base text-[#1C2B3A]/55 font-light max-w-lg mx-auto">
               Vyberte si oblast, která vás zajímá. Žádné speciální zkušenosti nejsou potřeba — stačí chuť pomáhat.
             </motion.p>
           </motion.div>
@@ -122,7 +122,7 @@ export function ZapojteSePage() {
                 <motion.div
                   key={i}
                   variants={reveal}
-                  className="group bg-[#fafbfc] rounded-2xl border border-gray-100 p-7 md:p-8 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  className="group bg-[#F4F1EC] rounded-2xl border border-[#E8E4DD]/50 p-7 md:p-8 hover:bg-[#FAF8F4] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                 >
                   <div
                     className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
@@ -130,8 +130,8 @@ export function ZapojteSePage() {
                   >
                     <Icon size={26} style={{ color: role.color }} strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-lg font-bold text-space-blue font-heading mb-3">{role.title}</h3>
-                  <p className="text-sm text-space-blue/55 font-light leading-relaxed mb-5">{role.description}</p>
+                  <h3 className="text-lg font-bold text-[#1C2B3A] font-heading mb-3">{role.title}</h3>
+                  <p className="text-sm text-[#1C2B3A]/55 font-light leading-relaxed mb-5">{role.description}</p>
                   <a
                     href="mailto:czech@tergar.org?subject=Dobrovolnictví – Tergar Česko"
                     className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest font-heading group-hover:gap-3 transition-all"
@@ -147,7 +147,7 @@ export function ZapojteSePage() {
       </section>
 
       {/* Volunteer quotes */}
-      <section className="py-16 md:py-24 bg-[#fafbfc]">
+      <section className="py-16 md:py-24 bg-[#F4F1EC]">
         <div className="container-custom">
           <motion.div
             initial="hidden"
@@ -160,19 +160,19 @@ export function ZapojteSePage() {
               <motion.blockquote
                 key={i}
                 variants={reveal}
-                className="bg-white rounded-2xl border border-gray-100 p-6 md:p-7 relative"
+                className="bg-[#FAF8F4] rounded-2xl border border-[#E8E4DD]/50 p-6 md:p-7 relative"
               >
-                <Quote size={24} className="text-tergar-gold/20 mb-4" />
-                <p className="text-sm text-space-blue/70 italic leading-relaxed font-light mb-5">
+                <Quote size={24} className="text-[#C9962A]/20 mb-4" />
+                <p className="text-sm text-[#1C2B3A]/70 italic leading-relaxed font-light mb-5">
                   &bdquo;{q.text}&ldquo;
                 </p>
                 <footer className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-tergar-blue/8 flex items-center justify-center">
-                    <span className="text-xs font-bold text-tergar-blue font-heading">{q.author.charAt(0)}</span>
+                  <div className="w-8 h-8 rounded-full bg-[#1C2B3A]/8 flex items-center justify-center">
+                    <span className="text-xs font-bold text-[#C9962A] font-heading">{q.author.charAt(0)}</span>
                   </div>
                   <div>
-                    <cite className="text-sm font-bold text-space-blue not-italic font-heading">{q.author}</cite>
-                    <span className="text-[10px] text-space-blue/35 block">{q.location}</span>
+                    <cite className="text-sm font-bold text-[#1C2B3A] not-italic font-heading">{q.author}</cite>
+                    <span className="text-[10px] text-[#1C2B3A]/35 block">{q.location}</span>
                   </div>
                 </footer>
               </motion.blockquote>
@@ -182,7 +182,7 @@ export function ZapojteSePage() {
       </section>
 
       {/* B) Dary */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-[#FAF8F4]">
         <div className="container-custom">
           <motion.div
             initial="hidden"
@@ -193,10 +193,10 @@ export function ZapojteSePage() {
           >
             <motion.div variants={reveal} className="text-center mb-12">
               <SectionLabel>Finanční podpora</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-space-blue font-heading tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C2B3A] font-heading tracking-tight mb-4">
                 Podpořte Tergar Česko
               </h2>
-              <p className="text-base text-space-blue/55 font-light leading-relaxed max-w-xl mx-auto">
+              <p className="text-base text-[#1C2B3A]/55 font-light leading-relaxed max-w-xl mx-auto">
                 Vaše dary pomáhají financovat organizaci meditačních setkání, překlady učení do češtiny, pronájem prostor a rozvoj komunity v České republice.
               </p>
             </motion.div>
@@ -231,10 +231,10 @@ export function ZapojteSePage() {
               {/* PayPal / Online */}
               <motion.div
                 variants={reveal}
-                className="bg-[#fafbfc] rounded-2xl border border-gray-100 p-7 md:p-8 flex flex-col"
+                className="bg-[#F4F1EC] rounded-2xl border border-[#E8E4DD]/50 p-7 md:p-8 flex flex-col"
               >
-                <h3 className="text-lg font-bold font-heading text-space-blue mb-4">Online platba</h3>
-                <p className="text-sm text-space-blue/55 font-light leading-relaxed mb-6 flex-1">
+                <h3 className="text-lg font-bold font-heading text-[#1C2B3A] mb-4">Online platba</h3>
+                <p className="text-sm text-[#1C2B3A]/55 font-light leading-relaxed mb-6 flex-1">
                   Podpořte nás jednorázově nebo pravidelně přes PayPal nebo platební bránu.
                 </p>
                 <div className="space-y-3">
@@ -249,7 +249,7 @@ export function ZapojteSePage() {
                     href="https://darujme.cz/projekt/1202868"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 border border-gray-200 text-space-blue/70 px-6 py-3.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:border-tergar-blue/30 hover:text-tergar-blue transition-all duration-300 font-heading"
+                    className="w-full inline-flex items-center justify-center gap-2 border border-[#E8E4DD]/50 text-[#1C2B3A]/70 px-6 py-3.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:border-[#C9962A]/30 hover:text-[#C9962A] transition-all duration-300 font-heading"
                   >
                     Darovat přes Darujme.cz
                     <ExternalLink size={11} />
@@ -261,11 +261,11 @@ export function ZapojteSePage() {
             {/* Tax deductibility note */}
             <motion.div
               variants={reveal}
-              className="bg-tergar-gold/5 border border-tergar-gold/15 rounded-2xl p-6 text-center"
+              className="bg-[#C9962A]/5 border border-[#C9962A]/15 rounded-2xl p-6 text-center"
             >
-              <Heart size={20} className="text-tergar-gold mx-auto mb-3" strokeWidth={1.5} />
-              <h4 className="text-sm font-bold text-space-blue font-heading mb-2">Daňová uznatelnost darů</h4>
-              <p className="text-sm text-space-blue/55 font-light leading-relaxed max-w-lg mx-auto">
+              <Heart size={20} className="text-[#C9962A] mx-auto mb-3" strokeWidth={1.5} />
+              <h4 className="text-sm font-bold text-[#1C2B3A] font-heading mb-2">Daňová uznatelnost darů</h4>
+              <p className="text-sm text-[#1C2B3A]/55 font-light leading-relaxed max-w-lg mx-auto">
                 Tergar Česko je registrovaný spolek. Vaše dary jsou daňově uznatelné podle § 15 odst. 1 zákona o daních z příjmů.
                 Na požádání vystavíme potvrzení o přijetí daru pro účely daňového přiznání.
                 Fyzické osoby si mohou odečíst dary od základu daně, pokud úhrnná hodnota darů přesáhne 2 % základu daně nebo činí alespoň 1 000 Kč.

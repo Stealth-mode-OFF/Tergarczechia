@@ -25,7 +25,7 @@ export function Header() {
   }, [location.pathname]);
 
   const linkClass =
-    'text-[13px] font-semibold uppercase tracking-[0.16em] transition-colors relative group py-1 block cursor-pointer font-heading';
+    'text-[12px] font-semibold uppercase tracking-[0.16em] transition-colors relative group py-1 block cursor-pointer';
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -37,7 +37,7 @@ export function Header() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed z-50 transition-all duration-500 ${
           scrolled || !isHome
-            ? 'top-3 left-4 right-4 md:left-8 md:right-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[min(1080px,calc(100%-4rem))] h-[68px] bg-white/90 backdrop-blur-2xl border border-white/20 rounded-full shadow-[0_4px_40px_rgba(0,0,0,0.06),0_0_0_1px_rgba(255,255,255,0.15)_inset]'
+            ? 'top-3 left-4 right-4 md:left-8 md:right-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[min(1080px,calc(100%-4rem))] h-[64px] bg-[#FAF8F4]/90 backdrop-blur-2xl border border-[#E8E4DD]/40 rounded-full shadow-[0_4px_40px_rgba(0,0,0,0.04)]'
             : 'top-0 left-0 right-0 bg-transparent h-[100px]'
         }`}
       >
@@ -63,11 +63,11 @@ export function Header() {
                     href={item.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${linkClass} ${scrolled || !isHome ? 'text-space-blue/70 hover:text-tergar-blue' : 'text-white/80 hover:text-white'} flex items-center gap-1.5`}
+                    className={`${linkClass} ${scrolled || !isHome ? 'text-[#2D3748]/60 hover:text-[#C9962A]' : 'text-white/80 hover:text-white'} flex items-center gap-1.5`}
                   >
                     <span className="relative z-10">{item.label}</span>
                     <ExternalLink size={12} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-tergar-gold translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C9962A] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                   </a>
                 ) : (
                   <Link
@@ -75,14 +75,14 @@ export function Header() {
                     className={`${linkClass} ${
                       scrolled || !isHome
                         ? isActive(item.path)
-                          ? 'text-tergar-blue'
-                          : 'text-space-blue/70 hover:text-tergar-blue'
+                          ? 'text-[#C9962A]'
+                          : 'text-[#2D3748]/60 hover:text-[#C9962A]'
                         : 'text-white/80 hover:text-white'
                     }`}
                   >
                     {item.label}
                     <span className={`absolute bottom-0 left-0 w-full h-px ${
-                      scrolled || !isHome ? 'bg-tergar-blue' : 'bg-white/60'
+                      scrolled || !isHome ? 'bg-[#C9962A]' : 'bg-white/60'
                     } origin-left ${isActive(item.path) ? 'scale-x-100' : 'scale-x-0'} group-hover:scale-x-100 transition-transform duration-300`} />
                   </Link>
                 )}
@@ -92,7 +92,7 @@ export function Header() {
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`lg:hidden relative z-50 p-2 -mr-2 transition-colors ${scrolled || !isHome || menuOpen ? 'text-space-blue' : 'text-white'}`}
+            className={`lg:hidden relative z-50 p-2 -mr-2 transition-colors ${scrolled || !isHome || menuOpen ? 'text-[#1C2B3A]' : 'text-white'}`}
             aria-label="Menu"
           >
             <motion.div
@@ -123,7 +123,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col pt-32 px-8 lg:hidden"
+            className="fixed inset-0 z-40 bg-[#FAF8F4]/98 backdrop-blur-xl flex flex-col pt-32 px-8 lg:hidden"
           >
             <nav className="flex flex-col gap-8 text-center">
               {nav.map((item, i) => (
@@ -139,7 +139,7 @@ export function Header() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setMenuOpen(false)}
-                      className="text-2xl font-bold text-space-blue font-heading tracking-tight inline-flex items-center gap-2"
+                      className="text-2xl font-bold text-[#1C2B3A] font-heading tracking-tight inline-flex items-center gap-2"
                     >
                       {item.label}
                       <ExternalLink size={14} className="opacity-30" />
@@ -149,7 +149,7 @@ export function Header() {
                       to={item.path}
                       onClick={() => setMenuOpen(false)}
                       className={`text-2xl font-bold font-heading tracking-tight ${
-                        isActive(item.path) ? 'text-tergar-blue' : 'text-space-blue'
+                        isActive(item.path) ? 'text-[#C9962A]' : 'text-[#1C2B3A]'
                       }`}
                     >
                       {item.label}

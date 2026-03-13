@@ -13,7 +13,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9962A] font-heading mb-6">
       {children}
     </span>
   );
@@ -61,10 +61,10 @@ const practiceGroups: PracticeGroup[] = [
 
 export function SkupinyPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-[#FAF8F4]">
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-b from-[#f0f2f5] to-white overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-tergar-blue/5" />
+      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-white to-[#FAF8F4] overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#1C2B3A]/5" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -73,10 +73,10 @@ export function SkupinyPage() {
             className="max-w-3xl"
           >
             <SectionLabel>Skupiny</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-space-blue font-heading tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.08] mb-6">
               Meditační skupiny v Praze
             </h1>
-            <p className="text-lg sm:text-xl text-space-blue/60 leading-relaxed font-light max-w-2xl">
+            <p className="text-lg sm:text-xl text-[#1C2B3A]/60 leading-relaxed font-light max-w-2xl">
               Tergar Česko provozuje dvě pravidelné praxové skupiny v Praze — českou a anglickou.
               Setkání jsou otevřená všem, bez ohledu na úroveň zkušeností.
             </p>
@@ -85,7 +85,7 @@ export function SkupinyPage() {
       </section>
 
       {/* Practice group cards */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-[#FAF8F4]">
         <div className="container-custom">
           <motion.div
             initial="hidden"
@@ -98,17 +98,17 @@ export function SkupinyPage() {
               <motion.div
                 key={i}
                 variants={reveal}
-                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-300"
+                className="group bg-[#FAF8F4] rounded-2xl border border-[#E8E4DD]/50 overflow-hidden hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-300"
               >
                 <div className="h-1.5 bg-gradient-to-r" style={{ background: `linear-gradient(to right, ${group.color}, ${group.color}cc)` }} />
                 <div className="p-7 md:p-8">
                   {/* Group name + language */}
                   <div className="flex items-start justify-between mb-5">
                     <div>
-                      <h3 className="text-lg font-bold text-space-blue font-heading leading-tight mb-1">
+                      <h3 className="text-lg font-bold text-[#1C2B3A] font-heading leading-tight mb-1">
                         {group.name}
                       </h3>
-                      <span className="inline-flex items-center gap-1.5 text-xs text-space-blue/40 font-light">
+                      <span className="inline-flex items-center gap-1.5 text-xs text-[#1C2B3A]/40 font-light">
                         <Globe size={11} />
                         {group.languageFlag} {group.language}
                       </span>
@@ -118,32 +118,32 @@ export function SkupinyPage() {
                   {/* Details */}
                   <div className="space-y-3 mb-6">
                     <div className="flex items-start gap-3">
-                      <Calendar size={14} className="text-space-blue/30 mt-0.5 flex-shrink-0" />
+                      <Calendar size={14} className="text-[#1C2B3A]/30 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="text-sm text-space-blue/70 font-medium block">{group.schedule}</span>
+                        <span className="text-sm text-[#1C2B3A]/70 font-medium block">{group.schedule}</span>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Clock size={14} className="text-space-blue/30 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-space-blue/70">{group.time}</span>
+                      <Clock size={14} className="text-[#1C2B3A]/30 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-[#1C2B3A]/70">{group.time}</span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <MapPin size={14} className="text-space-blue/30 mt-0.5 flex-shrink-0" />
+                      <MapPin size={14} className="text-[#1C2B3A]/30 mt-0.5 flex-shrink-0" />
                       <a
                         href={group.mapsLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-tergar-blue hover:underline inline-flex items-center gap-1"
+                        className="text-sm text-[#C9962A] hover:underline inline-flex items-center gap-1"
                       >
                         {group.location}
                         <ExternalLink size={10} className="opacity-40" />
                       </a>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Mail size={14} className="text-space-blue/30 mt-0.5 flex-shrink-0" />
+                      <Mail size={14} className="text-[#1C2B3A]/30 mt-0.5 flex-shrink-0" />
                       <a
                         href={`mailto:${group.contact}`}
-                        className="text-sm text-tergar-blue hover:underline"
+                        className="text-sm text-[#C9962A] hover:underline"
                       >
                         {group.contact}
                       </a>
@@ -151,8 +151,8 @@ export function SkupinyPage() {
                   </div>
 
                   {/* Divider */}
-                  <div className="h-px bg-gray-100 mb-4" />
-                  <p className="text-xs text-space-blue/35 font-light leading-relaxed">
+                  <div className="h-px bg-[#E8E4DD] mb-4" />
+                  <p className="text-xs text-[#1C2B3A]/35 font-light leading-relaxed">
                     Není třeba předchozí registrace. Přijďte kdykoliv.
                   </p>
                 </div>
@@ -168,16 +168,16 @@ export function SkupinyPage() {
             transition={{ duration: 0.8, ease }}
             className="max-w-3xl mx-auto mb-20"
           >
-            <div className="rounded-2xl overflow-hidden border border-gray-100 bg-[#fafbfc]">
-              <div className="aspect-[2/1] md:aspect-[3/1] bg-gradient-to-br from-[#e8eaed] to-[#f0f2f5] flex items-center justify-center relative">
+            <div className="rounded-2xl overflow-hidden border border-[#E8E4DD]/50 bg-[#F4F1EC]">
+              <div className="aspect-[2/1] md:aspect-[3/1] bg-gradient-to-br from-[#E8E4DD] to-[#F4F1EC] flex items-center justify-center relative">
                 <div className="text-center">
-                  <MapPin size={32} className="text-space-blue/15 mx-auto mb-2" />
-                  <p className="text-sm text-space-blue/30 font-light">Chorvatská 12, Praha 10</p>
+                  <MapPin size={32} className="text-[#1C2B3A]/15 mx-auto mb-2" />
+                  <p className="text-sm text-[#1C2B3A]/30 font-light">Chorvatská 12, Praha 10</p>
                   <a
                     href="https://maps.google.com/?q=Chorvatská+12,+Praha+10"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading text-tergar-blue mt-3 hover:gap-2.5 transition-all"
+                    className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading text-[#C9962A] mt-3 hover:gap-2.5 transition-all"
                   >
                     Otevřít v Google Maps <ExternalLink size={10} />
                   </a>
@@ -196,10 +196,10 @@ export function SkupinyPage() {
           >
             <motion.div variants={reveal} className="text-center mb-10">
               <SectionLabel>Založte skupinu</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl font-bold text-space-blue font-heading tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2B3A] font-heading tracking-tight mb-4">
                 Jak založit vlastní skupinu
               </h2>
-              <p className="text-base text-space-blue/55 font-light leading-relaxed">
+              <p className="text-base text-[#1C2B3A]/55 font-light leading-relaxed">
                 Chcete meditovat s ostatními ve vašem městě? Založení Tergar praxové skupiny je jednodušší, než si myslíte. Stačí pár lidí a pravidelný prostor.
               </p>
             </motion.div>
@@ -210,11 +210,11 @@ export function SkupinyPage() {
                 { num: '2', text: 'Zajistěte klidný prostor pro setkávání — může to být i obývák.' },
                 { num: '3', text: 'Kontaktujte nás — pomůžeme s materiály, programem a propojením s komunitou.' },
               ].map((step) => (
-                <div key={step.num} className="flex items-start gap-4 bg-[#fafbfc] rounded-xl p-5 border border-gray-100/80">
-                  <div className="w-8 h-8 rounded-full bg-tergar-blue/8 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm font-bold text-tergar-blue font-heading">{step.num}</span>
+                <div key={step.num} className="flex items-start gap-4 bg-[#F4F1EC] rounded-xl p-5 border border-[#E8E4DD]/50/80">
+                  <div className="w-8 h-8 rounded-full bg-[#1C2B3A]/8 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm font-bold text-[#C9962A] font-heading">{step.num}</span>
                   </div>
-                  <p className="text-sm text-space-blue/60 font-light leading-relaxed pt-1">{step.text}</p>
+                  <p className="text-sm text-[#1C2B3A]/60 font-light leading-relaxed pt-1">{step.text}</p>
                 </div>
               ))}
             </motion.div>
@@ -230,7 +230,7 @@ export function SkupinyPage() {
               </p>
               <a
                 href="mailto:czech@tergar.org?subject=Založení nové meditační skupiny"
-                className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 group"
+                className="inline-flex items-center gap-3 bg-[#FAF8F4]/10 hover:bg-[#FAF8F4]/20 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 group"
               >
                 <span>czech@tergar.org</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

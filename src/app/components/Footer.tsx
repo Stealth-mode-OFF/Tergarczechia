@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Youtube, Mail, MapPin, ArrowUpRight, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
 import logoImage from '@/assets/logo.png';
 import { content } from '@/data/content';
@@ -7,81 +8,123 @@ export function Footer() {
   const { copyright, contact } = content.footer;
 
   return (
-    <footer className="bg-space-blue text-white py-24 border-t border-white/5 relative overflow-hidden">
-      {/* Abstract Background Decoration */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-tergar-gold/20 to-transparent" />
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-tergar-blue/10 rounded-full blur-[100px]" />
+    <footer className="bg-[#1C2B3A] text-white relative overflow-hidden">
+      {/* Gold line accent */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#C9962A]/30 to-transparent" />
 
-      <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-8 mb-20 text-center md:text-left">
-          
-          {/* 1. Brand */}
-          <div className="lg:col-span-1 space-y-8 flex flex-col items-center md:items-start">
-            <motion.img 
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#C9962A]/5 rounded-full blur-[120px]" />
+
+      <div className="container-custom relative z-10 py-20 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+
+          {/* Brand */}
+          <div className="lg:col-span-1 space-y-6">
+            <motion.img
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              src={logoImage} 
-              alt="Tergar Logo" 
-              className="h-10 brightness-0 invert opacity-90"
+              src={logoImage}
+              alt="Tergar"
+              className="h-9 brightness-0 invert opacity-80"
             />
-            <p className="text-white/60 text-sm max-w-xs mx-auto md:mx-0 leading-relaxed font-light">
-              {copyright}
+            <p className="text-white/40 text-sm leading-relaxed font-light max-w-xs">
+              Meditační komunita Yongey Mingyura Rinpočheho v České republice.
             </p>
           </div>
 
-          {/* 2. Contact */}
-          <div className="lg:col-span-1 space-y-8">
-            <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-tergar-gold/80 font-heading">Kontakt</h5>
-            <ul className="space-y-6 text-white/70 text-sm font-light">
-              <li className="flex flex-col md:flex-row items-center md:items-start gap-4 group">
-                <div className="p-2 rounded-full bg-white/5 group-hover:bg-tergar-gold group-hover:text-space-blue transition-colors duration-300 mt-1">
-                  <Mail size={14} />
-                </div>
-                <div>
-                  <a href={`mailto:${contact.email}`} className="hover:text-white transition-colors border-b border-transparent hover:border-white/30 pb-0.5">
-                    {contact.email}
-                  </a>
-                </div>
+          {/* Navigation */}
+          <div className="lg:col-span-1 space-y-6">
+            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C9962A]/70">Navigace</h5>
+            <nav className="flex flex-col gap-3">
+              {[
+                { label: 'Co je meditace', to: '/co-je-meditace' },
+                { label: 'Program', to: '/program' },
+                { label: 'Skupiny', to: '/skupiny' },
+                { label: 'Události 2026', to: '/udalosti-2026' },
+                { label: 'Inspirace', to: '/inspirace' },
+                { label: 'O nás', to: '/o-nas' },
+                { label: 'Zapojte se', to: '/zapojte-se' },
+              ].map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="text-white/45 text-sm font-light hover:text-white transition-colors duration-300 w-fit"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Contact */}
+          <div className="lg:col-span-1 space-y-6">
+            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C9962A]/70">Kontakt</h5>
+            <ul className="space-y-4 text-white/50 text-sm font-light">
+              <li className="flex items-start gap-3 group">
+                <Mail size={14} className="mt-0.5 flex-shrink-0 group-hover:text-[#C9962A] transition-colors" />
+                <a href={`mailto:${contact.email}`} className="hover:text-white transition-colors">
+                  {contact.email}
+                </a>
               </li>
-              <li className="flex flex-col md:flex-row items-center md:items-start gap-4 group">
-                <div className="p-2 rounded-full bg-white/5 group-hover:bg-tergar-gold group-hover:text-space-blue transition-colors duration-300 mt-1">
-                  <MapPin size={14} />
-                </div>
-                <div>
-                  <span className="leading-relaxed block text-center md:text-left">
-                    {contact.address.name}<br/>
-                    {contact.address.street}<br/>
-                    {contact.address.city}
-                  </span>
-                </div>
+              <li className="flex items-start gap-3">
+                <MapPin size={14} className="mt-0.5 flex-shrink-0" />
+                <span className="leading-relaxed">
+                  {contact.address.name}<br />
+                  {contact.address.street}<br />
+                  {contact.address.city}
+                </span>
               </li>
             </ul>
           </div>
 
-          {/* 3. Social */}
-          <div className="lg:col-span-1 space-y-8 flex flex-col items-center lg:items-end">
-            <h5 className="text-xs font-bold uppercase tracking-[0.2em] text-tergar-gold/80 font-heading w-full text-center lg:text-right">Sledujte nás</h5>
-            <div className="flex gap-4">
-              <motion.a 
-                whileHover={{ y: -5 }}
-                href={contact.facebookLink} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-tergar-gold hover:text-space-blue hover:border-tergar-gold transition-all duration-300"
-              >
-                <Facebook size={20} strokeWidth={1.5} />
-              </motion.a>
-              <motion.a 
-                whileHover={{ y: -5 }}
-                href={contact.instagramLink} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-tergar-gold hover:text-space-blue hover:border-tergar-gold transition-all duration-300"
-              >
-                <Instagram size={20} strokeWidth={1.5} />
-              </motion.a>
+          {/* Social + Support */}
+          <div className="lg:col-span-1 space-y-6">
+            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C9962A]/70">Sledujte nás</h5>
+            <div className="flex gap-3">
+              {[
+                { href: contact.facebookLink, icon: Facebook, label: 'Facebook' },
+                { href: contact.instagramLink, icon: Instagram, label: 'Instagram' },
+                { href: contact.youtubeLink, icon: Youtube, label: 'YouTube' },
+              ].map(({ href, icon: Icon, label }) => (
+                <motion.a
+                  key={label}
+                  whileHover={{ y: -3 }}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center hover:bg-[#C9962A] hover:text-[#1C2B3A] hover:border-[#C9962A] transition-all duration-300"
+                  aria-label={label}
+                >
+                  <Icon size={16} strokeWidth={1.5} />
+                </motion.a>
+              ))}
             </div>
+
+            <div className="pt-4">
+              <a
+                href="https://darujme.cz/projekt/1202868"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#C9962A] text-sm font-medium hover:text-[#C9962A]/80 transition-colors group"
+              >
+                <Heart size={14} strokeWidth={1.5} />
+                <span className="border-b border-[#C9962A]/20 group-hover:border-[#C9962A]/50 transition-colors pb-0.5">
+                  Podpořte nás
+                </span>
+                <ArrowUpRight size={11} className="opacity-40" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-8 border-t border-white/8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/25 text-xs font-light">{copyright}</p>
+          <div className="flex items-center gap-6">
+            <Link to="/kontakt" className="text-white/25 text-xs font-light hover:text-white/50 transition-colors">Kontakt</Link>
+            <a href="https://tergar.org" target="_blank" rel="noopener noreferrer" className="text-white/25 text-xs font-light hover:text-white/50 transition-colors inline-flex items-center gap-1">
+              Tergar International <ArrowUpRight size={9} />
+            </a>
           </div>
         </div>
       </div>

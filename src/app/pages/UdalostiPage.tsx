@@ -14,7 +14,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9962A] font-heading mb-6">
       {children}
     </span>
   );
@@ -41,10 +41,10 @@ export function UdalostiPage() {
   ].filter(q => q.events.length > 0);
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#FAF8F4]">
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-b from-[#f0f2f5] to-white overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-tergar-blue/5" />
+      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-white to-[#FAF8F4] overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#1C2B3A]/5" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -53,10 +53,10 @@ export function UdalostiPage() {
             className="max-w-3xl"
           >
             <SectionLabel>Harmonogram 2026</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-space-blue font-heading tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.08] mb-6">
               Události a retreaty
             </h1>
-            <p className="text-lg sm:text-xl text-space-blue/60 leading-relaxed font-light max-w-2xl">
+            <p className="text-lg sm:text-xl text-[#1C2B3A]/60 leading-relaxed font-light max-w-2xl">
               Přehled nadcházejících online kurzů, retreatů a živých přenosů s Mingyurem Rinpočhem a dalšími učiteli Tergar.
             </p>
           </motion.div>
@@ -64,13 +64,13 @@ export function UdalostiPage() {
       </section>
 
       {/* Legend */}
-      <section className="py-6 bg-white border-b border-gray-100">
+      <section className="py-6 bg-[#FAF8F4] border-b border-[#E8E4DD]/50">
         <div className="container-custom">
           <div className="flex flex-wrap items-center gap-4 justify-center">
             {Object.entries(typeConfig).map(([key, config]) => {
               const Icon = config.icon;
               return (
-                <div key={key} className="flex items-center gap-2 text-xs text-space-blue/50 font-light">
+                <div key={key} className="flex items-center gap-2 text-xs text-[#1C2B3A]/50 font-light">
                   <Icon size={14} style={{ color: config.color }} />
                   <span>{config.label}</span>
                 </div>
@@ -81,7 +81,7 @@ export function UdalostiPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-[#FAF8F4]">
         <div className="container-custom max-w-3xl">
           {quarters.map((quarter, qi) => (
             <motion.div
@@ -93,11 +93,11 @@ export function UdalostiPage() {
               className="mb-16 last:mb-0"
             >
               <motion.div variants={reveal} className="mb-6">
-                <h2 className="text-lg font-bold text-space-blue font-heading tracking-tight flex items-center gap-3">
-                  <Calendar size={18} className="text-tergar-gold" />
+                <h2 className="text-lg font-bold text-[#1C2B3A] font-heading tracking-tight flex items-center gap-3">
+                  <Calendar size={18} className="text-[#C9962A]" />
                   {quarter.label}
                 </h2>
-                <div className="h-px bg-gradient-to-r from-tergar-gold/30 to-transparent mt-3" />
+                <div className="h-px bg-gradient-to-r from-[#C9962A]/30 to-transparent mt-3" />
               </motion.div>
 
               <motion.div variants={stagger} className="space-y-4 pl-2 md:pl-4">
@@ -108,11 +108,11 @@ export function UdalostiPage() {
                     <motion.div
                       key={i}
                       variants={reveal}
-                      className="group relative flex gap-4 md:gap-6 bg-[#fafbfc] rounded-2xl border border-gray-100 p-5 md:p-6 hover:bg-white hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                      className="group relative flex gap-4 md:gap-6 bg-[#F4F1EC] rounded-2xl border border-[#E8E4DD]/50 p-5 md:p-6 hover:bg-[#FAF8F4] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                     >
                       {/* Date column */}
                       <div className="flex-shrink-0 w-20 md:w-24 pt-0.5">
-                        <span className="text-sm font-bold font-heading text-space-blue/70">{event.date}</span>
+                        <span className="text-sm font-bold font-heading text-[#1C2B3A]/70">{event.date}</span>
                       </div>
 
                       {/* Timeline dot */}
@@ -132,16 +132,16 @@ export function UdalostiPage() {
                             {config.label}
                           </span>
                           {event.free && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading bg-tergar-gold/10 text-tergar-gold border border-tergar-gold/20">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest font-heading bg-[#C9962A]/10 text-[#C9962A] border border-[#C9962A]/20">
                               Zdarma
                             </span>
                           )}
                         </div>
-                        <h3 className="text-base font-bold font-heading text-space-blue leading-snug mb-1.5">
+                        <h3 className="text-base font-bold font-heading text-[#1C2B3A] leading-snug mb-1.5">
                           {event.title}
                         </h3>
                         {event.description && (
-                          <p className="text-sm text-space-blue/50 font-light leading-relaxed">
+                          <p className="text-sm text-[#1C2B3A]/50 font-light leading-relaxed">
                             {event.description}
                           </p>
                         )}
@@ -150,7 +150,7 @@ export function UdalostiPage() {
                             href={event.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 mt-3 text-[10px] font-bold uppercase tracking-widest font-heading text-tergar-blue opacity-50 group-hover:opacity-100 transition-opacity"
+                            className="inline-flex items-center gap-1.5 mt-3 text-[10px] font-bold uppercase tracking-widest font-heading text-[#C9962A] opacity-50 group-hover:opacity-100 transition-opacity"
                           >
                             Registrace <ExternalLink size={10} />
                           </a>
@@ -166,11 +166,11 @@ export function UdalostiPage() {
       </section>
 
       {/* Note */}
-      <section className="py-12 bg-[#fafbfc] border-t border-gray-100">
+      <section className="py-12 bg-[#F4F1EC] border-t border-[#E8E4DD]/50">
         <div className="container-custom text-center max-w-xl">
-          <p className="text-sm text-space-blue/40 font-light leading-relaxed">
+          <p className="text-sm text-[#1C2B3A]/40 font-light leading-relaxed">
             Události jsou organizovány Tergar International. Registrace a podrobnosti na{' '}
-            <a href="https://learning.tergar.org" target="_blank" rel="noopener noreferrer" className="text-tergar-blue hover:underline">
+            <a href="https://learning.tergar.org" target="_blank" rel="noopener noreferrer" className="text-[#C9962A] hover:underline">
               learning.tergar.org
             </a>
             . Časy jsou uvedeny v středoevropském čase (CET).

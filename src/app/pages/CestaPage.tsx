@@ -14,7 +14,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-tergar-gold font-heading mb-6">
+    <span className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9962A] font-heading mb-6">
       {children}
     </span>
   );
@@ -47,10 +47,10 @@ export function CestaPage() {
   const vajrayanaStep = tergarPathSteps[9]; // Vajrayana
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#FAF8F4]">
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-b from-[#f0f2f5] to-white overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-tergar-blue/5" />
+      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-white to-[#FAF8F4] overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#1C2B3A]/5" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -59,10 +59,10 @@ export function CestaPage() {
             className="max-w-3xl"
           >
             <SectionLabel>Meditační cesta</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-space-blue font-heading tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C2B3A] font-heading tracking-tight leading-[1.08] mb-6">
               Tergar cesta
             </h1>
-            <p className="text-lg sm:text-xl text-space-blue/60 leading-relaxed font-light max-w-2xl">
+            <p className="text-lg sm:text-xl text-[#1C2B3A]/60 leading-relaxed font-light max-w-2xl">
               Od prvních kroků v meditaci až po hlubokou buddhistickou praxi. Každý stupeň staví na předchozím a postupně prohlubuje vaše porozumění mysli.
             </p>
           </motion.div>
@@ -70,7 +70,7 @@ export function CestaPage() {
       </section>
 
       {/* Visual Timeline */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-[#FAF8F4]">
         <div className="container-custom max-w-4xl">
 
           {/* Intro — AAM */}
@@ -82,7 +82,7 @@ export function CestaPage() {
             className="mb-16"
           >
             <motion.div variants={reveal} className="text-center mb-8">
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-space-blue/30 font-heading">Začátek cesty</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1C2B3A]/30 font-heading">Začátek cesty</span>
             </motion.div>
             <motion.div variants={reveal}>
               <StepCard step={introStep} isHighlighted />
@@ -104,10 +104,10 @@ export function CestaPage() {
           >
             <motion.div variants={reveal} className="text-center mb-10">
               <SectionLabel>Radost ze života</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl font-bold text-space-blue font-heading tracking-tight mb-3">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2B3A] font-heading tracking-tight mb-3">
                 Joy of Living
               </h2>
-              <p className="text-sm text-space-blue/50 font-light max-w-lg mx-auto">
+              <p className="text-sm text-[#1C2B3A]/50 font-light max-w-lg mx-auto">
                 Meditační program pro každého bez ohledu na vyznání. Tři úrovně postupně prohlubují praxi.
               </p>
             </motion.div>
@@ -135,10 +135,10 @@ export function CestaPage() {
           >
             <motion.div variants={reveal} className="text-center mb-10">
               <SectionLabel>Buddhistická cesta</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl font-bold text-space-blue font-heading tracking-tight mb-3">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2B3A] font-heading tracking-tight mb-3">
                 Cesta osvobození
               </h2>
-              <p className="text-sm text-space-blue/50 font-light max-w-lg mx-auto">
+              <p className="text-sm text-[#1C2B3A]/50 font-light max-w-lg mx-auto">
                 Meditační trénink v tradici Mahámudry pod vedením Mingyura Rinpočheho.
               </p>
             </motion.div>
@@ -164,7 +164,7 @@ export function CestaPage() {
             variants={stagger}
           >
             <motion.div variants={reveal} className="text-center mb-8">
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-space-blue/30 font-heading">Pokročilá praxe</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1C2B3A]/30 font-heading">Pokročilá praxe</span>
             </motion.div>
             <motion.div variants={reveal}>
               <StepCard step={vajrayanaStep} isHighlighted />
@@ -174,7 +174,7 @@ export function CestaPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20 bg-[#fafbfc]">
+      <section className="py-16 md:py-20 bg-[#F4F1EC]">
         <div className="container-custom text-center max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -182,10 +182,10 @@ export function CestaPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease }}
           >
-            <h3 className="text-xl font-bold text-space-blue font-heading mb-4">
+            <h3 className="text-xl font-bold text-[#1C2B3A] font-heading mb-4">
               Nevíte, kde začít?
             </h3>
-            <p className="text-sm text-space-blue/50 font-light mb-6">
+            <p className="text-sm text-[#1C2B3A]/50 font-light mb-6">
               Program Anytime Anywhere Meditation je ideální první krok. Další možností je navštívit naši pravidelnou meditační skupinu v Praze.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -223,8 +223,8 @@ function StepCard({ step, isHighlighted }: { step: typeof tergarPathSteps[0]; is
       {...wrapperProps}
       className={`group relative flex items-start gap-5 md:gap-7 rounded-2xl border overflow-hidden transition-all duration-500 ${
         isHighlighted
-          ? 'bg-gradient-to-br from-white to-[#fafbfc] border-gray-200 shadow-sm p-6 md:p-8 hover:shadow-lg hover:-translate-y-0.5'
-          : 'bg-white border-gray-100 p-5 md:p-6 hover:shadow-md hover:-translate-y-0.5'
+          ? 'bg-gradient-to-br from-white to-[#F4F1EC] border-[#E8E4DD]/50 shadow-sm p-6 md:p-8 hover:shadow-lg hover:-translate-y-0.5'
+          : 'bg-[#FAF8F4] border-[#E8E4DD]/50 p-5 md:p-6 hover:shadow-md hover:-translate-y-0.5'
       } ${step.link ? 'cursor-pointer' : ''}`}
     >
       {/* Level indicator */}
@@ -243,7 +243,7 @@ function StepCard({ step, isHighlighted }: { step: typeof tergarPathSteps[0]; is
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div className="flex flex-wrap items-center gap-3 mb-2">
-          <h3 className={`font-bold text-space-blue font-heading leading-tight ${isHighlighted ? 'text-lg md:text-xl' : 'text-base'}`}>
+          <h3 className={`font-bold text-[#1C2B3A] font-heading leading-tight ${isHighlighted ? 'text-lg md:text-xl' : 'text-base'}`}>
             {step.title}
           </h3>
           <StatusBadge status={step.status} label={step.statusLabel} />
@@ -251,11 +251,11 @@ function StepCard({ step, isHighlighted }: { step: typeof tergarPathSteps[0]; is
         <p className="text-[11px] font-bold uppercase tracking-[0.2em] font-heading mb-3" style={{ color: step.color }}>
           {step.subtitle}
         </p>
-        <p className="text-sm text-space-blue/55 leading-relaxed font-light mb-2">
+        <p className="text-sm text-[#1C2B3A]/55 leading-relaxed font-light mb-2">
           {step.description}
         </p>
         {step.prerequisite && (
-          <p className="text-[10px] text-space-blue/35 font-heading">
+          <p className="text-[10px] text-[#1C2B3A]/35 font-heading">
             Předpoklad: {step.prerequisite}
           </p>
         )}
