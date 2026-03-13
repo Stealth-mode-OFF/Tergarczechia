@@ -63,8 +63,11 @@ export function SkupinyPage() {
   return (
     <div className="bg-[#FAF8F4]">
       {/* Hero */}
-      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-white to-[#FAF8F4] overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#1C2B3A]/5" />
+      <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&h=600&fit=crop" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F4]/95 via-[#FAF8F4]/85 to-[#FAF8F4]" />
+        </div>
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -160,7 +163,7 @@ export function SkupinyPage() {
             ))}
           </motion.div>
 
-          {/* Map embed placeholder */}
+          {/* Map */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -169,15 +172,24 @@ export function SkupinyPage() {
             className="max-w-3xl mx-auto mb-20"
           >
             <div className="rounded-2xl overflow-hidden border border-[#E8E4DD]/50 bg-[#F4F1EC]">
-              <div className="aspect-[2/1] md:aspect-[3/1] bg-gradient-to-br from-[#E8E4DD] to-[#F4F1EC] flex items-center justify-center relative">
-                <div className="text-center">
-                  <MapPin size={32} className="text-[#1C2B3A]/15 mx-auto mb-2" />
-                  <p className="text-sm text-[#1C2B3A]/30 font-light">Chorvatská 12, Praha 10</p>
+              <div className="aspect-[2/1] md:aspect-[5/2] relative overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=1200&h=500&fit=crop"
+                  alt="Praha"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C2B3A]/70 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <div className="flex items-center gap-2 mb-2">
+                    <MapPin size={16} className="text-[#C9962A]" />
+                    <span className="text-sm font-semibold font-heading">Chorvatská 12, Praha 10</span>
+                  </div>
                   <a
                     href="https://maps.google.com/?q=Chorvatská+12,+Praha+10"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading text-[#C9962A] mt-3 hover:gap-2.5 transition-all"
+                    className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest font-heading text-[#C9962A] hover:gap-2.5 transition-all"
                   >
                     Otevřít v Google Maps <ExternalLink size={10} />
                   </a>

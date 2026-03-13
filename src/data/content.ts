@@ -30,7 +30,7 @@ export const content = {
       {
         text: 'Tergar Česko pořádá',
         subtext: 'meditační workshopy, kurzy, pravidelná setkání a ústraní. Podívejte se na náš program.',
-        image: 'https://images.unsplash.com/photo-1755591169837-01288ab3c111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpdGF0aW9uJTIwbmF0dXJlJTIwcGVhY2VmdWwlMjBsYW5kc2NhcGV8ZW58MXx8fHwxNzcxMjYxNzg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
+        image: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=1920&h=1080&fit=crop'
       }
     ],
     quote1: {
@@ -110,14 +110,21 @@ export const content = {
       text: 'Mingyur Rinpočhe je držitelem linie Karma Kagyü, jedné z hlavních škol tibetského buddhismu. Tato nepřerušená linie sahá od historického Buddhy přes indické mahásiddhy, tibetské mistry Marpu a Milaräpu, až po současné učitele. Rinpočhe je žákem svého otce Tulku Urgjena Rinpočheho a XVII. Karmapa Ogyen Trinley Dordže je hlavou linie.',
       image: lineageTreeImage,
     },
-    photoStrip: [communityImage, mingyurWavingImage, communityImage, mingyurPortrait],
+    photoStrip: [
+      communityImage,
+      'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&h=400&fit=crop',
+      mingyurWavingImage,
+      'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&h=400&fit=crop',
+    ],
     gallery: [
-      { src: communityImage, alt: 'Tergar komunita', aspect: 'landscape' },
-      { src: mingyurWavingImage, alt: 'Mingyur Rinpočhe', aspect: 'portrait' },
-      { src: lineageTreeImage, alt: 'Strom linie Kagyü', aspect: 'landscape' },
-      { src: vajradharaImage, alt: 'Vajradhara', aspect: 'portrait' },
-      { src: mingyurPortrait, alt: 'Mingyur Rinpočhe portrét', aspect: 'portrait' },
-      { src: communityImage, alt: 'Meditační setkání', aspect: 'landscape' },
+      { src: communityImage, alt: 'Tergar komunita', aspect: 'landscape' as const },
+      { src: mingyurWavingImage, alt: 'Mingyur Rinpočhe', aspect: 'portrait' as const },
+      { src: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&h=800&fit=crop', alt: 'Meditace v přírodě', aspect: 'portrait' as const },
+      { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=500&fit=crop', alt: 'Tibetský chrám', aspect: 'landscape' as const },
+      { src: mingyurPortrait, alt: 'Mingyur Rinpočhe portrét', aspect: 'portrait' as const },
+      { src: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&h=500&fit=crop', alt: 'Klidná meditace', aspect: 'landscape' as const },
+      { src: lineageTreeImage, alt: 'Strom linie Kagyü', aspect: 'landscape' as const },
+      { src: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=600&h=800&fit=crop', alt: 'Příroda a klid', aspect: 'portrait' as const },
     ],
     social: {
       facebook: 'https://www.facebook.com/tergarcz/',

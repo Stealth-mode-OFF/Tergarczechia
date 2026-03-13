@@ -415,8 +415,11 @@ export function HomePage() {
       </section>
 
       {/* ═══════ SUPPORT — WARM DARK ═══════ */}
-      <section className="py-28 md:py-36 bg-[#1C2B3A] text-white relative overflow-hidden isolate">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2B3A] via-[#243447] to-[#0f1a24]" />
+      <section className="py-28 md:py-36 text-white relative overflow-hidden isolate">
+        <div className="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=1920&h=800&fit=crop" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#1C2B3A]/85 bg-gradient-to-br from-[#1C2B3A]/90 via-[#243447]/85 to-[#0f1a24]/90" />
+        </div>
         <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-[#C9962A]/10 rounded-full blur-[120px]" />
 
         <motion.div

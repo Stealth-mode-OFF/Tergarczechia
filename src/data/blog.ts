@@ -29,6 +29,7 @@ export const blogArticles: BlogArticle[] = [
     category: 'jak-meditovat',
     categoryLabel: 'Jak meditovat',
     date: '12. 1. 2026',
+    thumbnail: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
     content: `<p>Když bylo Mingyuru Rinpočhemu devět let, trpěl tak silnými záchvaty paniky, že se bál vyjít z místnosti. Srdce mu bušilo, ruce se třásly a svět kolem něj se zdál ohrožující. Pro malého chlapce v tibetském klášteře to byl zdroj obrovského studu — vždyť byl synem uznávaného meditačního mistra Tulku Urgjena Rinpočheho. Jak může budoucí učitel meditace trpět úzkostí?</p>
 
 <p>Ve svých jedenácti letech odešel Mingyur do kláštera Nagi Gompa v nepálských horách, kde se zúčastnil tříletého meditačního ústraní. Právě tam se naučil přístup, který změnil celý jeho život: místo boje s panikou se rozhodl z ní udělat svou přítelkyni. „Použij paniku jako podporu pro meditaci," poradil mu jeho otec. Místo toho, aby se snažil úzkost potlačit nebo od ní utéct, začal ji Mingyur vítat jako objekt své meditace. Když přišla panika, řekl jí: „Vítej. Pojď, meditujme spolu."</p>
@@ -44,6 +45,7 @@ export const blogArticles: BlogArticle[] = [
     category: 'veda',
     categoryLabel: 'Věda o meditaci',
     date: '28. 12. 2025',
+    thumbnail: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=500&fit=crop',
     content: `<p>V roce 2002 přišel Mingyur Rinpočhe do laboratoře neurovědce Richarda Davidsona na University of Wisconsin-Madison. Na hlavě měl 256 elektrod a před sebou úkol: meditovat na soucit na požádání, v krátkých intervalech střídaných s odpočinkem. To, co vědci naměřili, je šokovalo. Během meditace na soucit vyskočila Mingyurova aktivita gama vln o 700 až 800 procent oproti klidovému stavu — což bylo něco, co výzkumníci dosud nikdy nezaznamenali.</p>
 
 <p>Gama vlny jsou spojovány s vyššími kognitivními funkcemi, soustředěním a pocitem vnitřního štěstí. U běžných lidí kolísají v rozmezí desítek procent. Sedminásobný až osminásobný nárůst byl tak mimořádný, že výzkumný tým nejdřív kontroloval, zda přístroje fungují správně. Fungovaly. Média se tohoto příběhu chopila a Mingyur Rinpočhe se stal známým jako „nejšťastnější člověk na světě" — označení, které sám skromně odmítá.</p>
@@ -59,6 +61,7 @@ export const blogArticles: BlogArticle[] = [
     category: 'komunita',
     categoryLabel: 'Příběhy komunity',
     date: '15. 11. 2025',
+    thumbnail: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=500&fit=crop',
     content: `<p>Meditace je v jádru osobní cesta. Sedíte, zavřete oči, jste sami se svou myslí. Proč tedy chodit meditovat s ostatními? Odpověď je jednoduchá a zároveň hluboká: protože společná praxe nás drží na cestě. V buddhismu se společenství praktikujících nazývá sangha a je považována za jeden ze tří klenotů — stejně důležitá jako samotné učení.</p>
 
 <p>Praktický přínos skupinové meditace je zřejmý každému, kdo se někdy pokoušel meditovat sám doma. Dneska nemám čas. Zítra začnu. Ten polštář vypadá nepohodlně. Mysl je mistr ve vymýšlení výmluv. Ale když víte, že vás ve čtvrtek večer čeká skupina lidí, kteří sedí společně — najednou je mnohem těžší to vzdát. Pravidelnost je základ meditační praxe a skupina ji přirozeně vytváří.</p>
@@ -74,6 +77,7 @@ export const blogArticles: BlogArticle[] = [
     category: 'jak-meditovat',
     categoryLabel: 'Jak meditovat',
     date: '5. 2. 2026',
+    thumbnail: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=800&h=500&fit=crop',
     content: `<p>Jedna z nejčastějších stížností začínajících meditujících zní: „Nedokážu zastavit myšlenky." Sedí na polštáři, soustředí se na dech — a za tři vteřiny už přemýšlejí o tom, co budou mít k obědu, jestli odpověděli na ten email, a proč jim koleno tak divně vrže. Mingyur Rinpočhe pro tento stav používá slavný obraz opičí mysli: naše mysl je jako opice, která neustále skáče z větve na větev, z myšlenky na myšlenku, nikdy nezůstane v klidu.</p>
 
 <p>Většina lidí se instinktivně pokouší opici chytit a přivázat ke stromu. Snaží se myšlenky potlačit silou vůle, zatnout zuby a „nemyslet". Jenže to nefunguje — čím víc se snažíte nemyslet, tím víc myšlenek přichází. Je to jako snažit se neusnout: samotná snaha vás udržuje vzhůru. Mingyur Rinpočhe nabízí zcela jiný přístup: nedávejte opici pouta, dejte jí práci.</p>
@@ -90,6 +94,7 @@ export const blogArticles: BlogArticle[] = [
     category: 'jak-meditovat',
     categoryLabel: 'Jak meditovat',
     date: '20. 2. 2026',
+    thumbnail: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800&h=500&fit=crop',
     content: `<p>Jedna z největších bariér meditace je představa, že potřebujete speciální podmínky: tichý pokoj, meditační polštář, kadidlo, zvoneček a třicet minut nerušeného času. Mingyur Rinpočhe tuhle představu boří s úsměvem: „Meditovat můžete kdekoliv a kdykoliv. Ve frontě v obchodě, v metru, při mytí nádobí." Jeho přístup nazývaný Anytime Anywhere Meditation stojí na třech jednoduchých krocích.</p>
 
 <p><strong>Krok první: Uvědomění těla.</strong> Začněte tím, že si uvědomíte, že máte tělo. Zní to absurdně, ale většinu dne žijeme výhradně v hlavě — v myšlenkách, plánech, starostech. Stačí na okamžik přenést pozornost do těla. Cítíte nohy na zemi? Ruce na klávesnici? Váhu těla na židli? Tento jednoduchý posun pozornosti vás okamžitě přivede do přítomného okamžiku. Nemusíte nic měnit, jen si všimnout.</p>
@@ -108,6 +113,7 @@ export const blogArticles: BlogArticle[] = [
     category: 'komunita',
     categoryLabel: 'Příběhy komunity',
     date: '8. 3. 2026',
+    thumbnail: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=500&fit=crop',
     content: `<p>V noci 6. června 2011 napsal Mingyur Rinpočhe dopis svým studentům, nechal ho na stole ve svém pokoji v klášteře Tergar v indické Bodhgáji, a tiše odešel do tmy. Žádný doprovod, žádné peníze, žádný plán. Jeden z nejuznávanějších buddhistických učitelů své generace — člověk, který vedl meditační centra po celém světě — se rozhodl žít jako bezdomovec. Prostý jogín putující po Indii a Nepálu, bez jakéhokoliv záchytného bodu.</p>
 
 <p>Pro jeho studenty a blízké to byl šok. Pro Mingyura to byl krok, o kterém snil roky. V tibetské buddhistické tradici existuje praxe putovního ústraní, kdy praktikující opustí veškerý komfort a vydá se na cestu bez cíle. Mingyur chtěl otestovat své učení v nejdrsnějších podmínkách. Dokáže meditovat, když nemá co jíst? Dokáže zůstat v klidu, když spí pod mostem? Je jeho praxe skutečná, nebo jen produkt pohodlného klášterního života?</p>

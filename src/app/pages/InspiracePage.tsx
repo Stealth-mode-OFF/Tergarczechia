@@ -195,13 +195,22 @@ export function InspiracePage() {
                 >
                   {/* Thumbnail */}
                   <div className="aspect-[16/10] bg-gradient-to-br from-[#F4F1EC] to-[#E8E4DD] relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-20 rounded-full bg-white/70 flex items-center justify-center backdrop-blur-sm">
-                        <span className="text-3xl font-heading text-[#1C2B3A]/15" style={{ fontWeight: 600 }}>
-                          {article.title.charAt(0)}
-                        </span>
+                    {article.thumbnail ? (
+                      <img
+                        src={article.thumbnail}
+                        alt={article.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-full bg-white/70 flex items-center justify-center backdrop-blur-sm">
+                          <span className="text-3xl font-heading text-[#1C2B3A]/15" style={{ fontWeight: 600 }}>
+                            {article.title.charAt(0)}
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <div className="p-6 flex flex-col flex-1">
