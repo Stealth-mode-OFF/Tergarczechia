@@ -1,35 +1,45 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Header } from '@/app/components/Header';
 import { Footer } from '@/app/components/Footer';
 import { HomePage } from '@/app/pages/HomePage';
+import { ONasPage } from '@/app/pages/ONasPage';
+import { ProgramPage } from '@/app/pages/ProgramPage';
+import { SkupinyPage } from '@/app/pages/SkupinyPage';
+import { KontaktPage } from '@/app/pages/KontaktPage';
 import { CoJeMeditacePage } from '@/app/pages/CoJeMeditacePage';
+import { CestaPage } from '@/app/pages/CestaPage';
+import { UdalostiPage } from '@/app/pages/UdalostiPage';
+import { InspiracePage } from '@/app/pages/InspiracePage';
+import { ZapojteSePage } from '@/app/pages/ZapojteSePage';
 import { NotFoundPage } from '@/app/pages/NotFoundPage';
-import {
-  CestaTergarPage,
-  ProgramyPage,
-  KomunitaPage,
-  UdalostiPage,
-  ONasPage,
-  KontaktPage,
-} from '@/app/pages';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/co-je-meditace" element={<CoJeMeditacePage />} />
-            <Route path="/cesta-tergar" element={<CestaTergarPage />} />
-            <Route path="/programy" element={<ProgramyPage />} />
-            <Route path="/komunita" element={<KomunitaPage />} />
-            <Route path="/udalosti" element={<UdalostiPage />} />
             <Route path="/o-nas" element={<ONasPage />} />
+            <Route path="/co-je-meditace" element={<CoJeMeditacePage />} />
+            <Route path="/cesta" element={<CestaPage />} />
+            <Route path="/program" element={<ProgramPage />} />
+            <Route path="/udalosti-2026" element={<UdalostiPage />} />
+            <Route path="/skupiny" element={<SkupinyPage />} />
+            <Route path="/inspirace" element={<InspiracePage />} />
+            <Route path="/zapojte-se" element={<ZapojteSePage />} />
             <Route path="/kontakt" element={<KontaktPage />} />
-            
-            {/* 404 Route */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
