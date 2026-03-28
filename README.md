@@ -1,33 +1,75 @@
-# Tergar Česká republika
+# Tergar Czechia
 
-Website for the Czech Tergar meditation community — an organization dedicated to making meditation accessible through the teachings of Yongey Mingyur Rinpoche.
+> Website for the Czech Tergar meditation community — teachings of Yongey Mingyur Rinpoche.
 
-**Live:** [tergarczechia.vercel.app](https://tergarczechia.vercel.app) *(if deployed)*
+## Status
+
+Active
 
 ## Tech Stack
 
-- React 18 + TypeScript
-- Vite
-- Tailwind CSS 4
-- Radix UI + shadcn/ui components
-- React Router
-- Framer Motion
+- **Framework:** React 18 + Vite
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4 + Radix UI (shadcn/ui components)
+- **Animations:** Framer Motion
+- **Routing:** React Router 7
+- **UI Libraries:** MUI (Material UI), Embla Carousel, React Slick, Masonry layout
+- **Hosting:** Vercel
+- **Key deps:** Lucide React (icons), React Hook Form, date-fns, Recharts, Sonner (toasts)
 
 ## Getting Started
 
-```bash
-npm install
-npm run dev
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Stealth-mode-OFF/Tergarczechia.git
+   cd Tergarczechia
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── App.tsx              # Root component with routing
+│   ├── components/          # Shared components (Header, Footer)
+│   │   └── ui/              # Base UI primitives (shadcn/ui)
+│   └── pages/               # Route pages
+│       ├── HomePage.tsx
+│       ├── CoJeMeditacePage.tsx    # "What is meditation"
+│       ├── ONasPage.tsx            # "About us"
+│       ├── ProgramPage.tsx         # Programs
+│       ├── CestaPage.tsx           # Tergar Path
+│       ├── SkupinyPage.tsx         # Meditation groups
+│       ├── UdalostiPage.tsx        # Events
+│       ├── RozvrhPage.tsx          # Schedule
+│       ├── InspiracePage.tsx       # Inspiration / blog
+│       ├── KontaktPage.tsx         # Contact
+│       └── ZapojteSePage.tsx       # "Get involved"
+├── data/                    # Static content (blog, events, content, tergarPath)
+├── assets/                  # Static assets
+├── styles/                  # Additional stylesheets
+├── types.ts                 # Shared TypeScript types
+└── main.tsx                 # Entry point
 ```
 
-## Features
+## Deployment
 
-- Homepage with community info, upcoming events, and teacher bio
-- "Co je meditace" (What is meditation) page
-- Group practice finder with Czech meditation groups
-- Responsive design with dark/light theme support
-- Newsletter signup and contact section
+Deployed via Vercel. Linked project with automatic deployments on push.
 
-## Credits
+**Preview:** [tergarczechia.vercel.app](https://tergarczechia.vercel.app)
 
-UI components from [shadcn/ui](https://ui.shadcn.com/) (MIT license).
+## Environment Variables
+
+No environment variables required.
+
+## Owner
+
+Josef Hofman — josef.hofman@behavera.com
