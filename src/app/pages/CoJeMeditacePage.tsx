@@ -1,3 +1,4 @@
+// * "What is meditation" intro page — benefits, science, Rinpoche portrait, CTA to programs
 import { Link } from 'react-router-dom';
 import { ArrowRight, Brain, Heart, Zap, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';

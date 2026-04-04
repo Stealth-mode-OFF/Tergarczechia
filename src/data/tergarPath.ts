@@ -1,3 +1,4 @@
+// * Tergar learning path steps — AAM > JOL 1-3 > Path of Liberation, with prerequisites
 export type PathStatus = 'dostupne' | 'brzy' | 'vyzaduje-predchozi';
 
 export interface PathStep {

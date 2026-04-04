@@ -1,3 +1,4 @@
+// * Contact page — email, physical address, social links, embedded map
 import { Mail, MapPin, Facebook, Instagram, Youtube, Send, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
 import { content } from '@/data/content';

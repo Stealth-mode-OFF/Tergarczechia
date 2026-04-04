@@ -1,3 +1,4 @@
+// * Landing page — fullscreen slider, parallax hero, Rinpoche bio, community map, support CTA
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight, MapPin, Mail, Heart, Calendar, Users, Sparkles } from 'lucide-react';

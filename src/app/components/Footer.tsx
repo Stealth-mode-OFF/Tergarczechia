@@ -1,3 +1,4 @@
+// * Site footer — nav links, contact info, social icons, darujme.cz donation link
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail, MapPin, ArrowUpRight, Heart } from 'lucide-react';
 import { motion } from 'motion/react';

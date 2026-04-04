@@ -1,3 +1,4 @@
+// * "Get involved" page — volunteer roles, testimonials, donation CTA
 import { ArrowRight, Heart, Languages, Users, Share2, Wrench, ExternalLink, Quote } from 'lucide-react';
 import { motion } from 'motion/react';
 

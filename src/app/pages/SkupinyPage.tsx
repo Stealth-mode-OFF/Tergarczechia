@@ -1,3 +1,4 @@
+// * Practice groups page — city-by-city listing with schedule, contact, location details
 import { ArrowRight, MapPin, Mail, Globe, Clock, Calendar, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
 

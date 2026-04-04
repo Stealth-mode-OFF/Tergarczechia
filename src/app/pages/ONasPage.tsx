@@ -1,3 +1,4 @@
+// * About us page — Tergar International, Rinpoche bio, lineage, Czech community story
 import { ArrowRight, ExternalLink, BookOpen } from 'lucide-react';
 import { motion } from 'motion/react';
 import { content } from '@/data/content';

@@ -1,3 +1,4 @@
+// * 2026 event calendar data — sorted by dateSort for chronological display
 export interface Event2026 {
   date: string;
   dateSort: string;

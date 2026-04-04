@@ -1,3 +1,4 @@
+// * Programs page — course cards with detail modals, filtering by type (online/presential)
 import { useState } from 'react';
 import { ArrowRight, ExternalLink, Calendar, X, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';

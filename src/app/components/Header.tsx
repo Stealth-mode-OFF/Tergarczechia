@@ -1,3 +1,4 @@
+// * Sticky header — morphs from transparent to pill-shaped on scroll, mobile hamburger overlay
 import { Link, useLocation } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -10,6 +11,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { nav } = content.header;
+  // * Homepage gets transparent header, all other pages get solid pill
   const isHome = location.pathname === '/';
 
   useEffect(() => {

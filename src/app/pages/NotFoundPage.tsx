@@ -1,3 +1,4 @@
+// * 404 page — minimal, branded, links back to homepage
 import { Link } from 'react-router-dom';
 import { Home } from 'lucide-react';
 import { motion } from 'motion/react';

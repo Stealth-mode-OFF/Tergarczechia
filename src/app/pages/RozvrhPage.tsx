@@ -1,3 +1,4 @@
+// * Weekly schedule page — embedded Google Calendar iframe
 import { motion } from 'motion/react';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];

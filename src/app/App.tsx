@@ -1,3 +1,4 @@
+// * Root router — all Czech page routes, scroll-to-top on navigate
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header } from '@/app/components/Header';

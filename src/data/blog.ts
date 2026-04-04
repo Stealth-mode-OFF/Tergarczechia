@@ -1,3 +1,4 @@
+// * Blog articles + YouTube videos — used by InspiracePage for category filtering
 export type BlogCategory = 'jak-meditovat' | 'veda' | 'komunita' | 'udalosti';
 
 export interface BlogArticle {

@@ -1,3 +1,4 @@
+// * Shared TypeScript types for site content structure
 export interface NavItem {
   label: string;
   path: string;

@@ -1,3 +1,4 @@
+// * Learning path page — visual progression from beginner to advanced (AAM > JOL > Path of Liberation)
 import { ExternalLink, Lock, Check, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { tergarPathSteps } from '@/data/tergarPath';

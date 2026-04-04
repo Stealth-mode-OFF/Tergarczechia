@@ -1,3 +1,4 @@
+// * Central content store — all Czech copy for header, home, footer, contact page
 import communityImage from '@/assets/community.png';
 import vajradharaImage from '@/assets/vajradhara.png';
 import mingyurWavingImage from '@/assets/mingyur-waving.png';

@@ -1,3 +1,4 @@
+// * Blog + video inspiration page — category filter, YouTube embeds, article cards
 import { useState } from 'react';
 import { ArrowRight, Play, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';

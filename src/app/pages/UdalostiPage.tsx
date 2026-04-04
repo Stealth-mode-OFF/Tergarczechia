@@ -1,3 +1,4 @@
+// * Events 2026 page — chronological event timeline with type badges (online/presential/stream)
 import { Calendar, Monitor, Radio, MapPin, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
 import { events2026 } from '@/data/events2026';
