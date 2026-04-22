@@ -41,7 +41,7 @@ const jsonLd = {
   breadcrumbs={breadcrumbs}
   jsonLd={null}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
 
   <Section size="md">
     <Container>

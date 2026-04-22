@@ -7,6 +7,23 @@ import Badge from '@/components/ui/Badge.astro';
 import Card from '@/components/ui/Card.astro';
 import Quote from '@/components/ui/Quote.astro';
 import Divider from '@/components/ui/Divider.astro';
+import { getCollection } from 'astro:content';
+import { formatDateRange, formatDateShort, eventTypeLabel } from '@/lib/format';
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcoming = (await getCollection('events'))
+  .filter((e) => (e.data.dateEnd ?? e.data.dateStart) >= today)
+  .sort((a, b) => a.data.dateStart.getTime() - b.data.dateStart.getTime());
+
+const groups = (await getCollection('groups')).filter((g) => g.data.active);
+const featuredEvent = upcoming[0];
+const calendarPeek = upcoming.slice(1, 4);
+
+const cityCount = new Set(groups.filter((g) => g.data.city !== 'Online').map((g) => g.data.city)).size;
+const onlineCount = groups.filter((g) => g.data.city === 'Online').length;
+const upcomingCount = upcoming.length;
 
 const heroTitle = 'Meditace, která se hodí do českého života.';
 const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
@@ -62,11 +79,11 @@ const pathHighlights = [
         <dl class="hero-meta">
           <div>
             <dt>Skupiny</dt>
-            <dd>5 měst · 1 online</dd>
+            <dd>{cityCount} měst{onlineCount > 0 ? ` · ${onlineCount} online` : ''}</dd>
           </div>
           <div>
-            <dt>Akce 2026</dt>
-            <dd>9 retreatů a přenosů</dd>
+            <dt>Nadcházející akce</dt>
+            <dd>{upcomingCount}</dd>
           </div>
           <div>
             <dt>Tradice</dt>
@@ -140,40 +157,49 @@ const pathHighlights = [
     </Container>
   </Section>
 
-  <!-- Next event teaser -->
-  <Section size="md">
-    <Container>
-      <div class="next-event">
-        <div class="ne-left">
-          <p class="eyebrow">Nejbližší akce</p>
-          <h2>Joy of Living 1 — Víkendový workshop</h2>
-          <p class="ne-meta">
-            <Badge variant="outline">Online</Badge>
-            <span>15.–16. 3. 2026</span>
-            <span class="dot">·</span>
-            <span>Úvodní program</span>
-          </p>
-          <p class="ne-body">
-            Dva dny společné praxe otevřené všem — začátečníkům i dlouholetým praktikujícím.
-            Učení o klidu mysli, práci s myšlenkami a nalezení přirozené pozornosti.
-          </p>
-          <div class="ne-cta">
-            <Button href="/akce" variant="primary">Všechny akce</Button>
-            <Button href="https://app.zenamu.com/tergarczechia" variant="ghost" external>Přihlásit na Zenamu</Button>
+    {featuredEvent && (
+    <Section size="md">
+      <Container>
+        <div class="next-event">
+          <div class="ne-left">
+            <p class="eyebrow">Nejbližší akce</p>
+            <h2>{featuredEvent.data.title}</h2>
+            <p class="ne-meta">
+              <Badge variant="outline">{eventTypeLabel(featuredEvent.data.type)}</Badge>
+              <span>{formatDateRange(featuredEvent.data.dateStart, featuredEvent.data.dateEnd)}</span>
+              {featuredEvent.data.free && (
+                <>
+                  <span class="dot">·</span>
+                  <span>Zdarma</span>
+                </>
+              )}
+            </p>
+            <p class="ne-body">{featuredEvent.data.description}</p>
+            <div class="ne-cta">
+              <Button href={`/akce/${featuredEvent.id}`} variant="primary">Detail akce</Button>
+              {featuredEvent.data.registrationUrl && (
+                <Button href={featuredEvent.data.registrationUrl} variant="ghost" external>Přihlásit se</Button>
+              )}
+            </div>
           </div>
+          {calendarPeek.length > 0 && (
+            <aside class="ne-right" aria-label="Další události">
+              <h3 class="ne-small">Také v kalendáři</h3>
+              <ul>
+                {calendarPeek.map((e) => (
+                  <li>
+                    <span>{formatDateShort(e.data.dateStart)}</span>
+                    <a href={`/akce/${e.id}`}>{e.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+              <a href="/akce" class="ne-more">Celý kalendář →</a>
+            </aside>
+          )}
         </div>
-        <aside class="ne-right" aria-label="Další události">
-          <h3 class="ne-small">Také v kalendáři</h3>
-          <ul>
-            <li><span>22. 3.</span> Měsíční online meditace</li>
-            <li><span>10.–12. 4.</span> Mahámudra retreat s Rinpočhem</li>
-            <li><span>23.–25. 5.</span> Joy of Living 2 — Soucit</li>
-          </ul>
-          <a href="/akce" class="ne-more">Celý kalendář →</a>
-        </aside>
-      </div>
-    </Container>
-  </Section>
+      </Container>
+    </Section>
+  )}
 
   <!-- Groups teaser -->
   <Section size="md" surface>
@@ -413,6 +439,12 @@ const pathHighlights = [
     font-size: 0.8125rem;
     color: var(--accent);
   }
+  .ne-right li a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .ne-right li a:hover { color: var(--accent); }
   .ne-more {
     display: inline-block;
     margin-top: 1rem;

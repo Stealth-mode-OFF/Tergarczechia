@@ -5,41 +5,89 @@ import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import CategoryFilter from '@/components/blog/CategoryFilter';
-import { formatDate } from '@/lib/format';
+import { formatDate, categoryLabel } from '@/lib/format';
 
 const blog = (await getCollection('blog')).filter((a) => !a.data.draft);
 const resources = await getCollection('resources');
 
-const items = [
-  ...blog.map((a) => ({
-    id: `blog-${a.id}`,
-    kind: 'blog' as const,
+type CardItem = {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  external: boolean;
+  category: string;
+  kind: string;
+  kindLabel: string;
+  date?: string;
+  dateTs?: number;
+  thumb?: string;
+  youtubeId?: string;
+  featured?: boolean;
+};
+
+const kindLabels: Record<string, string> = {
+  blog: 'Článek',
+  clanek: 'Článek',
+  video: 'Video',
+  kniha: 'Kniha',
+  podcast: 'Podcast',
+  'meditace-audio': 'Audio',
+};
+
+const items: CardItem[] = [
+  ...blog.map((a): CardItem => ({
+    id: a.id,
     title: a.data.title,
-    href: `/zdroje/${a.id}`,
     description: a.data.perex,
+    href: `/zdroje/${a.id}`,
+    external: false,
     category: a.data.category,
+    kind: 'blog',
+    kindLabel: 'Článek',
     date: formatDate(a.data.date),
-    thumbnail: a.data.thumbnailRemote,
+    dateTs: a.data.date.getTime(),
+    thumb: a.data.thumbnailRemote,
     youtubeId: a.data.youtubeId,
     featured: a.data.featured,
   })),
-  ...resources.map((r) => ({
-    id: `res-${r.id}`,
-    kind: r.data.kind,
+  ...resources.map((r): CardItem => ({
+    id: r.id,
     title: r.data.title,
-    href: r.data.url ?? (r.data.youtubeId ? `https://youtube.com/watch?v=${r.data.youtubeId}` : '#'),
     description: r.data.description,
+    href: r.data.url
+      ? r.data.url
+      : r.data.youtubeId
+        ? `https://www.youtube.com/watch?v=${r.data.youtubeId}`
+        : '/kontakt',
+    external: !!r.data.url || !!r.data.youtubeId,
     category: r.data.category,
+    kind: r.data.kind,
+    kindLabel: kindLabels[r.data.kind] ?? r.data.kind,
     date: r.data.publishedAt ? formatDate(r.data.publishedAt) : undefined,
-    thumbnail: r.data.thumbnailRemote,
+    dateTs: r.data.publishedAt?.getTime(),
+    thumb: r.data.thumbnailRemote,
     youtubeId: r.data.youtubeId,
     featured: r.data.featured,
   })),
 ].sort((a, b) => {
-  if (a.featured && !b.featured) return -1;
-  if (!a.featured && b.featured) return 1;
-  return 0;
+  if (a.featured !== b.featured) return a.featured ? -1 : 1;
+  const at = a.dateTs ?? 0;
+  const bt = b.dateTs ?? 0;
+  return bt - at;
 });
+
+const categoriesMap = new Map<string, string>();
+for (const it of items) categoriesMap.set(it.category, categoryLabel(it.category));
+const categories = [...categoriesMap.entries()].map(([value, label]) => ({ value, label }));
+
+const kinds = [
+  { value: 'blog', label: 'Články' },
+  { value: 'video', label: 'Video' },
+  { value: 'kniha', label: 'Knihy' },
+  { value: 'meditace-audio', label: 'Audio' },
+  { value: 'podcast', label: 'Podcast' },
+];
 
 const breadcrumbs = [
   { label: 'Domů', href: '/' },
@@ -68,7 +116,39 @@ const breadcrumbs = [
 
   <Section size="md">
     <Container>
-      <CategoryFilter items={items} client:only="preact" />
+      <CategoryFilter categories={categories} kinds={kinds} client:visible />
+
+      <ul class="cf-grid" aria-label="Obsah">
+        {items.map((it) => (
+          <li data-resource data-category={it.category} data-kind={it.kind}>
+            <a
+              href={it.href}
+              class="cf-card"
+              target={it.external ? '_blank' : undefined}
+              rel={it.external ? 'noopener noreferrer' : undefined}
+            >
+              <div class="cf-kind">{it.kindLabel}</div>
+              {it.thumb && (
+                <div class="cf-thumb" style={`background-image:url(${it.thumb})`} aria-hidden="true" />
+              )}
+              {!it.thumb && it.youtubeId && (
+                <div
+                  class="cf-thumb"
+                  style={`background-image:url(https://i.ytimg.com/vi/${it.youtubeId}/hqdefault.jpg)`}
+                  aria-hidden="true"
+                />
+              )}
+              <h3>{it.title}</h3>
+              <p>{it.description}</p>
+              <div class="cf-meta">
+                <span class="cf-cat">{categoryLabel(it.category)}</span>
+                {it.date && <time>{it.date}</time>}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p id="cf-empty" class="cf-empty" hidden>Žádný obsah pro zvolené filtry.</p>
     </Container>
   </Section>
 </BaseLayout>
@@ -115,7 +195,8 @@ const breadcrumbs = [
   }
   :global(.cf-chip:hover) { color: var(--ink); }
   :global(.cf-chip.is-active) { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  :global(.cf-grid) {
+
+  .cf-grid {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -123,9 +204,9 @@ const breadcrumbs = [
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  @media (min-width: 640px) { :global(.cf-grid) { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { :global(.cf-grid) { grid-template-columns: repeat(3, 1fr); } }
-  :global(.cf-card) {
+  @media (min-width: 640px) { .cf-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .cf-grid { grid-template-columns: repeat(3, 1fr); } }
+  .cf-card {
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
@@ -135,18 +216,18 @@ const breadcrumbs = [
     border-radius: var(--radius-lg);
     color: inherit;
     text-decoration: none;
-    transition: border-color .15s;
+    transition: border-color .15s, transform .15s;
     height: 100%;
   }
-  :global(.cf-card:hover) { border-color: var(--line-strong); }
-  :global(.cf-kind) {
+  .cf-card:hover { border-color: var(--line-strong); }
+  .cf-kind {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
   }
-  :global(.cf-thumb) {
+  .cf-thumb {
     aspect-ratio: 4 / 2.4;
     border-radius: var(--radius-md);
     background-size: cover;
@@ -154,9 +235,9 @@ const breadcrumbs = [
     background-color: var(--surface);
     margin-bottom: 0.5rem;
   }
-  :global(.cf-card h3) { font-size: 1.125rem; margin: 0 0 0.375rem; line-height: 1.3; }
-  :global(.cf-card p) { color: var(--ink-muted); margin: 0; font-size: 0.9375rem; flex: 1; }
-  :global(.cf-meta) {
+  .cf-card h3 { font-size: 1.125rem; margin: 0 0 0.375rem; line-height: 1.3; }
+  .cf-card p { color: var(--ink-muted); margin: 0; font-size: 0.9375rem; flex: 1; }
+  .cf-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -165,6 +246,6 @@ const breadcrumbs = [
     font-size: 0.75rem;
     color: var(--ink-soft);
   }
-  :global(.cf-cat) { color: var(--ink-muted); }
-  :global(.cf-empty) { color: var(--ink-muted); padding: 2rem 0; text-align: center; }
+  .cf-cat { color: var(--ink-muted); }
+  .cf-empty { color: var(--ink-muted); padding: 2rem 0; text-align: center; }
 </style>
