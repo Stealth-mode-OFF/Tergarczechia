@@ -1,0 +1,140 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import ConsentEmbed from '@/components/media/ConsentEmbed.tsx';
+import { formatDate, categoryLabel } from '@/lib/format';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((a) => !a.data.draft);
+  return posts.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Zdroje', href: '/zdroje' },
+  { label: d.title, href: `/zdroje/${entry.id}` },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.perex,
+  datePublished: d.date.toISOString(),
+  dateModified: (d.updated ?? d.date).toISOString(),
+  image: d.thumbnailRemote,
+  author: { '@type': 'Organization', name: 'Tergar Česko' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Tergar Česko',
+    logo: { '@type': 'ImageObject', url: 'https://tergarczechia.cz/og-logo.png' },
+  },
+  mainEntityOfPage: `https://tergarczechia.cz/zdroje/${entry.id}`,
+};
+---
+
+<BaseLayout
+  title={`${d.title} — Tergar Česko`}
+  description={d.perex}
+  image={d.thumbnailRemote}
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="art-head">
+        <Badge variant="accent">{categoryLabel(d.category)}</Badge>
+        <h1>{d.title}</h1>
+        <p class="perex">{d.perex}</p>
+        <p class="byline">
+          <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+          <span class="dot" aria-hidden="true">·</span>
+          <span>Tergar Česko</span>
+        </p>
+      </header>
+      {d.thumbnailRemote && (
+        <figure class="art-hero">
+          <img src={d.thumbnailRemote} alt="" loading="eager" fetchpriority="high" decoding="async" />
+        </figure>
+      )}
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container size="prose">
+      {d.youtubeId && (
+        <div class="art-video">
+          <ConsentEmbed
+            src={`https://www.youtube-nocookie.com/embed/${d.youtubeId}`}
+            title={d.title}
+            provider="youtube"
+            client:visible
+          />
+        </div>
+      )}
+
+      <article class="prose">
+        <Content />
+      </article>
+
+      <div class="bottom-cta">
+        <Button href="/zdroje" variant="ghost">← Zpět na zdroje</Button>
+        <Button href="/skupiny" variant="secondary">Najít skupinu</Button>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .art-head { max-width: var(--w-prose); margin-inline: auto; text-align: left; }
+  .art-head h1 {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.08;
+    margin: 0.75rem 0 1rem;
+    text-wrap: balance;
+  }
+  .perex {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.375rem;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    margin: 0 0 1.5rem;
+    max-width: 60ch;
+  }
+  .byline {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  .dot { margin: 0 0.5rem; color: var(--ink-soft); }
+
+  .art-hero {
+    max-width: var(--w-wide);
+    margin: 3rem auto 0;
+  }
+  .art-hero img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .art-video { margin: 0 0 2rem; }
+  .bottom-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
+</style>

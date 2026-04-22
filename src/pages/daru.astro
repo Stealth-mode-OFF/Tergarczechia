@@ -1,0 +1,161 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Button from '@/components/ui/Button.astro';
+import Quote from '@/components/ui/Quote.astro';
+import Card from '@/components/ui/Card.astro';
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Podpořte nás', href: '/daru' },
+];
+
+const darujmeUrl = 'https://darujme.cz/projekt/1202868';
+const bankAccount = '2001592859/2010';
+---
+
+<BaseLayout
+  title="Podpořte nás — Tergar Česko"
+  description="Tergar Česko je nezisková meditační komunita. Každý dar — jednorázový i pravidelný — udržuje skupiny, překlady, retreaty a setkání v ČR."
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="head">
+        <p class="eyebrow">Daru</p>
+        <h1>Česká sangha žije z vašich darů.</h1>
+        <p class="lead">
+          Tergar Česko není firma. Nikdo tu nemá plat, žádný dar neznačí profitu.
+          Peníze jdou přímo na pronájmy prostor, překlady knih a materiálů,
+          cestovné lektorů, technické vybavení a podporu mezinárodního Tergar.
+        </p>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <div class="give-grid">
+        <Card elevated class="give-card primary">
+          <div>
+            <h2>Darujte online přes darujme.cz</h2>
+            <p>
+              Nejrychlejší způsob — platební kartou, bankovním převodem nebo Applem/Googlem.
+              Můžete nastavit pravidelný měsíční dar i jednorázovou podporu. Potvrzení pro daňové účely obdržíte automaticky.
+            </p>
+          </div>
+          <Button href={darujmeUrl} variant="primary" size="lg" external>Chci podpořit</Button>
+        </Card>
+
+        <Card class="give-card">
+          <h3>Bankovním převodem</h3>
+          <p>
+            <strong>{bankAccount}</strong> (Fio banka)<br />
+            <span class="muted">Tergar Czech z.s.</span>
+          </p>
+          <p class="help">
+            Jako variabilní symbol uveďte rok + měsíc (např. 202604).
+            Pro daňové potvrzení nám napište na <a href="mailto:czech@tergar.org">czech@tergar.org</a>.
+          </p>
+        </Card>
+
+        <Card class="give-card">
+          <h3>Čas místo peněz</h3>
+          <p>
+            Nemůžete darovat finančně? Pomoc s překlady, organizací akcí, fotografováním nebo
+            správou webu je pro nás stejně cenná.
+          </p>
+          <a href="/zapojte-se" class="link-out">Dobrovolnictví →</a>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section size="md" surface>
+    <Container>
+      <Quote author="Mingyur Rinpočhe">
+        „Štědrost není v tom, kolik dáváte. Je v tom, s jakou myslí to děláte."
+      </Quote>
+      <div class="where-to">
+        <h2>Kam peníze jdou</h2>
+        <ul>
+          <li><strong>Pronájmy a provoz</strong> — Tibet Open House, regionální prostory, online licence</li>
+          <li><strong>Překlady</strong> — česká verze Joy of Living, knihy, audio meditace</li>
+          <li><strong>Podpora lektorů</strong> — cestovné, ubytování českých i zahraničních učitelů</li>
+          <li><strong>Technika</strong> — streamování retreatů, audio nahrávky, web</li>
+          <li><strong>Podpora Tergar International</strong> — 10 % z darů jde globální sanghe</li>
+        </ul>
+        <p class="transparent">
+          Účetní závěrka je veřejná — najdete ji v obchodním rejstříku pod názvem <em>Tergar Czech z.s.</em>
+        </p>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .head { max-width: 48rem; }
+  .head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .head .lead { font-size: 1.25rem; color: var(--ink-muted); max-width: 62ch; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .give-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) { .give-grid { grid-template-columns: 2fr 1fr 1fr; } }
+  .give-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  .give-card.primary {
+    background: var(--ink);
+    color: var(--bg);
+    border: 0;
+  }
+  .give-card.primary h2 { color: var(--bg); font-size: 1.75rem; margin: 0 0 0.75rem; }
+  .give-card.primary p { color: rgba(255,255,255,.75); margin: 0; }
+  .give-card h3 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+  .give-card p { color: var(--ink-muted); margin: 0 0 0.5rem; }
+  .give-card .muted { color: var(--ink-soft); }
+  .give-card .help { font-size: 0.8125rem; }
+  .give-card a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
+  .give-card .link-out {
+    display: inline-block;
+    font-size: 0.9375rem;
+    margin-top: 0.5rem;
+  }
+
+  .where-to { max-width: 60rem; margin-inline: auto; margin-top: 2rem; }
+  .where-to h2 { text-wrap: balance; margin-bottom: 1rem; }
+  .where-to ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .where-to li {
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .where-to li:first-child { border-top: 1px solid var(--line); }
+  .where-to li strong { color: var(--ink); font-weight: 600; margin-right: 0.5rem; }
+  .transparent { font-size: 0.875rem; color: var(--ink-muted); }
+  .transparent em { font-style: italic; }
+</style>

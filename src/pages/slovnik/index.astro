@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'cs'));
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Slovník pojmů', href: '/slovnik' },
+];
+
+const groups: Record<string, typeof terms> = {};
+for (const t of terms) {
+  const letter = t.data.term.charAt(0).toUpperCase();
+  if (!groups[letter]) groups[letter] = [];
+  groups[letter].push(t);
+}
+const letters = Object.keys(groups).sort();
+---
+
+<BaseLayout
+  title="Slovník buddhistických pojmů — Tergar Česko"
+  description="Jasné české výklady klíčových pojmů tibetského buddhismu a meditace: Mahámudra, Šamatha, Vipaśyaná, Bódhičitta, Ngöndro, Rigpa, Dzogčen a další."
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="head">
+        <p class="eyebrow">Slovník</p>
+        <h1>Buddhistické pojmy srozumitelně česky.</h1>
+        <p class="lead">
+          Krátké výklady klíčových termínů tibetského buddhismu a meditace — pro čtenáře, kteří nejsou z tradice ani akademici, ale chtějí rozumět tomu, co slyší v textech a na setkáních.
+        </p>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <nav class="az-jump" aria-label="Přeskočit na písmeno">
+        {letters.map((l) => <a href={`#l-${l}`}>{l}</a>)}
+      </nav>
+      <div class="terms">
+        {letters.map((l) => (
+          <section class="letter" id={`l-${l}`} aria-labelledby={`h-${l}`}>
+            <h2 id={`h-${l}`} class="letter-head">{l}</h2>
+            <ul>
+              {groups[l].map((t) => (
+                <li>
+                  <a href={`/slovnik/${t.id}`} class="term">
+                    <div class="term-head">
+                      <h3>{t.data.term}</h3>
+                      {(t.data.termSanskrit || t.data.termTibetan) && (
+                        <p class="term-alt">
+                          {t.data.termSanskrit && <span>skt. <em>{t.data.termSanskrit}</em></span>}
+                          {t.data.termTibetan && <span class="tib">{t.data.termTibetan}</span>}
+                        </p>
+                      )}
+                    </div>
+                    <p class="term-def">{t.data.shortDef}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .head { max-width: 46rem; }
+  .head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .head .lead { font-size: 1.25rem; color: var(--ink-muted); max-width: 58ch; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+  }
+
+  .az-jump {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    margin-bottom: 2.5rem;
+  }
+  .az-jump a {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+  .az-jump a:hover { background: var(--accent-soft); }
+
+  .letter { margin-bottom: 3rem; }
+  .letter-head {
+    font-size: 3rem;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+    font-family: var(--font-serif);
+  }
+  .letter ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+
+  .term {
+    display: block;
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .15s;
+  }
+  .term:hover { border-color: var(--line-strong); }
+  .term-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1rem; margin-bottom: 0.5rem; }
+  .term-head h3 { font-size: 1.375rem; margin: 0; }
+  .term-alt { margin: 0; color: var(--ink-muted); font-size: 0.875rem; }
+  .term-alt span { margin-right: 0.75rem; font-family: var(--font-mono); }
+  .term-alt .tib { font-family: var(--font-serif); }
+  .term-alt em { font-style: italic; }
+  .term-def { color: var(--ink-muted); margin: 0; max-width: 72ch; }
+</style>

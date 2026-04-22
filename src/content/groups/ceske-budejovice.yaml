@@ -1,0 +1,10 @@
+name: Českobudějovická skupina
+language: cs
+city: České Budějovice
+schedule: Každou neděli · 18:00
+lat: 48.9745
+lng: 14.4743
+contactEmail: budejovice@community.tergar.org
+registrationUrl: https://app.zenamu.com/tergarczechia
+color: "#22c55e"
+active: true

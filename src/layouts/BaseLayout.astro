@@ -42,6 +42,8 @@ const {
     <Meta title={title} description={description} image={image} noindex={noindex} locale={locale} />
     <JsonLd type={jsonLd} breadcrumbs={breadcrumbs} title={title} description={description} />
 
+    <slot name="head" />
+
     <ClientRouter />
   </head>
   <body>

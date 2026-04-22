@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('path');
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Cesta', href: '/cesta' },
+  { label: entry.data.title, href: `/cesta/${entry.id}` },
+];
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Cesta Tergar`}
+  description={entry.data.subtitle}
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="head">
+        <p class="eyebrow">Úroveň {entry.data.level}</p>
+        <h1>{entry.data.title}</h1>
+        <p class="sub">{entry.data.subtitle}</p>
+        <div class="meta">
+          <Badge variant={entry.data.status === 'dostupne' ? 'accent' : 'outline'}>
+            {entry.data.statusLabel ?? entry.data.status}
+          </Badge>
+          {entry.data.durationHours && (
+            <Badge variant="outline">{entry.data.durationHours} hodin výuky</Badge>
+          )}
+        </div>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container size="prose">
+      <article class="prose">
+        <Content />
+      </article>
+      <div class="bottom-cta">
+        {entry.data.externalUrl && (
+          <Button href={entry.data.externalUrl} variant="primary" external>
+            Program na Tergar International
+          </Button>
+        )}
+        <Button href="/cesta" variant="ghost">← Celá cesta</Button>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .head { max-width: 44rem; }
+  .head h1 { margin-top: 0.5rem; margin-bottom: 0.75rem; text-wrap: balance; }
+  .head .sub { font-size: 1.375rem; color: var(--ink-muted); max-width: 52ch; margin-bottom: 1.5rem; font-family: var(--font-serif); font-style: italic; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .bottom-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
+</style>

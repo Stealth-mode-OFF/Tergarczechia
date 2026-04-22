@@ -30,8 +30,21 @@ export default defineConfig({
       i18n: { defaultLocale: 'cs', locales: { cs: 'cs-CZ', en: 'en-US' } },
       filter: (page) => !page.includes('/admin') && !page.includes('/api/'),
     }),
-    preact({ compat: false, include: ['**/nav/*.tsx', '**/preact/*.tsx', '**/islands/preact/*.tsx'] }),
-    react({ include: ['**/admin/*.tsx', '**/react/*.tsx', '**/islands/react/*.tsx'] }),
+    preact({
+      compat: false,
+      include: [
+        '**/nav/MobileMenu.tsx',
+        '**/media/ConsentEmbed.tsx',
+        '**/blog/CategoryFilter.tsx',
+      ],
+    }),
+    react({
+      include: [
+        '**/events/EventFilter.tsx',
+        '**/groups/GroupsMap.tsx',
+        '**/admin/**/*.tsx',
+      ],
+    }),
     keystatic(),
   ],
   vite: {

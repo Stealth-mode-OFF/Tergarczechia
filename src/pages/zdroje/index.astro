@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import CategoryFilter from '@/components/blog/CategoryFilter';
+import { formatDate } from '@/lib/format';
+
+const blog = (await getCollection('blog')).filter((a) => !a.data.draft);
+const resources = await getCollection('resources');
+
+const items = [
+  ...blog.map((a) => ({
+    id: `blog-${a.id}`,
+    kind: 'blog' as const,
+    title: a.data.title,
+    href: `/zdroje/${a.id}`,
+    description: a.data.perex,
+    category: a.data.category,
+    date: formatDate(a.data.date),
+    thumbnail: a.data.thumbnailRemote,
+    youtubeId: a.data.youtubeId,
+    featured: a.data.featured,
+  })),
+  ...resources.map((r) => ({
+    id: `res-${r.id}`,
+    kind: r.data.kind,
+    title: r.data.title,
+    href: r.data.url ?? (r.data.youtubeId ? `https://youtube.com/watch?v=${r.data.youtubeId}` : '#'),
+    description: r.data.description,
+    category: r.data.category,
+    date: r.data.publishedAt ? formatDate(r.data.publishedAt) : undefined,
+    thumbnail: r.data.thumbnailRemote,
+    youtubeId: r.data.youtubeId,
+    featured: r.data.featured,
+  })),
+].sort((a, b) => {
+  if (a.featured && !b.featured) return -1;
+  if (!a.featured && b.featured) return 1;
+  return 0;
+});
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Zdroje', href: '/zdroje' },
+];
+---
+
+<BaseLayout
+  title="Zdroje — články, videa, knihy · Tergar Česko"
+  description="Meditační obsah v češtině — články o práci s myslí, vedené meditace, vědecké výzkumy, knihy Mingyura Rinpočheho a videa. Filtrujte podle tématu."
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="head">
+        <p class="eyebrow">Zdroje</p>
+        <h1>Články, videa, knihy — inspirace pro praxi.</h1>
+        <p class="lead">
+          Sbírka obsahu pro ty, kdo chtějí meditaci prohloubit — vědecké výzkumy, praktické návody, osobní příběhy i tradiční učení.
+        </p>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <CategoryFilter items={items} client:only="preact" />
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .head { max-width: 46rem; }
+  .head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .head .lead { font-size: 1.25rem; color: var(--ink-muted); max-width: 58ch; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+  }
+  :global(.cf-controls) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+  }
+  :global(.cf-group) { display: flex; flex-wrap: wrap; gap: 0.375rem; align-items: center; }
+  :global(.cf-label) {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    margin-right: 0.5rem;
+  }
+  :global(.cf-chip) {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 9999px;
+    padding: 0.3125rem 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  :global(.cf-chip:hover) { color: var(--ink); }
+  :global(.cf-chip.is-active) { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  :global(.cf-grid) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) { :global(.cf-grid) { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { :global(.cf-grid) { grid-template-columns: repeat(3, 1fr); } }
+  :global(.cf-card) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding: 1.25rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .15s;
+    height: 100%;
+  }
+  :global(.cf-card:hover) { border-color: var(--line-strong); }
+  :global(.cf-kind) {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  :global(.cf-thumb) {
+    aspect-ratio: 4 / 2.4;
+    border-radius: var(--radius-md);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--surface);
+    margin-bottom: 0.5rem;
+  }
+  :global(.cf-card h3) { font-size: 1.125rem; margin: 0 0 0.375rem; line-height: 1.3; }
+  :global(.cf-card p) { color: var(--ink-muted); margin: 0; font-size: 0.9375rem; flex: 1; }
+  :global(.cf-meta) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+  :global(.cf-cat) { color: var(--ink-muted); }
+  :global(.cf-empty) { color: var(--ink-muted); padding: 2rem 0; text-align: center; }
+</style>

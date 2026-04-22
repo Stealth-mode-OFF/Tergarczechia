@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import { formatDateRange, eventTypeLabel, audienceLabel } from '@/lib/format';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Akce', href: '/akce' },
+  { label: d.title, href: `/akce/${entry.id}` },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: d.title,
+  description: d.description,
+  startDate: d.dateStart.toISOString(),
+  endDate: (d.dateEnd ?? d.dateStart).toISOString(),
+  eventAttendanceMode: d.type === 'online'
+    ? 'https://schema.org/OnlineEventAttendanceMode'
+    : d.type === 'hybridni'
+      ? 'https://schema.org/MixedEventAttendanceMode'
+      : 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: d.status === 'zrusena'
+    ? 'https://schema.org/EventCancelled'
+    : 'https://schema.org/EventScheduled',
+  location: d.location?.address
+    ? {
+        '@type': 'Place',
+        name: d.location.name ?? 'Tibet Open House',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: d.location.address,
+          addressLocality: d.location.city ?? 'Praha',
+          addressCountry: 'CZ',
+        },
+      }
+    : {
+        '@type': 'VirtualLocation',
+        url: d.registrationUrl ?? 'https://tergarczechia.cz',
+      },
+  organizer: {
+    '@type': 'Organization',
+    name: 'Tergar Česko',
+    url: 'https://tergarczechia.cz',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: d.free ? '0' : d.price ?? 'Dle programu',
+    priceCurrency: 'CZK',
+    url: d.registrationUrl ?? '',
+    availability: 'https://schema.org/InStock',
+  },
+};
+---
+
+<BaseLayout
+  title={`${d.title} — Akce`}
+  description={d.description}
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="ev-head">
+        <p class="eyebrow">{formatDateRange(d.dateStart, d.dateEnd)}</p>
+        <h1>{d.title}</h1>
+        <div class="ev-meta">
+          <Badge variant="accent">{eventTypeLabel(d.type)}</Badge>
+          {d.audience !== 'vsichni' && <Badge variant="outline">{audienceLabel(d.audience)}</Badge>}
+          {d.free && <Badge variant="accent">Zdarma</Badge>}
+          {d.status === 'skoncila' && <Badge variant="muted">Akce už proběhla</Badge>}
+          {d.status === 'zrusena' && <Badge variant="outline">Zrušeno</Badge>}
+        </div>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container size="prose">
+      <article class="prose">
+        <p class="lead">{d.description}</p>
+        {d.body && <div set:html={d.body} />}
+      </article>
+
+      {d.location?.address && (
+        <aside class="ev-location">
+          <h3>Místo</h3>
+          <p>
+            <strong>{d.location.name}</strong><br />
+            {d.location.address}
+          </p>
+        </aside>
+      )}
+
+      {d.status === 'planovana' && (
+        <div class="bottom-cta">
+          {d.registrationUrl ? (
+            <Button href={d.registrationUrl} variant="primary" size="lg" external>Přihlásit se</Button>
+          ) : (
+            <Button href="/kontakt" variant="primary">Zjistit víc</Button>
+          )}
+          <Button href="/akce" variant="ghost">← Všechny akce</Button>
+        </div>
+      )}
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .ev-head { max-width: 44rem; }
+  .ev-head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .ev-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .lead { font-size: 1.25rem; color: var(--ink-muted); line-height: 1.55; }
+  .ev-location {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+  }
+  .ev-location h3 { font-size: 1rem; margin: 0 0 0.5rem; font-family: var(--font-sans); font-weight: 600; }
+  .ev-location p { margin: 0; color: var(--ink-muted); }
+  .bottom-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
+</style>

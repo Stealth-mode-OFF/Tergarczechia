@@ -1,0 +1,13 @@
+name: Pražská skupina · česky
+language: cs
+city: Praha
+schedule: Každý 2. a 4. čtvrtek · 19:00–20:30
+address: |
+  Tibet Open House
+  Školská 28, 110 00 Praha 1
+lat: 50.0836
+lng: 14.4226
+contactEmail: czech@community.tergar.org
+registrationUrl: https://app.zenamu.com/tergarczechia
+color: "#1C2B3A"
+active: true

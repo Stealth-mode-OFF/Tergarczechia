@@ -1,0 +1,8 @@
+name: Online meditace
+language: cs
+city: Online
+schedule: Každé pondělí · 20:00
+contactEmail: online@community.tergar.org
+registrationUrl: https://app.zenamu.com/tergarczechia
+color: "#6366f1"
+active: true
