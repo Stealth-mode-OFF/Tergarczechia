@@ -36,6 +36,7 @@ export default defineConfig({
         '**/nav/MobileMenu.tsx',
         '**/media/ConsentEmbed.tsx',
         '**/blog/CategoryFilter.tsx',
+        '**/timer/MeditationTimer.tsx',
       ],
     }),
     react({

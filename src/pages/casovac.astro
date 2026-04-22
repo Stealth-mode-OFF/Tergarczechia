@@ -1,0 +1,129 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Button from '@/components/ui/Button.astro';
+import Accordion from '@/components/ui/Accordion.astro';
+import MeditationTimer from '@/components/timer/MeditationTimer.tsx';
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'Časovač', href: '/casovac' },
+];
+---
+
+<BaseLayout
+  title="Meditační časovač — Tergar Česko"
+  description="Vizuální TimeTimer-style ciferník pro meditaci. Prstem nastavíš délku, klín ubývá. Tibetský zvonek na konci. Funguje offline, bez účtu."
+  breadcrumbs={breadcrumbs}
+  jsonLd={null}
+>
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="head">
+        <p class="eyebrow">Časovač</p>
+        <h1>Ciferník, který vidíte.</h1>
+        <p class="lead">
+          Klasický TimeTimer princip — prstem potáhnete okraj klínu a nastavíte čas.
+          Při meditaci klín postupně ubývá, takže na první pohled vidíte, kolik zbývá. Na konci jemný zvonek.
+        </p>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <div class="dial-stage">
+        <MeditationTimer maxMinutes={60} defaultMinutes={20} client:only="preact" />
+      </div>
+    </Container>
+  </Section>
+
+  <Section size="md" surface>
+    <Container size="prose">
+      <h2>Jak na to</h2>
+      <ol class="howto">
+        <li><strong>Táhněte prstem</strong> po obvodu ciferníku — nastavíte délku.</li>
+        <li><strong>Nebo klikněte</strong> na předvolenou hodnotu: 5 · 10 · 15 · 20 · 30 · 45 minut.</li>
+        <li><strong>Klávesnice:</strong> šipky levá/pravá po minutě, se Shift po 5 minutách.</li>
+        <li><strong>Start</strong> spustí odpočet. Klín ubývá proti směru hodinových ručiček.</li>
+        <li><strong>Na konci</strong> zahraje tři tóny zvonku a telefon zavibruje (pokud dovolí prohlížeč).</li>
+      </ol>
+
+      <h2>Proč to takhle</h2>
+      <p>
+        Rad Yongey Mingyur Rinpočheho je praktikovat <em>pravidelně, krátce</em>. Pět minut denně po tři měsíce
+        udělá víc než dvě hodiny jednou za měsíc. Ciferník pomáhá nedělat z délky nic — vidíte ji, nemusíte
+        sledovat čas, mysl zůstane s dechem.
+      </p>
+
+      <Accordion summary="Mám meditovat s otevřenýma nebo zavřenýma očima?">
+        Obojí funguje. Tradice Tergar doporučuje <strong>pootevřené</strong> oči — pohled měkký, kousek před sebe, bez zaostřování.
+        Pomáhá to udržet bdělost a zabraňuje to usínání. Pokud vás ale vizuály rozptylují, zavřete je klidně.
+      </Accordion>
+      <Accordion summary="Kolik minut stačí na začátku?">
+        <strong>5 minut denně</strong> po dobu měsíce. Pak se podle chuti prodlužuje — obvykle 15–25 min.
+        Lepší krátce a pravidelně než jednou týdně hodinu.
+      </Accordion>
+      <Accordion summary="Funguje časovač bez internetu?">
+        Ano. Časovač běží plně v prohlížeči — žádný účet, žádný server, žádná analytika. Zvukový signál
+        generuje Web Audio API přímo v zařízení.
+      </Accordion>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <div class="next">
+        <div>
+          <p class="eyebrow">Další kroky</p>
+          <h2>Když vás praxe zaujme.</h2>
+          <p>
+            Po týdnu-dvou pravidelného sezení doporučujeme zkusit vedenou meditaci a přijít
+            na některé ze setkání skupiny.
+          </p>
+        </div>
+        <div class="next-cta">
+          <Button href="/meditace" variant="primary">Co je meditace</Button>
+          <Button href="/skupiny" variant="secondary">Najít skupinu</Button>
+          <Button href="/cesta" variant="ghost">Cesta Tergar</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .head { max-width: 44rem; }
+  .head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .head .lead { font-size: 1.25rem; color: var(--ink-muted); max-width: 58ch; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+  }
+  .dial-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1rem 2rem;
+  }
+  .howto { line-height: 1.7; }
+  .howto li { margin-bottom: 0.5rem; }
+  .next {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  @media (min-width: 800px) { .next { grid-template-columns: 1.5fr 1fr; } }
+  .next h2 { text-wrap: balance; margin-bottom: 0.5rem; }
+  .next p { color: var(--ink-muted); margin: 0; max-width: 50ch; }
+  .next-cta { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-end; }
+  @media (max-width: 799px) { .next-cta { justify-content: flex-start; } }
+</style>
