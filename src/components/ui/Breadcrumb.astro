@@ -1,0 +1,42 @@
+---
+type Crumb = { label: string; href: string };
+type Props = { items: Crumb[] };
+const { items } = Astro.props;
+---
+
+<nav class="bc" aria-label="Drobečková navigace">
+  <ol>
+    {items.map((it, i) => (
+      <li>
+        {i < items.length - 1 ? (
+          <>
+            <a href={it.href}>{it.label}</a>
+            <span class="sep" aria-hidden="true">/</span>
+          </>
+        ) : (
+          <span aria-current="page">{it.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--ink-muted);
+  }
+  .bc li { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .bc a { color: var(--ink-muted); text-decoration: none; }
+  .bc a:hover { color: var(--ink); }
+  .bc [aria-current] { color: var(--ink); }
+  .sep { opacity: 0.4; }
+</style>

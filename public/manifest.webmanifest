@@ -1,0 +1,13 @@
+{
+  "name": "Tergar Česko",
+  "short_name": "Tergar CZ",
+  "description": "Meditační komunita Yongey Mingyur Rinpočheho v České republice.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF8F2",
+  "theme_color": "#FBF8F2",
+  "lang": "cs-CZ",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,0 +1,75 @@
+---
+type Crumb = { label: string; href: string };
+
+type Props = {
+  type?: 'home' | 'article' | 'event' | 'faq' | null;
+  title?: string;
+  description?: string;
+  breadcrumbs?: Crumb[];
+};
+
+const { type = 'home', title, description, breadcrumbs } = Astro.props;
+
+const SITE = 'https://tergarczechia.cz';
+const SITE_NAME = 'Tergar Česko';
+const LOGO = `${SITE}/og-logo.png`;
+
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  alternateName: 'Tergar Czechia',
+  url: SITE,
+  logo: LOGO,
+  email: 'czech@tergar.org',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Školská 28',
+    addressLocality: 'Praha 1',
+    postalCode: '110 00',
+    addressCountry: 'CZ',
+  },
+  sameAs: [
+    'https://www.facebook.com/tergarcz/',
+    'https://instagram.com/tergar_cz',
+    'https://www.youtube.com/@tergarczechia1847',
+    'https://tergar.org',
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Tergar International',
+    url: 'https://tergar.org',
+  },
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE,
+  inLanguage: 'cs-CZ',
+  description: description,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${SITE}/hledat?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const crumb = breadcrumbs && breadcrumbs.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.label,
+        item: new URL(c.href, SITE).toString(),
+      })),
+    }
+  : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(org)} />
+{type === 'home' && <script type="application/ld+json" set:html={JSON.stringify(website)} />}
+{crumb && <script type="application/ld+json" set:html={JSON.stringify(crumb)} />}

@@ -1,0 +1,23 @@
+---
+type Props = {
+  size?: 'sm' | 'md' | 'lg';
+  surface?: boolean;
+  class?: string;
+  id?: string;
+};
+const { size = 'md', surface = false, class: className = '', id } = Astro.props;
+const classes = ['sec', `sec-${size}`, surface ? 'sec-surface' : '', className].filter(Boolean).join(' ');
+---
+
+<section id={id} class={classes}><slot /></section>
+
+<style>
+  .sec-sm { padding-block: var(--section-sm); }
+  .sec-md { padding-block: var(--section-sm); }
+  .sec-lg { padding-block: var(--section-md); }
+  @media (min-width: 768px) {
+    .sec-md { padding-block: var(--section-md); }
+    .sec-lg { padding-block: var(--section-lg); }
+  }
+  .sec-surface { background: var(--surface); }
+</style>

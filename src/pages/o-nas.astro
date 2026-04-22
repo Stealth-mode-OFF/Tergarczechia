@@ -1,0 +1,252 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Button from '@/components/ui/Button.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Quote from '@/components/ui/Quote.astro';
+import Divider from '@/components/ui/Divider.astro';
+import { Image } from 'astro:assets';
+import mingyurPortrait from '@/assets/mingyur-portrait.png';
+import lineageTree from '@/assets/lineage-tree.png';
+
+const breadcrumbs = [
+  { label: 'Domů', href: '/' },
+  { label: 'O nás', href: '/o-nas' },
+];
+---
+
+<BaseLayout
+  title="O nás — Tergar Česko"
+  description="Česká pobočka mezinárodní meditační komunity Tergar. Učíme meditaci v tradici Karma Kagjü pod vedením Yongey Mingyur Rinpočheho."
+  jsonLd={null}
+  breadcrumbs={breadcrumbs}
+>
+  <Section size="md">
+    <Container>
+      <Breadcrumb items={breadcrumbs} />
+      <header class="page-head">
+        <p class="eyebrow">O nás</p>
+        <h1>Česká sangha Tergar.</h1>
+        <p class="lead">
+          Jsme dobrovolná nezisková komunita, která na českém území rozvíjí učení Yongey Mingyur Rinpočheho.
+          Spojujeme lidi, kteří chtějí meditaci začlenit do svého každodenního života — s otevřeností, prostou poctivostí a bez mystifikace.
+        </p>
+      </header>
+    </Container>
+  </Section>
+
+  <Section size="md" surface>
+    <Container>
+      <div class="grid-2">
+        <div>
+          <p class="eyebrow">Učitel</p>
+          <h2>Yongey Mingyur Rinpočhe</h2>
+          <p>
+            Tibetský buddhistický učitel a autor bestselleru <em>Radost ze života</em>.
+            Známý svou vřelostí, humorem a schopností předat esenci meditační praxe lidem bez buddhistického zázemí.
+            Vede mezinárodní síť Tergar a řadu neziskových organizací.
+          </p>
+          <p>
+            Jeho přístup propojuje staletou tradici s poznatky neurovědy.
+            V laboratoři Richarda Davidsona na University of Wisconsin ukázal, jak meditace měřitelně mění mozek — nejen u mnichů, ale i u začátečníků.
+          </p>
+          <ul class="books">
+            <li>Radost ze života — Štěstí jako vědecká disciplína</li>
+            <li>Proměňte svůj život v meditaci</li>
+            <li>Zamilovanost do světa — Mnichovo putování za moudrostí</li>
+            <li>Vzhůru! — Odhalte sílu, bdělost a vnitřní klid</li>
+          </ul>
+        </div>
+        <figure class="teacher-figure">
+          <Image
+            src={mingyurPortrait}
+            alt="Yongey Mingyur Rinpočhe"
+            widths={[480, 720, 1080]}
+            sizes="(max-width: 768px) 90vw, 520px"
+            format="avif"
+            quality={82}
+          />
+        </figure>
+      </div>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container size="prose">
+      <Quote author="Mingyur Rinpočhe">
+        „Problém není v tom, že máme emoce. Problém je v tom, že si myslíme, že bychom je mít neměli."
+      </Quote>
+    </Container>
+  </Section>
+
+  <Section size="md" surface>
+    <Container>
+      <div class="grid-2 reverse">
+        <figure class="lineage-figure">
+          <Image
+            src={lineageTree}
+            alt="Strom linie Karma Kagjü — od historického Buddhy k současným učitelům"
+            widths={[480, 720, 1080]}
+            sizes="(max-width: 768px) 90vw, 520px"
+            format="avif"
+            quality={82}
+          />
+        </figure>
+        <div>
+          <p class="eyebrow">Linie</p>
+          <h2>Karma Kagjü — živá tradice</h2>
+          <p>
+            Mingyur Rinpočhe je držitelem linie Karma Kagjü, jedné z hlavních škol tibetského buddhismu.
+            Nepřerušená linie sahá od historického Buddhy přes indické mahásiddhy, tibetské mistry Marpu a Milarepu až po současné učitele.
+          </p>
+          <p>
+            Je žákem svého otce Tulku Urgjena Rinpočheho. Hlavou linie je XVII. Karmapa Ogjen Trinlä Dordžä.
+            Tradice klade důraz na praxi vhledu (Mahámudra), laskavou přítomnost a přenos „od srdce k srdci".
+          </p>
+          <Button href="/cesta" variant="secondary">Cesta Tergar</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <div class="mission">
+        <p class="eyebrow">Co děláme</p>
+        <h2>Česká pobočka globální sanghy.</h2>
+        <ul class="mission-list">
+          <li>
+            <h3>Skupiny a setkání</h3>
+            <p>Pravidelná týdenní meditace v Praze (česky i anglicky), Českých Budějovicích, České Lípě a online — otevřená všem.</p>
+          </li>
+          <li>
+            <h3>Kurzy a workshopy</h3>
+            <p>Anytime Anywhere Meditation, Joy of Living a přenosy retreatů s Mingyurem Rinpočhem — online i prezenčně v Tibet Open House.</p>
+          </li>
+          <li>
+            <h3>Překlady a obsah</h3>
+            <p>Převádíme českou verzi Joy of Living, tvoříme články, audio meditace a slovník tibetsko-buddhistických pojmů.</p>
+          </li>
+          <li>
+            <h3>Podpora Rinpočheho projektů</h3>
+            <p>Česká sangha finančně i dobrovolnicky podporuje Tergar International, darujme.cz sbírky a lokální překlady.</p>
+          </li>
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Divider variant="wave" class="ending-wave" />
+
+  <Section size="md">
+    <Container>
+      <div class="end">
+        <div>
+          <h2>Přidejte se, podpořte, přijďte.</h2>
+          <p>Nejjednodušší krok je přijít na skupinu. Druhý nejjednodušší je napsat nám.</p>
+        </div>
+        <div class="end-cta">
+          <Button href="/skupiny" variant="primary">Najděte skupinu</Button>
+          <Button href="/kontakt" variant="ghost">Napsat nám</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-head { max-width: 44rem; }
+  .page-head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .page-head .lead {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    max-width: 58ch;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .grid-2 { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
+    .grid-2.reverse { grid-template-columns: 0.9fr 1.1fr; }
+  }
+  .grid-2 h2 { text-wrap: balance; margin-bottom: 1rem; }
+  .grid-2 p { color: var(--ink); max-width: 56ch; margin-bottom: 1rem; }
+  .grid-2 em { font-style: italic; }
+  .books {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .books li {
+    padding: 0.5rem 0;
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .teacher-figure, .lineage-figure {
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: var(--shadow-sm);
+  }
+  .teacher-figure :global(img),
+  .lineage-figure :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .mission {
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+  .mission h2 { text-wrap: balance; margin-bottom: 2rem; }
+  .mission-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .mission-list { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+  .mission-list h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .mission-list p { color: var(--ink-muted); margin: 0; }
+
+  .ending-wave { color: var(--accent-soft); margin-top: 2rem; }
+
+  .end {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  @media (min-width: 720px) { .end { grid-template-columns: 1.5fr 1fr; } }
+  .end h2 { text-wrap: balance; margin-bottom: 0.5rem; }
+  .end p { color: var(--ink-muted); margin: 0; }
+  .end-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-end; }
+  @media (max-width: 719px) { .end-cta { justify-content: flex-start; } }
+</style>

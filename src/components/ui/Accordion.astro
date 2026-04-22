@@ -1,0 +1,45 @@
+---
+type Props = { summary: string; open?: boolean; class?: string };
+const { summary, open = false, class: className = '' } = Astro.props;
+---
+
+<details class={`acc ${className}`} open={open}>
+  <summary>
+    <span>{summary}</span>
+    <svg class="acc-chevron" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M3 4.5 L6 7.5 L9 4.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </summary>
+  <div class="acc-body"><slot /></div>
+</details>
+
+<style>
+  .acc {
+    border-bottom: 1px solid var(--line);
+  }
+  .acc summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--ink);
+    list-style: none;
+  }
+  .acc summary::-webkit-details-marker { display: none; }
+  .acc-chevron {
+    color: var(--ink-muted);
+    transition: transform var(--dur-fast) var(--ease-out);
+    flex-shrink: 0;
+  }
+  .acc[open] .acc-chevron { transform: rotate(180deg); }
+  .acc-body {
+    padding-bottom: 1.5rem;
+    color: var(--ink);
+    max-width: var(--w-prose);
+  }
+</style>

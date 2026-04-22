@@ -1,0 +1,55 @@
+---
+import '@/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import Header from '@/components/nav/Header.astro';
+import Footer from '@/components/nav/Footer.astro';
+import Meta from '@/components/seo/Meta.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+
+type Props = {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  locale?: 'cs' | 'en';
+  jsonLd?: 'home' | 'article' | 'event' | 'faq' | null;
+  breadcrumbs?: Array<{ label: string; href: string }>;
+};
+
+const {
+  title,
+  description = 'Česká pobočka mezinárodní meditační komunity Tergar — učení Yongey Mingyur Rinpočheho. Meditace, skupiny, kurzy a ústraní v ČR.',
+  image,
+  noindex = false,
+  locale = 'cs',
+  jsonLd = 'home',
+  breadcrumbs,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale} class="antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#FBF8F2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141820" media="(prefers-color-scheme: dark)" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <Meta title={title} description={description} image={image} noindex={noindex} locale={locale} />
+    <JsonLd type={jsonLd} breadcrumbs={breadcrumbs} title={title} description={description} />
+
+    <ClientRouter />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Přeskočit na obsah</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

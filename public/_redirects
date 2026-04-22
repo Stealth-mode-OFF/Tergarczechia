@@ -1,0 +1,7 @@
+# Legacy slug redirects from Vite SPA version
+/co-je-meditace      /meditace             301
+/program             /programy             301
+/udalosti-2026       /akce                 301
+/udalosti-2026/*     /akce/:splat          301
+/inspirace           /zdroje               301
+/inspirace/*         /zdroje/:splat        301

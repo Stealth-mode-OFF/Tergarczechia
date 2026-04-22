@@ -1,0 +1,463 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Card from '@/components/ui/Card.astro';
+import Quote from '@/components/ui/Quote.astro';
+import Divider from '@/components/ui/Divider.astro';
+
+const heroTitle = 'Meditace, která se hodí do českého života.';
+const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
+
+const audienceSegments = [
+  {
+    label: 'Jsem tu poprvé',
+    title: 'Začínám s meditací',
+    body: 'Projděte krátkou trasu „Co je meditace" a zkuste první vedenou praxi. Bez zkušeností. Bez vybavení. Bez nároků.',
+    cta: { label: 'Začít', href: '/meditace' },
+  },
+  {
+    label: 'Chci prohloubit',
+    title: 'Pokračuji na cestě',
+    body: 'Prohlédněte si Cestu Tergar — Joy of Living 1–3 a Path of Liberation. Strukturovaný program od tradice přes současnou vědu.',
+    cta: { label: 'Cesta Tergar', href: '/cesta' },
+  },
+  {
+    label: 'Hledám komunitu',
+    title: 'Najdu si skupinu',
+    body: 'V Praze, Českých Budějovicích, České Lípě i online. Pravidelná setkání každý týden — přijďte kdykoliv.',
+    cta: { label: 'Skupiny', href: '/skupiny' },
+  },
+];
+
+const pathHighlights = [
+  { num: '01', title: 'Anytime Anywhere Meditation', sub: 'Úvod do meditace kdykoliv a kdekoliv' },
+  { num: '02', title: 'Joy of Living 1–3', sub: 'Klid · soucit · moudrost' },
+  { num: '03', title: 'Path of Liberation 1–5', sub: 'Tradiční cesta Mahámudry' },
+  { num: '04', title: 'Vajrayana Online', sub: 'Pokročilá praxe pod vedením Rinpočheho' },
+];
+---
+
+<BaseLayout
+  title="Tergar Česko — Meditační komunita Yongey Mingyur Rinpočheho"
+  description="Česká pobočka mezinárodní meditační komunity Tergar. Joy of Living, Path of Liberation, skupiny v Praze a regionech, akce a ústraní. Učení Yongey Mingyur Rinpočheho."
+  jsonLd="home"
+>
+  <!-- Hero -->
+  <section class="hero">
+    <Container>
+      <div class="hero-inner">
+        <p class="hero-kicker">
+          <span aria-hidden="true">✦</span>
+          Tergar Česko
+        </p>
+        <h1 class="hero-title">{heroTitle}</h1>
+        <p class="hero-lede">{heroLede}</p>
+        <div class="hero-cta">
+          <Button href="/skupiny" variant="primary" size="lg">Najděte skupinu</Button>
+          <Button href="/meditace" variant="secondary" size="lg">Co je meditace</Button>
+        </div>
+        <dl class="hero-meta">
+          <div>
+            <dt>Skupiny</dt>
+            <dd>4 města · 1 online</dd>
+          </div>
+          <div>
+            <dt>Akce 2026</dt>
+            <dd>9 retreatů a přenosů</dd>
+          </div>
+          <div>
+            <dt>Tradice</dt>
+            <dd>Karma Kagjü</dd>
+          </div>
+        </dl>
+      </div>
+    </Container>
+    <Divider variant="wave" class="hero-wave" />
+  </section>
+
+  <!-- Audience segments -->
+  <Section size="md">
+    <Container>
+      <header class="seg-header">
+        <p class="eyebrow">Kudy dál</p>
+        <h2>Každý začíná jinde. Vyberte si, co vám sedí.</h2>
+      </header>
+      <div class="segments">
+        {audienceSegments.map((s) => (
+          <Card href={s.cta.href} class="segment" elevated>
+            <Badge variant="accent" size="sm">{s.label}</Badge>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            <span class="seg-cta">
+              {s.cta.label}
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M3 8h10 M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Path ladder -->
+  <Section size="md" surface>
+    <Container>
+      <div class="path-layout">
+        <div class="path-head">
+          <p class="eyebrow">Cesta Tergar</p>
+          <h2>Strukturovaný program — od prvních vdechů po Mahámudru.</h2>
+          <p class="path-lede">
+            Navazující úrovně vyvinuté Mingyurem Rinpočhem propojují starodávnou tradici tibetského buddhismu s pozorností k tomu, jak dnes žijeme.
+            Každý stupeň staví na předchozím.
+          </p>
+          <Button href="/cesta" variant="secondary">Celá cesta</Button>
+        </div>
+        <ol class="path-list">
+          {pathHighlights.map((p) => (
+            <li>
+              <span class="path-num">{p.num}</span>
+              <div>
+                <h4>{p.title}</h4>
+                <p>{p.sub}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Quote -->
+  <Section size="sm">
+    <Container>
+      <Quote author="Yongey Mingyur Rinpočhe">
+        „Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
+      </Quote>
+    </Container>
+  </Section>
+
+  <!-- Next event teaser -->
+  <Section size="md">
+    <Container>
+      <div class="next-event">
+        <div class="ne-left">
+          <p class="eyebrow">Nejbližší akce</p>
+          <h2>Joy of Living 1 — Víkendový workshop</h2>
+          <p class="ne-meta">
+            <Badge variant="outline">Online</Badge>
+            <span>15.–16. 3. 2026</span>
+            <span class="dot">·</span>
+            <span>Úvodní program</span>
+          </p>
+          <p class="ne-body">
+            Dva dny společné praxe otevřené všem — začátečníkům i dlouholetým praktikujícím.
+            Učení o klidu mysli, práci s myšlenkami a nalezení přirozené pozornosti.
+          </p>
+          <div class="ne-cta">
+            <Button href="/akce" variant="primary">Všechny akce</Button>
+            <Button href="https://app.zenamu.com/tergarczechia" variant="ghost" external>Přihlásit na Zenamu</Button>
+          </div>
+        </div>
+        <aside class="ne-right" aria-label="Další události">
+          <h3 class="ne-small">Také v kalendáři</h3>
+          <ul>
+            <li><span>22. 3.</span> Měsíční online meditace</li>
+            <li><span>10.–12. 4.</span> Mahámudra retreat s Rinpočhem</li>
+            <li><span>23.–25. 5.</span> Joy of Living 2 — Soucit</li>
+          </ul>
+          <a href="/akce" class="ne-more">Celý kalendář →</a>
+        </aside>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Groups teaser -->
+  <Section size="md" surface>
+    <Container>
+      <div class="groups-teaser">
+        <div>
+          <p class="eyebrow">Skupiny</p>
+          <h2>Setkáváme se tam, kde žijete.</h2>
+          <p class="groups-lede">
+            Pravidelná setkání v Praze (česky i anglicky), Českých Budějovicích, České Lípě a online. Otevřená — přijďte, i když jste nikdy nemeditovali.
+          </p>
+          <Button href="/skupiny" variant="primary">Prohlédnout mapu skupin</Button>
+        </div>
+        <ul class="groups-list">
+          <li><strong>Praha</strong><span>2. a 4. čtvrtek · 19:00</span></li>
+          <li><strong>Prague (English)</strong><span>2nd &amp; 4th Thursday · 19:00</span></li>
+          <li><strong>Č. Budějovice</strong><span>Každou neděli</span></li>
+          <li><strong>Česká Lípa</strong><span>Každou středu</span></li>
+          <li><strong>Online</strong><span>Každé pondělí</span></li>
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Footer CTA: donate + newsletter -->
+  <Section size="md">
+    <Container>
+      <div class="end-cta">
+        <div>
+          <h2>Podpořte českou sanghu.</h2>
+          <p>Tergar Česko je nezisková komunita. Každý dar — jednorázový i pravidelný — udržuje skupiny, překlady a setkání.</p>
+          <Button href="/daru" variant="primary" size="lg">Chci podpořit</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(4rem, 8vw, 7rem) 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+  }
+  .hero-inner {
+    max-width: 40rem;
+    padding-bottom: 5rem;
+  }
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-size: var(--text-5xl);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+    max-width: 15ch;
+  }
+  .hero-lede {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    max-width: 54ch;
+    margin-bottom: 2rem;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: 36rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    margin: 0;
+  }
+  .hero-meta div { display: flex; flex-direction: column; gap: 0.25rem; }
+  .hero-meta dt {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+  }
+  .hero-meta dd {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    color: var(--ink);
+  }
+  .hero-wave {
+    color: var(--accent-soft);
+    opacity: 0.65;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+  }
+  .seg-header {
+    max-width: 40rem;
+    margin-bottom: 3rem;
+  }
+  .seg-header h2 { text-wrap: balance; }
+
+  .segments {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .segments { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  .segment {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.75rem 1.75rem 1.5rem;
+  }
+  .segment h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .segment p { color: var(--ink-muted); margin: 0; flex: 1; }
+  .seg-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-top: 0.5rem;
+  }
+  .segment:hover .seg-cta svg { transform: translateX(3px); }
+  .seg-cta svg { transition: transform var(--dur-fast) var(--ease-out); }
+
+  .path-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (min-width: 960px) {
+    .path-layout { grid-template-columns: 1fr 1.1fr; gap: 5rem; }
+  }
+  .path-head h2 { text-wrap: balance; margin-bottom: 1rem; }
+  .path-lede { color: var(--ink-muted); max-width: 44ch; margin-bottom: 1.5rem; }
+  .path-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .path-list li {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .path-num {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .path-list h4 {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem;
+    font-family: var(--font-serif);
+  }
+  .path-list p { color: var(--ink-muted); margin: 0; font-size: 0.9375rem; }
+
+  .next-event {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (min-width: 900px) { .next-event { grid-template-columns: 1.6fr 1fr; gap: 4rem; } }
+  .ne-left h2 { text-wrap: balance; margin-bottom: 1.25rem; }
+  .ne-meta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+  }
+  .ne-body { color: var(--ink-muted); max-width: 56ch; margin-bottom: 1.5rem; }
+  .ne-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .ne-right {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .ne-small {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin: 0 0 1rem;
+  }
+  .ne-right ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ne-right li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.75rem;
+  }
+  .ne-right li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .ne-right li span:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--accent);
+  }
+  .ne-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+  }
+
+  .groups-teaser {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (min-width: 900px) { .groups-teaser { grid-template-columns: 1.1fr 1fr; gap: 4rem; } }
+  .groups-teaser h2 { text-wrap: balance; margin-bottom: 1rem; }
+  .groups-lede { color: var(--ink-muted); max-width: 48ch; margin-bottom: 1.5rem; }
+  .groups-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .groups-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .groups-list li:last-child { border-bottom: 1px solid var(--line); }
+  .groups-list strong { font-family: var(--font-serif); font-weight: 600; font-size: 1.0625rem; }
+  .groups-list span { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-muted); }
+
+  .end-cta {
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+  .end-cta h2 { text-wrap: balance; margin-bottom: 1rem; }
+  .end-cta p { color: var(--ink-muted); margin-bottom: 1.75rem; }
+
+  .dot { color: var(--ink-soft); }
+</style>

@@ -1,0 +1,34 @@
+---
+type Props = { variant?: 'info' | 'quote' | 'warning'; title?: string; class?: string };
+const { variant = 'info', title, class: className = '' } = Astro.props;
+---
+
+<aside class={`callout callout-${variant} ${className}`}>
+  {title && <p class="callout-title">{title}</p>}
+  <div class="callout-body"><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-block: 1.5rem;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+  }
+  .callout-body > :first-child { margin-top: 0; }
+  .callout-body > :last-child { margin-bottom: 0; }
+  .callout-warning { border-color: #B6671F; background: var(--accent-soft); }
+  .callout-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-color: var(--ink-muted);
+  }
+</style>
