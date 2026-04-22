@@ -4,7 +4,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
 import preact from '@astrojs/preact';
 import react from '@astrojs/react';
-import cloudflare from '@astrojs/cloudflare';
+import vercel from '@astrojs/vercel';
 import keystatic from '@keystatic/astro';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -13,7 +13,11 @@ const site = 'https://tergarczechia.cz';
 export default defineConfig({
   site,
   output: 'static',
-  adapter: cloudflare({ platformProxy: { enabled: true }, imageService: 'compile' }),
+  adapter: vercel({
+    webAnalytics: { enabled: false },
+    imageService: true,
+    maxDuration: 30,
+  }),
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   trailingSlash: 'never',
   build: { format: 'directory', inlineStylesheets: 'auto' },

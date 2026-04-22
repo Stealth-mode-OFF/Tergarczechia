@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/co-je-meditace", "destination": "/meditace", "permanent": true },
+    { "source": "/program", "destination": "/programy", "permanent": true },
+    { "source": "/udalosti-2026", "destination": "/akce", "permanent": true },
+    { "source": "/udalosti-2026/:slug*", "destination": "/akce/:slug*", "permanent": true },
+    { "source": "/inspirace", "destination": "/zdroje", "permanent": true },
+    { "source": "/inspirace/:slug*", "destination": "/zdroje/:slug*", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/uploads/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+    },
+    {
+      "source": "/rss.xml",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+    }
+  ]
+}
