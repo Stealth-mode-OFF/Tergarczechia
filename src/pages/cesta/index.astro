@@ -15,8 +15,8 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title="Cesta Tergar — meditační program od prvních kroků po pokročilou praxi"
-  description="Navazující úrovně Tergar programu: Anytime Anywhere Meditation, Joy of Living 1–3, Cesta osvobození 1–5, Vajrayana Online. Strukturovaný systém pro současné praktikující."
+  title="Cesta Tergar — meditační program krok za krokem"
+  description="Navazující úrovně od Anytime Anywhere Meditation přes Joy of Living 1–3 po Path of Liberation a Vajrayana Online."
   breadcrumbs={breadcrumbs}
   jsonLd={null}
 >
@@ -35,6 +35,7 @@ const breadcrumbs = [
 
   <Section size="md">
     <Container>
+      <h2 class="section-label">Úrovně programu</h2>
       <ol class="timeline" aria-label="Úrovně cesty Tergar">
         {steps.map((step, i) => (
           <li class="step" data-status={step.data.status}>
@@ -77,6 +78,15 @@ const breadcrumbs = [
     text-transform: uppercase;
     color: var(--ink-soft);
     margin-bottom: 0.75rem;
+  }
+  .section-label {
+    font-size: 1.125rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
   }
 
   .timeline {

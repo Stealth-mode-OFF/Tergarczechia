@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
 import preact from '@astrojs/preact';
 import react from '@astrojs/react';
@@ -23,6 +24,11 @@ export default defineConfig({
     defaultLocale: 'cs',
     locales: ['cs', 'en'],
     routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false },
+  },
+  markdown: {
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+    ],
   },
   integrations: [
     mdx(),
