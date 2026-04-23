@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Button from '@/components/ui/Button.astro';
 import GroupsMap from '@/components/groups/GroupsMap';
@@ -35,19 +36,23 @@ const breadcrumbs = [
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Skupiny</p>
-        <h1>Najděte sanghu poblíž sebe.</h1>
-        <p class="lead">
-          Pravidelná týdenní meditace — otevřená všem, od začátečníků po dlouholeté praktikující.
-          Není třeba se registrovat ani předem cokoliv umět. Přijďte tak, jak jste.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Skupiny"
+        title="Najděte sanghu poblíž sebe."
+        lede="Pravidelná týdenní meditace — otevřená všem, od začátečníků po dlouholeté praktikující. Není třeba se registrovat ani předem cokoliv umět. Přijďte tak, jak jste."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container>
+      <SectionHeader
+        folio="02"
+        eyebrow="Mapa skupin"
+        title="Kde se potkáváme."
+      />
       <div class="map-wrap">
         <GroupsMap groups={pins} client:only="react" />
       </div>
@@ -56,7 +61,11 @@ const breadcrumbs = [
 
   <Section size="md" surface>
     <Container>
-      <h2>Přehled skupin</h2>
+      <SectionHeader
+        folio="03"
+        eyebrow="Přehled skupin"
+        title="Každý týden, bez přihlášky."
+      />
       <ul class="group-list">
         {groups.map((g) => (
           <li class="group">
@@ -92,28 +101,24 @@ const breadcrumbs = [
 
   <Section size="md">
     <Container>
-      <div class="start-group">
-        <div>
-          <p class="eyebrow">Založte skupinu</p>
-          <h2>Ve vašem městě zatím nejsme — chcete to změnit?</h2>
-          <p>
-            Pokud byste chtěli být iniciátorem pravidelných setkání u vás (Olomouc, Ostrava, Plzeň, Liberec, Hradec, jinde),
-            rádi vás podpoříme zkušenostmi, materiály a návštěvou.
-          </p>
-        </div>
-        <Button href="/kontakt" variant="primary" size="lg">Napište nám</Button>
-      </div>
+      <SectionHeader
+        folio="04"
+        eyebrow="Založte skupinu"
+        title="Ve vašem městě zatím nejsme — chcete to změnit?"
+        lede="Pokud byste chtěli být iniciátorem pravidelných setkání u vás (Olomouc, Ostrava, Plzeň, Liberec, Hradec, jinde), rádi vás podpoříme zkušenostmi, materiály a návštěvou."
+      />
+      <Button href="/kontakt" variant="primary" size="lg">Napište nám</Button>
     </Container>
   </Section>
 </BaseLayout>
 
 <style>
-.map-wrap { margin-top: 1rem; }
+  .map-wrap { margin-top: 1rem; }
 
   .group-list {
     list-style: none;
     padding: 0;
-    margin: 2rem 0 0;
+    margin: 1rem 0 0;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--gap-default);
@@ -158,15 +163,4 @@ const breadcrumbs = [
     border-bottom: 1px solid var(--line);
     padding-bottom: 1px;
   }
-
-  .start-group {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: center;
-    padding: 2rem 0;
-  }
-  @media (min-width: 768px) { .start-group { grid-template-columns: 2fr 1fr; } }
-  .start-group h2 { margin: 0.5rem 0 1rem; text-wrap: balance; }
-  .start-group p { color: var(--ink-muted); margin: 0; max-width: 52ch; }
 </style>

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 
 const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'cs'));
@@ -30,18 +31,23 @@ const letters = Object.keys(groups).sort();
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Slovník</p>
-        <h1>Buddhistické pojmy srozumitelně česky.</h1>
-        <p class="lead">
-          Krátké výklady klíčových termínů tibetského buddhismu a meditace — pro čtenáře, kteří nejsou z tradice ani akademici, ale chtějí rozumět tomu, co slyší v textech a na setkáních.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Slovník"
+        title="Buddhistické pojmy srozumitelně česky."
+        lede="Krátké výklady klíčových termínů tibetského buddhismu a meditace — pro čtenáře, kteří nejsou z tradice ani akademici, ale chtějí rozumět tomu, co slyší v textech a na setkáních."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container>
+      <SectionHeader
+        folio="02"
+        eyebrow="Rejstřík"
+        title="Přeskočte na písmeno."
+      />
       <nav class="az-jump" aria-label="Přeskočit na písmeno">
         {letters.map((l) => <a href={`#l-${l}`}>{l}</a>)}
       </nav>
@@ -75,10 +81,11 @@ const letters = Object.keys(groups).sort();
 </BaseLayout>
 
 <style>
-.az-jump {
+  .az-jump {
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
+    justify-content: flex-start;
     padding: 1rem 1.25rem;
     background: var(--surface);
     border-radius: var(--radius-md);

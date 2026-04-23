@@ -1,0 +1,114 @@
+---
+/**
+ * SectionHeader — canonical section opener.
+ *
+ * Enforces the single rhythm pattern used across every page:
+ *   eyebrow (saffron folio + mono muted-grey label) → h2 (serif, balance, start) → lede (sans, pretty, start)
+ *
+ * NEVER override alignment from outside. NEVER compose your own eyebrow.
+ * If a section needs a different visual treatment, question the design,
+ * don't fork this component. See DESIGN.md §"Section rhythm".
+ */
+type Props = {
+  /** Two-digit folio number (e.g. "01"). Sequential per page — includes hero. */
+  folio?: string;
+  /** Eyebrow label. Short. Capitalized by CSS. */
+  eyebrow?: string;
+  /** Heading text. Serif, balanced, left. */
+  title: string;
+  /** Optional lede paragraph under the title. */
+  lede?: string;
+  /** Heading level. Default 2. Use 1 only on hero. */
+  as?: 'h1' | 'h2';
+  /** Constrain heading width (default 24ch on mobile, inherits otherwise). */
+  narrow?: boolean;
+  class?: string;
+};
+
+const { folio, eyebrow, title, lede, as = 'h2', narrow = false, class: className = '' } = Astro.props;
+const HeadingTag = as;
+const classes = ['section-header', narrow ? 'narrow' : '', className].filter(Boolean).join(' ');
+---
+
+<header class={classes}>
+  {(folio || eyebrow) && (
+    <p class="eyebrow">
+      {folio && <span class="folio">{folio}.</span>}
+      {eyebrow && <span class="label">{eyebrow}</span>}
+    </p>
+  )}
+  <HeadingTag class="title" set:html={title} />
+  {lede && <p class="lede">{lede}</p>}
+</header>
+
+<style>
+  /* One rail. Always start. No alignment switches by breakpoint. */
+  .section-header {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.5vw, 1.125rem);
+    margin-bottom: clamp(2rem, 4vw, 2.75rem);
+    max-width: 54rem;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1;
+  }
+  .eyebrow .folio {
+    font-family: var(--font-mono);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    padding-right: 0.625rem;
+    border-right: 1px solid var(--line-strong);
+    line-height: 1;
+  }
+  .eyebrow .label {
+    line-height: 1;
+  }
+
+  /* In navy-tint sections the eyebrow stays saffron; its parent scope handles that.
+     We intentionally don't set color on .label here — Section.astro already does
+     `.sec-tint-navy .eyebrow { color: var(--accent) }`. */
+
+  .title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.875rem, 5vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    color: var(--ink);
+    margin: 0;
+    max-width: 32ch;
+  }
+  .narrow .title { max-width: 22ch; }
+
+  .lede {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    line-height: 1.55;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  /* Navy tint — invert heading + lede, keep eyebrow folio saffron + label cream */
+  :global(.sec-tint-navy) .eyebrow { color: rgba(246, 231, 200, 0.72); }
+  :global(.sec-tint-navy) .eyebrow .folio { color: var(--accent); border-right-color: rgba(246, 231, 200, 0.35); }
+  :global(.sec-tint-navy) .title { color: #FAF8F4; }
+  :global(.sec-tint-navy) .lede { color: rgba(250, 248, 244, 0.75); }
+</style>

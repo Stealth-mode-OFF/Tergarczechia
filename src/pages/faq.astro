@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Accordion from '@/components/ui/Accordion.astro';
 
@@ -39,6 +40,9 @@ const jsonLd = {
     },
   })),
 };
+
+// Sequential folios — one per section plus the hero
+const sectionKeys = Object.keys(sections);
 ---
 
 <BaseLayout
@@ -52,43 +56,41 @@ const jsonLd = {
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">FAQ</p>
-        <h1>Časté dotazy.</h1>
-        <p class="lead">
-          Odpovědi na to, co se nejčastěji ptáte. Pokud tady odpověď nenajdete, napište nám.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="FAQ"
+        title="Časté dotazy."
+        lede="Odpovědi na to, co se nejčastěji ptáte. Pokud tady odpověď nenajdete, napište nám."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container size="prose">
-      {Object.entries(sections).map(([key, items]) => (
-        <section class="faq-section">
-          <h2>{sectionLabels[key] ?? key}</h2>
+      {sectionKeys.map((key, idx) => (
+        <div class="faq-section">
+          <SectionHeader
+            folio={String(idx + 2).padStart(2, '0')}
+            eyebrow={sectionLabels[key] ?? key}
+            title={`Otázky k tématu ${sectionLabels[key] ?? key}.`}
+          />
           <div class="faq-list">
-            {items.map((f) => (
+            {sections[key].map((f) => (
               <Accordion summary={f.data.question}>
                 <p>{f.data.answer}</p>
               </Accordion>
             ))}
           </div>
-        </section>
+        </div>
       ))}
     </Container>
   </Section>
 </BaseLayout>
 
 <style>
-.faq-section { margin-bottom: 3rem; }
-  .faq-section h2 {
-    font-size: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent);
-    display: inline-block;
-    margin-bottom: 0.5rem;
-  }
+  .faq-section { margin-bottom: 3.5rem; }
+  .faq-section:last-child { margin-bottom: 0; }
   .faq-list { margin-top: 1rem; }
   .faq-list p { white-space: pre-line; }
 </style>

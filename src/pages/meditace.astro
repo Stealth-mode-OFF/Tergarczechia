@@ -3,6 +3,7 @@ import { getEntry, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Button from '@/components/ui/Button.astro';
 import Callout from '@/components/ui/Callout.astro';
@@ -28,16 +29,23 @@ const breadcrumbs = [
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="page-head">
-        <p class="eyebrow">Začátek</p>
-        <h1>Naučte se dívat na svou mysl.</h1>
-        <p class="lead">{heroText}</p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Začátek"
+        title="Naučte se dívat na svou mysl."
+        lede={heroText}
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container size="prose">
+      <SectionHeader
+        folio="02"
+        eyebrow="Co vlastně děláme"
+        title="Bez mystifikace, bez pózy."
+      />
       <article class="prose">
         {Content && <Content />}
       </article>
@@ -57,37 +65,31 @@ const breadcrumbs = [
 
   <Section size="md" surface>
     <Container>
-      <div class="try-now">
-        <div class="try-head">
-          <p class="eyebrow">Zkuste to teď</p>
-          <h2>Pět minut. Bez závazku. Bez účtu.</h2>
-          <p>
-            Klikněte na 5, stiskněte Spustit a zavřete oči. Až uslyšíte zvonek, máte za sebou první minuty praxe.
-            Zbytek článku počká.
-          </p>
-        </div>
-        <div class="try-dial">
-          <MeditationTimer maxMinutes={30} defaultMinutes={5} compact client:only="preact" />
-        </div>
+      <SectionHeader
+        folio="03"
+        eyebrow="Zkuste to teď"
+        title="Pět minut. Bez závazku. Bez účtu."
+        lede="Klikněte na 5, stiskněte Spustit a zavřete oči. Až uslyšíte zvonek, máte za sebou první minuty praxe. Zbytek článku počká."
+      />
+      <div class="try-dial">
+        <MeditationTimer maxMinutes={30} defaultMinutes={5} compact client:only="preact" />
       </div>
     </Container>
   </Section>
 </BaseLayout>
 
 <style>
-.mid-quote { margin: 3rem 0; font-size: 1.375rem; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
+  .mid-quote { margin: 3rem 0; font-size: 1.375rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-start; margin-top: 3rem; }
 
-  .try-now {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    align-items: center;
-    max-width: 60rem;
-    margin-inline: auto;
+  /* Timer sits on the section rail (left) on mobile, centered only when there's
+     real empty space to absorb (desktop >= 800px). No forced center on mobile. */
+  .try-dial {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1.5rem;
   }
-  @media (min-width: 800px) { .try-now { grid-template-columns: 1fr 1fr; } }
-  .try-head h2 { text-wrap: balance; margin-bottom: 0.75rem; }
-  .try-head p { color: var(--ink-muted); margin: 0; max-width: 44ch; }
-  .try-dial { display: flex; justify-content: center; }
+  @media (min-width: 800px) {
+    .try-dial { justify-content: center; }
+  }
 </style>

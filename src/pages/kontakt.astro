@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 
 const breadcrumbs = [
@@ -19,21 +20,25 @@ const breadcrumbs = [
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Kontakt</p>
-        <h1>Napište nám.</h1>
-        <p class="lead">
-          Nejrychlejší je e-mail. Na zprávy obvykle odpovídáme do 2–3 dnů.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Kontakt"
+        title="Napište nám."
+        lede="Nejrychlejší je e-mail. Na zprávy obvykle odpovídáme do 2–3 dnů."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container>
+      <SectionHeader
+        folio="02"
+        eyebrow="Obecné dotazy"
+        title="Napište o čemkoliv."
+      />
       <div class="kontakt-grid">
         <div class="k-main">
-          <h2>Obecné dotazy</h2>
           <p class="email">
             <a href="mailto:czech@tergar.org">czech@tergar.org</a>
           </p>
@@ -41,7 +46,7 @@ const breadcrumbs = [
             Napište nám o čemkoliv — registrace, dotaz k meditaci, nabídka pomoci, cokoliv.
           </p>
 
-          <h2 class="mt">Místo setkávání</h2>
+          <h3 class="sub">Místo setkávání</h3>
           <address class="addr">
             <strong>Tibet Open House</strong><br />
             Školská 28<br />
@@ -51,7 +56,7 @@ const breadcrumbs = [
             </a>
           </address>
 
-          <h2 class="mt">Sociální sítě</h2>
+          <h3 class="sub">Sociální sítě</h3>
           <ul class="social">
             <li><a href="https://www.facebook.com/tergarcz/" target="_blank" rel="noopener noreferrer">Facebook · tergarcz</a></li>
             <li><a href="https://instagram.com/tergar_cz" target="_blank" rel="noopener noreferrer">Instagram · tergar_cz</a></li>
@@ -78,17 +83,25 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-.kontakt-grid {
+  .kontakt-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
   }
   @media (min-width: 900px) { .kontakt-grid { grid-template-columns: 1.6fr 1fr; gap: 4rem; } }
-  .k-main h2 { font-size: 1.5rem; margin: 0 0 0.75rem; letter-spacing: -0.005em; line-height: 1.25; text-wrap: balance; }
-  .k-main h2.mt { margin-top: 2.5rem; }
+
+  .k-main .sub {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 2rem 0 0.75rem;
+  }
   .email {
     font-family: var(--font-serif);
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 4vw, 1.875rem);
     margin: 0;
   }
   .email a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 0.2em; }

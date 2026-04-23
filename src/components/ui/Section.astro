@@ -19,7 +19,12 @@ const classes = [
 <section id={id} class={classes}><slot /></section>
 
 <style>
-  .sec { position: relative; }
+  .sec {
+    position: relative;
+    /* One rule. Every section reads from the same left rail. Override only
+       with a conscious component (e.g. Quote), never per-section inline. */
+    text-align: start;
+  }
   /* Fluid rhythm — scales gracefully 0-1600px */
   .sec-sm { padding-block: clamp(3.5rem, 7vw, 5rem); }
   .sec-md { padding-block: clamp(5rem, 10vw, 8rem); }

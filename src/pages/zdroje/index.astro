@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import CategoryFilter from '@/components/blog/CategoryFilter';
 import { formatDate, categoryLabel } from '@/lib/format';
@@ -104,19 +105,23 @@ const breadcrumbs = [
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Zdroje</p>
-        <h1>Články, videa, knihy — inspirace pro praxi.</h1>
-        <p class="lead">
-          Sbírka obsahu pro ty, kdo chtějí meditaci prohloubit — vědecké výzkumy, praktické návody, osobní příběhy i tradiční učení.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Zdroje"
+        title="Články, videa, knihy — inspirace pro praxi."
+        lede="Sbírka obsahu pro ty, kdo chtějí meditaci prohloubit — vědecké výzkumy, praktické návody, osobní příběhy i tradiční učení."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container>
-      <h2 class="section-label">Všechny zdroje</h2>
+      <SectionHeader
+        folio="02"
+        eyebrow="Všechny zdroje"
+        title="Filtrujte podle tématu a formátu."
+      />
       <CategoryFilter categories={categories} kinds={kinds} client:visible />
 
       <ul class="cf-grid" aria-label="Obsah">
@@ -155,19 +160,12 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-.section-label {
-    font-size: 1.125rem;
-    font-family: var(--font-sans);
-    font-weight: 500;
-    color: var(--ink-muted);
-    margin: 0 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--line);
-  }
+  /* Filter bar — left-aligned, never centered */
   :global(.cf-controls) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.25rem 2rem;
+    justify-content: flex-start;
     padding: 1.25rem 1.5rem;
     background: var(--surface);
     border-radius: var(--radius-md);
@@ -185,7 +183,7 @@ const breadcrumbs = [
   :global(.cf-chip) {
     background: transparent;
     border: 1px solid var(--line-strong);
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     padding: 0.3125rem 0.75rem;
     font-size: 0.8125rem;
     color: var(--ink-muted);
@@ -246,5 +244,5 @@ const breadcrumbs = [
     color: var(--ink-soft);
   }
   .cf-cat { color: var(--ink-muted); }
-  .cf-empty { color: var(--ink-muted); padding: 2rem 0; text-align: center; }
+  .cf-empty { color: var(--ink-muted); padding: 2rem 0; text-align: start; }
 </style>

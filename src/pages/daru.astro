@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Button from '@/components/ui/Button.astro';
 import Quote from '@/components/ui/Quote.astro';
@@ -25,24 +26,28 @@ const bankAccount = '2001592859/2010';
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Daru</p>
-        <h1>Česká sangha žije z vašich darů.</h1>
-        <p class="lead">
-          Tergar Česko není firma. Nikdo tu nemá plat, žádný dar neznačí profitu.
-          Peníze jdou přímo na pronájmy prostor, překlady knih a materiálů,
-          cestovné lektorů, technické vybavení a podporu mezinárodního Tergar.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Podpořte"
+        title="Česká sangha žije z vašich darů."
+        lede="Tergar Česko není firma. Nikdo tu nemá plat, žádný dar neznačí profitu. Peníze jdou přímo na pronájmy prostor, překlady knih a materiálů, cestovné lektorů, technické vybavení a podporu mezinárodního Tergar."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container>
+      <SectionHeader
+        folio="02"
+        eyebrow="Darujte online"
+        title="Tři cesty, jedna sangha."
+        lede="Vyberte si, co vám sedí — rychlé online darování, převodem z účtu, nebo věnujte čas místo peněz."
+      />
       <div class="give-grid">
         <Card elevated class="give-card primary">
           <div>
-            <h2>Darujte online přes darujme.cz</h2>
+            <h3>Přes darujme.cz</h3>
             <p>
               Nejrychlejší způsob — platební kartou, bankovním převodem nebo Applem/Googlem.
               Můžete nastavit pravidelný měsíční dar i jednorázovou podporu. Potvrzení pro daňové účely obdržíte automaticky.
@@ -77,11 +82,15 @@ const bankAccount = '2001592859/2010';
 
   <Section size="md" surface>
     <Container>
+      <SectionHeader
+        folio="03"
+        eyebrow="Kam peníze jdou"
+        title="Transparentně, bez marketingových mezitahů."
+      />
       <Quote author="Mingyur Rinpočhe">
         „Štědrost není v tom, kolik dáváte. Je v tom, s jakou myslí to děláte."
       </Quote>
       <div class="where-to">
-        <h2>Kam peníze jdou</h2>
         <ul>
           <li><strong>Pronájmy a provoz</strong> — Tibet Open House, regionální prostory, online licence</li>
           <li><strong>Překlady</strong> — česká verze Joy of Living, knihy, audio meditace</li>
@@ -98,7 +107,7 @@ const bankAccount = '2001592859/2010';
 </BaseLayout>
 
 <style>
-.give-grid {
+  .give-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--gap-default);
@@ -114,7 +123,7 @@ const bankAccount = '2001592859/2010';
     color: var(--bg);
     border: 0;
   }
-  .give-card.primary h2 { color: var(--bg); font-size: 1.75rem; margin: 0 0 0.75rem; }
+  .give-card.primary h3 { color: var(--bg); font-size: 1.5rem; margin: 0 0 0.75rem; }
   .give-card.primary p { color: rgba(255,255,255,.75); margin: 0; }
   .give-card h3 { font-size: 1.375rem; margin: 0 0 0.5rem; letter-spacing: -0.005em; line-height: 1.25; text-wrap: balance; }
   .give-card p { color: var(--ink-muted); margin: 0 0 0.5rem; }
@@ -127,8 +136,8 @@ const bankAccount = '2001592859/2010';
     margin-top: 0.5rem;
   }
 
-  .where-to { max-width: 60rem; margin-inline: auto; margin-top: 2rem; }
-  .where-to h2 { text-wrap: balance; margin-bottom: 1rem; }
+  /* "Where to" list — left-aligned on the same rail, no centered island */
+  .where-to { max-width: 60rem; margin-top: 2rem; }
   .where-to ul {
     list-style: none;
     padding: 0;

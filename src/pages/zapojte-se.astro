@@ -3,6 +3,7 @@ import { getEntry, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 
 const entry = await getEntry('pages', 'zapojte-se');
@@ -23,11 +24,13 @@ const breadcrumbs = [
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Komunita</p>
-        <h1>Staňte se součástí sanghy.</h1>
-        <p class="lead">{entry?.data.heroText}</p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Komunita"
+        title="Staňte se součástí sanghy."
+        lede={entry?.data.heroText}
+        as="h1"
+      />
     </Container>
   </Section>
 
@@ -39,6 +42,3 @@ const breadcrumbs = [
     </Container>
   </Section>
 </BaseLayout>
-
-<style>
-</style>

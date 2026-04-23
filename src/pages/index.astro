@@ -9,6 +9,7 @@ import Card from '@/components/ui/Card.astro';
 import Quote from '@/components/ui/Quote.astro';
 import Divider from '@/components/ui/Divider.astro';
 import SocialIcon from '@/components/ui/SocialIcon.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import mingyurPortrait from '@/assets/mingyur-portrait.png';
 import mingyurWaving from '@/assets/mingyur-waving.png';
 import communityImage from '@/assets/community.png';
@@ -374,11 +375,13 @@ const voices = [
   <Section size="md">
     <Container>
       <div class="end-cta">
-        <div>
-          <h2>Podpořte českou sanghu.</h2>
-          <p>Tergar Česko je nezisková komunita. Každý dar — jednorázový i pravidelný — udržuje skupiny, překlady a setkání.</p>
-          <Button href="/daru" variant="primary" size="lg">Chci podpořit</Button>
-        </div>
+        <SectionHeader
+          folio="08"
+          eyebrow="Podpořte"
+          title="Podpořte českou sanghu."
+          lede="Tergar Česko je nezisková komunita. Každý dar — jednorázový i pravidelný — udržuje skupiny, překlady a setkání."
+        />
+        <Button href="/daru" variant="primary" size="lg">Chci podpořit</Button>
       </div>
     </Container>
   </Section>
@@ -788,13 +791,12 @@ const voices = [
   .groups-list strong { font-family: var(--font-serif); font-weight: 600; font-size: 1.0625rem; }
   .groups-list span { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-muted); }
 
+  /* Donate section — stays on the 21px rail like every other section.
+     No center-island: text left, CTA left, max-width editorial. */
   .end-cta {
-    text-align: center;
+    text-align: start;
     max-width: 42rem;
-    margin-inline: auto;
   }
-  .end-cta h2 { text-wrap: balance; margin-bottom: 1rem; }
-  .end-cta p { color: var(--ink-muted); margin-bottom: 1.75rem; }
 
   .dot { color: var(--ink-soft); }
 

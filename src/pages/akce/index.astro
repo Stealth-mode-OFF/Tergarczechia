@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import EventFilter from '@/components/events/EventFilter';
 import { formatDateRange, eventTypeLabel, audienceLabel } from '@/lib/format';
@@ -41,19 +42,23 @@ const audiences = [
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Akce</p>
-        <h1>Retreaty, workshopy, přenosy.</h1>
-        <p class="lead">
-          Kalendář akcí — online i prezenčně, s českými učiteli i s přímým přenosem od Mingyura Rinpočheho.
-        </p>
-      </header>
+      <SectionHeader
+        folio="01"
+        eyebrow="Akce"
+        title="Retreaty, workshopy, přenosy."
+        lede="Kalendář akcí — online i prezenčně, s českými učiteli i s přímým přenosem od Mingyura Rinpočheho."
+        as="h1"
+      />
     </Container>
   </Section>
 
   <Section size="md">
     <Container>
-      <h2 class="section-label">Kalendář 2026</h2>
+      <SectionHeader
+        folio="02"
+        eyebrow="Kalendář 2026"
+        title="Filtrujte podle formátu a úrovně."
+      />
       <EventFilter types={types} audiences={audiences} client:visible />
 
       <ul class="ef-list" aria-label="Seznam akcí">
@@ -94,21 +99,13 @@ const audiences = [
 </BaseLayout>
 
 <style>
-.section-label {
-    font-size: 1.125rem;
-    font-family: var(--font-sans);
-    font-weight: 500;
-    color: var(--ink-muted);
-    margin: 0 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--line);
-  }
-
+  /* Filter row — left-aligned, matches the section rail. Never justify-content center. */
   :global(.ef-controls) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     align-items: center;
+    justify-content: flex-start;
     padding: 1.25rem;
     background: var(--surface);
     border-radius: var(--radius-md);
@@ -126,7 +123,7 @@ const audiences = [
   :global(.ef-chip) {
     background: transparent;
     border: 1px solid var(--line-strong);
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     padding: 0.3125rem 0.75rem;
     font-size: 0.8125rem;
     color: var(--ink-muted);
@@ -142,7 +139,6 @@ const audiences = [
     font-size: 0.8125rem;
     color: var(--ink-muted);
     cursor: pointer;
-    margin-left: auto;
   }
 
   .ef-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
@@ -178,5 +174,6 @@ const audiences = [
   .ef-tags .tag-accent { background: var(--accent-soft); color: var(--accent-hover); border-color: transparent; }
   .ef-item.is-past { opacity: 0.55; }
   .ef-item.is-past .ef-body h3 { text-decoration: line-through; text-decoration-thickness: 1px; }
-  .ef-empty { color: var(--ink-muted); padding: 2rem 0; text-align: center; }
+  /* Empty state sits on the same rail — no centered island */
+  .ef-empty { color: var(--ink-muted); padding: 2rem 0; text-align: start; }
 </style>
