@@ -30,8 +30,8 @@ const cityCount = new Set(groups.filter((g) => g.data.city !== 'Online').map((g)
 const onlineCount = groups.filter((g) => g.data.city === 'Online').length;
 const upcomingCount = upcoming.length;
 
-const heroTitle = 'Meditace, která se hodí do českého života.';
-const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
+const heroTitle = 'Meditace, která se hodí do českého života.';
+const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
 
 const audienceSegments = [
   {
@@ -98,7 +98,7 @@ const pathHighlights = [
             </div>
           </dl>
         </div>
-        <aside class="hero-portrait" aria-hidden="true">
+        <aside class="hero-portrait" aria-label="Zakladatel komunity">
           <div class="portrait-frame">
             <Image
               src={mingyurPortrait}
@@ -409,7 +409,8 @@ const pathHighlights = [
   }
   @media (min-width: 900px) {
     .portrait-frame {
-      width: auto;
+      width: 100%;
+      height: auto;
       aspect-ratio: 4 / 5;
       border-radius: 2rem;
       box-shadow:
@@ -494,11 +495,13 @@ const pathHighlights = [
     box-shadow: 0 0 0 3px rgba(224, 160, 32, 0.2);
   }
   .hero-title {
-    font-size: var(--text-5xl);
+    /* Smaller than --text-5xl (76px) because the 2-col hero splits the
+       content width — 80px would orphan words. Scales 40→64px. */
+    font-size: clamp(2.5rem, 5vw, 4rem);
     line-height: 1.05;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     margin-bottom: 1.25rem;
-    max-width: 22ch;
+    max-width: none;
     text-wrap: balance;
   }
   .hero-lede {

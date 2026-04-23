@@ -38,9 +38,12 @@ html {
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphenate-limit-chars: 7 3 3;
+  /* Global default: don't auto-hyphenate. Short copy in cards / headers
+     looks broken when browser chops words ("vede-nou", "čes-kého"). Long
+     running article prose re-enables via .prose below. */
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  hyphenate-limit-chars: 9 4 4;
   font-feature-settings: "kern", "liga", "calt";
   font-optical-sizing: auto;
 }
@@ -79,6 +82,17 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
   font-feature-settings: "kern", "liga", "calt", "ss01";
   font-optical-sizing: auto;
+  /* Never auto-hyphenate headings — splitting display words mid-syllable
+     ("čes-kého") looks broken. Body text keeps hyphens: auto from html{}. */
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+/* Leads and large type shouldn't hyphenate either */
+.lead, .hero-lede, .path-lede, .ig-lede, .teacher-lede, .teacher-quote {
+  hyphens: manual;
+  -webkit-hyphens: manual;
 }
 
 h1 {
@@ -143,6 +157,9 @@ p + p { margin-top: 1rem; }
   font-size: 1.125rem;
   line-height: 1.7;
   hanging-punctuation: first last;
+  /* Long running text re-enables auto-hyphens for clean justification */
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .prose > * + * { margin-top: 1.25em; }
 .prose > h2 { margin-top: 2.25em; margin-bottom: 0.6em; }
