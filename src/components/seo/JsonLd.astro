@@ -16,42 +16,74 @@ const LOGO = `${SITE}/og-logo.png`;
 
 const org = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'NGO', 'ReligiousOrganization'],
+  '@id': `${SITE}/#organization`,
   name: SITE_NAME,
-  alternateName: 'Tergar Czechia',
+  alternateName: ['Tergar Czechia', 'Tergar ČR'],
   url: SITE,
-  logo: LOGO,
+  logo: {
+    '@type': 'ImageObject',
+    url: LOGO,
+    width: 1500,
+    height: 494,
+  },
+  image: `${SITE}/og-default.png`,
+  description: 'Česká pobočka mezinárodní meditační komunity Tergar pod vedením Yongey Mingyur Rinpočheho. Učení tradice Karma Kagjü, Joy of Living a Path of Liberation.',
   email: 'czech@tergar.org',
+  foundingDate: '2015',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Školská 28',
-    addressLocality: 'Praha 1',
+    addressLocality: 'Praha',
     postalCode: '110 00',
     addressCountry: 'CZ',
+    addressRegion: 'Praha 1',
   },
+  areaServed: [
+    { '@type': 'Country', name: 'Česká republika' },
+    { '@type': 'City', name: 'Praha' },
+    { '@type': 'City', name: 'České Budějovice' },
+    { '@type': 'City', name: 'Česká Lípa' },
+  ],
+  knowsLanguage: ['cs', 'en'],
   sameAs: [
     'https://www.facebook.com/tergarcz/',
-    'https://instagram.com/tergar_cz',
+    'https://www.instagram.com/tergar_cz',
     'https://www.youtube.com/@tergarczechia1847',
     'https://tergar.org',
   ],
   parentOrganization: {
     '@type': 'Organization',
+    '@id': 'https://tergar.org/#organization',
     name: 'Tergar International',
     url: 'https://tergar.org',
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Yongey Mingyur Rinpočhe',
+    url: 'https://tergar.org/yongey-mingyur-rinpoche',
+    sameAs: [
+      'https://en.wikipedia.org/wiki/Yongey_Mingyur_Rinpoche',
+      'https://www.wikidata.org/wiki/Q1780225',
+    ],
   },
 };
 
 const website = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${SITE}/#website`,
   name: SITE_NAME,
   url: SITE,
   inLanguage: 'cs-CZ',
   description: description,
+  publisher: { '@id': `${SITE}/#organization` },
   potentialAction: {
     '@type': 'SearchAction',
-    target: `${SITE}/hledat?q={search_term_string}`,
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${SITE}/hledat?q={search_term_string}`,
+    },
     'query-input': 'required name=search_term_string',
   },
 };

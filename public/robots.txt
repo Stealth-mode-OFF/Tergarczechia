@@ -4,4 +4,8 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /keystatic
 
+User-agent: Bingbot
+Crawl-delay: 2
+
 Sitemap: https://tergarczechia.cz/sitemap-index.xml
+Host: https://tergarczechia.cz

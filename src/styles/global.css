@@ -45,6 +45,18 @@ html {
   font-optical-sizing: auto;
 }
 
+/* Numerals — use oldstyle proportional figures for editorial warmth.
+   Tabular lining only on data tables / timetables via .tnum. */
+body {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+.tnum {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.lnum {
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
 body {
   min-height: 100dvh;
   background-color: var(--bg);
@@ -212,14 +224,62 @@ p + p { margin-top: 1rem; }
   .section { padding-block: var(--section-md); }
 }
 
+/* ---------- Editorial eyebrow / folio ---------- */
+
+/* Default eyebrow — replaces uppercase+tracking with real small caps for handcrafted feel */
+.eyebrow,
+[class*="eyebrow"] {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "c2sc", "smcp", "kern";
+  text-transform: none;
+  margin-bottom: 0.75rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.625rem;
+}
+
+/* Editorial folio — small magazine-style number prefix "01." "02." */
+.folio {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  color: var(--accent);
+  font-variant-numeric: oldstyle-nums;
+  letter-spacing: 0.02em;
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--line-strong);
+  line-height: 1;
+}
+
 /* ---------- Dharma / Tergar visual utilities ---------- */
 
 .bg-dharma-radiance {
+  position: relative;
   background:
     radial-gradient(circle at 15% 20%, rgba(224, 160, 32, 0.18) 0%, transparent 42%),
     radial-gradient(circle at 85% 15%, rgba(32, 48, 112, 0.10) 0%, transparent 40%),
     linear-gradient(140deg, #FAF7EF 0%, #F6E7C8 46%, #EFE6D8 100%);
 }
+
+/* Paper grain — subtle SVG noise, adds handmade texture. 2% opacity. */
+.bg-dharma-radiance::before,
+.has-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.13 0 0 0 0 0.18 0 0 0 0 0.25 0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+.bg-dharma-radiance > * { position: relative; z-index: 1; }
 
 .section-shell {
   border-radius: 2rem;

@@ -1,24 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FBF8F2"/>
-      <stop offset="100%" stop-color="#EAE1CD"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#FAF8F4"/>
+      <stop offset="55%" stop-color="#F6E7C8"/>
+      <stop offset="100%" stop-color="#EFE6D8"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.15" cy="0.25" r="0.6">
+      <stop offset="0%" stop-color="#E0A020" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#E0A020" stop-opacity="0"/>
+    </radialGradient>
     <style>
-      text { font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif; }
-      .kicker { font-family: "Inter", system-ui, sans-serif; letter-spacing: 0.18em; font-size: 20px; fill: #B6671F; text-transform: uppercase; }
-      .title { font-size: 88px; font-weight: 600; fill: #1B2230; }
-      .sub { font-family: "Inter", system-ui, sans-serif; font-size: 26px; fill: #55606E; }
+      .kicker { font-family: "Inter", system-ui, sans-serif; letter-spacing: 0.22em; font-size: 22px; fill: #203070; font-weight: 700; text-transform: uppercase; }
+      .title { font-family: "Playfair Display", "Source Serif 4", Georgia, serif; font-size: 88px; font-weight: 600; fill: #1C2B3A; letter-spacing: -0.02em; }
+      .title-accent { font-family: "Playfair Display", "Source Serif 4", Georgia, serif; font-size: 88px; font-weight: 600; font-style: italic; fill: #203070; letter-spacing: -0.02em; }
+      .sub { font-family: "Inter", system-ui, sans-serif; font-size: 24px; fill: #2D3748; font-weight: 500; }
+      .folio { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-size: 20px; fill: #E0A020; }
+      .url { font-family: "Inter", system-ui, sans-serif; font-size: 18px; fill: #6B7480; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
     </style>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect x="0" y="0" width="8" height="630" fill="#B6671F"/>
-  <g transform="translate(96, 130)">
-    <circle cx="0" cy="0" r="32" fill="none" stroke="#B6671F" stroke-width="2.5"/>
-    <path d="M-24 0 Q0 -24 24 0 Q0 24 -24 0 Z" fill="none" stroke="#1B2230" stroke-width="1.8" opacity="0.7"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Dharma wheel mark — top-left -->
+  <g transform="translate(88, 96)" stroke-linecap="round">
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#E0A020" stroke-width="2.2"/>
+    <circle cx="0" cy="0" r="9.5" fill="none" stroke="#E0A020" stroke-width="1.8"/>
+    <g stroke="#E0A020" stroke-width="1.8" opacity="0.9">
+      <line x1="0" y1="-29.5" x2="0" y2="-10"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(45)"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(90)"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(135)"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(180)"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(225)"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(270)"/>
+      <line x1="0" y1="-29.5" x2="0" y2="-10" transform="rotate(315)"/>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#E0A020"/>
   </g>
-  <text x="96" y="260" class="kicker">TERGAR ČESKO</text>
-  <text x="96" y="360" class="title">Meditační komunita</text>
-  <text x="96" y="450" class="title">Yongey Mingyur Rinpočheho</text>
-  <text x="96" y="560" class="sub">Joy of Living · Path of Liberation · Skupiny v ČR · Akce 2026</text>
+
+  <!-- Folio -->
+  <text x="150" y="102" class="folio">01.</text>
+
+  <!-- Kicker -->
+  <text x="88" y="168" class="kicker">Tergar Česko</text>
+
+  <!-- Headline — two lines, mixed roman + italic -->
+  <text x="88" y="290" class="title">Meditace, která se hodí</text>
+  <text x="88" y="385" class="title-accent">do českého života.</text>
+
+  <!-- Subhead -->
+  <text x="88" y="460" class="sub">Yongey Mingyur Rinpočhe · Karma Kagjü · Joy of Living · Path of Liberation</text>
+
+  <!-- Hairline rule -->
+  <line x1="88" y1="520" x2="1112" y2="520" stroke="#E8E4DD" stroke-width="1"/>
+
+  <!-- Footer meta -->
+  <text x="88" y="562" class="url">tergarczechia.cz</text>
+  <text x="1112" y="562" class="url" text-anchor="end">Komunita v&#160;Praze · Č. Budějovicích · Liberci · Online</text>
 </svg>

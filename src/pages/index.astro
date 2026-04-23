@@ -118,14 +118,14 @@ const pathHighlights = [
         </aside>
       </div>
     </Container>
-    <Divider variant="wave" class="hero-wave" />
+    <Divider variant="wheel" class="hero-wheel" />
   </section>
 
   <!-- Audience segments -->
   <Section size="md">
     <Container>
       <header class="seg-header">
-        <p class="eyebrow">Kudy dál</p>
+        <p class="eyebrow"><span class="folio">01.</span>Kudy dál</p>
         <h2>Každý začíná jinde. Vyberte si, co vám sedí.</h2>
       </header>
       <div class="segments">
@@ -151,7 +151,7 @@ const pathHighlights = [
     <Container>
       <div class="path-layout">
         <div class="path-head">
-          <p class="eyebrow">Cesta Tergar</p>
+          <p class="eyebrow"><span class="folio">02.</span>Cesta Tergar</p>
           <h2>Strukturovaný program — od prvních vdechů po Mahámudru.</h2>
           <p class="path-lede">
             Navazující úrovně vyvinuté Mingyurem Rinpočhem propojují starodávnou tradici tibetského buddhismu s pozorností k tomu, jak dnes žijeme.
@@ -193,9 +193,9 @@ const pathHighlights = [
           </figcaption>
         </figure>
         <div class="teacher-body">
-          <p class="eyebrow">Váš učitel</p>
-          <blockquote class="teacher-quote">
-            „Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
+          <p class="eyebrow"><span class="folio">03.</span>Váš učitel</p>
+          <blockquote class="teacher-quote"><span class="big-quote" aria-hidden="true">„</span><span class="drop-cap" aria-hidden="true">S</span><span class="sr-only">„S</span>kutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
+            <cite class="teacher-sig">— YMR</cite>
           </blockquote>
           <p class="teacher-lede">
             Mingyur Rinpočhe spojuje tradiční tibetský buddhismus s moderní neurovědou. Jeho knihy vyšly ve dvaceti jazycích, komunita Tergar má žáky ve více než třiceti zemích.
@@ -214,7 +214,7 @@ const pathHighlights = [
       <Container>
         <div class="next-event">
           <div class="ne-left">
-            <p class="eyebrow">Nejbližší akce</p>
+            <p class="eyebrow"><span class="folio">04.</span>Nejbližší akce</p>
             <h2>{featuredEvent.data.title}</h2>
             <p class="ne-meta">
               <Badge variant="outline">{eventTypeLabel(featuredEvent.data.type)}</Badge>
@@ -258,7 +258,7 @@ const pathHighlights = [
     <Container>
       <div class="groups-teaser">
         <div>
-          <p class="eyebrow">Skupiny</p>
+          <p class="eyebrow"><span class="folio">05.</span>Skupiny</p>
           <h2>Setkáváme se tam, kde žijete.</h2>
           <p class="groups-lede">
             Pravidelná setkání v Praze (česky i anglicky), Českých Budějovicích, České Lípě a online. Otevřená — přijďte, i když jste nikdy nemeditovali.
@@ -272,6 +272,58 @@ const pathHighlights = [
           <li><strong>Česká Lípa</strong><span>Každou středu</span></li>
           <li><strong>Online</strong><span>Každé pondělí</span></li>
         </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Instagram — community visuals + follow CTA -->
+  <Section size="md" class="ig-section">
+    <Container>
+      <div class="ig-wrap">
+        <header class="ig-head">
+          <p class="eyebrow"><span class="folio">06.</span>Instagram</p>
+          <h2>Sangha na fotkách.</h2>
+          <p class="ig-lede">
+            Setkání v Tibet Open House, retreaty v přírodě, učitelé navštěvující Česko. Sledujte každodenní život české sanghy na Instagramu.
+          </p>
+        </header>
+        <a href="https://instagram.com/tergar_cz" target="_blank" rel="noopener" class="ig-grid" aria-label="Otevřít Instagram Tergar Česko">
+          <div class="ig-tile ig-tile-1"><Image src={communityImage} alt="" widths={[240, 360]} sizes="(max-width: 768px) 33vw, 200px" loading="lazy" /></div>
+          <div class="ig-tile ig-tile-2"><Image src={mingyurWaving} alt="" widths={[240, 360]} sizes="(max-width: 768px) 33vw, 200px" loading="lazy" /></div>
+          <div class="ig-tile ig-tile-3"><Image src={mingyurPortrait} alt="" widths={[240, 360]} sizes="(max-width: 768px) 33vw, 200px" loading="lazy" /></div>
+          <div class="ig-tile ig-tile-4 ig-tile-cta">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+            </svg>
+            <span class="ig-cta-label">@tergar_cz</span>
+            <span class="ig-cta-sub">Sledujte nás &#8599;</span>
+          </div>
+        </a>
+        <div class="ig-follow-row">
+          <a href="https://instagram.com/tergar_cz" target="_blank" rel="noopener" class="ig-follow">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+            </svg>
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/tergarcz/" target="_blank" rel="noopener" class="ig-follow">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M14 9h3V5h-3c-1.7 0-3 1.3-3 3v2H8v4h3v8h4v-8h3l1-4h-4V8c0-.6.4-1 1-1z"/>
+            </svg>
+            Facebook
+          </a>
+          <a href="https://www.youtube.com/@tergarczechia1847" target="_blank" rel="noopener" class="ig-follow">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M21 8c0-2-1.3-3-3-3H6C4 5 3 6 3 8v8c0 2 1 3 3 3h12c2 0 3-1 3-3V8z"/>
+              <path d="M10 9.5v5l5-2.5-5-2.5z" fill="currentColor"/>
+            </svg>
+            YouTube
+          </a>
+        </div>
       </div>
     </Container>
   </Section>
@@ -325,23 +377,46 @@ const pathHighlights = [
     max-width: 40rem;
   }
 
-  /* Portrait frame */
+  /* Portrait frame — small decorative round on mobile, full card on desktop */
   .hero-portrait {
     position: relative;
-    display: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    order: -1;
   }
   @media (min-width: 900px) {
-    .hero-portrait { display: block; justify-self: end; max-width: 440px; width: 100%; }
+    .hero-portrait {
+      display: block;
+      justify-self: end;
+      max-width: 440px;
+      width: 100%;
+      order: unset;
+      margin-bottom: 0;
+    }
   }
   .portrait-frame {
     position: relative;
-    aspect-ratio: 4 / 5;
-    border-radius: 2rem;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
     overflow: hidden;
+    flex-shrink: 0;
     background: linear-gradient(160deg, var(--tergar-cream) 0%, #EFE6D8 100%);
     box-shadow:
-      0 4px 12px rgba(32, 48, 112, 0.06),
-      0 40px 80px -40px rgba(32, 48, 112, 0.32);
+      0 2px 6px rgba(32, 48, 112, 0.08),
+      0 8px 20px -10px rgba(224, 160, 32, 0.35);
+  }
+  @media (min-width: 900px) {
+    .portrait-frame {
+      width: auto;
+      aspect-ratio: 4 / 5;
+      border-radius: 2rem;
+      box-shadow:
+        0 4px 12px rgba(32, 48, 112, 0.06),
+        0 40px 80px -40px rgba(32, 48, 112, 0.32);
+    }
   }
   .portrait-img {
     position: absolute;
@@ -353,10 +428,16 @@ const pathHighlights = [
   }
   .portrait-ring {
     position: absolute;
-    inset: 0.75rem;
-    border: 1px solid rgba(224, 160, 32, 0.4);
-    border-radius: 1.5rem;
+    inset: 4px;
+    border: 1px solid rgba(224, 160, 32, 0.5);
+    border-radius: 50%;
     pointer-events: none;
+  }
+  @media (min-width: 900px) {
+    .portrait-ring {
+      inset: 0.75rem;
+      border-radius: 1.5rem;
+    }
   }
   .portrait-glow {
     position: absolute;
@@ -369,9 +450,13 @@ const pathHighlights = [
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
-    margin-top: 1.25rem;
-    padding-left: 0.5rem;
+    padding-left: 0;
     font-family: var(--font-sans);
+    flex: 1;
+    min-width: 0;
+  }
+  @media (min-width: 900px) {
+    .portrait-caption { margin-top: 1.25rem; padding-left: 0.5rem; flex: unset; }
   }
   .portrait-name {
     font-family: var(--font-serif);
@@ -429,7 +514,12 @@ const pathHighlights = [
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
+  }
+  /* Full-width CTA buttons on tight phones — avoids cramped inline pair */
+  @media (max-width: 420px) {
+    .hero-cta { gap: 0.625rem; }
+    .hero-cta > :global(*) { width: 100%; }
   }
   .hero-meta {
     display: grid;
@@ -694,10 +784,12 @@ const pathHighlights = [
   .teacher-figure {
     position: relative;
     margin: 0;
-    max-width: 380px;
+    max-width: 260px;
     justify-self: center;
   }
-  @media (min-width: 900px) { .teacher-figure { justify-self: start; } }
+  @media (min-width: 900px) {
+    .teacher-figure { justify-self: start; max-width: 380px; }
+  }
   .teacher-img {
     width: 100%;
     height: auto;
@@ -736,6 +828,7 @@ const pathHighlights = [
     margin-bottom: 1.25rem;
   }
   .teacher-quote {
+    position: relative;
     font-family: var(--font-serif);
     font-size: clamp(1.5rem, 2.6vw, 2.125rem);
     font-style: italic;
@@ -743,8 +836,57 @@ const pathHighlights = [
     letter-spacing: -0.01em;
     color: #FAF8F4;
     margin: 0 0 1.5rem;
-    max-width: 34ch;
+    max-width: 36ch;
     text-wrap: balance;
+  }
+  /* Oversize opening quote — editorial ornament, pulled into margin */
+  .teacher-quote .big-quote {
+    position: absolute;
+    left: -0.75em;
+    top: -0.35em;
+    font-family: var(--font-serif);
+    font-style: normal;
+    font-size: 4.5em;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Drop cap on first letter — classic magazine move */
+  .teacher-quote .drop-cap {
+    float: left;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 3.4em;
+    line-height: 0.85;
+    margin: 0.1em 0.08em -0.05em 0;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  /* Handwritten-feel signature below quote — light, italic, small */
+  .teacher-sig {
+    display: block;
+    margin-top: 0.75rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: rgba(246, 231, 200, 0.55);
+    letter-spacing: 0.08em;
+  }
+  /* SR-only — keep accessibility text but hide visually */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
   .teacher-lede {
     font-size: 1.0625rem;
@@ -773,4 +915,115 @@ const pathHighlights = [
     color: var(--accent);
     border-color: var(--accent);
   }
+
+  /* ──────────── Instagram community block ──────────── */
+  .ig-section {
+    background: linear-gradient(180deg, transparent 0%, var(--surface) 20%, var(--surface) 80%, transparent 100%);
+  }
+  .ig-wrap {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .ig-head { max-width: 42rem; }
+  .ig-head h2 { text-wrap: balance; margin-bottom: 1rem; }
+  .ig-lede {
+    font-size: 1.0625rem;
+    color: var(--ink-muted);
+    max-width: 52ch;
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  @media (min-width: 640px) { .ig-grid { grid-template-columns: repeat(4, 1fr); } }
+  .ig-tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--bg);
+    border-radius: 10px;
+  }
+  .ig-tile :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms var(--ease-out), filter 500ms var(--ease-out);
+  }
+  .ig-grid:hover .ig-tile :global(img),
+  .ig-grid:focus-visible .ig-tile :global(img) {
+    transform: scale(1.03);
+    filter: brightness(1.04) saturate(1.05);
+  }
+  .ig-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(32, 48, 112, 0.06);
+    pointer-events: none;
+  }
+
+  .ig-tile-cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+    background: linear-gradient(135deg, var(--accent) 0%, #C9861A 65%, var(--tergar-navy) 180%);
+    color: var(--tergar-navy);
+    text-align: center;
+    padding: 1rem;
+    transition: filter 280ms var(--ease-out);
+  }
+  .ig-grid:hover .ig-tile-cta { filter: brightness(1.05); }
+  .ig-cta-label {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.005em;
+  }
+  .ig-cta-sub {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+    font-weight: 700;
+  }
+
+  .ig-follow-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    align-items: center;
+  }
+  .ig-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--tergar-navy);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+    min-height: 40px;
+  }
+  .ig-follow:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(246, 231, 200, 0.4);
+  }
+  .ig-follow svg { flex-shrink: 0; }
 </style>
