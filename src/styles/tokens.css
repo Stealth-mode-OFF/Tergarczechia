@@ -3,7 +3,13 @@
 :root {
   /* Brand core */
   --tergar-blue: #1C2B3A;
-  --tergar-gold: #C9962A;
+  --tergar-gold: #C9962A;          /* legacy — kept for lineage content */
+  --tergar-saffron: #D9A441;       /* primary accent — brighter, lighter gold */
+  --tergar-saffron-pale: #F2C770;  /* soft saffron — hover / subtle accents */
+  --tergar-maroon: #7A2635;        /* deep Buddhist maroon — dharma ribbon */
+  --tergar-maroon-soft: #9B3A4B;
+  --tergar-lotus: #F6E7C8;         /* lotus cream — surface tint */
+  --tergar-incense: #EFE6D8;
 
   /* Semantic */
   --bg: #FAF8F4;
@@ -12,12 +18,13 @@
   --ink: #1C2B3A;
   --ink-muted: #2D3748;
   --ink-soft: #6B7480;
-  --accent: #C9962A;
-  --accent-hover: #A67D1F;
-  --accent-soft: #F2D4A8;
+  --accent: #D9A441;               /* was #C9962A — now saffron */
+  --accent-hover: #B8842C;
+  --accent-soft: #F6E7C8;          /* was #F2D4A8 — now lotus cream */
+  --accent-deep: #7A2635;          /* maroon — for ribbons / accents */
   --line: #E8E4DD;
   --line-strong: #C9BFA9;
-  --focus: #C9962A;
+  --focus: #D9A441;
 
   /* Typography */
   --font-serif: "Playfair Display Variable", "Playfair Display", Georgia, serif;
@@ -86,12 +93,13 @@
     --ink: #FAF8F4;
     --ink-muted: #C9BFA9;
     --ink-soft: #8A93A1;
-    --accent: #D9B04A;
-    --accent-hover: #E8C565;
+    --accent: #E8B95A;
+    --accent-hover: #F2C770;
     --accent-soft: #3A2F1A;
+    --accent-deep: #9B3A4B;
     --line: #26303D;
     --line-strong: #34404F;
-    --focus: #D9B04A;
+    --focus: #E8B95A;
   }
 }
 

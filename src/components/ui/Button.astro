@@ -57,11 +57,17 @@ const classes = ['btn', `btn-${variant}`, `btn-${size}`, className].filter(Boole
   .btn-lg { padding: 0.9375rem 1.75rem; font-size: 1rem; }
 
   .btn-primary {
-    background: var(--ink);
-    color: var(--bg);
-    border: 1px solid var(--ink);
+    background: var(--accent);
+    color: var(--ink);
+    border: 1px solid var(--accent);
+    font-weight: 600;
+    box-shadow: 0 8px 24px -12px rgba(217, 164, 65, 0.6);
   }
-  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: 0 10px 30px -10px rgba(217, 164, 65, 0.7);
+  }
 
   .btn-secondary {
     background: transparent;

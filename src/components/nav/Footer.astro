@@ -30,6 +30,7 @@ const social = [
 ---
 
 <footer class="site-footer">
+  <div class="dharma-line" aria-hidden="true"></div>
   <svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,30 C240,50 480,10 720,20 C960,30 1200,50 1440,30 L1440,60 L0,60 Z"
           fill="currentColor" opacity=".12" />
@@ -93,6 +94,11 @@ const social = [
     padding-bottom: 2.5rem;
     background: var(--surface);
     color: var(--ink);
+    position: relative;
+  }
+  .dharma-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(217, 164, 65, 0.45), rgba(122, 38, 53, 0.4), rgba(217, 164, 65, 0.45), transparent);
   }
   .wave-divider { color: var(--surface-strong); }
   .footer-grid {
