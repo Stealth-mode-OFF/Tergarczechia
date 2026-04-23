@@ -194,8 +194,10 @@ const pathHighlights = [
         </figure>
         <div class="teacher-body">
           <p class="eyebrow"><span class="folio">03.</span>Váš učitel</p>
-          <blockquote class="teacher-quote"><span class="big-quote" aria-hidden="true">„</span><span class="drop-cap" aria-hidden="true">S</span><span class="sr-only">„S</span>kutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
-            <cite class="teacher-sig">— YMR</cite>
+          <blockquote class="teacher-quote">
+            <span class="big-quote" aria-hidden="true">„</span>
+            Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
+            <cite class="teacher-sig">— Yongey Mingyur Rinpočhe</cite>
           </blockquote>
           <p class="teacher-lede">
             Mingyur Rinpočhe spojuje tradiční tibetský buddhismus s moderní neurovědou. Jeho knihy vyšly ve dvaceti jazycích, komunita Tergar má žáky ve více než třiceti zemích.
@@ -376,14 +378,11 @@ const pathHighlights = [
     max-width: 40rem;
   }
 
-  /* Portrait frame — small decorative round on mobile, full card on desktop */
+  /* Portrait — hidden on mobile (teacher cameo further down has a proper
+     one); full portrait card in hero only on desktop. Prevents the weird
+     tiny-portrait-above-welcome-badge on phones. */
   .hero-portrait {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-    order: -1;
+    display: none;
   }
   @media (min-width: 900px) {
     .hero-portrait {
@@ -391,8 +390,6 @@ const pathHighlights = [
       justify-self: end;
       max-width: 440px;
       width: 100%;
-      order: unset;
-      margin-bottom: 0;
     }
   }
   .portrait-frame {
@@ -831,54 +828,39 @@ const pathHighlights = [
     max-width: 36ch;
     text-wrap: balance;
   }
-  /* Oversize opening quote — editorial ornament, pulled into margin */
+  /* Oversize opening quote — inline on mobile so it stays visible,
+     pulled into left margin as an editorial ornament on desktop. */
   .teacher-quote .big-quote {
-    position: absolute;
-    left: -0.75em;
-    top: -0.35em;
     font-family: var(--font-serif);
     font-style: normal;
-    font-size: 4.5em;
-    line-height: 1;
+    font-size: 1.2em;
     color: var(--accent);
-    opacity: 0.35;
-    pointer-events: none;
+    opacity: 0.8;
+    line-height: 1;
+    margin-right: 0.1em;
     user-select: none;
   }
-  /* Drop cap on first letter — classic magazine move */
-  .teacher-quote .drop-cap {
-    float: left;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 600;
-    font-size: 3.4em;
-    line-height: 0.85;
-    margin: 0.1em 0.08em -0.05em 0;
-    color: var(--accent);
-    letter-spacing: -0.04em;
+  @media (min-width: 768px) {
+    .teacher-quote .big-quote {
+      position: absolute;
+      left: -0.6em;
+      top: -0.25em;
+      font-size: 4em;
+      opacity: 0.35;
+      margin-right: 0;
+      pointer-events: none;
+    }
   }
-  /* Handwritten-feel signature below quote — light, italic, small */
+  /* Signature below quote — light italic, reads like a handwritten cite */
   .teacher-sig {
     display: block;
-    margin-top: 0.75rem;
+    margin-top: 0.875rem;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 400;
-    color: rgba(246, 231, 200, 0.55);
-    letter-spacing: 0.08em;
-  }
-  /* SR-only — keep accessibility text but hide visually */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    color: rgba(246, 231, 200, 0.62);
+    letter-spacing: 0.04em;
   }
   .teacher-lede {
     font-size: 1.0625rem;

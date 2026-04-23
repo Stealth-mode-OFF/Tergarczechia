@@ -53,5 +53,42 @@ const {
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      // Scroll reveal — IntersectionObserver pattern. Respects
+      // prefers-reduced-motion (CSS handles it). Works with <astro:page-load>
+      // for view transitions.
+      (function setupReveal() {
+        if (!('IntersectionObserver' in window)) return;
+        const mm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (mm.matches) return;
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-revealed');
+              io.unobserve(e.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+        document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+      })();
+      document.addEventListener('astro:page-load', () => {
+        if (!('IntersectionObserver' in window)) return;
+        const mm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (mm.matches) {
+          document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-revealed'));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-revealed');
+              io.unobserve(e.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+        document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach((el) => io.observe(el));
+      });
+    </script>
   </body>
 </html>
