@@ -2,22 +2,46 @@
 type Props = {
   size?: 'sm' | 'md' | 'lg';
   surface?: boolean;
+  tint?: 'cream' | 'navy' | null;
   class?: string;
   id?: string;
 };
-const { size = 'md', surface = false, class: className = '', id } = Astro.props;
-const classes = ['sec', `sec-${size}`, surface ? 'sec-surface' : '', className].filter(Boolean).join(' ');
+const { size = 'md', surface = false, tint = null, class: className = '', id } = Astro.props;
+const classes = [
+  'sec',
+  `sec-${size}`,
+  surface ? 'sec-surface' : '',
+  tint ? `sec-tint-${tint}` : '',
+  className,
+].filter(Boolean).join(' ');
 ---
 
 <section id={id} class={classes}><slot /></section>
 
 <style>
-  .sec-sm { padding-block: var(--section-sm); }
-  .sec-md { padding-block: var(--section-sm); }
-  .sec-lg { padding-block: var(--section-md); }
-  @media (min-width: 768px) {
-    .sec-md { padding-block: var(--section-md); }
-    .sec-lg { padding-block: var(--section-lg); }
-  }
+  .sec { position: relative; }
+  /* Fluid rhythm — scales gracefully 0-1600px */
+  .sec-sm { padding-block: clamp(3.5rem, 7vw, 5rem); }
+  .sec-md { padding-block: clamp(5rem, 10vw, 8rem); }
+  .sec-lg { padding-block: clamp(7rem, 14vw, 11rem); }
+
   .sec-surface { background: var(--surface); }
+
+  /* Warm cream wash — quote / testimonial blocks */
+  .sec-tint-cream {
+    background: linear-gradient(180deg, transparent 0%, var(--tergar-cream) 30%, var(--tergar-cream) 70%, transparent 100%);
+    background-color: transparent;
+  }
+
+  /* Deep navy wash — authority / teacher cameo */
+  .sec-tint-navy {
+    background: var(--tergar-navy);
+    color: #F6E7C8;
+  }
+  .sec-tint-navy :global(h1),
+  .sec-tint-navy :global(h2),
+  .sec-tint-navy :global(h3),
+  .sec-tint-navy :global(h4) { color: #FAF8F4; }
+  .sec-tint-navy :global(p) { color: rgba(250, 248, 244, 0.82); }
+  .sec-tint-navy :global(.eyebrow) { color: var(--accent); }
 </style>

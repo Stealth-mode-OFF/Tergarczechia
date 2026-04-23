@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
@@ -7,6 +8,9 @@ import Badge from '@/components/ui/Badge.astro';
 import Card from '@/components/ui/Card.astro';
 import Quote from '@/components/ui/Quote.astro';
 import Divider from '@/components/ui/Divider.astro';
+import mingyurPortrait from '@/assets/mingyur-portrait.png';
+import mingyurWaving from '@/assets/mingyur-waving.png';
+import communityImage from '@/assets/community.png';
 import { getCollection } from 'astro:content';
 import { formatDateRange, formatDateShort, eventTypeLabel } from '@/lib/format';
 import { csTypo } from '@/lib/cs-typo';
@@ -67,31 +71,51 @@ const pathHighlights = [
   <section class="hero bg-dharma-radiance">
     <div class="hero-spotlight" aria-hidden="true"></div>
     <Container>
-      <div class="hero-inner">
-        <p class="hero-kicker">
-          <span class="kicker-mark" aria-hidden="true"></span>
-          Vítejte v&nbsp;Tergar Czechia
-        </p>
-        <h1 class="hero-title">{heroTitle}</h1>
-        <p class="hero-lede">{heroLede}</p>
-        <div class="hero-cta">
-          <Button href="/skupiny" variant="primary" size="lg">Najděte skupinu</Button>
-          <Button href="/meditace" variant="secondary" size="lg">Co je meditace</Button>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="hero-kicker">
+            <span class="kicker-mark" aria-hidden="true"></span>
+            Vítejte v&nbsp;Tergar Czechia
+          </p>
+          <h1 class="hero-title">{heroTitle}</h1>
+          <p class="hero-lede">{heroLede}</p>
+          <div class="hero-cta">
+            <Button href="/skupiny" variant="primary" size="lg">Najděte skupinu</Button>
+            <Button href="/meditace" variant="secondary" size="lg">Co je meditace</Button>
+          </div>
+          <dl class="hero-meta">
+            <div>
+              <dt>Skupiny</dt>
+              <dd>{cityCount} měst{onlineCount > 0 ? ` · ${onlineCount} online` : ''}</dd>
+            </div>
+            <div>
+              <dt>Nadcházející akce</dt>
+              <dd>{upcomingCount}</dd>
+            </div>
+            <div>
+              <dt>Tradice</dt>
+              <dd>Karma Kagjü</dd>
+            </div>
+          </dl>
         </div>
-        <dl class="hero-meta">
-          <div>
-            <dt>Skupiny</dt>
-            <dd>{cityCount} měst{onlineCount > 0 ? ` · ${onlineCount} online` : ''}</dd>
+        <aside class="hero-portrait" aria-hidden="true">
+          <div class="portrait-frame">
+            <Image
+              src={mingyurPortrait}
+              alt=""
+              widths={[320, 480, 640, 960]}
+              sizes="(max-width: 768px) 0px, (max-width: 1200px) 38vw, 480px"
+              loading="eager"
+              class="portrait-img"
+            />
+            <div class="portrait-ring"></div>
+            <div class="portrait-glow"></div>
           </div>
-          <div>
-            <dt>Nadcházející akce</dt>
-            <dd>{upcomingCount}</dd>
-          </div>
-          <div>
-            <dt>Tradice</dt>
-            <dd>Karma Kagjü</dd>
-          </div>
-        </dl>
+          <figcaption class="portrait-caption">
+            <span class="portrait-name">Yongey Mingyur Rinpočhe</span>
+            <span class="portrait-role">zakladatel Tergar</span>
+          </figcaption>
+        </aside>
       </div>
     </Container>
     <Divider variant="wave" class="hero-wave" />
@@ -150,12 +174,38 @@ const pathHighlights = [
     </Container>
   </Section>
 
-  <!-- Quote -->
-  <Section size="sm">
+  <!-- Teacher cameo -->
+  <Section size="md" tint="navy" class="teacher">
     <Container>
-      <Quote author="Yongey Mingyur Rinpočhe">
-        „Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
-      </Quote>
+      <div class="teacher-grid">
+        <figure class="teacher-figure">
+          <Image
+            src={mingyurWaving}
+            alt="Yongey Mingyur Rinpočhe"
+            widths={[320, 480, 640]}
+            sizes="(max-width: 768px) 60vw, 380px"
+            loading="lazy"
+            class="teacher-img"
+          />
+          <figcaption class="teacher-cap">
+            <span class="teacher-name">Yongey Mingyur Rinpočhe</span>
+            <span class="teacher-role">učitel linie Karma Kagjü · Tergar International</span>
+          </figcaption>
+        </figure>
+        <div class="teacher-body">
+          <p class="eyebrow">Váš učitel</p>
+          <blockquote class="teacher-quote">
+            „Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
+          </blockquote>
+          <p class="teacher-lede">
+            Mingyur Rinpočhe spojuje tradiční tibetský buddhismus s moderní neurovědou. Jeho knihy vyšly ve dvaceti jazycích, komunita Tergar má žáky ve více než třiceti zemích.
+          </p>
+          <div class="teacher-cta">
+            <Button href="/o-nas" variant="primary">O Rinpočhem i sanghe</Button>
+            <a href="https://tergar.org/yongey-mingyur-rinpoche" target="_blank" rel="noopener" class="teacher-link">Tergar International ↗</a>
+          </div>
+        </div>
+      </div>
     </Container>
   </Section>
 
@@ -243,22 +293,98 @@ const pathHighlights = [
 <style>
   .hero {
     position: relative;
-    padding-block: clamp(4rem, 8vw, 7rem) 0;
+    padding-block: clamp(3.5rem, 7vw, 6rem) 0;
     overflow: hidden;
   }
   .hero-spotlight {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 78% -10%, rgba(32, 48, 112, 0.08), transparent 50%),
-      radial-gradient(circle at 12% 110%, rgba(224, 160, 32, 0.18), transparent 50%);
+      radial-gradient(circle at 82% 8%, rgba(32, 48, 112, 0.08), transparent 50%),
+      radial-gradient(circle at 12% 110%, rgba(224, 160, 32, 0.20), transparent 50%);
     pointer-events: none;
     z-index: 0;
   }
-  .hero :global(.container) { position: relative; z-index: 1; }
-  .hero-inner {
-    max-width: 40rem;
+  .hero :global(.container-default) { position: relative; z-index: 1; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
     padding-bottom: 5rem;
+  }
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 4rem;
+      padding-bottom: 6rem;
+    }
+  }
+  .hero-text {
+    max-width: 40rem;
+  }
+
+  /* Portrait frame */
+  .hero-portrait {
+    position: relative;
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .hero-portrait { display: block; justify-self: end; max-width: 440px; width: 100%; }
+  }
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 2rem;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--tergar-cream) 0%, #EFE6D8 100%);
+    box-shadow:
+      0 4px 12px rgba(32, 48, 112, 0.06),
+      0 40px 80px -40px rgba(32, 48, 112, 0.32);
+  }
+  .portrait-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+  .portrait-ring {
+    position: absolute;
+    inset: 0.75rem;
+    border: 1px solid rgba(224, 160, 32, 0.4);
+    border-radius: 1.5rem;
+    pointer-events: none;
+  }
+  .portrait-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at 30% 30%, rgba(224, 160, 32, 0.18), transparent 50%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  .portrait-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-top: 1.25rem;
+    padding-left: 0.5rem;
+    font-family: var(--font-sans);
+  }
+  .portrait-name {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--tergar-navy);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .portrait-role {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   .hero-kicker {
     display: inline-flex;
@@ -523,4 +649,128 @@ const pathHighlights = [
   .end-cta p { color: var(--ink-muted); margin-bottom: 1.75rem; }
 
   .dot { color: var(--ink-soft); }
+
+  /* ──────────── Teacher cameo (navy section) ──────────── */
+  .teacher {
+    position: relative;
+    overflow: hidden;
+  }
+  .teacher::before,
+  .teacher::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .teacher::before {
+    top: -20%;
+    right: -10%;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(224, 160, 32, 0.18), transparent 60%);
+  }
+  .teacher::after {
+    bottom: -25%;
+    left: -8%;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(224, 160, 32, 0.08), transparent 65%);
+  }
+  .teacher :global(.container-default) { position: relative; z-index: 1; }
+
+  .teacher-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .teacher-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+      gap: 4.5rem;
+    }
+  }
+
+  .teacher-figure {
+    position: relative;
+    margin: 0;
+    max-width: 380px;
+    justify-self: center;
+  }
+  @media (min-width: 900px) { .teacher-figure { justify-self: start; } }
+  .teacher-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(224, 160, 32, 0.25);
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.15),
+      0 30px 60px -30px rgba(224, 160, 32, 0.35);
+  }
+  .teacher-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-top: 1.25rem;
+    padding-left: 0.5rem;
+  }
+  .teacher-name {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: #FAF8F4;
+    font-weight: 600;
+  }
+  .teacher-role {
+    font-size: 0.7rem;
+    color: rgba(246, 231, 200, 0.7);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .teacher-body { max-width: 38rem; }
+  .teacher-body :global(.eyebrow) {
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .teacher-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+    font-style: italic;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #FAF8F4;
+    margin: 0 0 1.5rem;
+    max-width: 34ch;
+    text-wrap: balance;
+  }
+  .teacher-lede {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: rgba(250, 248, 244, 0.75);
+    max-width: 52ch;
+    margin-bottom: 2rem;
+    text-wrap: pretty;
+  }
+  .teacher-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .teacher-link {
+    font-size: 0.8125rem;
+    color: rgba(246, 231, 200, 0.82);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(224, 160, 32, 0.4);
+    padding-bottom: 2px;
+    letter-spacing: 0.04em;
+    transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+  }
+  .teacher-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
 </style>
