@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoImage from '@/assets/logo.png';
+import SocialIcon from '@/components/ui/SocialIcon.astro';
 
 const year = new Date().getFullYear();
 
@@ -26,9 +27,9 @@ const nav = [
 ];
 
 const social = [
-  { label: 'Facebook', href: 'https://www.facebook.com/tergarcz/' },
-  { label: 'Instagram', href: 'https://instagram.com/tergar_cz' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@tergarczechia1847' },
+  { label: 'Facebook', platform: 'facebook' as const, href: 'https://www.facebook.com/tergarcz/' },
+  { label: 'Instagram', platform: 'instagram' as const, href: 'https://instagram.com/tergar_cz' },
+  { label: 'YouTube', platform: 'youtube' as const, href: 'https://www.youtube.com/@tergarczechia1847' },
 ];
 ---
 
@@ -49,9 +50,18 @@ const social = [
         Meditační komunita Yongey Mingyur Rinpočheho v&nbsp;České republice.
         Učení tradice Karma Kagjü — od&nbsp;prvních kroků až&nbsp;po&nbsp;pokročilou praxi.
       </p>
-      <div class="social">
+      <div class="social" aria-label="Sociální sítě">
         {social.map((s) => (
-          <a href={s.href} target="_blank" rel="noopener noreferrer" class="social-link">{s.label}</a>
+          <a
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label={`Tergar Česko na ${s.label}`}
+          >
+            <SocialIcon platform={s.platform} variant="mono" size={18} />
+            <span>{s.label}</span>
+          </a>
         ))}
       </div>
     </div>
@@ -127,18 +137,27 @@ const social = [
     line-height: 1;
   }
   .brand-lead { color: var(--ink-muted); max-width: 34ch; font-size: 0.9375rem; line-height: 1.6; }
-  .social { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.25rem; }
+  .social { display: flex; gap: 0.625rem; flex-wrap: wrap; margin-top: 0.25rem; }
   .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 0.8125rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: var(--ink-muted);
     text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    transition: color .15s, border-color .15s;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: color .15s, border-color .15s, background .15s;
+    min-height: 36px;
   }
-  .social-link:hover { color: var(--ink); border-color: var(--accent); }
+  .social-link svg { flex-shrink: 0; }
+  .social-link:hover {
+    color: var(--tergar-navy);
+    border-color: var(--accent);
+    background: rgba(246, 231, 200, 0.35);
+  }
   .footer-col h5 {
     font-family: var(--font-sans);
     font-size: 0.75rem;
