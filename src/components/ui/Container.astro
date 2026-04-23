@@ -12,28 +12,16 @@ const cls = `container-${size} ${className}`.trim();
 <Tag class={cls}><slot /></Tag>
 
 <style>
-  .container-prose {
-    width: 100%;
-    max-width: var(--w-prose);
-    margin-inline: auto;
-    padding-inline: 1.5rem;
-  }
-  .container-default {
-    width: 100%;
-    max-width: var(--w-content);
-    margin-inline: auto;
-    padding-inline: 1.5rem;
-  }
+  /* Unified horizontal padding — same inset on every page, every breakpoint.
+     Uses clamp so spacing scales fluidly without media-query jumps. */
+  .container-prose,
+  .container-default,
   .container-wide {
     width: 100%;
-    max-width: var(--w-wide);
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
   }
-  @media (min-width: 768px) {
-    .container-prose, .container-default, .container-wide { padding-inline: 2rem; }
-  }
-  @media (min-width: 1024px) {
-    .container-default, .container-wide { padding-inline: 2.5rem; }
-  }
+  .container-prose { max-width: var(--w-prose); }
+  .container-default { max-width: var(--w-content); }
+  .container-wide { max-width: var(--w-wide); }
 </style>

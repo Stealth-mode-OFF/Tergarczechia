@@ -103,8 +103,8 @@ const social = [
   .wave-divider { color: var(--surface-strong); }
   .footer-grid {
     display: grid;
-    gap: 2.5rem;
-    padding-block: 3.5rem 3rem;
+    gap: var(--gap-md);
+    padding-block: clamp(3rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3rem);
     grid-template-columns: 1fr;
   }
   @media (min-width: 720px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; } }

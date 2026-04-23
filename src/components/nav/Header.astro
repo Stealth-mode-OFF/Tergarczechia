@@ -65,10 +65,10 @@ const isActive = (href: string) =>
     align-items: center;
     gap: 1.25rem;
     height: 72px;
-    padding-inline: 1.5rem;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
   }
   @media (min-width: 768px) {
-    .header-inner { padding-inline: 2rem; height: 78px; }
+    .header-inner { height: 78px; }
   }
 
   .brand {

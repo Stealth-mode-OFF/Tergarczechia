@@ -48,6 +48,25 @@
   --w-content: 1120px;
   --w-wide: 1320px;
 
+  /* Unified rhythm — used by page-head, section-head, leads everywhere.
+     Change once, all pages update together. */
+  --head-mw: 48rem;            /* Max-width of h1 headers */
+  --head-mw-wide: 56rem;       /* For longer heros (teacher cameo etc) */
+  --head-mb: clamp(2.5rem, 5vw, 4rem);   /* Bottom margin of page-head block */
+  --head-section-mb: clamp(2rem, 4vw, 3rem);  /* Bottom margin for in-page section headers */
+  --head-h1-mt: 1rem;          /* Gap between eyebrow and h1 */
+  --head-h1-mb: clamp(1rem, 1.8vw, 1.25rem);  /* Gap between h1 and lead */
+  --head-lead-mw: 56ch;        /* Lead paragraph max-width (readability cap) */
+  --head-lead-mb: clamp(1.5rem, 2.6vw, 2rem);
+  --head-lead-size: clamp(1.125rem, 1.6vw, 1.25rem);
+
+  /* Grid gaps — tight / default / spacious */
+  --gap-tight: clamp(0.75rem, 1.2vw, 1rem);
+  --gap-default: clamp(1.25rem, 2vw, 1.75rem);
+  --gap-md: clamp(1.75rem, 3vw, 2.5rem);
+  --gap-lg: clamp(2.5rem, 5vw, 4rem);
+  --gap-xl: clamp(3rem, 7vw, 5rem);
+
   /* Spacing baseline 4px */
   --space-1: 0.25rem;
   --space-2: 0.5rem;

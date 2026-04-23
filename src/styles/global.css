@@ -224,6 +224,99 @@ p + p { margin-top: 1rem; }
   .section { padding-block: var(--section-md); }
 }
 
+/* ────────────────────────────────────────────────────────────
+   Unified header blocks — every page uses the same pattern.
+   - .page-head: top-of-page hero header (eyebrow → h1 → lead)
+   - .section-head: in-page section header (eyebrow → h2 → lead)
+   ──────────────────────────────────────────────────────────── */
+
+.page-head {
+  max-width: var(--head-mw);
+  margin-bottom: var(--head-mb);
+}
+.page-head.is-wide { max-width: var(--head-mw-wide); }
+.page-head > .eyebrow { margin-bottom: var(--head-h1-mt); }
+.page-head > h1 {
+  margin-top: 0;
+  margin-bottom: var(--head-h1-mb);
+  text-wrap: balance;
+}
+.page-head > .lead,
+.page-head > p:not(.eyebrow) {
+  font-size: var(--head-lead-size);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: var(--head-lead-mw);
+  margin-bottom: var(--head-lead-mb);
+  text-wrap: pretty;
+}
+.page-head > .lead:last-child,
+.page-head > p:last-child { margin-bottom: 0; }
+
+.section-head {
+  max-width: var(--head-mw);
+  margin-bottom: var(--head-section-mb);
+}
+.section-head > .eyebrow { margin-bottom: 0.75rem; }
+.section-head > h2 {
+  margin-top: 0;
+  margin-bottom: var(--head-h1-mb);
+  text-wrap: balance;
+}
+.section-head > p {
+  font-size: var(--head-lead-size);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: var(--head-lead-mw);
+  margin-bottom: 0;
+  text-wrap: pretty;
+}
+
+/* Legacy aliases — unify page-specific class names to the same behavior so we
+   can strip per-page CSS without changing markup.
+   :where() keeps specificity 0 so per-page overrides still win. */
+:where(.head) {
+  max-width: var(--head-mw);
+  margin-bottom: var(--head-mb);
+}
+:where(.head) > h1 { margin-top: 0; margin-bottom: var(--head-h1-mb); text-wrap: balance; }
+:where(.head) > .lead {
+  font-size: var(--head-lead-size);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: var(--head-lead-mw);
+  margin-bottom: var(--head-lead-mb);
+  text-wrap: pretty;
+}
+:where(.head) > .lead:last-child { margin-bottom: 0; }
+
+/* In-page section headers (eyebrow + h2 + lead) — used everywhere with
+   different class names (seg-header, path-head, ig-head, etc.). Unify rhythm. */
+:where(.seg-header, .path-head, .ig-head, .groups-teaser > div > .eyebrow + h2 + *) {
+  /* placeholder — overridden by specific children below */
+}
+:where(.seg-header, .path-head, .ig-head) {
+  max-width: var(--head-mw);
+  margin-bottom: var(--head-section-mb);
+}
+:where(.seg-header, .path-head, .ig-head) > h2 {
+  margin-top: 0;
+  margin-bottom: var(--head-h1-mb);
+  text-wrap: balance;
+}
+:where(.seg-header, .path-head, .ig-head) > .lead,
+:where(.seg-header, .path-head, .ig-head) > .path-lede,
+:where(.seg-header, .path-head, .ig-head) > .ig-lede,
+:where(.seg-header, .path-head, .ig-head) > p {
+  font-size: var(--head-lead-size);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: var(--head-lead-mw);
+  margin-bottom: var(--head-lead-mb);
+  text-wrap: pretty;
+}
+:where(.seg-header, .path-head, .ig-head) > p:last-child { margin-bottom: 0; }
+
 /* ---------- Editorial eyebrow / folio ---------- */
 
 /* Default eyebrow — replaces uppercase+tracking with real small caps for handcrafted feel */
