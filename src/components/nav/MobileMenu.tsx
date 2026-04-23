@@ -3,8 +3,18 @@ import { useEffect, useState } from 'preact/hooks';
 
 type Item = { label: string; href: string };
 
-export default function MobileMenu({ nav, activePath }: { nav: Item[]; activePath: string }) {
+export default function MobileMenu({
+  nav,
+  quickLinks = [],
+  activePath,
+}: {
+  nav: Item[];
+  quickLinks?: Item[];
+  activePath: string;
+}) {
   const [open, setOpen] = useState(false);
+  const isActive = (href: string) =>
+    href === '/' ? activePath === '/' : activePath === href || activePath.startsWith(`${href}/`);
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? 'hidden' : '';
@@ -33,21 +43,45 @@ export default function MobileMenu({ nav, activePath }: { nav: Item[]; activePat
 
       {open && (
         <div id="mm-panel" class="mm-panel" role="dialog" aria-modal="true" aria-label="Menu">
+          <div class="mm-hero">
+            <p class="mm-kicker">První krok</p>
+            <div class="mm-quick-grid">
+              <a href="/meditace" class="mm-quick mm-quick-primary" onClick={() => setOpen(false)}>
+                <span>Začít zdarma</span>
+                <small>5 minut meditace bez závazku</small>
+              </a>
+              <a href="/skupiny" class="mm-quick" onClick={() => setOpen(false)}>
+                <span>Najít skupinu</span>
+                <small>Praha, další města i online</small>
+              </a>
+            </div>
+          </div>
+
           <nav class="mm-nav" aria-label="Mobilní navigace">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                class={`mm-link ${activePath === item.href ? 'is-active' : ''}`}
+                class={`mm-link ${isActive(item.href) ? 'is-active' : ''}`}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
               </a>
             ))}
-            <a href="/daru" class="mm-link mm-donate" onClick={() => setOpen(false)}>
-              Podpořte nás
-            </a>
           </nav>
+
+          {quickLinks.length > 0 && (
+            <div class="mm-secondary">
+              <p class="mm-kicker">Další</p>
+              <div class="mm-secondary-links">
+                {quickLinks.map((item) => (
+                  <a key={item.href} href={item.href} class="mm-secondary-link" onClick={() => setOpen(false)}>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -81,10 +115,12 @@ export default function MobileMenu({ nav, activePath }: { nav: Item[]; activePat
         .mm-panel {
           position: fixed;
           inset: 72px 0 0 0;
-          background: var(--bg);
+          background:
+            radial-gradient(circle at top right, rgba(224, 160, 32, 0.12), transparent 24rem),
+            var(--bg);
           z-index: 39;
           overflow-y: auto;
-          padding: 2rem 1.5rem 4rem;
+          padding: 1.25rem 1.5rem 4rem;
           animation: mm-fade 220ms var(--ease-out, ease-out);
         }
         @media (min-width: 768px) {
@@ -93,6 +129,51 @@ export default function MobileMenu({ nav, activePath }: { nav: Item[]; activePat
         @keyframes mm-fade {
           from { opacity: 0; transform: translateY(-6px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        .mm-hero {
+          max-width: 480px;
+          margin: 0 auto 1.5rem;
+        }
+        .mm-kicker {
+          margin: 0 0 0.75rem;
+          font-family: var(--font-mono);
+          font-size: 0.6875rem;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          color: var(--ink-soft);
+        }
+        .mm-quick-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0.75rem;
+        }
+        .mm-quick {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          padding: 1rem;
+          border-radius: 1rem;
+          border: 1px solid var(--line);
+          background: color-mix(in oklab, var(--surface) 88%, white 12%);
+          color: var(--ink);
+          text-decoration: none;
+          box-shadow: 0 10px 28px -24px rgba(28, 43, 58, 0.4);
+        }
+        .mm-quick span {
+          font-family: var(--font-serif);
+          font-size: 1.1rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          color: var(--tergar-navy);
+        }
+        .mm-quick small {
+          font-size: 0.76rem;
+          line-height: 1.35;
+          color: var(--ink-muted);
+        }
+        .mm-quick-primary {
+          background: linear-gradient(145deg, rgba(246, 231, 200, 0.9), rgba(255, 247, 230, 0.98));
+          border-color: color-mix(in oklab, var(--accent) 52%, white 48%);
         }
         .mm-nav {
           display: flex;
@@ -120,21 +201,33 @@ export default function MobileMenu({ nav, activePath }: { nav: Item[]; activePat
           padding-left: 0.5rem;
         }
         .mm-link.is-active { color: var(--accent); }
-        .mm-donate {
-          margin-top: 1.5rem;
-          padding: 1rem 1.5rem;
-          background: var(--accent);
-          color: var(--tergar-navy);
-          border-radius: 10px;
-          border: 0;
-          justify-content: center;
-          font-size: 1rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          font-weight: 700;
-          font-family: var(--font-sans);
+        .mm-secondary {
+          max-width: 480px;
+          margin: 1.75rem auto 0;
         }
-        .mm-donate:active { padding-left: 1.5rem; }
+        .mm-secondary-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.625rem;
+        }
+        .mm-secondary-link {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 2.75rem;
+          padding: 0.8rem 1rem;
+          border-radius: 999px;
+          border: 1px solid var(--line-strong);
+          color: var(--ink);
+          text-decoration: none;
+          font-size: 0.8125rem;
+          font-weight: 600;
+        }
+        @media (max-width: 420px) {
+          .mm-quick-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
     </>
   );

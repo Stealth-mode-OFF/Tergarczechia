@@ -7,6 +7,7 @@ import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Button from '@/components/ui/Button.astro';
 import GroupsMap from '@/components/groups/GroupsMap';
+import MobileActionBar from '@/components/ui/MobileActionBar.astro';
 
 const groups = (await getCollection('groups')).filter((g) => g.data.active);
 
@@ -46,23 +47,10 @@ const breadcrumbs = [
     </Container>
   </Section>
 
-  <Section size="md">
+  <Section id="prehled-skupin" size="md" surface>
     <Container>
       <SectionHeader
         folio="02"
-        eyebrow="Mapa skupin"
-        title="Kde se potkáváme."
-      />
-      <div class="map-wrap">
-        <GroupsMap groups={pins} client:only="react" />
-      </div>
-    </Container>
-  </Section>
-
-  <Section size="md" surface>
-    <Container>
-      <SectionHeader
-        folio="03"
         eyebrow="Přehled skupin"
         title="Každý týden, bez přihlášky."
       />
@@ -101,6 +89,19 @@ const breadcrumbs = [
   <Section size="md">
     <Container>
       <SectionHeader
+        folio="03"
+        eyebrow="Mapa skupin"
+        title="Kde se potkáváme."
+      />
+      <div class="map-wrap">
+        <GroupsMap groups={pins} client:only="react" />
+      </div>
+    </Container>
+  </Section>
+
+  <Section size="md">
+    <Container>
+      <SectionHeader
         folio="04"
         eyebrow="Založte skupinu"
         title="Ve vašem městě zatím nejsme — chcete to změnit?"
@@ -109,6 +110,14 @@ const breadcrumbs = [
       <Button href="/kontakt" variant="primary" size="lg">Napište nám</Button>
     </Container>
   </Section>
+
+  <MobileActionBar
+    label="Rychlé akce na stránce skupin"
+    actions={[
+      { label: 'Přehled skupin', href: '#prehled-skupin' },
+      { label: 'Napište nám', href: '/kontakt', variant: 'secondary' },
+    ]}
+  />
 </BaseLayout>
 
 <style>

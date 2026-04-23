@@ -27,6 +27,8 @@ export default function CategoryFilter({
     });
     const empty = document.getElementById('cf-empty');
     if (empty) empty.hidden = visible > 0;
+    const count = document.getElementById('cf-count');
+    if (count) count.textContent = String(visible);
   }, [cat, kind, targetSelector]);
 
   return (

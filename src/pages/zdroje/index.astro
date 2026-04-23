@@ -6,6 +6,7 @@ import Section from '@/components/ui/Section.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import CategoryFilter from '@/components/blog/CategoryFilter';
+import MobileActionBar from '@/components/ui/MobileActionBar.astro';
 import { formatDate, categoryLabel } from '@/lib/format';
 
 const blog = (await getCollection('blog')).filter((a) => !a.data.draft);
@@ -115,7 +116,7 @@ const breadcrumbs = [
     </Container>
   </Section>
 
-  <Section size="md">
+  <Section id="filtry-zdroju" size="md">
     <Container>
       <SectionHeader
         folio="02"
@@ -123,6 +124,7 @@ const breadcrumbs = [
         title="Filtrujte podle tématu a formátu."
       />
       <CategoryFilter categories={categories} kinds={kinds} client:visible />
+      <p class="cf-summary"><span id="cf-count">{items.length}</span> zdrojů v aktuálním výběru</p>
 
       <ul class="cf-grid" aria-label="Obsah">
         {items.map((it) => (
@@ -157,6 +159,14 @@ const breadcrumbs = [
       <p id="cf-empty" class="cf-empty" hidden>Žádný obsah pro zvolené filtry.</p>
     </Container>
   </Section>
+
+  <MobileActionBar
+    label="Rychlé akce na stránce zdrojů"
+    actions={[
+      { label: 'Filtry zdrojů', href: '#filtry-zdroju' },
+      { label: 'Začít meditovat', href: '/meditace', variant: 'secondary' },
+    ]}
+  />
 </BaseLayout>
 
 <style>
@@ -226,6 +236,14 @@ const breadcrumbs = [
   }
   @media (min-width: 640px) { .cf-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1024px) { .cf-grid { grid-template-columns: repeat(3, 1fr); } }
+  .cf-summary {
+    margin: -0.5rem 0 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
   .cf-card {
     display: flex;
     flex-direction: column;

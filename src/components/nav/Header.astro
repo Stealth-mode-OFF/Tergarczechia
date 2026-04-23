@@ -4,13 +4,16 @@ import logoImage from '@/assets/logo.png';
 import MobileMenu from './MobileMenu.tsx';
 
 const nav = [
-  { label: 'Meditace', href: '/meditace' },
-  { label: 'Časovač', href: '/casovac' },
-  { label: 'Cesta', href: '/cesta' },
+  { label: 'Začít', href: '/meditace' },
   { label: 'Skupiny', href: '/skupiny' },
   { label: 'Akce', href: '/akce' },
+  { label: 'Cesta', href: '/cesta' },
   { label: 'Zdroje', href: '/zdroje' },
   { label: 'O nás', href: '/o-nas' },
+];
+const quickLinks = [
+  { label: 'Časovač', href: '/casovac' },
+  { label: 'Podpořte nás', href: '/daru' },
 ];
 const pathname = Astro.url.pathname;
 const isActive = (href: string) =>
@@ -38,8 +41,9 @@ const isActive = (href: string) =>
       </nav>
 
       <div class="header-cta">
-        <a href="/daru" class="cta-donate">Podpořte</a>
-        <MobileMenu nav={nav} activePath={pathname} client:media="(max-width: 960px)" />
+        <a href="/daru" class="cta-support">Podpořte</a>
+        <a href="/meditace" class:list={['cta-start', { active: isActive('/meditace') }]}>Začít zdarma</a>
+        <MobileMenu nav={nav} quickLinks={quickLinks} activePath={pathname} client:media="(max-width: 959px)" />
       </div>
     </div>
   </div>
@@ -143,28 +147,50 @@ const isActive = (href: string) =>
     align-items: center;
     gap: 0.5rem;
   }
-  .cta-donate {
+  .cta-support {
+    display: none;
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.25rem;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .cta-support:hover {
+    color: var(--tergar-navy);
+  }
+  .cta-start {
     display: none;
     padding: 0.5rem 1.125rem;
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, #E7B14B 100%);
     color: var(--tergar-navy);
-    border: 1px solid var(--accent);
+    border: 1px solid color-mix(in oklab, var(--accent) 82%, white 18%);
     border-radius: var(--radius-md);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     text-decoration: none;
-    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
     box-shadow: 0 4px 14px -4px rgba(224, 160, 32, 0.35);
   }
-  @media (min-width: 640px) {
-    .cta-donate { display: inline-flex; }
-  }
-  .cta-donate:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+  .cta-start:hover {
+    background: linear-gradient(135deg, var(--accent-hover) 0%, #C98C17 100%);
     color: #FFFFFF;
-    box-shadow: 0 6px 18px -4px rgba(224, 160, 32, 0.5);
+    box-shadow: 0 8px 22px -8px rgba(224, 160, 32, 0.58);
+    transform: translateY(-1px);
+  }
+  .cta-start.active {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--accent-hover) 72%, white 28%),
+      0 8px 22px -8px rgba(224, 160, 32, 0.48);
+  }
+  @media (min-width: 520px) {
+    .cta-start { display: inline-flex; }
+  }
+  @media (min-width: 960px) {
+    .cta-support { display: inline-flex; }
   }
 </style>

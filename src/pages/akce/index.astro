@@ -6,6 +6,7 @@ import Section from '@/components/ui/Section.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import EventFilter from '@/components/events/EventFilter';
+import MobileActionBar from '@/components/ui/MobileActionBar.astro';
 import { formatDateRange, eventTypeLabel, audienceLabel } from '@/lib/format';
 
 const events = (await getCollection('events')).sort(
@@ -52,7 +53,7 @@ const audiences = [
     </Container>
   </Section>
 
-  <Section size="md">
+  <Section id="kalendar" size="md">
     <Container>
       <SectionHeader
         folio="02"
@@ -75,7 +76,7 @@ const audiences = [
               data-end-ts={end}
               hidden={hiddenInitial}
             >
-              <a href={`/akce/${e.id}`}>
+              <article class="ef-card">
                 <div class="ef-date">{formatDateRange(e.data.dateStart, e.data.dateEnd)}</div>
                 <div class="ef-body">
                   <h3>{e.data.title}</h3>
@@ -88,7 +89,17 @@ const audiences = [
                     {e.data.free && <span class="tag tag-accent">Zdarma</span>}
                   </div>
                 </div>
-              </a>
+                <div class="ef-actions">
+                  {e.data.registrationUrl && (
+                    <a href={e.data.registrationUrl} target="_blank" rel="noopener noreferrer" class="ef-link ef-link-primary">
+                      Přihlásit se ↗
+                    </a>
+                  )}
+                  <a href={`/akce/${e.id}`} class="ef-link">
+                    Detail akce
+                  </a>
+                </div>
+              </article>
             </li>
           );
         })}
@@ -96,6 +107,14 @@ const audiences = [
       <p id="ef-empty" class="ef-empty" hidden>Žádná akce pro zvolené filtry.</p>
     </Container>
   </Section>
+
+  <MobileActionBar
+    label="Rychlé akce na stránce akcí"
+    actions={[
+      { label: 'Filtrovat akce', href: '#kalendar' },
+      { label: 'Najít skupinu', href: '/skupiny', variant: 'secondary' },
+    ]}
+  />
 </BaseLayout>
 
 <style>
@@ -162,15 +181,18 @@ const audiences = [
   .ef-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
   .ef-item { border-top: 1px solid var(--line); }
   .ef-item:last-child { border-bottom: 1px solid var(--line); }
-  .ef-item a {
+  .ef-card {
     display: grid;
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 140px minmax(0, 1fr) auto;
     gap: 1.5rem;
     padding: 1.5rem 0;
-    color: inherit;
-    text-decoration: none;
   }
-  @media (max-width: 640px) { .ef-item a { grid-template-columns: 1fr; gap: 0.75rem; } }
+  @media (max-width: 720px) {
+    .ef-card {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
   .ef-date {
     font-family: var(--font-mono);
     font-size: 0.875rem;
@@ -189,6 +211,39 @@ const audiences = [
   }
   .ef-body h3 { font-size: 1.375rem; margin: 0 0 0.5rem; }
   .ef-body p { color: var(--ink-muted); margin: 0 0 0.75rem; }
+  .ef-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.625rem;
+  }
+  @media (max-width: 720px) {
+    .ef-actions {
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+  .ef-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .ef-link-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--tergar-navy);
+  }
   .ef-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; }
   .ef-tags .tag {
     display: inline-flex;

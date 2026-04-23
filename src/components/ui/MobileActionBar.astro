@@ -1,0 +1,105 @@
+---
+type Action = {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+};
+
+type Props = {
+  actions: Action[];
+  label?: string;
+};
+
+const { actions, label = 'Rychlé akce' } = Astro.props;
+const visibleActions = actions.slice(0, 2);
+---
+
+{visibleActions.length > 0 && (
+  <>
+    <div class="mab-spacer" aria-hidden="true"></div>
+    <nav class="mab" aria-label={label}>
+      <div class="mab-shell">
+        {visibleActions.map((action) => (
+          <a
+            href={action.href}
+            class:list={['mab-link', action.variant === 'secondary' ? 'mab-secondary' : 'mab-primary']}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </>
+)}
+
+<style>
+  .mab-spacer {
+    display: block;
+    height: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+  }
+  .mab {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 42;
+    padding:
+      0.75rem
+      max(0.875rem, env(safe-area-inset-right, 0px))
+      calc(0.75rem + env(safe-area-inset-bottom, 0px))
+      max(0.875rem, env(safe-area-inset-left, 0px));
+    pointer-events: none;
+  }
+  .mab-shell {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.625rem;
+    padding: 0.625rem;
+    background: color-mix(in oklab, var(--bg) 88%, white 12%);
+    border: 1px solid color-mix(in oklab, var(--line-strong) 72%, white 28%);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 20px 50px -28px rgba(28, 43, 58, 0.42),
+      0 6px 18px -10px rgba(28, 43, 58, 0.22);
+    backdrop-filter: saturate(1.1) blur(14px);
+    -webkit-backdrop-filter: saturate(1.1) blur(14px);
+    pointer-events: auto;
+  }
+  .mab-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.875rem 1rem;
+    border-radius: 0.95rem;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.15;
+    font-weight: 700;
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .mab-link:active {
+    transform: translateY(1px);
+  }
+  .mab-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, #E7B14B 100%);
+    color: var(--tergar-navy);
+    border: 1px solid color-mix(in oklab, var(--accent) 88%, white 12%);
+  }
+  .mab-secondary {
+    background: color-mix(in oklab, var(--surface) 88%, white 12%);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+  }
+  @media (min-width: 768px) {
+    .mab,
+    .mab-spacer {
+      display: none;
+    }
+  }
+</style>

@@ -9,6 +9,7 @@ import Card from '@/components/ui/Card.astro';
 import Divider from '@/components/ui/Divider.astro';
 import SocialIcon from '@/components/ui/SocialIcon.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
+import MobileActionBar from '@/components/ui/MobileActionBar.astro';
 import mingyurPortrait from '@/assets/mingyur-portrait.png';
 import mingyurWaving from '@/assets/mingyur-waving.png';
 import communityImage from '@/assets/community.png';
@@ -29,6 +30,10 @@ const calendarPeek = upcoming.slice(1, 4);
 const cityCount = new Set(groups.filter((g) => g.data.city !== 'Online').map((g) => g.data.city)).size;
 const onlineCount = groups.filter((g) => g.data.city === 'Online').length;
 const upcomingCount = upcoming.length;
+const groupsPreview = groups
+  .slice()
+  .sort((a, b) => Number(a.data.city === 'Online') - Number(b.data.city === 'Online') || a.data.city.localeCompare(b.data.city, 'cs'))
+  .slice(0, 5);
 
 const heroTitle = 'Meditace, která se hodí do českého života.';
 const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
@@ -36,18 +41,21 @@ const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yong
 const audienceSegments = [
   {
     label: 'Jsem tu poprvé',
+    meta: '5 minut · bez závazku',
     title: 'Začínám s meditací',
     body: 'Projděte krátkou trasu „Co je meditace" a zkuste první vedenou praxi. Bez zkušeností. Bez vybavení. Bez nároků.',
-    cta: { label: 'Začít', href: '/meditace' },
+    cta: { label: 'Začít zdarma', href: '/meditace' },
   },
   {
     label: 'Chci prohloubit',
+    meta: 'Joy of Living · Path of Liberation',
     title: 'Pokračuji na cestě',
     body: 'Prohlédněte si Cestu Tergar — Joy of Living 1–3 a Path of Liberation. Strukturovaný program od tradice přes současnou vědu.',
     cta: { label: 'Cesta Tergar', href: '/cesta' },
   },
   {
     label: 'Hledám komunitu',
+    meta: `${cityCount} měst${onlineCount > 0 ? ` · ${onlineCount} online` : ''}`,
     title: 'Najdu si skupinu',
     body: 'V Praze, Českých Budějovicích, České Lípě i online. Pravidelná setkání každý týden — přijďte kdykoliv.',
     cta: { label: 'Skupiny', href: '/skupiny' },
@@ -106,8 +114,8 @@ const voices = [
           <h1 class="hero-title">{heroTitle}</h1>
           <p class="hero-lede">{heroLede}</p>
           <div class="hero-cta">
-            <Button href="/skupiny" variant="primary" size="lg">Najděte skupinu</Button>
-            <Button href="/meditace" variant="secondary" size="lg">Co je meditace</Button>
+            <Button href="/meditace" variant="primary" size="lg">Začít zdarma</Button>
+            <Button href="/skupiny" variant="secondary" size="lg">Najít skupinu</Button>
           </div>
           <dl class="hero-meta">
             <div>
@@ -124,23 +132,40 @@ const voices = [
             </div>
           </dl>
         </div>
-        <aside class="hero-portrait" aria-label="Zakladatel komunity">
-          <div class="portrait-frame">
-            <Image
-              src={mingyurPortrait}
-              alt=""
-              widths={[320, 480, 640, 960]}
-              sizes="(max-width: 768px) 0px, (max-width: 1200px) 38vw, 480px"
-              loading="eager"
-              class="portrait-img"
-            />
-            <div class="portrait-ring"></div>
-            <div class="portrait-glow"></div>
+        <aside class="hero-panel" aria-label="Vyberte si první krok">
+          <div class="hero-panel-shell">
+            <p class="hero-panel-kicker">Nejrychlejší další krok</p>
+            <div class="hero-steps">
+              <a href="/meditace" class="hero-step hero-step-primary">
+                <strong>Vyzkoušet meditaci</strong>
+                <span>Krátký úvod a prvních 5 minut praxe.</span>
+              </a>
+              <a href="/skupiny" class="hero-step">
+                <strong>Najít skupinu</strong>
+                <span>Praha, další města i online setkání.</span>
+              </a>
+              <a href={featuredEvent?.data.registrationUrl ?? (featuredEvent ? `/akce/${featuredEvent.id}` : '/akce')} class="hero-step">
+                <strong>{featuredEvent ? 'Nejbližší akce' : 'Kalendář akcí'}</strong>
+                <span>{featuredEvent ? featuredEvent.data.title : 'Retreaty, workshopy a přenosy.'}</span>
+              </a>
+            </div>
+            <div class="hero-guide">
+              <div class="hero-guide-media">
+                <Image
+                  src={mingyurPortrait}
+                  alt=""
+                  widths={[120, 180, 240]}
+                  sizes="72px"
+                  loading="eager"
+                  class="hero-guide-img"
+                />
+              </div>
+              <div class="hero-guide-copy">
+                <span class="hero-guide-title">Vede Yongey Mingyur Rinpočhe</span>
+                <span class="hero-guide-text">Tergar propojuje tradiční meditaci s jazykem, který je srozumitelný i pro úplné začátky.</span>
+              </div>
+            </div>
           </div>
-          <figcaption class="portrait-caption">
-            <span class="portrait-name">Yongey Mingyur Rinpočhe</span>
-            <span class="portrait-role">zakladatel Tergar</span>
-          </figcaption>
         </aside>
       </div>
     </Container>
@@ -155,11 +180,12 @@ const voices = [
         <h2>Každý začíná jinde. Vyberte si, co vám sedí.</h2>
       </header>
       <div class="segments">
-        {audienceSegments.map((s) => (
-          <Card href={s.cta.href} class="segment" elevated>
+        {audienceSegments.map((s, index) => (
+          <Card href={s.cta.href} class="segment" elevated accent={index === 0}>
             <Badge variant="accent" size="sm">{s.label}</Badge>
             <h3>{s.title}</h3>
             <p>{s.body}</p>
+            <span class="segment-meta">{s.meta}</span>
             <span class="seg-cta">
               {s.cta.label}
               <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -172,67 +198,71 @@ const voices = [
     </Container>
   </Section>
 
-  <!-- Path ladder -->
+  {featuredEvent && (
+    <Section size="md">
+      <Container>
+        <div class="next-event">
+          <div class="ne-left">
+            <p class="eyebrow"><span class="folio">02.</span>Nejbližší akce</p>
+            <h2>{featuredEvent.data.title}</h2>
+            <p class="ne-meta">
+              <Badge variant="outline">{eventTypeLabel(featuredEvent.data.type)}</Badge>
+              <span>{formatDateRange(featuredEvent.data.dateStart, featuredEvent.data.dateEnd)}</span>
+              {featuredEvent.data.free && (
+                <>
+                  <span class="dot">·</span>
+                  <span>Zdarma</span>
+                </>
+              )}
+            </p>
+            <p class="ne-body">{featuredEvent.data.description}</p>
+            <div class="ne-cta">
+              {featuredEvent.data.registrationUrl && (
+                <Button href={featuredEvent.data.registrationUrl} variant="primary" external>Přihlásit se</Button>
+              )}
+              <Button href={`/akce/${featuredEvent.id}`} variant={featuredEvent.data.registrationUrl ? 'secondary' : 'primary'}>Detail akce</Button>
+            </div>
+          </div>
+          {calendarPeek.length > 0 && (
+            <aside class="ne-right" aria-label="Další události">
+              <h3 class="ne-small">Také v kalendáři</h3>
+              <ul>
+                {calendarPeek.map((e) => (
+                  <li>
+                    <span>{formatDateShort(e.data.dateStart)}</span>
+                    <a href={`/akce/${e.id}`}>{e.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+              <a href="/akce" class="ne-more">Celý kalendář →</a>
+            </aside>
+          )}
+        </div>
+      </Container>
+    </Section>
+  )}
+
+  <!-- Groups teaser -->
   <Section size="md" surface>
     <Container>
-      <div class="path-layout">
-        <div class="path-head">
-          <p class="eyebrow"><span class="folio">02.</span>Cesta Tergar</p>
-          <h2>Strukturovaný program — od prvních vdechů po Mahámudru.</h2>
-          <p class="path-lede">
-            Navazující úrovně vyvinuté Mingyurem Rinpočhem propojují starodávnou tradici tibetského buddhismu s pozorností k tomu, jak dnes žijeme.
-            Každý stupeň staví na předchozím.
+      <div class="groups-teaser">
+        <div>
+          <p class="eyebrow"><span class="folio">03.</span>Skupiny</p>
+          <h2>Setkáváme se tam, kde žijete.</h2>
+          <p class="groups-lede">
+            Pravidelná setkání v Praze, Českých Budějovicích, České Lípě a online. Otevřená — přijďte, i když jste nikdy nemeditovali.
           </p>
-          <Button href="/cesta" variant="secondary">Celá cesta</Button>
+          <Button href="/skupiny" variant="primary">Prohlédnout mapu skupin</Button>
         </div>
-        <ol class="path-list">
-          {pathHighlights.map((p) => (
+        <ul class="groups-list">
+          {groupsPreview.map((group) => (
             <li>
-              <span class="path-num">{p.num}</span>
-              <div>
-                <h4>{p.title}</h4>
-                <p>{p.sub}</p>
-              </div>
+              <strong>{group.data.city}</strong>
+              <span class="groups-list-name">{group.data.name}</span>
+              <span class="groups-list-schedule">{group.data.schedule}</span>
             </li>
           ))}
-        </ol>
-      </div>
-    </Container>
-  </Section>
-
-  <!-- Teacher cameo -->
-  <Section size="md" tint="navy" class="teacher">
-    <Container>
-      <div class="teacher-grid">
-        <figure class="teacher-figure">
-          <Image
-            src={mingyurWaving}
-            alt="Yongey Mingyur Rinpočhe"
-            widths={[320, 480, 640]}
-            sizes="(max-width: 768px) 60vw, 380px"
-            loading="lazy"
-            class="teacher-img"
-          />
-          <figcaption class="teacher-cap">
-            <span class="teacher-name">Yongey Mingyur Rinpočhe</span>
-            <span class="teacher-role">učitel linie Karma Kagjü · Tergar International</span>
-          </figcaption>
-        </figure>
-        <div class="teacher-body">
-          <p class="eyebrow"><span class="folio">03.</span>Váš učitel</p>
-          <blockquote class="teacher-quote">
-            <span class="big-quote" aria-hidden="true">„</span>
-            Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
-            <cite class="teacher-sig">— Yongey Mingyur Rinpočhe</cite>
-          </blockquote>
-          <p class="teacher-lede">
-            Mingyur Rinpočhe spojuje tradiční tibetský buddhismus s moderní neurovědou. Jeho knihy vyšly ve dvaceti jazycích, komunita Tergar má žáky ve více než třiceti zemích.
-          </p>
-          <div class="teacher-cta">
-            <Button href="/o-nas" variant="primary">O Rinpočhem i sanghe</Button>
-            <a href="https://tergar.org/yongey-mingyur-rinpoche" target="_blank" rel="noopener" class="teacher-link">Tergar International ↗</a>
-          </div>
-        </div>
+        </ul>
       </div>
     </Container>
   </Section>
@@ -263,69 +293,67 @@ const voices = [
     </Container>
   </Section>
 
-    {featuredEvent && (
-    <Section size="md">
-      <Container>
-        <div class="next-event">
-          <div class="ne-left">
-            <p class="eyebrow"><span class="folio">05.</span>Nejbližší akce</p>
-            <h2>{featuredEvent.data.title}</h2>
-            <p class="ne-meta">
-              <Badge variant="outline">{eventTypeLabel(featuredEvent.data.type)}</Badge>
-              <span>{formatDateRange(featuredEvent.data.dateStart, featuredEvent.data.dateEnd)}</span>
-              {featuredEvent.data.free && (
-                <>
-                  <span class="dot">·</span>
-                  <span>Zdarma</span>
-                </>
-              )}
-            </p>
-            <p class="ne-body">{featuredEvent.data.description}</p>
-            <div class="ne-cta">
-              <Button href={`/akce/${featuredEvent.id}`} variant="primary">Detail akce</Button>
-              {featuredEvent.data.registrationUrl && (
-                <Button href={featuredEvent.data.registrationUrl} variant="ghost" external>Přihlásit se</Button>
-              )}
-            </div>
+  <!-- Teacher cameo -->
+  <Section size="md" tint="navy" class="teacher">
+    <Container>
+      <div class="teacher-grid">
+        <figure class="teacher-figure">
+          <Image
+            src={mingyurWaving}
+            alt="Yongey Mingyur Rinpočhe"
+            widths={[320, 480, 640]}
+            sizes="(max-width: 768px) 60vw, 380px"
+            loading="lazy"
+            class="teacher-img"
+          />
+          <figcaption class="teacher-cap">
+            <span class="teacher-name">Yongey Mingyur Rinpočhe</span>
+            <span class="teacher-role">učitel linie Karma Kagjü · Tergar International</span>
+          </figcaption>
+        </figure>
+        <div class="teacher-body">
+          <p class="eyebrow"><span class="folio">05.</span>Váš učitel</p>
+          <blockquote class="teacher-quote">
+            <span class="big-quote" aria-hidden="true">„</span>
+            Skutečná meditace je způsob, jak se spřátelit se svou vlastní myslí. A nejlepší přítel je ten, kdo vás přijme přesně takové, jací jste."
+            <cite class="teacher-sig">— Yongey Mingyur Rinpočhe</cite>
+          </blockquote>
+          <p class="teacher-lede">
+            Mingyur Rinpočhe spojuje tradiční tibetský buddhismus s moderní neurovědou. Jeho knihy vyšly ve dvaceti jazycích, komunita Tergar má žáky ve více než třiceti zemích.
+          </p>
+          <div class="teacher-cta">
+            <Button href="/o-nas" variant="primary">O Rinpočhem i sanghe</Button>
+            <a href="https://tergar.org/yongey-mingyur-rinpoche" target="_blank" rel="noopener" class="teacher-link">Tergar International ↗</a>
           </div>
-          {calendarPeek.length > 0 && (
-            <aside class="ne-right" aria-label="Další události">
-              <h3 class="ne-small">Také v kalendáři</h3>
-              <ul>
-                {calendarPeek.map((e) => (
-                  <li>
-                    <span>{formatDateShort(e.data.dateStart)}</span>
-                    <a href={`/akce/${e.id}`}>{e.data.title}</a>
-                  </li>
-                ))}
-              </ul>
-              <a href="/akce" class="ne-more">Celý kalendář →</a>
-            </aside>
-          )}
         </div>
-      </Container>
-    </Section>
-  )}
+      </div>
+    </Container>
+  </Section>
 
-  <!-- Groups teaser -->
+  <!-- Path ladder -->
   <Section size="md" surface>
     <Container>
-      <div class="groups-teaser">
-        <div>
-          <p class="eyebrow"><span class="folio">06.</span>Skupiny</p>
-          <h2>Setkáváme se tam, kde žijete.</h2>
-          <p class="groups-lede">
-            Pravidelná setkání v Praze (česky i anglicky), Českých Budějovicích, České Lípě a online. Otevřená — přijďte, i když jste nikdy nemeditovali.
+      <div class="path-layout">
+        <div class="path-head">
+          <p class="eyebrow"><span class="folio">06.</span>Cesta Tergar</p>
+          <h2>Strukturovaný program — od prvních vdechů po Mahámudru.</h2>
+          <p class="path-lede">
+            Navazující úrovně vyvinuté Mingyurem Rinpočhem propojují starodávnou tradici tibetského buddhismu s pozorností k tomu, jak dnes žijeme.
+            Každý stupeň staví na předchozím.
           </p>
-          <Button href="/skupiny" variant="primary">Prohlédnout mapu skupin</Button>
+          <Button href="/cesta" variant="secondary">Celá cesta</Button>
         </div>
-        <ul class="groups-list">
-          <li><strong>Praha</strong><span>2. a 4. čtvrtek · 19:00</span></li>
-          <li><strong>Prague (English)</strong><span>2nd &amp; 4th Thursday · 19:00</span></li>
-          <li><strong>Č. Budějovice</strong><span>Každou neděli</span></li>
-          <li><strong>Česká Lípa</strong><span>Každou středu</span></li>
-          <li><strong>Online</strong><span>Každé pondělí</span></li>
-        </ul>
+        <ol class="path-list">
+          {pathHighlights.map((p) => (
+            <li>
+              <span class="path-num">{p.num}</span>
+              <div>
+                <h4>{p.title}</h4>
+                <p>{p.sub}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </Container>
   </Section>
@@ -383,6 +411,14 @@ const voices = [
       </div>
     </Container>
   </Section>
+
+  <MobileActionBar
+    label="Rychlé akce na domovské stránce"
+    actions={[
+      { label: 'Začít zdarma', href: '/meditace' },
+      { label: 'Najít skupinu', href: '/skupiny', variant: 'secondary' },
+    ]}
+  />
 </BaseLayout>
 
 <style>
@@ -444,97 +480,116 @@ const voices = [
   .hero-text {
     max-width: 40rem;
   }
-
-  /* Portrait — hidden on mobile (teacher cameo further down has a proper
-     one); full portrait card in hero only on desktop. Prevents the weird
-     tiny-portrait-above-welcome-badge on phones. */
-  .hero-portrait {
-    display: none;
+  .hero-panel {
+    justify-self: stretch;
   }
   @media (min-width: 900px) {
-    .hero-portrait {
-      display: block;
+    .hero-panel {
       justify-self: end;
-      max-width: 440px;
+      max-width: 30rem;
       width: 100%;
     }
   }
-  .portrait-frame {
-    position: relative;
-    width: 72px;
-    height: 72px;
+  .hero-panel-shell {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.125rem, 2.2vw, 1.5rem);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(246, 231, 200, 0.28)),
+      color-mix(in oklab, var(--bg) 90%, white 10%);
+    border: 1px solid color-mix(in oklab, var(--line-strong) 80%, white 20%);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 12px 30px -24px rgba(28, 43, 58, 0.45),
+      0 24px 50px -42px rgba(224, 160, 32, 0.55);
+    backdrop-filter: saturate(1.05) blur(10px);
+    -webkit-backdrop-filter: saturate(1.05) blur(10px);
+  }
+  .hero-panel-kicker {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+  }
+  .hero-steps {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .hero-step {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 1.05rem;
+    border-radius: 1rem;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.7);
+    color: inherit;
+    text-decoration: none;
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .hero-step:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in oklab, var(--accent) 72%, white 28%);
+    box-shadow: 0 12px 28px -24px rgba(28, 43, 58, 0.45);
+  }
+  .hero-step strong {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--tergar-navy);
+  }
+  .hero-step span {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--ink-muted);
+  }
+  .hero-step-primary {
+    background: linear-gradient(145deg, rgba(246, 231, 200, 0.96), rgba(255, 250, 242, 0.98));
+    border-color: color-mix(in oklab, var(--accent) 52%, white 48%);
+  }
+  .hero-guide {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.875rem;
+    align-items: center;
+    padding-top: 0.25rem;
+    border-top: 1px solid color-mix(in oklab, var(--line) 82%, white 18%);
+  }
+  .hero-guide-media {
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     overflow: hidden;
-    flex-shrink: 0;
     background: linear-gradient(160deg, var(--tergar-cream) 0%, #EFE6D8 100%);
     box-shadow:
-      0 2px 6px rgba(32, 48, 112, 0.08),
-      0 8px 20px -10px rgba(224, 160, 32, 0.35);
+      0 8px 18px -14px rgba(28, 43, 58, 0.4),
+      0 14px 26px -22px rgba(224, 160, 32, 0.45);
   }
-  @media (min-width: 900px) {
-    .portrait-frame {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      border-radius: 2rem;
-      box-shadow:
-        0 4px 12px rgba(32, 48, 112, 0.06),
-        0 40px 80px -40px rgba(32, 48, 112, 0.32);
-    }
-  }
-  .portrait-img {
-    position: absolute;
-    inset: 0;
+  .hero-guide-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 20%;
   }
-  .portrait-ring {
-    position: absolute;
-    inset: 4px;
-    border: 1px solid rgba(224, 160, 32, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
+  .hero-guide-copy {
+    display: grid;
+    gap: 0.18rem;
   }
-  @media (min-width: 900px) {
-    .portrait-ring {
-      inset: 0.75rem;
-      border-radius: 1.5rem;
-    }
-  }
-  .portrait-glow {
-    position: absolute;
-    inset: -20%;
-    background: radial-gradient(circle at 30% 30%, rgba(224, 160, 32, 0.18), transparent 50%);
-    pointer-events: none;
-    mix-blend-mode: screen;
-  }
-  .portrait-caption {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-    padding-left: 0;
-    font-family: var(--font-sans);
-    flex: 1;
-    min-width: 0;
-  }
-  @media (min-width: 900px) {
-    .portrait-caption { margin-top: 1.25rem; padding-left: 0.5rem; flex: unset; }
-  }
-  .portrait-name {
+  .hero-guide-title {
     font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--tergar-navy);
+    font-size: 0.98rem;
     font-weight: 600;
-    letter-spacing: -0.005em;
+    color: var(--tergar-navy);
   }
-  .portrait-role {
+  .hero-guide-text {
     font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    line-height: 1.45;
+    color: var(--ink-muted);
   }
   .hero-kicker {
     display: inline-flex;
@@ -593,8 +648,8 @@ const voices = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
     max-width: 36rem;
+    padding: 1.1rem 1.2rem 0;
     border-top: 1px solid var(--line);
-    padding-top: 1.5rem;
     margin: 0;
   }
   .hero-meta div { display: flex; flex-direction: column; gap: 0.25rem; }
@@ -653,6 +708,13 @@ const voices = [
     text-wrap: balance;
   }
   .segment p { color: var(--ink-muted); margin: 0; flex: 1; }
+  .segment-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
   .seg-cta {
     display: inline-flex;
     align-items: center;
@@ -787,16 +849,22 @@ const voices = [
     flex-direction: column;
   }
   .groups-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
+    display: grid;
+    gap: 0.2rem;
     padding: 1rem 0;
     border-top: 1px solid var(--line);
   }
   .groups-list li:last-child { border-bottom: 1px solid var(--line); }
   .groups-list strong { font-family: var(--font-serif); font-weight: 600; font-size: 1.0625rem; }
-  .groups-list span { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-muted); }
+  .groups-list-name {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+  }
+  .groups-list-schedule {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
 
   /* Donate section — stays on the 21px rail like every other section.
      No center-island: text left, CTA left, max-width editorial. */

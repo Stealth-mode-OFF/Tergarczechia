@@ -105,6 +105,20 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 - **Tertiary CTA**: text link or `Button variant="link"`. Use for glossaries, supporting reading, external references.
 - Never place 3 equally-weighted buttons in a row on mobile.
 - In stacked mobile CTAs: primary first, secondary second, tertiary as text underneath or inline.
+- On homepage and other acquisition pages, primary CTA should favor **entry** ("Začít zdarma", "Zkusit 5 minut", "Najít skupinu"), not donation.
+- For time-sensitive event cards, **registration beats detail**. "Přihlásit se" becomes primary when available.
+
+### Conversion flow
+- Homepage order should bias toward **intent-first**:
+  `hero -> decision cards -> upcoming event / groups -> proof -> teacher -> deep program -> support`
+- Brand story should support action, not delay it. If event/group signup appears after long lineage copy, reorder the page.
+- Off-site links (Instagram, International, social platforms) belong **after** main on-site conversion paths.
+
+### Mobile conversion bar
+- On key mobile pages (`/`, `/meditace`, `/skupiny`, `/akce`, `/zdroje`) use a persistent bottom action bar when the next step would otherwise disappear below the fold.
+- Limit to **2 actions** max: one primary, one secondary.
+- The bar must feel premium and lightweight: glass/cream shell, compact radius, safe-area aware, hidden on tablet/desktop.
+- Always include page spacing so the bar never covers the last CTA or footer.
 
 ### Radius rules (right now this is inconsistent across tergar, fix on sight)
 - **Buttons, link-chips (social, ig-follow, cta-donate)** → `var(--radius-md)` (10px)
@@ -174,3 +188,4 @@ Reference DESIGN.md files for these brands live in `~/.claude/references/awesome
 - **2026-04-23** — New component `SocialIcon.astro` with mono + brand variants (official IG gradient, FB #0866FF, YT #FF0033).
 - **2026-04-23** — New "Hlasy sanghy" editorial testimonials section on homepage (3 quotes, saffron left rule, middle-card offset on desktop).
 - **2026-04-23** — Audit-driven rules added: stricter CTA ladder, tighter mobile section rhythm, denser footer, and explicit post-deploy screenshot verification.
+- **2026-04-23** — Conversion-first pass: header CTA shifted from donation-first to entry-first, homepage reordered around intent and trust, and a reusable mobile action bar introduced for high-intent pages.

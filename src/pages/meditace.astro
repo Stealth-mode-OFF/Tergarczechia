@@ -8,6 +8,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Button from '@/components/ui/Button.astro';
 import Callout from '@/components/ui/Callout.astro';
 import MeditationTimer from '@/components/timer/MeditationTimer.tsx';
+import MobileActionBar from '@/components/ui/MobileActionBar.astro';
 
 const entry = await getEntry('pages', 'meditace');
 const { Content } = entry ? await render(entry) : { Content: null };
@@ -36,13 +37,31 @@ const breadcrumbs = [
         lede={heroText}
         as="h1"
       />
+      <div class="start-actions">
+        <Button href="#zkuste-ted" variant="primary" size="lg">Zkusit 5 minut</Button>
+        <Button href="/skupiny" variant="secondary" size="lg">Najít skupinu</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="zkuste-ted" size="md" surface>
+    <Container>
+      <SectionHeader
+        folio="02"
+        eyebrow="Zkuste to teď"
+        title="Pět minut. Bez závazku. Bez účtu."
+        lede="Klikněte na 5, stiskněte Spustit a zavřete oči. Až uslyšíte zvonek, máte za sebou první minuty praxe. Zbytek článku počká."
+      />
+      <div class="try-dial">
+        <MeditationTimer maxMinutes={30} defaultMinutes={5} compact client:only="preact" />
+      </div>
     </Container>
   </Section>
 
   <Section size="md">
     <Container size="prose">
       <SectionHeader
-        folio="02"
+        folio="03"
         eyebrow="Co vlastně děláme"
         title="Bez mystifikace, bez pózy."
       />
@@ -63,26 +82,30 @@ const breadcrumbs = [
     </Container>
   </Section>
 
-  <Section size="md" surface>
-    <Container>
-      <SectionHeader
-        folio="03"
-        eyebrow="Zkuste to teď"
-        title="Pět minut. Bez závazku. Bez účtu."
-        lede="Klikněte na 5, stiskněte Spustit a zavřete oči. Až uslyšíte zvonek, máte za sebou první minuty praxe. Zbytek článku počká."
-      />
-      <div class="try-dial">
-        <MeditationTimer maxMinutes={30} defaultMinutes={5} compact client:only="preact" />
-      </div>
-    </Container>
-  </Section>
+  <MobileActionBar
+    label="Rychlé akce na stránce meditace"
+    actions={[
+      { label: 'Zkusit 5 minut', href: '#zkuste-ted' },
+      { label: 'Najít skupinu', href: '/skupiny', variant: 'secondary' },
+    ]}
+  />
 </BaseLayout>
 
 <style>
+  .start-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
   .mid-quote { margin: 3rem 0; font-size: 1.375rem; }
   .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-start; margin-top: 3rem; }
   .cta-link { align-self: center; }
   @media (max-width: 520px) {
+    .start-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
     .cta-row {
       flex-direction: column;
       align-items: stretch;
