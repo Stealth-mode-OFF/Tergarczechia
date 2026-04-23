@@ -23,8 +23,8 @@
   },
   "summary": {
     "critical": 0,
-    "high": 3,
-    "medium": 4,
+    "high": 5,
+    "medium": 5,
     "low": 1
   },
   "issues": [
@@ -144,23 +144,84 @@
       ]
     },
     {
-      "id": "post-deploy-template-validation",
-      "severity": "medium",
-      "status": "pending_after_deploy",
-      "category": "qa",
-      "pages": ["/o-nas", "/zdroje", "/faq"],
+      "id": "mobile-filter-clouds-weakened-list-page-hierarchy",
+      "severity": "high",
+      "status": "fixed_in_repo",
+      "category": "filters",
+      "pages": ["/zdroje", "/akce"],
       "viewport": ["mobile"],
-      "problem": "Some live screenshots suggest production and current repo are not fully in sync, especially around long-page spacing and content block sequencing.",
-      "impact": "A few visual anomalies visible on the live URL may persist until the updated repo is deployed.",
-      "recommended_next_step": "Deploy the current repo revision and re-run screenshot capture for the audited templates before closing the audit."
+      "problem": "Wrapped chip clouds in the filter UI pushed the first results too far down and made filter groups harder to scan.",
+      "impact": "List pages lost their main reading order before users even reached the content.",
+      "action_taken": "Split filter labels onto their own line, introduced dedicated chip rows, reduced mobile padding, and made chip rows horizontally scrollable on small screens.",
+      "files": [
+        "src/components/blog/CategoryFilter.tsx",
+        "src/components/events/EventFilter.tsx",
+        "src/pages/zdroje/index.astro",
+        "src/pages/akce/index.astro"
+      ]
+    },
+    {
+      "id": "zdroje-cards-had-unstable-rhythm-between-media-and-text-items",
+      "severity": "high",
+      "status": "fixed_in_repo",
+      "category": "cards",
+      "pages": ["/zdroje"],
+      "viewport": ["desktop", "mobile"],
+      "problem": "Cards with thumbnails and text-only cards had inconsistent opening rhythm, while long descriptions overpowered scanning.",
+      "impact": "The resource grid felt uneven and harder to skim quickly.",
+      "action_taken": "Added explicit text-only card treatment, strengthened title rhythm, and line-clamped descriptions for more stable card scanning.",
+      "files": [
+        "src/pages/zdroje/index.astro"
+      ]
+    },
+    {
+      "id": "akce-mobile-date-cue-was-too-weak",
+      "severity": "medium",
+      "status": "fixed_in_repo",
+      "category": "calendar",
+      "pages": ["/akce"],
+      "viewport": ["mobile"],
+      "problem": "When event rows collapsed to one column, the date lost visual weight and the calendar reading pattern weakened.",
+      "impact": "Titles dominated the list while the chronological cue became secondary.",
+      "action_taken": "Promoted the mobile date into a stronger inline block with more separation from the event body.",
+      "files": [
+        "src/pages/akce/index.astro"
+      ]
+    },
+    {
+      "id": "skupiny-card-meta-wrapped-awkwardly-on-narrow-screens",
+      "severity": "medium",
+      "status": "fixed_in_repo",
+      "category": "cards",
+      "pages": ["/skupiny"],
+      "viewport": ["mobile"],
+      "problem": "City and schedule were forced into one inline sentence, which wrapped poorly and blurred the action hierarchy.",
+      "impact": "Practical details competed with the registration path instead of leading into it cleanly.",
+      "action_taken": "Split city and schedule into stacked meta rows and strengthened the registration link treatment.",
+      "files": [
+        "src/pages/skupiny.astro"
+      ]
+    },
+    {
+      "id": "live-deployment-verification",
+      "severity": "medium",
+      "status": "verified_live",
+      "category": "qa",
+      "pages": ["/faq", "/skupiny", "/zdroje"],
+      "viewport": ["desktop", "mobile"],
+      "problem": "The initial audit started against a live deployment that was not guaranteed to match local source.",
+      "impact": "Without live verification, fixes could have remained local-only.",
+      "action_taken": "Verified deployed HTML on `tergarczechia-three.vercel.app` after push, confirming new FAQ hierarchy, tighter list-page filters, updated resource card variants, and revised utility-page styles."
     }
   ],
   "verification": {
-    "astro_check": "passed_with_hints_only",
+    "astro_check": "passed_clean",
     "build": "passed",
+    "live_verification": "confirmed_on_vercel_preview",
     "notes": [
-      "No type errors remain.",
-      "Build completed successfully with non-blocking hints and a Vite chunk-size warning."
+      "No type errors, warnings, or hints remain.",
+      "Build completed successfully; only the existing Vite chunk-size warning remains non-blocking.",
+      "Live Vercel HTML included the new FAQ kicker/title structure and updated utility/list-page CSS markers."
     ]
   }
 }
