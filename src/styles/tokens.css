@@ -105,23 +105,10 @@
   --dur-slow: 600ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141820;
-    --surface: #1C2B3A;
-    --surface-strong: #2D3748;
-    --ink: #FAF8F4;
-    --ink-muted: #C9BFA9;
-    --ink-soft: #8A93A1;
-    --accent: #E8B95A;
-    --accent-hover: #F2C770;
-    --accent-soft: #3A2F1A;
-    --accent-deep: #9B3A4B;
-    --line: #26303D;
-    --line-strong: #34404F;
-    --focus: #E8B95A;
-  }
-}
+/* Dark mode is intentionally disabled — the tokens above flip correctly
+   but many components still have hardcoded rgba() values (hero gradients,
+   teacher section, image shadows), so the hybrid renders broken on
+   devices in dark mode. Ship light-only until every rgba() is audited. */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

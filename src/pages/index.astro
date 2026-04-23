@@ -401,29 +401,23 @@ const voices = [
   }
   .hero :global(.container-default) { position: relative; z-index: 1; }
 
-  /* Mandala backdrop — concentric rings, quiet editorial ornament.
-     Positioned top-right, fades to transparent. Scales with viewport.
-     On mobile it sits behind the kicker/title area; on desktop tucks behind portrait. */
-  .hero-mandala {
-    position: absolute;
-    top: -80px;
-    right: -160px;
-    width: 440px;
-    height: 440px;
-    color: var(--accent);
-    opacity: 0.18;
-    pointer-events: none;
-    z-index: 0;
-    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 72%);
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 72%);
-  }
+  /* Mandala backdrop — desktop only; on mobile it crowds the text
+     and reads as noise. Mobile hero stays clean. */
+  .hero-mandala { display: none; }
   @media (min-width: 900px) {
     .hero-mandala {
+      display: block;
+      position: absolute;
       top: -140px;
       right: -120px;
       width: 640px;
       height: 640px;
+      color: var(--accent);
       opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 72%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 72%);
     }
   }
   @media (prefers-reduced-motion: no-preference) {
