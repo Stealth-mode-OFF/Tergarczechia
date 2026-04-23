@@ -1,14 +1,14 @@
 /* Tergar Czechia — design tokens (brand-aligned: tergar-blue + tergar-gold) */
 
 :root {
-  /* Brand core */
-  --tergar-blue: #1C2B3A;
-  --tergar-gold: #C9962A;          /* legacy — kept for lineage content */
-  --tergar-saffron: #D9A441;       /* primary accent — brighter, lighter gold */
-  --tergar-saffron-pale: #F2C770;  /* soft saffron — hover / subtle accents */
-  --tergar-maroon: #7A2635;        /* deep Buddhist maroon — dharma ribbon */
-  --tergar-maroon-soft: #9B3A4B;
-  --tergar-lotus: #F6E7C8;         /* lotus cream — surface tint */
+  /* Brand core — sampled from official Tergar logo (src/assets/logo.png) */
+  --tergar-gold: #E0A020;          /* dharma wheel — the true brand orange-gold */
+  --tergar-gold-deep: #B8821A;     /* pressed / active */
+  --tergar-gold-pale: #F2C770;     /* hover halos / subtle accents */
+  --tergar-navy: #203070;          /* Tergar wordmark — royal navy */
+  --tergar-navy-deep: #102070;
+  --tergar-blue: #1C2B3A;          /* warm ink — for body text */
+  --tergar-cream: #F6E7C8;         /* warm surface tint */
   --tergar-incense: #EFE6D8;
 
   /* Semantic */
@@ -18,13 +18,13 @@
   --ink: #1C2B3A;
   --ink-muted: #2D3748;
   --ink-soft: #6B7480;
-  --accent: #D9A441;               /* was #C9962A — now saffron */
-  --accent-hover: #B8842C;
-  --accent-soft: #F6E7C8;          /* was #F2D4A8 — now lotus cream */
-  --accent-deep: #7A2635;          /* maroon — for ribbons / accents */
+  --accent: #E0A020;               /* brand gold from logo */
+  --accent-hover: #B8821A;
+  --accent-soft: #F6E7C8;
+  --accent-deep: #203070;          /* brand navy — secondary / ribbons */
   --line: #E8E4DD;
   --line-strong: #C9BFA9;
-  --focus: #D9A441;
+  --focus: #E0A020;
 
   /* Typography */
   --font-serif: "Playfair Display Variable", "Playfair Display", Georgia, serif;
