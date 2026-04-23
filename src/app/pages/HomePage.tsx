@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { content } from '@/data/content';
 import mingyurWavingImage from '@/assets/mingyur-waving.png';
 import communityImage from '@/assets/community.png';
+import logoImage from '@/assets/logo.png';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -37,10 +38,11 @@ export function HomePage() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slider.length) % slider.length);
 
   return (
-    <div className="bg-[#FAF8F4] overflow-hidden">
+    <div className="bg-dharma-radiance overflow-hidden">
 
       {/* ═══════ HERO — CINEMATIC FULLSCREEN ═══════ */}
       <section className="relative h-screen w-full overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,38,53,0.28),transparent_45%)] z-[1]" />
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -50,7 +52,7 @@ export function HomePage() {
             transition={{ duration: 1.8, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#1C2B3A]/50 via-[#1C2B3A]/25 to-[#1C2B3A]/75 z-10" />
             <motion.img
               src={slider[currentSlide].image}
               alt=""
@@ -74,6 +76,10 @@ export function HomePage() {
                 exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
                 transition={{ duration: 0.7, delay: 0.15 }}
               >
+                <div className="inline-flex items-center gap-3 px-4 py-2 mb-6 rounded-full bg-white/15 border border-white/35 backdrop-blur-md">
+                  <img src={logoImage} alt="Tergar Czechia" className="h-6 w-auto" />
+                  <span className="text-[11px] uppercase tracking-[0.24em] text-white/90 font-semibold">Vítejte v Tergar Czechia</span>
+                </div>
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading text-white mb-6 leading-[1.1] tracking-tight drop-shadow-2xl" style={{ fontWeight: 600 }}>
                   {slider[currentSlide].text}
                 </h1>
@@ -99,14 +105,14 @@ export function HomePage() {
             >
               <Link
                 to="/co-je-meditace"
-                className="inline-flex items-center gap-3 bg-[#C9962A] text-white px-8 py-4 rounded-full font-semibold tracking-wide hover:shadow-[0_8px_30px_-6px_rgba(201,150,42,0.5)] transition-all duration-500 group"
+                className="inline-flex items-center gap-3 bg-[#D9A441] text-[#1C2B3A] px-8 py-4 rounded-full font-semibold tracking-wide hover:shadow-[0_8px_30px_-6px_rgba(201,150,42,0.5)] transition-all duration-500 group"
               >
                 Začít meditovat
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/program"
-                className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/25 transition-all duration-300"
+                className="inline-flex items-center gap-2 bg-[#7A2635]/70 backdrop-blur-md text-[#F6E7C8] px-8 py-4 rounded-full font-medium border border-[#F6E7C8]/30 hover:bg-[#7A2635]/85 transition-all duration-300"
               >
                 Prozkoumat program
               </Link>
@@ -152,7 +158,7 @@ export function HomePage() {
       </section>
 
       {/* ═══════ QUOTE — WARM & ELEGANT ═══════ */}
-      <section className="py-28 md:py-36 bg-[#FAF8F4] text-center px-6 relative">
+      <section className="py-28 md:py-36 bg-[#FBF5E8] text-center px-6 relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-[#C9962A]/30 to-transparent" />
         <motion.div
           initial="hidden"
@@ -176,9 +182,9 @@ export function HomePage() {
       </section>
 
       {/* ═══════ KDE ZAČÍT — DUAL ENTRY POINT ═══════ */}
-      <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+      <section className="py-24 md:py-32 relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E8E4DD] to-transparent" />
-        <div className="container-custom">
+        <div className="container-custom section-shell p-8 md:p-14">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -243,7 +249,7 @@ export function HomePage() {
       </section>
 
       {/* ═══════ RINPOCHE BIO ═══════ */}
-      <section className="py-28 md:py-36 bg-[#F4F1EC] overflow-hidden relative">
+      <section className="py-28 md:py-36 bg-[#F2E8DA] overflow-hidden relative">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#C9962A]/[0.03] rounded-full blur-[100px] -translate-y-1/3 translate-x-1/4" />
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -401,7 +407,7 @@ export function HomePage() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="group inline-flex items-center gap-3 bg-[#C9962A] text-white px-10 py-5 rounded-full font-semibold tracking-wider shadow-[0_0_40px_-10px_rgba(201,150,42,0.4)] hover:shadow-[0_0_60px_-10px_rgba(201,150,42,0.6)] transition-shadow duration-500"
+            className="group inline-flex items-center gap-3 bg-[#D9A441] text-[#1C2B3A] px-10 py-5 rounded-full font-semibold tracking-wider shadow-[0_0_40px_-10px_rgba(201,150,42,0.4)] hover:shadow-[0_0_60px_-10px_rgba(201,150,42,0.6)] transition-shadow duration-500"
           >
             {support.buttonText}
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -432,7 +438,7 @@ export function HomePage() {
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/skupiny"
-                  className="inline-flex items-center gap-2 bg-[#C9962A] text-white px-6 py-3 rounded-full font-semibold text-sm tracking-wide hover:shadow-lg transition-all duration-300"
+                  className="inline-flex items-center gap-2 bg-[#D9A441] text-[#1C2B3A] px-6 py-3 rounded-full font-semibold text-sm tracking-wide hover:shadow-lg transition-all duration-300"
                 >
                   Najít skupinu <ArrowRight size={14} />
                 </Link>
