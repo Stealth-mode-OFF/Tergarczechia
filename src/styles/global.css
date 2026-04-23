@@ -251,6 +251,9 @@ p + p { margin-top: 1rem; }
   max-width: var(--head-mw);
   margin-bottom: var(--head-mb);
 }
+/* When page-head is the only thing in its Section container, the Section's
+   own padding handles spacing — remove margin-bottom to avoid triple gap. */
+.page-head:last-child { margin-bottom: 0; }
 .page-head.is-wide { max-width: var(--head-mw-wide); }
 .page-head > .eyebrow { margin-bottom: var(--head-h1-mt); }
 .page-head > h1 {
@@ -306,6 +309,7 @@ p + p { margin-top: 1rem; }
   text-wrap: pretty;
 }
 :where(.head) > .lead:last-child { margin-bottom: 0; }
+:where(.head):last-child { margin-bottom: 0; }
 
 /* In-page section headers (eyebrow + h2 + lead) — used everywhere with
    different class names (seg-header, path-head, ig-head, etc.). Unify rhythm. */
