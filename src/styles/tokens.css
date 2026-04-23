@@ -1,6 +1,9 @@
 /* Tergar Czechia — design tokens (brand-aligned: tergar-blue + tergar-gold) */
 
 :root {
+  /* Pin to light rendering at browser engine level — prevents OS dark mode
+     from re-painting native form controls and scrollbars out of brand. */
+  color-scheme: light;
   /* Brand core — sampled from official Tergar logo (src/assets/logo.png) */
   --tergar-gold: #E0A020;          /* dharma wheel — the true brand orange-gold */
   --tergar-gold-deep: #B8821A;     /* pressed / active */
@@ -17,7 +20,7 @@
   --surface-strong: #E8E4DD;
   --ink: #1C2B3A;
   --ink-muted: #2D3748;
-  --ink-soft: #6B7480;
+  --ink-soft: #5B6472;      /* darkened from #6B7480 to hit WCAG AA 4.5:1 on cream/surface */
   --accent: #E0A020;               /* brand gold from logo */
   --accent-hover: #B8821A;
   --accent-soft: #F6E7C8;

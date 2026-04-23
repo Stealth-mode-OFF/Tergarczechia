@@ -31,7 +31,7 @@ const cityCount = new Set(groups.filter((g) => g.data.city !== 'Online').map((g)
 const onlineCount = groups.filter((g) => g.data.city === 'Online').length;
 const upcomingCount = upcoming.length;
 
-const heroTitle = 'Meditace, která se hodí do českého života.';
+const heroTitle = 'Meditace, která se hodí do českého života.';
 const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
 
 const audienceSegments = [
@@ -529,7 +529,8 @@ const voices = [
     letter-spacing: -0.005em;
   }
   .portrait-role {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
     color: var(--ink-soft);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -624,7 +625,9 @@ const voices = [
     grid-template-columns: 1fr;
     gap: var(--gap-default);
   }
-  @media (min-width: 768px) {
+  /* At tablet (768-959px) 3-up squeezes body copy to ~150px readable.
+     Keep 1-up until 960px where the grid has room for 3 full columns. */
+  @media (min-width: 960px) {
     .segments { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   .segment {
