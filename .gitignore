@@ -10,3 +10,4 @@ dist/
 *.log
 .cache/
 .vscode/settings.json
+.vercel

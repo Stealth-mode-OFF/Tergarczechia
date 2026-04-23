@@ -1,26 +1,26 @@
-/* Tergar Czechia — design tokens (Dawn palette) */
+/* Tergar Czechia — design tokens (brand-aligned: tergar-blue + tergar-gold) */
 
 :root {
-  /* Brand */
-  --bg: #FBF8F2;
-  --surface: #F4EEE3;
-  --surface-strong: #EAE1CD;
-  --ink: #1B2230;
-  --ink-muted: #55606E;
-  --ink-soft: #8A93A1;
-  --accent: #B6671F;
-  --accent-hover: #8F4F17;
-  --accent-soft: #E8D3B7;
-  --line: #E3DBCC;
-  --line-strong: #C9BFA9;
-  --focus: #1E4E8C;
-
-  /* Legacy brand (uchováno pro linkování s existujícím lineage content) */
+  /* Brand core */
   --tergar-blue: #1C2B3A;
   --tergar-gold: #C9962A;
 
+  /* Semantic */
+  --bg: #FAF8F4;
+  --surface: #F4F1EC;
+  --surface-strong: #E8E4DD;
+  --ink: #1C2B3A;
+  --ink-muted: #2D3748;
+  --ink-soft: #6B7480;
+  --accent: #C9962A;
+  --accent-hover: #A67D1F;
+  --accent-soft: #F2D4A8;
+  --line: #E8E4DD;
+  --line-strong: #C9BFA9;
+  --focus: #C9962A;
+
   /* Typography */
-  --font-serif: "Source Serif 4 Variable", "Source Serif 4", Charter, Georgia, serif;
+  --font-serif: "Playfair Display Variable", "Playfair Display", Georgia, serif;
   --font-sans: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -81,17 +81,17 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #141820;
-    --surface: #1C2230;
-    --surface-strong: #243044;
-    --ink: #EDE6D6;
-    --ink-muted: #9CA6B3;
-    --ink-soft: #6C7684;
-    --accent: #D98E45;
-    --accent-hover: #EBA865;
-    --accent-soft: #3A2E20;
+    --surface: #1C2B3A;
+    --surface-strong: #2D3748;
+    --ink: #FAF8F4;
+    --ink-muted: #C9BFA9;
+    --ink-soft: #8A93A1;
+    --accent: #D9B04A;
+    --accent-hover: #E8C565;
+    --accent-soft: #3A2F1A;
     --line: #26303D;
     --line-strong: #34404F;
-    --focus: #7FB1F0;
+    --focus: #D9B04A;
   }
 }
 

@@ -62,7 +62,7 @@ export default function GroupsMap({ groups }: { groups: GroupPin[] }) {
           .setLngLat([p.lng!, p.lat!])
           .setPopup(
             new maplibregl.Popup({ offset: 18, closeButton: false }).setHTML(
-              `<strong>${p.name}</strong><br/><span style="color:#55606e">${p.schedule}</span><br/><a href="${p.href}" style="color:#B6671F;">Detail →</a>`,
+              `<strong>${p.name}</strong><br/><span style="color:#55606e">${p.schedule}</span><br/><a href="${p.href}" style="color:#C9962A;">Detail →</a>`,
             ),
           )
           .addTo(map);
@@ -96,7 +96,7 @@ export default function GroupsMap({ groups }: { groups: GroupPin[] }) {
           width: 100%;
         }
         :global(.gmap-pin) {
-          --pin-color: #B6671F;
+          --pin-color: #C9962A;
           width: 24px;
           height: 24px;
           cursor: pointer;
@@ -107,7 +107,7 @@ export default function GroupsMap({ groups }: { groups: GroupPin[] }) {
           inset: 0;
           border-radius: 50%;
           background: var(--pin-color);
-          border: 3px solid #FBF8F2;
+          border: 3px solid #FAF8F4;
           box-shadow: 0 2px 8px rgba(27,34,48,.25);
         }
         :global(.maplibregl-popup) { font-family: var(--font-sans, system-ui); }

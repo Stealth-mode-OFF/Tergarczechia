@@ -396,14 +396,14 @@ export default function MeditationTimer({
           flex-direction: column;
           align-items: center;
           gap: 1.25rem;
-          --mt-face: var(--surface, #F4EEE3);
-          --mt-face-inner: var(--bg, #FBF8F2);
-          --mt-ink: var(--ink, #1B2230);
-          --mt-ink-muted: var(--ink-muted, #55606E);
-          --mt-ink-soft: var(--ink-soft, #8A93A1);
-          --mt-accent: var(--accent, #B6671F);
-          --mt-accent-soft: var(--accent-soft, #E8D3B7);
-          --mt-line: var(--line, #E3DBCC);
+          --mt-face: var(--surface, #F4F1EC);
+          --mt-face-inner: var(--bg, #FAF8F4);
+          --mt-ink: var(--ink, #1C2B3A);
+          --mt-ink-muted: var(--ink-muted, #2D3748);
+          --mt-ink-soft: var(--ink-soft, #6B7480);
+          --mt-accent: var(--accent, #C9962A);
+          --mt-accent-soft: var(--accent-soft, #F2D4A8);
+          --mt-line: var(--line, #E8E4DD);
         }
         .mt-dial-wrap {
           width: 100%;
