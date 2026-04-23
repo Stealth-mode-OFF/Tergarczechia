@@ -36,15 +36,21 @@ const classes = ['btn', `btn-${variant}`, `btn-${size}`, className].filter(Boole
   .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     font-family: var(--font-sans);
     font-weight: 500;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
     border-radius: var(--radius-md);
     transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
     cursor: pointer;
     text-decoration: none;
-    line-height: 1;
+    line-height: 1.15;
+  }
+  @media (min-width: 640px) {
+    .btn { white-space: nowrap; }
   }
   .btn-sm { padding: 0.5rem 0.875rem; font-size: 0.8125rem; }
   .btn-md { padding: 0.75rem 1.25rem; font-size: 0.9375rem; }

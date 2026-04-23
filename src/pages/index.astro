@@ -9,6 +9,7 @@ import Quote from '@/components/ui/Quote.astro';
 import Divider from '@/components/ui/Divider.astro';
 import { getCollection } from 'astro:content';
 import { formatDateRange, formatDateShort, eventTypeLabel } from '@/lib/format';
+import { csTypo } from '@/lib/cs-typo';
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -184,7 +185,7 @@ const pathHighlights = [
           </div>
           {calendarPeek.length > 0 && (
             <aside class="ne-right" aria-label="Další události">
-              <h3 class="ne-small">Také v kalendáři</h3>
+              <h3 class="ne-small">Také v kalendáři</h3>
               <ul>
                 {calendarPeek.map((e) => (
                   <li>
@@ -207,9 +208,9 @@ const pathHighlights = [
       <div class="groups-teaser">
         <div>
           <p class="eyebrow">Skupiny</p>
-          <h2>Setkáváme se tam, kde žijete.</h2>
+          <h2>Setkáváme se tam, kde žijete.</h2>
           <p class="groups-lede">
-            Pravidelná setkání v Praze (česky i anglicky), Českých Budějovicích, České Lípě a online. Otevřená — přijďte, i když jste nikdy nemeditovali.
+            Pravidelná setkání v Praze (česky i anglicky), Českých Budějovicích, České Lípě a online. Otevřená — přijďte, i když jste nikdy nemeditovali.
           </p>
           <Button href="/skupiny" variant="primary">Prohlédnout mapu skupin</Button>
         </div>
@@ -261,10 +262,11 @@ const pathHighlights = [
   }
   .hero-title {
     font-size: var(--text-5xl);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
     margin-bottom: 1.25rem;
-    max-width: 15ch;
+    max-width: 22ch;
+    text-wrap: balance;
   }
   .hero-lede {
     font-size: 1.25rem;
@@ -272,6 +274,7 @@ const pathHighlights = [
     color: var(--ink-muted);
     max-width: 54ch;
     margin-bottom: 2rem;
+    text-wrap: pretty;
   }
   .hero-cta {
     display: flex;
@@ -336,9 +339,11 @@ const pathHighlights = [
     padding: 1.75rem 1.75rem 1.5rem;
   }
   .segment h3 {
-    font-size: 1.5rem;
+    font-size: 1.625rem;
     margin: 0;
     line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
   .segment p { color: var(--ink-muted); margin: 0; flex: 1; }
   .seg-cta {
@@ -385,9 +390,12 @@ const pathHighlights = [
     letter-spacing: 0.06em;
   }
   .path-list h4 {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     margin: 0 0 0.25rem;
     font-family: var(--font-serif);
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    text-wrap: balance;
   }
   .path-list p { color: var(--ink-muted); margin: 0; font-size: 0.9375rem; }
 
