@@ -125,7 +125,7 @@ export default function MobileMenu({ nav, activePath }: { nav: Item[]; activePat
           padding: 1rem 1.5rem;
           background: var(--accent);
           color: var(--tergar-navy);
-          border-radius: 999px;
+          border-radius: 10px;
           border: 0;
           justify-content: center;
           font-size: 1rem;
