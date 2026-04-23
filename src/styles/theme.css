@@ -5,6 +5,9 @@
   --tergar-blue: #1C2B3A;
   --space-blue: #2D3748;
   --tergar-gold: #C9962A;
+  --tergar-saffron: #D9A441;
+  --tergar-maroon: #7A2635;
+  --tergar-lotus: #F6E7C8;
 
   /* Brand Gradient Colors */
   --gradient-yellow: #F2D4A8;
@@ -197,5 +200,16 @@
 
   .section-padding {
     @apply py-20 lg:py-28;
+  }
+
+  .bg-dharma-radiance {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(217, 164, 65, 0.22) 0%, transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(122, 38, 53, 0.16) 0%, transparent 36%),
+      linear-gradient(140deg, #faf7ef 0%, #f6e7c8 46%, #efe6d8 100%);
+  }
+
+  .section-shell {
+    @apply rounded-[2rem] border border-[#E8E0D3] bg-white/85 backdrop-blur-sm shadow-[0_24px_90px_-50px_rgba(28,43,58,0.45)];
   }
 }

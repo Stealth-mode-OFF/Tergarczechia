@@ -10,10 +10,10 @@ export function Footer() {
 
   return (
     <footer className="bg-[#1C2B3A] text-white relative overflow-hidden">
-      {/* Gold line accent */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#C9962A]/30 to-transparent" />
+      {/* Dharma line accent */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#D9A441]/40 to-transparent" />
 
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#C9962A]/5 rounded-full blur-[120px]" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#7A2635]/18 rounded-full blur-[120px]" />
 
       <div className="container-custom relative z-10 py-20 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
@@ -26,7 +26,7 @@ export function Footer() {
               viewport={{ once: true }}
               src={logoImage}
               alt="Tergar"
-              className="h-9 brightness-0 invert opacity-80"
+              className="h-10 opacity-95"
             />
             <p className="text-white/40 text-sm leading-relaxed font-light max-w-xs">
               Meditační komunita Yongey Mingyura Rinpočheho v České republice.
@@ -35,7 +35,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div className="lg:col-span-1 space-y-6">
-            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C9962A]/70">Navigace</h5>
+            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#F2C770]/80">Navigace</h5>
             <nav className="flex flex-col gap-3">
               {[
                 { label: 'Co je meditace', to: '/co-je-meditace' },
@@ -59,10 +59,10 @@ export function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-1 space-y-6">
-            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C9962A]/70">Kontakt</h5>
+            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#F2C770]/80">Kontakt</h5>
             <ul className="space-y-4 text-white/50 text-sm font-light">
               <li className="flex items-start gap-3 group">
-                <Mail size={14} className="mt-0.5 flex-shrink-0 group-hover:text-[#C9962A] transition-colors" />
+                <Mail size={14} className="mt-0.5 flex-shrink-0 group-hover:text-[#D9A441] transition-colors" />
                 <a href={`mailto:${contact.email}`} className="hover:text-white transition-colors">
                   {contact.email}
                 </a>
@@ -80,7 +80,7 @@ export function Footer() {
 
           {/* Social + Support */}
           <div className="lg:col-span-1 space-y-6">
-            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C9962A]/70">Sledujte nás</h5>
+            <h5 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#F2C770]/80">Sledujte nás</h5>
             <div className="flex gap-3">
               {[
                 { href: contact.facebookLink, icon: Facebook, label: 'Facebook' },
@@ -93,7 +93,7 @@ export function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center hover:bg-[#C9962A] hover:text-[#1C2B3A] hover:border-[#C9962A] transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center hover:bg-[#D9A441] hover:text-[#1C2B3A] hover:border-[#D9A441] transition-all duration-300"
                   aria-label={label}
                 >
                   <Icon size={16} strokeWidth={1.5} />
@@ -106,10 +106,10 @@ export function Footer() {
                 href="https://darujme.cz/projekt/1202868"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#C9962A] text-sm font-medium hover:text-[#C9962A]/80 transition-colors group"
+                className="inline-flex items-center gap-2 text-[#F2C770] text-sm font-medium hover:text-[#F2C770]/80 transition-colors group"
               >
                 <Heart size={14} strokeWidth={1.5} />
-                <span className="border-b border-[#C9962A]/20 group-hover:border-[#C9962A]/50 transition-colors pb-0.5">
+                <span className="border-b border-[#F2C770]/20 group-hover:border-[#F2C770]/50 transition-colors pb-0.5">
                   Podpořte nás
                 </span>
                 <ArrowUpRight size={11} className="opacity-40" />
