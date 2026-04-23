@@ -10,7 +10,6 @@ import Badge from '@/components/ui/Badge.astro';
 import Card from '@/components/ui/Card.astro';
 import { formatDateRange, eventTypeLabel, isFutureOrOngoing } from '@/lib/format';
 
-const path = (await getCollection('path')).sort((a, b) => a.data.level - b.data.level);
 const events = (await getCollection('events'))
   .filter((e) => isFutureOrOngoing(e.data) || e.data.featured)
   .sort((a, b) => a.data.dateStart.getTime() - b.data.dateStart.getTime())

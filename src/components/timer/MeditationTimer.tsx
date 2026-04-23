@@ -15,7 +15,6 @@ type Props = {
 const VIEW = 400;
 const CENTER = VIEW / 2;
 const RADIUS = 160;
-const STROKE = 2;
 
 function toFixedAngle(m: number, max: number): number {
   // 0 → top (-90°), clockwise. Return angle in radians, where 0 is top.

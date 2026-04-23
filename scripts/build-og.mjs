@@ -1,7 +1,6 @@
 // Build og-default.png — composites the real Mingyur portrait with hand-
 // rendered text + dharma wheel ornament. Run via `node scripts/build-og.mjs`.
 import sharp from 'sharp';
-import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 

@@ -33,31 +33,35 @@ export default function CategoryFilter({
     <div class="cf-controls">
       <div class="cf-group">
         <span class="cf-label">Téma</span>
-        <button type="button" class={`cf-chip ${cat === 'all' ? 'is-active' : ''}`} onClick={() => setCat('all')}>Vše</button>
-        {categories.map((c) => (
-          <button
-            key={c.value}
-            type="button"
-            class={`cf-chip ${cat === c.value ? 'is-active' : ''}`}
-            onClick={() => setCat(c.value)}
-          >
-            {c.label}
-          </button>
-        ))}
+        <div class="cf-row">
+          <button type="button" class={`cf-chip ${cat === 'all' ? 'is-active' : ''}`} onClick={() => setCat('all')}>Vše</button>
+          {categories.map((c) => (
+            <button
+              key={c.value}
+              type="button"
+              class={`cf-chip ${cat === c.value ? 'is-active' : ''}`}
+              onClick={() => setCat(c.value)}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
       </div>
       <div class="cf-group">
         <span class="cf-label">Typ</span>
-        <button type="button" class={`cf-chip ${kind === 'all' ? 'is-active' : ''}`} onClick={() => setKind('all')}>Vše</button>
-        {kinds.map((k) => (
-          <button
-            key={k.value}
-            type="button"
-            class={`cf-chip ${kind === k.value ? 'is-active' : ''}`}
-            onClick={() => setKind(k.value)}
-          >
-            {k.label}
-          </button>
-        ))}
+        <div class="cf-row">
+          <button type="button" class={`cf-chip ${kind === 'all' ? 'is-active' : ''}`} onClick={() => setKind('all')}>Vše</button>
+          {kinds.map((k) => (
+            <button
+              key={k.value}
+              type="button"
+              class={`cf-chip ${kind === k.value ? 'is-active' : ''}`}
+              onClick={() => setKind(k.value)}
+            >
+              {k.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

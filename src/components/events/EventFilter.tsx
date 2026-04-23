@@ -45,43 +45,47 @@ export default function EventFilter({
     <div className="ef-controls" role="group" aria-label="Filtry akcí">
       <div className="ef-group">
         <span className="ef-label">Formát</span>
-        <button
-          type="button"
-          className={`ef-chip ${type === 'all' ? 'is-active' : ''}`}
-          onClick={() => setType('all')}
-        >
-          Vše
-        </button>
-        {types.map((t) => (
+        <div className="ef-row">
           <button
-            key={t.value}
             type="button"
-            className={`ef-chip ${type === t.value ? 'is-active' : ''}`}
-            onClick={() => setType(t.value)}
+            className={`ef-chip ${type === 'all' ? 'is-active' : ''}`}
+            onClick={() => setType('all')}
           >
-            {t.label}
+            Vše
           </button>
-        ))}
+          {types.map((t) => (
+            <button
+              key={t.value}
+              type="button"
+              className={`ef-chip ${type === t.value ? 'is-active' : ''}`}
+              onClick={() => setType(t.value)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="ef-group">
         <span className="ef-label">Pro koho</span>
-        <button
-          type="button"
-          className={`ef-chip ${audience === 'all' ? 'is-active' : ''}`}
-          onClick={() => setAudience('all')}
-        >
-          Vše
-        </button>
-        {audiences.map((a) => (
+        <div className="ef-row">
           <button
-            key={a.value}
             type="button"
-            className={`ef-chip ${audience === a.value ? 'is-active' : ''}`}
-            onClick={() => setAudience(a.value)}
+            className={`ef-chip ${audience === 'all' ? 'is-active' : ''}`}
+            onClick={() => setAudience('all')}
           >
-            {a.label}
+            Vše
           </button>
-        ))}
+          {audiences.map((a) => (
+            <button
+              key={a.value}
+              type="button"
+              className={`ef-chip ${audience === a.value ? 'is-active' : ''}`}
+              onClick={() => setAudience(a.value)}
+            >
+              {a.label}
+            </button>
+          ))}
+        </div>
       </div>
       <label className="ef-toggle">
         <input

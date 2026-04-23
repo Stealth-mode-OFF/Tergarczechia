@@ -1,0 +1,166 @@
+{
+  "audited_at": "2026-04-23",
+  "source_url": "https://tergarczechia-three.vercel.app/",
+  "repo": "Stealth-mode-OFF/Tergarczechia",
+  "scope": {
+    "viewports": ["desktop", "mobile"],
+    "pages_reviewed": [
+      "/",
+      "/meditace",
+      "/cesta",
+      "/skupiny",
+      "/zdroje",
+      "/o-nas",
+      "/akce",
+      "/daru",
+      "/faq"
+    ],
+    "evidence": [
+      "live site structure review",
+      "desktop and mobile screenshots",
+      "repository inspection in local clone"
+    ]
+  },
+  "summary": {
+    "critical": 0,
+    "high": 3,
+    "medium": 4,
+    "low": 1
+  },
+  "issues": [
+    {
+      "id": "global-mobile-whitespace-rhythm",
+      "severity": "high",
+      "status": "fixed_in_repo",
+      "category": "spacing",
+      "pages": ["sitewide"],
+      "viewport": ["mobile"],
+      "problem": "Inner pages had too much empty space above the first content block and before the footer, which weakened hierarchy and made long pages feel visually unfinished.",
+      "impact": "Users hit large low-information zones before they reach content or after the last meaningful action.",
+      "action_taken": "Reduced mobile section padding globally and tightened first/last section rhythm inside main content.",
+      "files": [
+        "src/components/ui/Section.astro",
+        "src/styles/global.css"
+      ]
+    },
+    {
+      "id": "footer-overpowers-last-cta-on-mobile",
+      "severity": "high",
+      "status": "fixed_in_repo",
+      "category": "hierarchy",
+      "pages": ["sitewide"],
+      "viewport": ["mobile"],
+      "problem": "The footer consumed too much vertical space and visually competed with the final CTA or closing message.",
+      "impact": "End-of-page actions lost urgency because the footer immediately dominated the screen.",
+      "action_taken": "Compressed footer spacing, reduced top margin, and switched mobile footer navigation to a denser two-column layout where possible.",
+      "files": [
+        "src/components/nav/Footer.astro"
+      ]
+    },
+    {
+      "id": "homepage-hero-meta-too-cramped",
+      "severity": "medium",
+      "status": "fixed_in_repo",
+      "category": "homepage",
+      "pages": ["/"],
+      "viewport": ["mobile"],
+      "problem": "Hero meta stats were forced into three narrow columns, which reduced scanability and made the first screen feel busy.",
+      "impact": "The supporting facts under the hero read as noise instead of reinforcing the main message.",
+      "action_taken": "Changed the mobile meta layout to two columns and let the primary stat span the full row.",
+      "files": [
+        "src/pages/index.astro"
+      ]
+    },
+    {
+      "id": "meditace-cta-priority-too-flat",
+      "severity": "medium",
+      "status": "fixed_in_repo",
+      "category": "cta",
+      "pages": ["/meditace"],
+      "viewport": ["mobile"],
+      "problem": "The post-content action cluster presented three nearly equal actions, so the intended next step was not obvious enough.",
+      "impact": "Users interested in continuing could hesitate between path, groups and glossary.",
+      "action_taken": "Kept two strong actions and demoted the glossary to a tertiary text-link treatment; stacked the CTA group on small screens.",
+      "files": [
+        "src/pages/meditace.astro"
+      ]
+    },
+    {
+      "id": "header-footer-image-props-blocked-verification",
+      "severity": "low",
+      "status": "fixed_in_repo",
+      "category": "engineering",
+      "pages": ["sitewide"],
+      "viewport": ["desktop", "mobile"],
+      "problem": "Invalid Astro image props in header/footer caused type-check errors, which blocked reliable verification of visual changes.",
+      "impact": "Design improvements could not be validated cleanly in CI-style checks.",
+      "action_taken": "Removed unsupported Image props so astro check can pass without errors.",
+      "files": [
+        "src/components/nav/Header.astro",
+        "src/components/nav/Footer.astro"
+      ]
+    },
+    {
+      "id": "faq-category-headings-too-heavy-for-long-page-scan",
+      "severity": "medium",
+      "status": "fixed_in_repo",
+      "category": "hierarchy",
+      "pages": ["/faq"],
+      "viewport": ["mobile", "desktop"],
+      "problem": "Each FAQ category opened with a full section-header treatment, which made the page feel like multiple stacked landings instead of one scannable help page.",
+      "impact": "Users had to fight repeated visual resets before reaching the actual questions.",
+      "action_taken": "Replaced repeated full section-header blocks with compact folio+kicker category headings and tighter section spacing.",
+      "files": [
+        "src/pages/faq.astro"
+      ]
+    },
+    {
+      "id": "o-nas-lineage-section-started-with-weak-mobile-visual-order",
+      "severity": "high",
+      "status": "fixed_in_repo",
+      "category": "mobile_flow",
+      "pages": ["/o-nas"],
+      "viewport": ["mobile"],
+      "problem": "The lineage section could start with the image block before the explanatory text, weakening narrative flow and risking a blank-card impression on slower loads.",
+      "impact": "The section felt visually unanchored before users understood why the image mattered.",
+      "action_taken": "Changed mobile ordering so explanatory text leads and the lineage image follows; constrained figure width for a tighter composition.",
+      "files": [
+        "src/pages/o-nas.astro"
+      ]
+    },
+    {
+      "id": "skupiny-map-dominated-mobile-screen",
+      "severity": "high",
+      "status": "fixed_in_repo",
+      "category": "mobile_flow",
+      "pages": ["/skupiny"],
+      "viewport": ["mobile"],
+      "problem": "The map block consumed too much first-screen height relative to the list of actual groups and actions.",
+      "impact": "Users saw geography before useful attendance details and registration paths.",
+      "action_taken": "Reduced mobile map height and tightened group CTA stacking for easier scan and action.",
+      "files": [
+        "src/components/groups/GroupsMap.tsx",
+        "src/pages/skupiny.astro"
+      ]
+    },
+    {
+      "id": "post-deploy-template-validation",
+      "severity": "medium",
+      "status": "pending_after_deploy",
+      "category": "qa",
+      "pages": ["/o-nas", "/zdroje", "/faq"],
+      "viewport": ["mobile"],
+      "problem": "Some live screenshots suggest production and current repo are not fully in sync, especially around long-page spacing and content block sequencing.",
+      "impact": "A few visual anomalies visible on the live URL may persist until the updated repo is deployed.",
+      "recommended_next_step": "Deploy the current repo revision and re-run screenshot capture for the audited templates before closing the audit."
+    }
+  ],
+  "verification": {
+    "astro_check": "passed_with_hints_only",
+    "build": "passed",
+    "notes": [
+      "No type errors remain.",
+      "Build completed successfully with non-blocking hints and a Vite chunk-size warning."
+    ]
+  }
+}

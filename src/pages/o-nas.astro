@@ -23,7 +23,7 @@ const breadcrumbs = [
   jsonLd={null}
   breadcrumbs={breadcrumbs}
 >
-  <Section size="md">
+  <Section size="sm">
     <Container>
       <Breadcrumb items={breadcrumbs} />
       <SectionHeader
@@ -71,7 +71,7 @@ const breadcrumbs = [
     </Container>
   </Section>
 
-  <Section size="md">
+  <Section size="sm" class="about-quote">
     <Container size="prose">
       <Quote author="Mingyur Rinpočhe">
         „Problém není v tom, že máme emoce. Problém je v tom, že si myslíme, že bychom je mít neměli."
@@ -162,9 +162,13 @@ const breadcrumbs = [
     gap: 2.5rem;
     align-items: start;
   }
+  .grid-2.reverse > .lineage-figure { order: 2; }
+  .grid-2.reverse > div { order: 1; }
   @media (min-width: 900px) {
     .grid-2 { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
     .grid-2.reverse { grid-template-columns: 0.9fr 1.1fr; }
+    .grid-2.reverse > .lineage-figure { order: 1; }
+    .grid-2.reverse > div { order: 2; }
   }
   .grid-2 p { color: var(--ink); max-width: 56ch; margin-bottom: 1rem; }
   .grid-2 em { font-style: italic; }
@@ -190,6 +194,9 @@ const breadcrumbs = [
     overflow: hidden;
     background: var(--bg);
     box-shadow: var(--shadow-sm);
+  }
+  .lineage-figure {
+    max-width: 30rem;
   }
   .teacher-figure :global(img),
   .lineage-figure :global(img) {
@@ -217,8 +224,22 @@ const breadcrumbs = [
     text-wrap: balance;
   }
   .mission-list p { color: var(--ink-muted); margin: 0; }
+  @media (max-width: 767px) {
+    .mission-list li {
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+    .mission-list li:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+    .mission-list h3 {
+      font-size: 1.25rem;
+    }
+  }
 
   .ending-wave { color: var(--accent-soft); margin-top: 2rem; }
+  .about-quote :global(.quote) { margin-block: 0; }
 
   /* CTA row — left-aligned on all sizes to match the section rail */
   .end-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-start; }

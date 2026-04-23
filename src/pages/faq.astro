@@ -15,6 +15,25 @@ for (const f of faqs) {
   sections[f.data.section].push(f);
 }
 
+const faqAnswerHtml = (answer: string) => {
+  const escapeHtml = (value: string) =>
+    value
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
+
+  return answer
+    .trim()
+    .split(/\n{2,}/)
+    .map((paragraph) => {
+      const safe = escapeHtml(paragraph)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br />');
+      return `<p>${safe}</p>`;
+    })
+    .join('');
+};
+
 const sectionLabels: Record<string, string> = {
   obecne: 'Obecné',
   programy: 'Programy',
@@ -53,7 +72,7 @@ const sectionKeys = Object.keys(sections);
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
 
-  <Section size="md">
+  <Section size="sm">
     <Container>
       <Breadcrumb items={breadcrumbs} />
       <SectionHeader
@@ -70,15 +89,15 @@ const sectionKeys = Object.keys(sections);
     <Container size="prose">
       {sectionKeys.map((key, idx) => (
         <div class="faq-section">
-          <SectionHeader
-            folio={String(idx + 2).padStart(2, '0')}
-            eyebrow={sectionLabels[key] ?? key}
-            title={`Otázky k tématu ${sectionLabels[key] ?? key}.`}
-          />
+          <p class="faq-kicker">
+            <span class="faq-folio">{String(idx + 2).padStart(2, '0')}.</span>
+            <span>{sectionLabels[key] ?? key}</span>
+          </p>
+          <h2 class="faq-title">{sectionLabels[key] ?? key}</h2>
           <div class="faq-list">
             {sections[key].map((f) => (
               <Accordion summary={f.data.question}>
-                <p>{f.data.answer}</p>
+                <div class="faq-answer" set:html={faqAnswerHtml(f.data.answer)} />
               </Accordion>
             ))}
           </div>
@@ -89,8 +108,39 @@ const sectionKeys = Object.keys(sections);
 </BaseLayout>
 
 <style>
-  .faq-section { margin-bottom: 3.5rem; }
+  .faq-section { margin-bottom: 3rem; }
   .faq-section:last-child { margin-bottom: 0; }
+  .faq-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .faq-folio {
+    color: var(--accent);
+    padding-right: 0.625rem;
+    border-right: 1px solid var(--line-strong);
+  }
+  .faq-title {
+    margin: 0;
+    font-size: clamp(1.875rem, 5vw, 2.5rem);
+    line-height: 1.12;
+  }
+  .faq-title::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 2px;
+    margin-top: 0.75rem;
+    background: var(--accent);
+  }
   .faq-list { margin-top: 1rem; }
-  .faq-list p { white-space: pre-line; }
+  .faq-answer :global(strong) { color: var(--ink); font-weight: 700; }
+  .faq-list :global(p + p) { margin-top: 0.875rem; }
 </style>

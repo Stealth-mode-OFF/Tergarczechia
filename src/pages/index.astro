@@ -6,7 +6,6 @@ import Section from '@/components/ui/Section.astro';
 import Button from '@/components/ui/Button.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Card from '@/components/ui/Card.astro';
-import Quote from '@/components/ui/Quote.astro';
 import Divider from '@/components/ui/Divider.astro';
 import SocialIcon from '@/components/ui/SocialIcon.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
@@ -15,7 +14,6 @@ import mingyurWaving from '@/assets/mingyur-waving.png';
 import communityImage from '@/assets/community.png';
 import { getCollection } from 'astro:content';
 import { formatDateRange, formatDateShort, eventTypeLabel } from '@/lib/format';
-import { csTypo } from '@/lib/cs-typo';
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -600,6 +598,15 @@ const voices = [
     margin: 0;
   }
   .hero-meta div { display: flex; flex-direction: column; gap: 0.25rem; }
+  @media (max-width: 560px) {
+    .hero-meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+    }
+    .hero-meta div:first-child {
+      grid-column: 1 / -1;
+    }
+  }
   .hero-meta dt {
     font-family: var(--font-mono);
     font-size: 0.6875rem;

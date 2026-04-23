@@ -92,8 +92,13 @@ export default function GroupsMap({ groups }: { groups: GroupPin[] }) {
           background: var(--surface);
         }
         .groups-map {
-          height: 480px;
+          height: 360px;
           width: 100%;
+        }
+        @media (min-width: 768px) {
+          .groups-map {
+            height: 480px;
+          }
         }
         :global(.gmap-pin) {
           --pin-color: #C9962A;

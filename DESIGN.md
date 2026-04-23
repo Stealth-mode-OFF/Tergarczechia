@@ -37,6 +37,26 @@ Tergar Česko is the **Czech sangha of Yongey Mingyur Rinpočhe's Tergar meditat
 - `body`: 1rem (1.0625rem on lede), line-height 1.55-1.65
 - `eyebrow`: 0.6875-0.75rem, uppercase, letter-spacing 0.12-0.22em
 
+## Visual hierarchy
+Every screen must answer these three questions in under 3 seconds:
+
+1. **Where am I?** — page title + eyebrow + breadcrumb
+2. **Why should I care?** — one strong lede or proof block
+3. **What do I do next?** — one obvious primary action
+
+### Hierarchy ladder (strict)
+- **Level 1** — `h1` / dominant section title. Usually one per screen.
+- **Level 2** — lede or key proof. Short. Max ~55-60ch.
+- **Level 3** — primary CTA. Only one filled button per content cluster.
+- **Level 4** — secondary CTA, supporting cards, meta facts.
+- **Level 5** — tertiary links, glossary links, "learn more" style exits.
+
+### Rules
+- A section gets **one hero idea**. If title, quote, map, and CTA all fight for attention, the section is wrong.
+- Supporting stats must **support**, not compete with, the heading. If a meta row becomes denser than the hero copy, simplify it.
+- If two buttons feel equally important, they probably are not. Demote one.
+- Decorative elements must never outrank copy on mobile.
+
 ### Eyebrow / folio pattern (reusable)
 Every section starts with an eyebrow line in this pattern:
 ```
@@ -50,6 +70,18 @@ Every section starts with an eyebrow line in this pattern:
 - Content gaps: `--gap-tight` (0.5rem) / `--gap-default` (1.5rem) / `--gap-md` (2.5rem) / `--gap-lg` (4rem).
 - **One visual idea per section.** Don't stack a hero + CTA + testimonial + newsletter into one section.
 - Card internal padding: 1.5-1.75rem, not generous hotel-lobby padding.
+
+### Mobile rhythm
+- Mobile is the source of truth for vertical pacing.
+- First content section under the sticky header should start **fast**. No giant dead band before the breadcrumb/title block.
+- Last meaningful CTA should not drown in whitespace before the footer.
+- If a page contains multiple long reading sections, reduce padding before inventing more separators.
+- Empty-looking blocks on mobile are bugs, even if they feel elegant on desktop.
+
+### Footer rhythm
+- Footer is a utility block, not a second homepage.
+- On mobile it should feel **dense but breathable**: brand summary first, then compact nav, then legal/contact.
+- Footer must never visually outweigh the final CTA above it.
 
 ## Components (canonical)
 All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never duplicate.**
@@ -67,6 +99,13 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 | `Section` | Outer section wrapper w/ padding + bg | Inner content grids |
 | `Container` | Max-width + padding-inline | Full-bleed content |
 
+### CTA priority model
+- **Primary CTA**: filled saffron button. Max 1 per section/card cluster.
+- **Secondary CTA**: outlined button. Use when there is a genuine alternate route.
+- **Tertiary CTA**: text link or `Button variant="link"`. Use for glossaries, supporting reading, external references.
+- Never place 3 equally-weighted buttons in a row on mobile.
+- In stacked mobile CTAs: primary first, secondary second, tertiary as text underneath or inline.
+
 ### Radius rules (right now this is inconsistent across tergar, fix on sight)
 - **Buttons, link-chips (social, ig-follow, cta-donate)** → `var(--radius-md)` (10px)
 - **Badge, Tag, hero-kicker, eyebrow pills** → `var(--radius-pill)` (999px)
@@ -83,6 +122,11 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 - **Portrait of Rinpočhe** — warm, softly lit, centered. Never cropped to face only. Use `object-position: center 20%`.
 - **Community photos** — people in meditation posture, Tibet Open House interior, retreats in nature. No stock photos of "smiling professionals."
 - **Decorative marks** — dharma wheel (used as divider), subtle concentric rings as editorial ornament. Saffron + navy tones only. No lotuses or clichés.
+
+### Mobile image rules
+- If an image does not add meaning in the first viewport, hide it or move it lower on mobile.
+- Timeline, map and gallery blocks need a clear text anchor before the visual.
+- Never insert a decorative image that reads like a blank card at phone width.
 
 ## Voice & copy (see also `ux-writing` skill)
 - **Confident, calm, Czech.** No marketing superlatives.
@@ -102,6 +146,20 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 8. ❌ Nav link active state missing (breaks orientation)
 9. ❌ `<Section surface>` and `<Section>` with identical bg (no visual rhythm)
 10. ❌ English-only microcopy slipping through (all strings must be Czech)
+11. ❌ Footer taller than the section above it on mobile
+12. ❌ Three same-weight CTAs in one cluster
+13. ❌ Hero/supporting meta squeezed into unreadable 3-up mobile columns
+14. ❌ Blank-looking image card or oversized empty band on phone widths
+15. ❌ Live site and repo drifting apart without a fresh screenshot pass after deploy
+
+## Audit workflow
+- Any meaningful homepage or template redesign should end with:
+  1. desktop screenshot review
+  2. mobile screenshot review
+  3. `npm run check`
+  4. `npm run build`
+- If screenshots and repo disagree, trust neither blindly. Verify which environment is actually deployed.
+- When a design bug is fixed systemically, update this file, not just the component CSS.
 
 ## Reference brands (inspiration, NOT imitation)
 - **Claude** (Anthropic) — warm terracotta, editorial layout, restrained
@@ -115,3 +173,4 @@ Reference DESIGN.md files for these brands live in `~/.claude/references/awesome
 - **2026-04-23** — Radius unified: all CTAs → 10px. Pill reserved for badges/tags/eyebrow. Dark mode disabled project-wide until hardcoded `rgba()` values are audited. Hero mandala moved to desktop-only.
 - **2026-04-23** — New component `SocialIcon.astro` with mono + brand variants (official IG gradient, FB #0866FF, YT #FF0033).
 - **2026-04-23** — New "Hlasy sanghy" editorial testimonials section on homepage (3 quotes, saffron left rule, middle-card offset on desktop).
+- **2026-04-23** — Audit-driven rules added: stricter CTA ladder, tighter mobile section rhythm, denser footer, and explicit post-deploy screenshot verification.

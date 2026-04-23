@@ -241,6 +241,17 @@ p + p { margin-top: 1rem; }
   .section { padding-block: var(--section-md); }
 }
 
+/* Inner-page rhythm:
+   the global header already creates separation from the viewport edge, so the
+   first and last content sections inside <main> should feel tighter on mobile.
+   This removes the "floating in whitespace" feeling visible on long pages. */
+main > .sec:first-child {
+  padding-top: clamp(2.75rem, 7vw, 5rem);
+}
+main > .sec:last-child {
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
 /* ────────────────────────────────────────────────────────────
    Unified header blocks — every page uses the same pattern.
    - .page-head: top-of-page hero header (eyebrow → h1 → lead)

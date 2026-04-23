@@ -8,7 +8,7 @@ type Props = {
   breadcrumbs?: Crumb[];
 };
 
-const { type = 'home', title, description, breadcrumbs } = Astro.props;
+const { type = 'home', description, breadcrumbs } = Astro.props as Props;
 
 const SITE = 'https://tergarczechia.cz';
 const SITE_NAME = 'Tergar Česko';
@@ -102,6 +102,6 @@ const crumb = breadcrumbs && breadcrumbs.length > 0
   : null;
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(org)} />
-{type === 'home' && <script type="application/ld+json" set:html={JSON.stringify(website)} />}
-{crumb && <script type="application/ld+json" set:html={JSON.stringify(crumb)} />}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(org)} />
+{type === 'home' && <script is:inline type="application/ld+json" set:html={JSON.stringify(website)} />}
+{crumb && <script is:inline type="application/ld+json" set:html={JSON.stringify(crumb)} />}

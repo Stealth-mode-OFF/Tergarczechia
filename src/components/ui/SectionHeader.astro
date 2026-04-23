@@ -25,7 +25,7 @@ type Props = {
   class?: string;
 };
 
-const { folio, eyebrow, title, lede, as = 'h2', narrow = false, class: className = '' } = Astro.props;
+const { folio, eyebrow, title, lede, as = 'h2', narrow = false, class: className = '' } = Astro.props as Props;
 const HeadingTag = as;
 const classes = ['section-header', narrow ? 'narrow' : '', className].filter(Boolean).join(' ');
 ---
