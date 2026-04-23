@@ -311,6 +311,17 @@ p + p { margin-top: 1rem; }
 :where(.head) > .lead:last-child { margin-bottom: 0; }
 :where(.head):last-child { margin-bottom: 0; }
 
+/* When a <section class="sec"> wraps ONLY a page-head/head block (first
+   section of many sub-pages), the next section's padding-top is enough
+   breathing room — this section's padding-bottom is redundant and makes
+   a huge empty gap. Collapse it. Works with any Container variant. */
+section.sec:has([class^="container-"] > .page-head:only-child),
+section.sec:has([class^="container-"] > .head:only-child),
+section.sec:has([class^="container-"] > nav + .page-head:last-child),
+section.sec:has([class^="container-"] > nav + .head:last-child) {
+  padding-bottom: 0;
+}
+
 /* In-page section headers (eyebrow + h2 + lead) — used everywhere with
    different class names (seg-header, path-head, ig-head, etc.). Unify rhythm. */
 :where(.seg-header, .path-head, .ig-head, .groups-teaser > div > .eyebrow + h2 + *) {
