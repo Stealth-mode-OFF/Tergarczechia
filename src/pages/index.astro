@@ -69,23 +69,14 @@ const pathHighlights = [
   { num: '04', title: 'Vajrayana Online', sub: 'Pokročilá praxe pod vedením Rinpočheho' },
 ];
 
-const voices = [
-  {
-    quote: 'Přišla jsem z ciziny, bez kontaktů, bez kotvy. Skupina v Tibet Open House byla první místo v Praze, kde jsem se cítila doma. Tři roky sedím každý týden.',
-    name: 'Hana K.',
-    meta: 'Praha · Joy of Living 2',
-  },
-  {
-    quote: 'Začal jsem s dechem pět minut ráno, protože nic jiného se mi do dne nevešlo. Po roce vím, že to není o té pětiminutovce — je to o tom, že se nepereš sám se sebou.',
-    name: 'Martin P.',
-    meta: 'Č. Budějovice · 2 roky praxe',
-  },
-  {
-    quote: 'Přišla jsem se zvědavostí, zůstala pro sanghu. Zjistila jsem, že meditace není útěk z hluku, ale způsob, jak ho nechat projít. Bez mystifikace, bez pózy.',
-    name: 'Tereza M.',
-    meta: 'Online · Path of Liberation',
-  },
-];
+const voices = (await getCollection('testimonials'))
+  .filter((t) => t.data.active)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((t) => ({
+    quote: t.data.quote,
+    name: t.data.name,
+    meta: [t.data.city, t.data.practiceYears].filter(Boolean).join(' · '),
+  }));
 ---
 
 <BaseLayout

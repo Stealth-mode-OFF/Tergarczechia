@@ -12,6 +12,9 @@ const site = 'https://tergarczechia.cz';
 
 export default defineConfig({
   site,
+  // Static build with on-demand routes for Keystatic admin + API endpoints.
+  // Pages default to prerendered HTML; /keystatic/** and /api/** opt out
+  // via `export const prerender = false`.
   output: 'static',
   adapter: vercel({
     webAnalytics: { enabled: false },
@@ -52,6 +55,7 @@ export default defineConfig({
     react({
       include: [
         '**/events/EventFilter.tsx',
+        '**/events/RegistrationForm.tsx',
         '**/groups/GroupsMap.tsx',
         '**/admin/**/*.tsx',
       ],

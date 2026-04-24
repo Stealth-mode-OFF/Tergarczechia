@@ -83,27 +83,49 @@ const classes = ['section-header', narrow ? 'narrow' : '', className].filter(Boo
      We intentionally don't set color on .label here — Section.astro already does
      `.sec-tint-navy .eyebrow { color: var(--accent) }`. */
 
+  /* TWO sizes only — hero (h1) dominates, section (h2) is clearly smaller.
+     The gap between them is what makes hierarchy readable.
+     Mobile ratio: h1 ≈ 2.625rem (42px), h2 ≈ 1.625rem (26px) — 1.6x apart.
+     Desktop: h1 ≈ 4rem (64px), h2 ≈ 2.25rem (36px) — 1.78x apart. */
   .title {
     font-family: var(--font-serif);
     font-weight: 600;
-    font-size: clamp(1.875rem, 5vw, 2.75rem);
-    line-height: 1.1;
+    line-height: 1.12;
     letter-spacing: -0.015em;
     text-wrap: balance;
     color: var(--ink);
     margin: 0;
-    max-width: 32ch;
   }
-  .narrow .title { max-width: 22ch; }
+  /* Section title (h2) — default */
+  h2.title {
+    font-size: clamp(1.625rem, 3.8vw, 2.25rem);
+    max-width: 28ch;
+  }
+  /* Hero title (h1) — bigger, bolder, tighter letter-spacing */
+  h1.title {
+    font-size: clamp(2.625rem, 7.5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    max-width: 18ch;
+  }
+  .narrow h2.title { max-width: 20ch; }
+  .narrow h1.title { max-width: 14ch; }
 
   .lede {
     font-family: var(--font-sans);
-    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    font-size: 1.0625rem;
     line-height: 1.55;
     color: var(--ink-muted);
     text-wrap: pretty;
     max-width: 60ch;
     margin: 0;
+  }
+  /* Hero lede is slightly larger — it's the page's first sentence */
+  h1.title + .lede,
+  .section-header:has(h1.title) .lede {
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    max-width: 54ch;
   }
 
   /* Navy tint — invert heading + lede, keep eyebrow folio saffron + label cream */

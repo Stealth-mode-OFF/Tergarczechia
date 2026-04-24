@@ -172,4 +172,35 @@ const pages = defineCollection({
     }),
 });
 
-export const collections = { blog, events, path, teachers, groups, resources, glossary, faq, pages };
+const registrations = defineCollection({
+  loader: glob({ pattern: '**/*.{yaml,yml}', base: './src/content/registrations' }),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+    phone: z.string().optional().default(''),
+    event: z.string(),
+    message: z.string().optional().default(''),
+    source: z.enum(['web', 'email', 'phone', 'manual']).default('web'),
+    status: z.enum(['new', 'confirmed', 'attended', 'cancelled']).default('new'),
+    createdAt: z.coerce.date(),
+    notes: z.string().optional().default(''),
+  }),
+});
+
+const testimonials = defineCollection({
+  loader: glob({ pattern: '**/*.{yaml,yml}', base: './src/content/testimonials' }),
+  schema: z.object({
+    name: z.string(),
+    quote: z.string(),
+    city: z.string(),
+    practiceYears: z.string().optional().default(''),
+    order: z.number().default(0),
+    active: z.boolean().default(true),
+  }),
+});
+
+export const collections = {
+  blog, events, path, teachers, groups, resources, glossary, faq, pages,
+  registrations, testimonials,
+};

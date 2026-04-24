@@ -95,30 +95,45 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-hyphens: manual;
 }
 
+/* Canonical type scale — each level is ~1.4-1.6x smaller than the previous,
+   so hierarchy reads immediately. Hero (h1) dominates, section (h2) is clearly
+   a step down, card titles (h3) are another step down, sub-labels (h4+) small.
+   Mobile uses the low end, desktop the high end via clamp(). */
 h1 {
-  font-size: var(--text-5xl);
-  letter-spacing: -0.022em;
-  line-height: 1.03;
-  font-weight: 600;
+  font-size: clamp(2.625rem, 7.5vw, 4rem);      /* 42 → 64 px */
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  font-weight: 700;
   font-variation-settings: "opsz" 48;
 }
 h2 {
-  font-size: var(--text-4xl);
-  letter-spacing: -0.016em;
-  line-height: 1.08;
+  font-size: clamp(1.625rem, 3.8vw, 2.25rem);   /* 26 → 36 px */
+  letter-spacing: -0.018em;
+  line-height: 1.12;
   font-weight: 600;
-  font-variation-settings: "opsz" 36;
+  font-variation-settings: "opsz" 32;
 }
 h3 {
-  font-size: var(--text-3xl);
-  letter-spacing: -0.012em;
-  line-height: 1.18;
+  font-size: clamp(1.125rem, 1.8vw, 1.375rem);  /* 18 → 22 px */
+  letter-spacing: -0.008em;
+  line-height: 1.3;
   font-weight: 600;
-  font-variation-settings: "opsz" 24;
+  font-variation-settings: "opsz" 20;
 }
-h4 { font-size: var(--text-2xl); line-height: 1.28; letter-spacing: -0.008em; font-variation-settings: "opsz" 20; }
-h5 { font-size: var(--text-xl); line-height: 1.35; letter-spacing: -0.004em; font-variation-settings: "opsz" 18; }
-h6 { font-size: var(--text-lg); line-height: 1.4; font-variation-settings: "opsz" 16; }
+h4 {
+  font-size: clamp(1rem, 1.3vw, 1.0625rem);     /* 16 → 17 px */
+  letter-spacing: -0.004em;
+  line-height: 1.4;
+  font-weight: 600;
+  font-variation-settings: "opsz" 18;
+  text-transform: none;
+}
+h5, h6 {
+  font-size: 0.9375rem;                          /* 15 px */
+  line-height: 1.4;
+  font-weight: 600;
+  font-variation-settings: "opsz" 16;
+}
 
 /* Card / sub-section title — used for h3/h4 inside cards where page-level
    serif scale would overwhelm. Keeps serif + balance + proper hierarchy. */
