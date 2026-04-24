@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720" fill="none">
+  <rect width="1400" height="720" rx="40" fill="#FAF8F4"/>
+  <text x="100" y="132" fill="#203070" font-family="Georgia, serif" font-size="76" font-weight="700">Cesta Tergar v jednom pohledu</text>
+  <text x="100" y="178" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="30">Infographic systém pro stránky programů, onboarding a prezentační materiály.</text>
+
+  <path d="M152 408H1248" stroke="#D9CCB2" stroke-width="6" stroke-linecap="round"/>
+
+  <g transform="translate(120 286)">
+    <circle cx="60" cy="122" r="44" fill="#F6E7C8" stroke="#E0A020" stroke-width="6"/>
+    <circle cx="60" cy="122" r="12" fill="#203070"/>
+    <text x="0" y="12" fill="#B8821A" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">01</text>
+    <text x="0" y="44" fill="#203070" font-family="Georgia, serif" font-size="42" font-weight="700">Anytime Anywhere</text>
+    <text x="0" y="84" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">První kontakt s meditací.</text>
+  </g>
+
+  <g transform="translate(420 222)">
+    <rect width="240" height="248" rx="28" fill="#203070"/>
+    <circle cx="120" cy="186" r="44" fill="#F6E7C8" stroke="#E0A020" stroke-width="6"/>
+    <circle cx="120" cy="186" r="12" fill="#203070"/>
+    <text x="38" y="44" fill="#F2C770" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">02</text>
+    <text x="38" y="90" fill="#FAF8F4" font-family="Georgia, serif" font-size="44" font-weight="700">Joy of Living</text>
+    <text x="38" y="130" fill="#F6E7C8" font-family="Arial, Helvetica, sans-serif" font-size="24">Klid, soucit, moudrost.</text>
+  </g>
+
+  <g transform="translate(744 254)">
+    <circle cx="60" cy="154" r="44" fill="#F6E7C8" stroke="#E0A020" stroke-width="6"/>
+    <circle cx="60" cy="154" r="12" fill="#203070"/>
+    <text x="0" y="12" fill="#B8821A" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">03</text>
+    <text x="0" y="52" fill="#203070" font-family="Georgia, serif" font-size="42" font-weight="700">Path of Liberation</text>
+    <text x="0" y="92" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">Tradiční cesta Mahámudry.</text>
+  </g>
+
+  <g transform="translate(1042 214)">
+    <rect width="240" height="256" rx="28" fill="#F4F1EC" stroke="#E8E4DD"/>
+    <circle cx="120" cy="194" r="44" fill="#F6E7C8" stroke="#E0A020" stroke-width="6"/>
+    <circle cx="120" cy="194" r="12" fill="#203070"/>
+    <text x="36" y="46" fill="#B8821A" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">04</text>
+    <text x="36" y="92" fill="#203070" font-family="Georgia, serif" font-size="44" font-weight="700">Vajrayana</text>
+    <text x="36" y="132" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">Pokročilá online praxe.</text>
+  </g>
+</svg>

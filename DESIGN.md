@@ -152,6 +152,8 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 - **Portrait of Rinpočhe** — warm, softly lit, centered. Never cropped to face only. Use `object-position: center 20%`.
 - **Community photos** — people in meditation posture, Tibet Open House interior, retreats in nature. No stock photos of "smiling professionals."
 - **Decorative marks** — dharma wheel (used as divider), subtle concentric rings as editorial ornament. Saffron + navy tones only. No lotuses or clichés.
+- Brand-kit assets live in `public/brand/` and form the canonical Czechia companion identity layer.
+- The official Tergar logo remains the institutional master mark. Czechia marks, seals and lockups are supporting assets, not replacements.
 
 ### Mobile image rules
 - If an image does not add meaning in the first viewport, hide it or move it lower on mobile.
@@ -207,3 +209,4 @@ Reference DESIGN.md files for these brands live in `~/.claude/references/awesome
 - **2026-04-23** — Conversion-first pass: header CTA shifted from donation-first to entry-first, homepage reordered around intent and trust, and a reusable mobile action bar introduced for high-intent pages.
 - **2026-04-24** — Site-wide unification pass: shared `split-grid/cards/panel/chip-nav/action-row` patterns established, detail templates aligned closer to `SectionHeader`, and desktop/mobile breakpoint logic tightened around 960px.
 - **2026-04-24** — Tablet cleanup pass: dense card grids now hold a calmer 2-column rhythm until wide desktop, footer stays lighter on tablet, and CTA rows/time-based tools align to the same responsive rules.
+- **2026-04-24** — Brand identity package added: Czechia companion marks, favicon refresh, OG refresh, and a reusable infographic set in `public/brand/`.

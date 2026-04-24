@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { JSX } from 'preact';
 
 type Props = {
   eventId: string;
@@ -11,9 +12,9 @@ export default function RegistrationForm({ eventId, eventTitle }: Props) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string>('');
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit: JSX.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
+    const form = e.currentTarget as HTMLFormElement;
     const data = new FormData(form);
 
     setStatus('submitting');
@@ -42,7 +43,7 @@ export default function RegistrationForm({ eventId, eventTitle }: Props) {
 
     setStatus('ok');
     form.reset();
-  }
+  };
 
   if (status === 'ok') {
     return (

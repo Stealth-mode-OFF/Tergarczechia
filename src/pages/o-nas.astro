@@ -10,7 +10,6 @@ import Divider from '@/components/ui/Divider.astro';
 import Card from '@/components/ui/Card.astro';
 import { Image } from 'astro:assets';
 import mingyurPortrait from '@/assets/mingyur-portrait.png';
-import lineageTree from '@/assets/lineage-tree.png';
 
 const breadcrumbs = [
   { label: 'Domů', href: '/' },
@@ -90,13 +89,10 @@ const breadcrumbs = [
       />
       <div class="split-grid is-reverse">
         <figure class="lineage-figure">
-          <Image
-            src={lineageTree}
-            alt="Strom linie Karma Kagjü — od historického Buddhy k současným učitelům"
-            widths={[480, 720, 1080]}
-            sizes="(max-width: 768px) 90vw, 520px"
-            format="avif"
-            quality={82}
+          <img
+            src="/brand/infographic-lineage.svg"
+            alt="Zkrácená vizuální linie Karma Kagjü — Buddha, mahásiddhové, tibetští mistři, Karmapové, Tulku Urgyen a Yongey Mingyur Rinpočhe"
+            loading="lazy"
           />
         </figure>
         <div>

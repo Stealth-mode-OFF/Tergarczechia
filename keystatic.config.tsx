@@ -173,8 +173,10 @@ export default config({
       columns: ['name', 'email', 'event', 'createdAt'],
       schema: {
         id: fields.slug({
-          name: { label: 'ID (automaticky)' },
-          description: 'Vytváří se automaticky při příjmu formuláře.',
+          name: {
+            label: 'ID (automaticky)',
+            description: 'Vytváří se automaticky při příjmu formuláře.',
+          },
         }),
         name: fields.text({ label: 'Jméno' }),
         email: fields.text({ label: 'E-mail' }),

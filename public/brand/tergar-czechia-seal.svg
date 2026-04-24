@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="sealBg" x1="96" y1="72" x2="424" y2="456" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FAF8F4"/>
+      <stop offset="0.55" stop-color="#F6E7C8"/>
+      <stop offset="1" stop-color="#EFE6D8"/>
+    </linearGradient>
+    <linearGradient id="sealGold" x1="122" y1="96" x2="392" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2C770"/>
+      <stop offset="0.55" stop-color="#E0A020"/>
+      <stop offset="1" stop-color="#B8821A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="64" fill="url(#sealBg)"/>
+  <circle cx="256" cy="234" r="126" stroke="url(#sealGold)" stroke-width="14"/>
+  <circle cx="256" cy="234" r="97" stroke="#D6C7A9" stroke-width="4"/>
+  <g stroke="#203070" stroke-linecap="round" opacity="0.94">
+    <path d="M256 140V188" stroke-width="6"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(45 256 234)"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(90 256 234)"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(135 256 234)"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(180 256 234)"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(225 256 234)"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(270 256 234)"/>
+    <path d="M256 140V188" stroke-width="6" transform="rotate(315 256 234)"/>
+  </g>
+  <circle cx="256" cy="234" r="21" fill="#E0A020" stroke="#203070" stroke-width="6"/>
+  <circle cx="256" cy="234" r="7" fill="#203070"/>
+
+  <path d="M196 314C214 292 234 281 256 281C278 281 298 292 316 314" stroke="#203070" stroke-width="10" stroke-linecap="round"/>
+  <path d="M165 334C191 313 221 302 256 302C291 302 321 313 347 334" stroke="#E0A020" stroke-width="10" stroke-linecap="round"/>
+
+  <text x="256" y="402" text-anchor="middle" fill="#203070" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" letter-spacing="1.5">
+    Tergar Czechia
+  </text>
+  <text x="256" y="438" text-anchor="middle" fill="#6B7480" font-family="Arial, Helvetica, sans-serif" font-size="16" letter-spacing="4.2">
+    MEDITATION • SANGHA • CZECH REPUBLIC
+  </text>
+</svg>

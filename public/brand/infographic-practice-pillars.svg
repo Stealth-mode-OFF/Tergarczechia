@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="40" fill="#FAF8F4"/>
+  <circle cx="188" cy="114" r="28" stroke="#E0A020" stroke-width="3"/>
+  <circle cx="188" cy="114" r="9" fill="#E0A020"/>
+  <text x="240" y="122" fill="#B8821A" font-family="Georgia, serif" font-size="24" font-style="italic">Infographic 01.</text>
+  <text x="90" y="208" fill="#203070" font-family="Georgia, serif" font-size="72" font-weight="700">Tři pilíře praxe</text>
+  <text x="90" y="254" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="28">
+    Jednoduchá sada pro web, workshopy i sociální sítě.
+  </text>
+
+  <g transform="translate(92 330)">
+    <rect width="312" height="260" rx="28" fill="#F4F1EC" stroke="#E8E4DD"/>
+    <circle cx="84" cy="74" r="34" fill="#F6E7C8" stroke="#E0A020" stroke-width="3"/>
+    <circle cx="84" cy="74" r="10" fill="#203070"/>
+    <text x="52" y="142" fill="#203070" font-family="Georgia, serif" font-size="42" font-weight="700">Uvědomění</text>
+    <text x="52" y="186" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">
+      Návrat k dechu, tělu
+    </text>
+    <text x="52" y="218" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">
+      a přímému prožitku.
+    </text>
+  </g>
+
+  <g transform="translate(444 280)">
+    <rect width="312" height="310" rx="28" fill="#203070"/>
+    <circle cx="84" cy="74" r="34" fill="#F6E7C8" stroke="#E0A020" stroke-width="3"/>
+    <path d="M72 74C72 66 78 60 84 60C90 60 96 66 96 74C96 88 84 95 84 95C84 95 72 88 72 74Z" fill="#E0A020"/>
+    <text x="52" y="152" fill="#FAF8F4" font-family="Georgia, serif" font-size="42" font-weight="700">Soucit</text>
+    <text x="52" y="196" fill="#F6E7C8" font-family="Arial, Helvetica, sans-serif" font-size="24">
+      Měkčí vztah k sobě
+    </text>
+    <text x="52" y="228" fill="#F6E7C8" font-family="Arial, Helvetica, sans-serif" font-size="24">
+      i druhým lidem.
+    </text>
+  </g>
+
+  <g transform="translate(796 330)">
+    <rect width="312" height="260" rx="28" fill="#F4F1EC" stroke="#E8E4DD"/>
+    <circle cx="84" cy="74" r="34" fill="#F6E7C8" stroke="#E0A020" stroke-width="3"/>
+    <path d="M84 54L89 69H104L92 78L97 92L84 83L71 92L76 78L64 69H79L84 54Z" fill="#203070"/>
+    <text x="52" y="142" fill="#203070" font-family="Georgia, serif" font-size="42" font-weight="700">Moudrost</text>
+    <text x="52" y="186" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">
+      Vidět mysl bez
+    </text>
+    <text x="52" y="218" fill="#5B6472" font-family="Arial, Helvetica, sans-serif" font-size="24">
+      zbytečné dramatizace.
+    </text>
+  </g>
+</svg>

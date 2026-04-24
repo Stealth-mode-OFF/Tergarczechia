@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" fill="none">
+  <defs>
+    <linearGradient id="lockGold" x1="40" y1="20" x2="248" y2="228" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2C770"/>
+      <stop offset="0.55" stop-color="#E0A020"/>
+      <stop offset="1" stop-color="#B8821A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="420" rx="40" fill="#FAF8F4"/>
+
+  <g transform="translate(72 66)">
+    <circle cx="114" cy="114" r="92" stroke="url(#lockGold)" stroke-width="12"/>
+    <circle cx="114" cy="114" r="70" stroke="#D6C7A9" stroke-width="3"/>
+    <g stroke="#203070" stroke-linecap="round" opacity="0.9">
+      <path d="M114 46V80" stroke-width="4"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(45 114 114)"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(90 114 114)"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(135 114 114)"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(180 114 114)"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(225 114 114)"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(270 114 114)"/>
+      <path d="M114 46V80" stroke-width="4" transform="rotate(315 114 114)"/>
+    </g>
+    <circle cx="114" cy="114" r="16" fill="#E0A020" stroke="#203070" stroke-width="4"/>
+    <circle cx="114" cy="114" r="5" fill="#203070"/>
+    <path d="M69 169C81 155 96 148 114 148C132 148 147 155 159 169" stroke="#203070" stroke-width="8" stroke-linecap="round"/>
+    <path d="M44 185C63 170 86 162 114 162C142 162 165 170 184 185" stroke="#E0A020" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <text x="330" y="174" fill="#6B7480" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="7">
+    TERGAR CZECHIA
+  </text>
+  <text x="330" y="248" fill="#203070" font-family="Georgia, 'Times New Roman', serif" font-size="114" font-weight="700" letter-spacing="-2">
+    Meditation for
+  </text>
+  <text x="330" y="340" fill="#1C2B3A" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-style="italic" font-weight="700" letter-spacing="-1.5">
+    everyday Czech life
+  </text>
+  <line x1="332" y1="368" x2="1092" y2="368" stroke="#D6C7A9"/>
+  <text x="330" y="396" fill="#6B7480" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="4">
+    SANGHA • JOY OF LIVING • KARMA KAGYÜ • PRAHA / ONLINE
+  </text>
+</svg>
