@@ -25,7 +25,9 @@ type CardItem = {
   dateTs?: number;
   thumb?: string;
   youtubeId?: string;
+  duration?: string;
   featured?: boolean;
+  language?: 'cs' | 'en';
 };
 
 const kindLabels: Record<string, string> = {
@@ -37,50 +39,63 @@ const kindLabels: Record<string, string> = {
   'meditace-audio': 'Audio',
 };
 
-const items: CardItem[] = [
-  ...blog.map((a): CardItem => ({
-    id: a.id,
-    title: a.data.title,
-    description: a.data.perex,
-    href: `/zdroje/${a.id}`,
-    external: false,
-    category: a.data.category,
-    kind: 'blog',
-    kindLabel: 'Článek',
-    date: formatDate(a.data.date),
-    dateTs: a.data.date.getTime(),
-    thumb: a.data.thumbnailRemote,
-    youtubeId: a.data.youtubeId,
-    featured: a.data.featured,
-  })),
-  ...resources.map((r): CardItem => ({
-    id: r.id,
-    title: r.data.title,
-    description: r.data.description,
-    href: r.data.url
-      ? r.data.url
-      : r.data.youtubeId
-        ? `https://www.youtube.com/watch?v=${r.data.youtubeId}`
-        : '/kontakt',
-    external: !!r.data.url || !!r.data.youtubeId,
-    category: r.data.category,
-    kind: r.data.kind,
-    kindLabel: kindLabels[r.data.kind] ?? r.data.kind,
-    date: r.data.publishedAt ? formatDate(r.data.publishedAt) : undefined,
-    dateTs: r.data.publishedAt?.getTime(),
-    thumb: r.data.thumbnailRemote,
-    youtubeId: r.data.youtubeId,
-    featured: r.data.featured,
-  })),
-].sort((a, b) => {
-  if (a.featured !== b.featured) return a.featured ? -1 : 1;
-  const at = a.dateTs ?? 0;
-  const bt = b.dateTs ?? 0;
-  return bt - at;
-});
+const blogItems: CardItem[] = blog.map((a) => ({
+  id: a.id,
+  title: a.data.title,
+  description: a.data.perex,
+  href: `/zdroje/${a.id}`,
+  external: false,
+  category: a.data.category,
+  kind: 'blog',
+  kindLabel: 'Článek',
+  date: formatDate(a.data.date),
+  dateTs: a.data.date.getTime(),
+  thumb: a.data.thumbnailRemote,
+  youtubeId: a.data.youtubeId,
+  featured: a.data.featured,
+}));
+
+const resourceItems: CardItem[] = resources.map((r) => ({
+  id: r.id,
+  title: r.data.title,
+  description: r.data.description,
+  href: r.data.url
+    ? r.data.url
+    : r.data.youtubeId
+      ? `https://www.youtube.com/watch?v=${r.data.youtubeId}`
+      : '/kontakt',
+  external: !!r.data.url || !!r.data.youtubeId,
+  category: r.data.category,
+  kind: r.data.kind,
+  kindLabel: kindLabels[r.data.kind] ?? r.data.kind,
+  date: r.data.publishedAt ? formatDate(r.data.publishedAt) : undefined,
+  dateTs: r.data.publishedAt?.getTime(),
+  thumb: r.data.thumbnailRemote,
+  youtubeId: r.data.youtubeId,
+  duration: r.data.duration,
+  featured: r.data.featured,
+  language: r.data.language,
+}));
+
+const sortNewest = (a: CardItem, b: CardItem) => (b.dateTs ?? 0) - (a.dateTs ?? 0);
+const sortFeaturedFirst = (a: CardItem, b: CardItem) => {
+  if (!!a.featured !== !!b.featured) return a.featured ? -1 : 1;
+  return sortNewest(a, b);
+};
+
+const videoItems = resourceItems.filter((r) => r.kind === 'video').sort(sortFeaturedFirst);
+const bookItems = resourceItems.filter((r) => r.kind === 'kniha').sort(sortFeaturedFirst);
+const audioItems = resourceItems
+  .filter((r) => r.kind === 'meditace-audio' || r.kind === 'podcast')
+  .sort(sortFeaturedFirst);
+
+const featuredVideo = videoItems[0] ?? null;
+
+// Full catalog sorted — used in the filterable browser at the bottom
+const allItems = [...blogItems, ...resourceItems].sort(sortFeaturedFirst);
 
 const categoriesMap = new Map<string, string>();
-for (const it of items) categoriesMap.set(it.category, categoryLabel(it.category));
+for (const it of allItems) categoriesMap.set(it.category, categoryLabel(it.category));
 const categories = [...categoriesMap.entries()].map(([value, label]) => ({ value, label }));
 
 const kinds = [
@@ -98,8 +113,8 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title="Zdroje — články, videa, knihy · Tergar Česko"
-  description="Meditační obsah v češtině — články o práci s myslí, vedené meditace, vědecké výzkumy, knihy Mingyura Rinpočheho a videa. Filtrujte podle tématu."
+  title="Zdroje — videa Rinpočheho, knihy, články · Tergar Česko"
+  description="Videa Mingyura Rinpočheho, jeho knihy v češtině i angličtině, vedené meditace, články o praxi a neurovědě meditace."
   breadcrumbs={breadcrumbs}
   jsonLd={null}
 >
@@ -109,25 +124,182 @@ const breadcrumbs = [
       <SectionHeader
         folio="01"
         eyebrow="Zdroje"
-        title="Články, videa, knihy."
-        lede="Co čteme, posloucháme a odkazujeme. Čeština i angličtina."
+        title="Videa Rinpočheho, jeho knihy, články."
+        lede="Co nabízíme sangze k prohloubení praxe. Čeština i angličtina."
         as="h1"
       />
     </Container>
   </Section>
 
+  {featuredVideo && (
+    <Section size="sm">
+      <Container>
+        <SectionHeader
+          folio="02"
+          eyebrow="Začněte tímhle"
+          title="Krátký úvod od Rinpočheho."
+        />
+        <a
+          class="feat-video"
+          href={featuredVideo.href}
+          target={featuredVideo.external ? '_blank' : undefined}
+          rel={featuredVideo.external ? 'noopener noreferrer' : undefined}
+          aria-label={`Přehrát: ${featuredVideo.title}`}
+        >
+          <div
+            class="feat-thumb"
+            style={`background-image: url(${featuredVideo.thumb ?? (featuredVideo.youtubeId ? `https://i.ytimg.com/vi/${featuredVideo.youtubeId}/maxresdefault.jpg` : '')})`}
+            aria-hidden="true"
+          >
+            <span class="feat-play" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </div>
+          <div class="feat-body">
+            <p class="feat-kind">Video · {featuredVideo.duration ?? 'YouTube'}</p>
+            <h3 class="feat-title">{featuredVideo.title}</h3>
+            <p class="feat-desc">{featuredVideo.description}</p>
+            <span class="feat-cta">Přehrát na YouTube ↗</span>
+          </div>
+        </a>
+      </Container>
+    </Section>
+  )}
+
+  {videoItems.length > 1 && (
+    <Section size="md" surface>
+      <Container>
+        <SectionHeader
+          folio="03"
+          eyebrow="Videa"
+          title="Další videa s Rinpočhem."
+          lede="Vybrali jsme z oficiálních kanálů Tergar International a Tergar Czechia. Otevírají se v YouTube."
+        />
+        <ul class="video-grid" aria-label="Videa">
+          {videoItems.slice(1).map((v) => (
+            <li>
+              <a
+                class="video-card"
+                href={v.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Přehrát: ${v.title}`}
+              >
+                <div
+                  class="video-thumb"
+                  style={`background-image:url(${v.thumb ?? (v.youtubeId ? `https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg` : '')})`}
+                  aria-hidden="true"
+                >
+                  <span class="video-play" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  {v.duration && <span class="video-duration">{v.duration}</span>}
+                </div>
+                <h4 class="video-title">{v.title}</h4>
+                <p class="video-desc">{v.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </Section>
+  )}
+
+  {bookItems.length > 0 && (
+    <Section size="md">
+      <Container>
+        <SectionHeader
+          folio={videoItems.length > 1 ? '04' : '03'}
+          eyebrow="Knihy"
+          title="Knihy Mingyura Rinpočheho."
+          lede="Vše, co vyšlo česky i anglicky. Kde je česká verze, odkazujeme na Maitreu nebo DharmaGaiu; u anglických na vydavatele."
+        />
+        <ul class="book-grid" aria-label="Knihy">
+          {bookItems.map((b) => (
+            <li>
+              <a
+                class="book-card"
+                href={b.href}
+                target={b.external ? '_blank' : undefined}
+                rel={b.external ? 'noopener noreferrer' : undefined}
+              >
+                <div
+                  class="book-cover"
+                  style={b.thumb ? `background-image:url(${b.thumb})` : ''}
+                  aria-hidden="true"
+                >
+                  {!b.thumb && <span class="book-cover-placeholder">{b.title.split(' ').slice(0, 2).join(' ')}</span>}
+                </div>
+                <div class="book-body">
+                  <p class="book-kind">
+                    Kniha{b.language === 'cs' ? ' · česky' : b.language === 'en' ? ' · anglicky' : ''}
+                    {b.date ? ` · ${b.date.slice(-4)}` : ''}
+                  </p>
+                  <h4 class="book-title">{b.title}</h4>
+                  <p class="book-desc">{b.description}</p>
+                  {b.external && <span class="book-cta">Koupit ↗</span>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </Section>
+  )}
+
+  {audioItems.length > 0 && (
+    <Section size="md" surface>
+      <Container>
+        <SectionHeader
+          folio={(() => {
+            let n = 3;
+            if (videoItems.length > 1) n += 1;
+            if (bookItems.length > 0) n += 1;
+            return String(n).padStart(2, '0');
+          })()}
+          eyebrow="Poslech"
+          title="Vedené meditace a podcasty."
+        />
+        <ul class="audio-list">
+          {audioItems.map((a) => (
+            <li>
+              <a
+                class="audio-row"
+                href={a.href}
+                target={a.external ? '_blank' : undefined}
+                rel={a.external ? 'noopener noreferrer' : undefined}
+              >
+                <span class="audio-kind">{a.kindLabel}</span>
+                <span class="audio-title">{a.title}</span>
+                {a.duration && <span class="audio-meta">{a.duration}</span>}
+                <span class="audio-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </Section>
+  )}
+
   <Section id="filtry-zdroju" size="md">
     <Container>
       <SectionHeader
-        folio="02"
-        eyebrow="Výběr"
-        title="Filtrujte podle tématu a formátu."
+        folio={(() => {
+          let n = 3;
+          if (videoItems.length > 1) n += 1;
+          if (bookItems.length > 0) n += 1;
+          if (audioItems.length > 0) n += 1;
+          return String(n).padStart(2, '0');
+        })()}
+        eyebrow="Vše"
+        title="Prolistovat celý katalog."
+        lede="Filtrujte podle tématu a formátu."
       />
       <CategoryFilter categories={categories} kinds={kinds} client:visible />
-      <p class="cf-summary"><span id="cf-count">{items.length}</span> zdrojů v aktuálním výběru</p>
+      <p class="cf-summary"><span id="cf-count">{allItems.length}</span> zdrojů v aktuálním výběru</p>
 
       <ul class="cf-grid" aria-label="Obsah">
-        {items.map((it) => (
+        {allItems.map((it) => (
           <li data-resource data-category={it.category} data-kind={it.kind}>
             <a
               href={it.href}
@@ -170,7 +342,327 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-  /* Filter bar — left-aligned, never centered */
+  /* ──────────── Featured video spotlight ──────────── */
+  .feat-video {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    color: inherit;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  @media (min-width: 760px) {
+    .feat-video {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+  .feat-video:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -28px rgba(32, 48, 112, 0.35);
+  }
+  .feat-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--surface);
+    min-height: 220px;
+  }
+  .feat-play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .feat-play::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(32, 48, 112, 0.18), rgba(224, 160, 32, 0.12));
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+  .feat-play svg {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    padding: 1rem 0.875rem 1rem 1.125rem;
+    color: var(--tergar-navy);
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px -8px rgba(32, 48, 112, 0.45);
+    transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  }
+  .feat-video:hover .feat-play svg { transform: scale(1.06); background: var(--accent); color: #fff; }
+  .feat-body {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .feat-kind {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .feat-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.15;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+  .feat-desc {
+    color: var(--ink-muted);
+    margin: 0.5rem 0 0;
+    max-width: 48ch;
+    line-height: 1.55;
+  }
+  .feat-cta {
+    margin-top: 1rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--accent);
+  }
+
+  /* ──────────── Videos grid ──────────── */
+  .video-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 640px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+  .video-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    color: inherit;
+    text-decoration: none;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .video-card:hover { transform: translateY(-2px); }
+  .video-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--surface);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .video-play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transition: background var(--dur-fast) var(--ease-out);
+  }
+  .video-play svg {
+    width: 44px;
+    height: 44px;
+    padding: 0.625rem 0.5rem 0.625rem 0.75rem;
+    color: var(--tergar-navy);
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+  .video-card:hover .video-play svg { transform: scale(1.08); background: var(--accent); color: #fff; }
+  .video-duration {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.125rem 0.375rem;
+    background: rgba(28, 43, 58, 0.78);
+    color: #fff;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+  }
+  .video-title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0.375rem 0 0.25rem;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .video-desc {
+    color: var(--ink-muted);
+    font-size: 0.9375rem;
+    margin: 0;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ──────────── Books grid ──────────── */
+  .book-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) { .book-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .book-grid { grid-template-columns: repeat(3, 1fr); } }
+  .book-card {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    height: 100%;
+  }
+  @media (min-width: 640px) {
+    .book-card { grid-template-columns: 120px 1fr; gap: 1.25rem; }
+  }
+  .book-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .book-cover {
+    aspect-ratio: 2 / 3;
+    border-radius: var(--radius-sm);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--surface);
+    box-shadow: 0 10px 22px -14px rgba(32, 48, 112, 0.45);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-serif);
+    font-size: 0.8125rem;
+    text-align: center;
+    color: var(--ink-muted);
+    padding: 0.5rem;
+  }
+  .book-cover-placeholder {
+    font-style: italic;
+    opacity: 0.7;
+    line-height: 1.3;
+  }
+  .book-body { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+  .book-kind {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .book-title {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0.125rem 0 0.375rem;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  .book-desc {
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .book-cta {
+    margin-top: 0.625rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--accent);
+  }
+
+  /* ──────────── Audio / podcast list ──────────── */
+  .audio-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .audio-row {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr) auto auto;
+    gap: 0.875rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .audio-list li:last-child .audio-row { border-bottom: 1px solid var(--line); }
+  .audio-row:hover { color: var(--accent); }
+  .audio-kind {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .audio-title {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    color: var(--ink);
+    line-height: 1.3;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .audio-row:hover .audio-title { color: var(--accent); }
+  .audio-meta {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+  }
+  .audio-arrow { color: var(--ink-soft); font-size: 0.9375rem; }
+  @media (max-width: 640px) {
+    .audio-row {
+      grid-template-columns: 1fr auto;
+      gap: 0.375rem 0.75rem;
+    }
+    .audio-kind { grid-column: 1; grid-row: 1; }
+    .audio-title { grid-column: 1 / -1; grid-row: 2; }
+    .audio-meta { grid-column: 1; grid-row: 3; }
+    .audio-arrow { grid-column: 2; grid-row: 1 / 4; align-self: center; }
+  }
+
+  /* ──────────── Filter + browse (unchanged from prior) ──────────── */
   :global(.cf-controls) {
     display: flex;
     flex-wrap: wrap;
@@ -221,9 +713,7 @@ const breadcrumbs = [
       gap: 1rem;
       margin-bottom: 1.5rem;
     }
-    :global(.cf-group) {
-      width: 100%;
-    }
+    :global(.cf-group) { width: 100%; }
     :global(.cf-row) {
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -266,9 +756,7 @@ const breadcrumbs = [
     transition: border-color .15s, transform .15s;
     height: 100%;
   }
-  .cf-card.no-media {
-    padding-top: 1.5rem;
-  }
+  .cf-card.no-media { padding-top: 1.5rem; }
   .cf-card.no-media::before {
     content: '';
     width: 4rem;
@@ -296,7 +784,6 @@ const breadcrumbs = [
     font-size: 1.1875rem;
     margin: 0 0 0.375rem;
     line-height: 1.28;
-    min-height: 3.1em;
   }
   .cf-card p {
     color: var(--ink-muted);
@@ -319,9 +806,6 @@ const breadcrumbs = [
   }
   .cf-cat { color: var(--ink-muted); }
   @media (max-width: 640px) {
-    .cf-card h3 {
-      min-height: 0;
-    }
     .cf-meta {
       flex-direction: column;
       align-items: flex-start;
