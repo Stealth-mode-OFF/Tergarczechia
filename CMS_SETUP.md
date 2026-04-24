@@ -143,39 +143,87 @@ Pokud tuto proměnnou nenastavíte, formulář bude fungovat, ale záznamy se bu
 
 ---
 
-## Přihlášení přes Gmail
+## Přihlášení přes Gmail (Supabase guard)
 
-Keystatic v core nepodporuje Google OAuth. Máte **tři** cesty k Gmail přihlášení:
+Tergar používá **Supabase Auth** jako guard před Keystatic admin rozhraním. Uživatel
+přijde na `/keystatic` → middleware ho přesměruje na `/admin/login` → klikne
+„Přihlásit přes Google" → po úspěšném přihlášení zkontroluje, že jeho e-mail
+je v `ADMIN_EMAILS` a pustí dovnitř Keystatic (které zapisuje přes GitHub mode).
 
-### Cesta A — Keystatic Cloud (nejjednodušší, placené)
+Tento flow je **nezávislý na GitHub OAuth App výše** — GitHub OAuth stále může běžet
+jako alternativní cesta (otevře se `?login=github` v Keystatic), ale **výchozí login
+je Google/Supabase**.
 
-[keystatic.cloud](https://keystatic.cloud/) je hostovaná platforma od tvůrců Keystatic. Umí:
+### Krok 1 — Nastavit Google OAuth v Supabase
 
-- Přihlášení e-mailem (včetně Gmail magic-link)
-- Pozvánky pro team members
-- Role (admin / editor / viewer)
-- Všechno ostatní stejné jako GitHub mode
+1. Otevřete [supabase.com/dashboard](https://supabase.com/dashboard) → projekt
+   `clawdia-bus` (Tergar používá stejný projekt) → **Authentication → Providers → Google**.
+2. Zapněte Google provider.
+3. Potřebujete **Google Cloud OAuth Client ID**:
+   - [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
+   - **Create credentials → OAuth client ID → Web application**
+   - Name: `Tergar Redakce`
+   - **Authorized JavaScript origins**: `https://tergarczechia-three.vercel.app`
+   - **Authorized redirect URIs**: `https://egxxyszvwrqvkvlxawky.supabase.co/auth/v1/callback`
+4. V Supabase vložte **Client ID** a **Client Secret** z Google Cloud a uložte.
 
-**Ceny:** od $10/měsíc pro team. V `keystatic.config.tsx` stačí změnit:
+### Krok 2 — Doplnit redirect URL Supabase → web
 
-```ts
-storage: {
-  kind: 'cloud',
-  pathPrefix: 'Stealth-mode-OFF/Tergarczechia',
-}
+V Supabase **Authentication → URL Configuration**:
+
+- **Site URL**: `https://tergarczechia-three.vercel.app`
+- **Additional Redirect URLs**:
+  - `https://tergarczechia-three.vercel.app/api/auth/callback`
+  - `http://localhost:4321/api/auth/callback` *(pro lokální vývoj)*
+
+### Krok 3 — Env vars ve Vercelu
+
+```bash
+vercel env add PUBLIC_SUPABASE_URL production
+# → https://egxxyszvwrqvkvlxawky.supabase.co
+
+vercel env add PUBLIC_SUPABASE_ANON_KEY production
+# → sb_publishable_WjCsaepIZ4DvSbPk3aCRJQ_X7YHenZS
+
+vercel env add ADMIN_EMAILS production
+# → chatujsgpt@gmail.com,jakub@...
 ```
 
-A zaregistrovat projekt na [keystatic.cloud](https://keystatic.cloud/).
+### Krok 4 — Redeploy
 
-### Cesta B — Clerk/Supabase + custom admin (vlastní vývoj, zdarma)
+```bash
+vercel --prod --yes
+```
 
-Postavit vlastní admin route s Google OAuth přes [Clerk](https://clerk.com) nebo [Supabase Auth](https://supabase.com/auth). 1–2 dny práce. Pro Tergar overkill, dokud team = 1–2 lidé.
+Otevřete `https://tergarczechia-three.vercel.app/keystatic`. Middleware vás odhodí
+na `/admin/login` s tlačítkem **Přihlásit přes Google**. Po kliknutí se otevře
+standardní Google OAuth dialog, potvrdíte a vrátíte se zpět do redakce.
 
-### Cesta C — Zůstat u GitHubu (současné řešení)
+### Jak funguje allowlist
 
-Team = Josef + Jakub (oba mají GitHub). Jakub dostane collaborator access na repo. Gmail přihlášení se nepotřebuje.
+Middleware (`src/middleware.ts`) kontroluje Supabase session cookie na každém
+requestu k `/keystatic/**` a `/api/keystatic/**`. Přístup dostane **pouze**
+uživatel, jehož Google e-mail je v `ADMIN_EMAILS`. Každý jiný account je ihned
+odhlášen a uvidí chybovou hlášku „Tento účet není v seznamu správců".
 
-**Doporučení:** Cesta C pro teď, Cesta A až bude potřeba zapojit lidi bez GitHubu (redaktor článků, grafik pro fotky).
+Pro přidání nového redaktora:
+
+```bash
+vercel env rm ADMIN_EMAILS production
+vercel env add ADMIN_EMAILS production
+# → chatujsgpt@gmail.com,jakub@tergarczechia.cz,novy@email.cz
+vercel --prod --yes
+```
+
+### Alternativa — Keystatic Cloud
+
+Pokud chcete Supabase obejít a platit za hotovou team collaboration:
+[keystatic.cloud](https://keystatic.cloud/) — od $10/měsíc, e-mail pozvánky, role.
+V tom případě v `keystatic.config.tsx`:
+
+```ts
+storage: { kind: 'cloud', pathPrefix: 'Stealth-mode-OFF/Tergarczechia' }
+```
 
 ---
 
