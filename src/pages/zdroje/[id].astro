@@ -6,6 +6,7 @@ import Section from '@/components/ui/Section.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import ConsentEmbed from '@/components/media/ConsentEmbed.tsx';
 import { formatDate, categoryLabel } from '@/lib/format';
 
@@ -54,16 +55,20 @@ const jsonLd = {
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="art-head">
+      <div class="art-head">
         <Badge variant="accent">{categoryLabel(d.category)}</Badge>
-        <h1>{d.title}</h1>
-        <p class="perex">{d.perex}</p>
+        <SectionHeader
+          title={d.title}
+          lede={d.perex}
+          as="h1"
+          class="article-header"
+        />
         <p class="byline">
           <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
           <span class="dot" aria-hidden="true">·</span>
           <span>Tergar Česko</span>
         </p>
-      </header>
+      </div>
       {d.thumbnailRemote && (
         <figure class="art-hero">
           <img src={d.thumbnailRemote} alt="" loading="eager" fetchpriority="high" decoding="async" />
@@ -89,7 +94,7 @@ const jsonLd = {
         <Content />
       </article>
 
-      <div class="bottom-cta">
+      <div class="bottom-cta action-row">
         <Button href="/zdroje" variant="ghost">← Zpět na zdroje</Button>
         <Button href="/skupiny" variant="secondary">Najít skupinu</Button>
       </div>
@@ -99,20 +104,16 @@ const jsonLd = {
 
 <style>
   .art-head { max-width: var(--w-prose); margin-inline: auto; text-align: left; }
-  .art-head h1 {
+  .article-header { margin: 1rem 0 1.25rem; }
+  .article-header :global(.title) {
     font-size: clamp(2rem, 4.5vw, 3.25rem);
     line-height: 1.08;
-    margin: 0.75rem 0 1rem;
-    text-wrap: balance;
   }
-  .perex {
+  .article-header :global(.lede) {
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 1.375rem;
     line-height: 1.5;
-    color: var(--ink-muted);
-    margin: 0 0 1.5rem;
-    max-width: 60ch;
   }
   .byline {
     font-family: var(--font-mono);
@@ -136,5 +137,5 @@ const jsonLd = {
   }
 
   .art-video { margin: 0 0 2rem; }
-  .bottom-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
+  .bottom-cta { margin-top: 3rem; }
 </style>

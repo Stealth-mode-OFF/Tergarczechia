@@ -189,6 +189,14 @@ const breadcrumbs = [
     letter-spacing: 0.14em;
     color: var(--ink-soft);
   }
+  :global(.cf-scroll-hint) {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
   :global(.cf-row) {
     display: flex;
     flex-wrap: wrap;
@@ -224,6 +232,7 @@ const breadcrumbs = [
       scrollbar-width: none;
     }
     :global(.cf-row::-webkit-scrollbar) { display: none; }
+    :global(.cf-scroll-hint) { display: inline-flex; }
   }
 
   .cf-grid {

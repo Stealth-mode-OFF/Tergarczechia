@@ -318,6 +318,162 @@ main > .sec:last-child {
   text-wrap: pretty;
 }
 
+/* ---------- Shared Page Patterns ---------- */
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .split-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: clamp(2.5rem, 4vw, 4rem);
+    align-items: center;
+  }
+  .split-grid.is-reverse > :first-child { order: 2; }
+  .split-grid.is-reverse > :last-child { order: 1; }
+}
+
+.cards-2,
+.cards-3,
+.cards-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-default);
+}
+@media (min-width: 720px) {
+  .cards-2,
+  .cards-3,
+  .cards-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1080px) {
+  .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.panel {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.panel-soft {
+  background: var(--surface);
+}
+.panel-strong {
+  background: color-mix(in oklab, var(--surface) 82%, white 18%);
+  border-color: color-mix(in oklab, var(--line-strong) 62%, white 38%);
+}
+
+.panel-pad {
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+}
+
+.lined-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.lined-list > li {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.lined-list > li:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.chip-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  justify-content: flex-start;
+  padding: 1rem 1.125rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+.chip-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.chip-nav a:hover {
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+@media (max-width: 520px) {
+  .action-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .action-row > .btn:not(.btn-link),
+  .action-row > a.btn:not(.btn-link) {
+    width: 100%;
+  }
+}
+
+.link-inline {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.link-inline:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.meta-heading {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.875rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.625rem 1.125rem;
+  margin: 0;
+}
+.detail-grid dt {
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+}
+.detail-grid dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.9375rem;
+}
+
 /* Legacy aliases — unify page-specific class names to the same behavior so we
    can strip per-page CSS without changing markup.
    :where() keeps specificity 0 so per-page overrides still win. */

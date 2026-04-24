@@ -90,7 +90,7 @@ const breadcrumbs = [
         title="Když vás praxe zaujme."
         lede="Po týdnu-dvou pravidelného sezení doporučujeme zkusit vedenou meditaci a přijít na některé ze setkání skupiny."
       />
-      <div class="next-cta">
+      <div class="action-row">
         <Button href="/meditace" variant="primary">Co je meditace</Button>
         <Button href="/skupiny" variant="secondary">Najít skupinu</Button>
         <Button href="/cesta" variant="ghost">Cesta Tergar</Button>
@@ -107,9 +107,7 @@ const breadcrumbs = [
     align-items: flex-start;
     padding-block: 1rem 2rem;
   }
-  @media (min-width: 800px) { .dial-stage { align-items: center; } }
+  @media (min-width: 960px) { .dial-stage { align-items: center; } }
   .howto { line-height: 1.7; }
   .howto li { margin-bottom: 0.5rem; }
-  /* CTA row — always left on rail */
-  .next-cta { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-start; }
 </style>

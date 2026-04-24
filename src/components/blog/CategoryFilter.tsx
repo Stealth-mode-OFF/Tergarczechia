@@ -48,6 +48,7 @@ export default function CategoryFilter({
             </button>
           ))}
         </div>
+        <span class="cf-scroll-hint">Posuňte pro další volby</span>
       </div>
       <div class="cf-group">
         <span class="cf-label">Typ</span>
@@ -64,6 +65,7 @@ export default function CategoryFilter({
             </button>
           ))}
         </div>
+        <span class="cf-scroll-hint">Posuňte pro další volby</span>
       </div>
     </div>
   );

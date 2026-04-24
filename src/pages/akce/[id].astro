@@ -7,6 +7,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
 import RegistrationForm from '@/components/events/RegistrationForm';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 import { formatDateRange, eventTypeLabel, audienceLabel } from '@/lib/format';
 
 export async function getStaticPaths() {
@@ -79,30 +80,32 @@ const jsonLd = {
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="ev-head">
-        <p class="eyebrow">{formatDateRange(d.dateStart, d.dateEnd)}</p>
-        <h1>{d.title}</h1>
-        <div class="ev-meta">
-          <Badge variant="accent">{eventTypeLabel(d.type)}</Badge>
-          {d.audience !== 'vsichni' && <Badge variant="outline">{audienceLabel(d.audience)}</Badge>}
-          {d.free && <Badge variant="accent">Zdarma</Badge>}
-          {d.status === 'skoncila' && <Badge variant="muted">Akce už proběhla</Badge>}
-          {d.status === 'zrusena' && <Badge variant="outline">Zrušeno</Badge>}
-        </div>
-      </header>
+      <SectionHeader
+        eyebrow={formatDateRange(d.dateStart, d.dateEnd)}
+        title={d.title}
+        lede={d.description}
+        as="h1"
+        class="ev-head"
+      />
+      <div class="ev-meta">
+        <Badge variant="accent">{eventTypeLabel(d.type)}</Badge>
+        {d.audience !== 'vsichni' && <Badge variant="outline">{audienceLabel(d.audience)}</Badge>}
+        {d.free && <Badge variant="accent">Zdarma</Badge>}
+        {d.status === 'skoncila' && <Badge variant="muted">Akce už proběhla</Badge>}
+        {d.status === 'zrusena' && <Badge variant="outline">Zrušeno</Badge>}
+      </div>
     </Container>
   </Section>
 
   <Section size="md">
     <Container size="prose">
       <article class="prose">
-        <p class="lead">{d.description}</p>
         {d.body && <div set:html={d.body} />}
       </article>
 
       {d.location?.address && (
-        <aside class="ev-location">
-          <h3>Místo</h3>
+        <aside class="ev-location panel panel-soft panel-pad">
+          <h3 class="meta-heading">Místo</h3>
           <p>
             <strong>{d.location.name}</strong><br />
             {d.location.address}
@@ -113,7 +116,7 @@ const jsonLd = {
       {d.status === 'planovana' && (
         <>
           {d.registrationUrl ? (
-            <div class="bottom-cta">
+            <div class="bottom-cta action-row">
               <Button href={d.registrationUrl} variant="primary" size="lg" external>Přihlásit se (Zenamu)</Button>
               <Button href="/akce" variant="ghost">← Všechny akce</Button>
             </div>
@@ -130,19 +133,13 @@ const jsonLd = {
 </BaseLayout>
 
 <style>
-  .ev-head { max-width: 44rem; }
-  .ev-head h1 { margin-top: 1rem; margin-bottom: 1.25rem; text-wrap: balance; }
+  .ev-head { margin-bottom: 1.5rem; }
   .ev-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-.lead { font-size: 1.25rem; color: var(--ink-muted); line-height: 1.55; }
   .ev-location {
     margin-top: 2.5rem;
-    padding: 1.5rem;
-    background: var(--surface);
-    border-radius: var(--radius-md);
   }
-  .ev-location h3 { font-size: 1rem; margin: 0 0 0.5rem; font-family: var(--font-sans); font-weight: 600; }
   .ev-location p { margin: 0; color: var(--ink-muted); }
-  .bottom-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
+  .bottom-cta { margin-top: 3rem; }
 
   /* Registration card — editorial form card, left-aligned on section rail */
   .reg-card {

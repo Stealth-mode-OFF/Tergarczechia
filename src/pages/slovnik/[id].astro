@@ -5,6 +5,7 @@ import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import Breadcrumb from '@/components/ui/Breadcrumb.astro';
 import Button from '@/components/ui/Button.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 
 export async function getStaticPaths() {
   const terms = await getCollection('glossary');
@@ -46,10 +47,13 @@ const jsonLd = {
   <Section size="md">
     <Container>
       <Breadcrumb items={breadcrumbs} />
-      <header class="head">
-        <p class="eyebrow">Slovník</p>
-        <h1>{d.term}</h1>
-        <dl class="term-alt">
+      <SectionHeader
+        eyebrow="Slovník"
+        title={d.term}
+        as="h1"
+        class="head glossary-head"
+      />
+      <dl class="term-alt panel panel-soft panel-pad">
           {d.termSanskrit && (
             <div><dt>Sanskrt</dt><dd><em>{d.termSanskrit}</em></dd></div>
           )}
@@ -59,8 +63,7 @@ const jsonLd = {
           {d.pronunciation && (
             <div><dt>Výslovnost</dt><dd>{d.pronunciation}</dd></div>
           )}
-        </dl>
-      </header>
+      </dl>
     </Container>
   </Section>
 
@@ -71,7 +74,7 @@ const jsonLd = {
       <article class="prose">
         <Content />
       </article>
-      <div class="bottom-cta">
+      <div class="bottom-cta action-row">
         <Button href="/slovnik" variant="ghost">← Zpět na slovník</Button>
       </div>
     </Container>
@@ -79,14 +82,14 @@ const jsonLd = {
 </BaseLayout>
 
 <style>
-.head h1 { margin: 0.75rem 0 1.5rem; font-size: clamp(2.5rem, 5vw, 3.75rem); }
-.term-alt {
+.glossary-head {
+    margin-bottom: 1.5rem;
+  }
+  .glossary-head :global(.title) { font-size: clamp(2.5rem, 5vw, 3.75rem); }
+  .term-alt {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem 2rem;
-    padding: 1rem 1.25rem;
-    background: var(--surface);
-    border-radius: var(--radius-md);
   }
   .term-alt div { display: flex; flex-direction: column; gap: 0.125rem; }
   .term-alt dt {
@@ -113,5 +116,5 @@ const jsonLd = {
     margin: 0 0 1.5rem;
   }
   hr { border: 0; border-top: 1px solid var(--line); margin: 1.5rem 0 2.5rem; }
-  .bottom-cta { display: flex; gap: 0.75rem; margin-top: 3rem; }
+  .bottom-cta { margin-top: 3rem; }
 </style>

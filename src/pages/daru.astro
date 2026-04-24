@@ -44,7 +44,7 @@ const bankAccount = '2001592859/2010';
         title="Tři cesty, jedna sangha."
         lede="Vyberte si, co vám sedí — rychlé online darování, převodem z účtu, nebo věnujte čas místo peněz."
       />
-      <div class="give-grid">
+      <div class="give-grid cards-3">
         <Card elevated class="give-card primary">
           <div>
             <h3>Přes darujme.cz</h3>
@@ -74,7 +74,7 @@ const bankAccount = '2001592859/2010';
             Nemůžete darovat finančně? Pomoc s překlady, organizací akcí, fotografováním nebo
             správou webu je pro nás stejně cenná.
           </p>
-          <a href="/zapojte-se" class="link-out">Dobrovolnictví →</a>
+          <a href="/zapojte-se" class="link-out link-inline">Dobrovolnictví →</a>
         </Card>
       </div>
     </Container>
@@ -91,7 +91,7 @@ const bankAccount = '2001592859/2010';
         „Štědrost není v tom, kolik dáváte. Je v tom, s jakou myslí to děláte."
       </Quote>
       <div class="where-to">
-        <ul>
+        <ul class="lined-list">
           <li><strong>Pronájmy a provoz</strong> — Tibet Open House, regionální prostory, online licence</li>
           <li><strong>Překlady</strong> — česká verze Joy of Living, knihy, audio meditace</li>
           <li><strong>Podpora lektorů</strong> — cestovné, ubytování českých i zahraničních učitelů</li>
@@ -108,11 +108,13 @@ const bankAccount = '2001592859/2010';
 
 <style>
   .give-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--gap-default);
+    align-items: stretch;
   }
-  @media (min-width: 900px) { .give-grid { grid-template-columns: 2fr 1fr 1fr; } }
+  @media (min-width: 960px) {
+    .give-grid > :first-child {
+      grid-column: span 2;
+    }
+  }
   .give-card {
     display: flex;
     flex-direction: column;
@@ -138,19 +140,10 @@ const bankAccount = '2001592859/2010';
 
   /* "Where to" list — left-aligned on the same rail, no centered island */
   .where-to { max-width: 60rem; margin-top: 2rem; }
-  .where-to ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-    display: flex;
-    flex-direction: column;
-  }
+  .where-to ul { margin: 0 0 1.5rem; }
   .where-to li {
-    padding: 0.875rem 0;
-    border-bottom: 1px solid var(--line);
     color: var(--ink);
   }
-  .where-to li:first-child { border-top: 1px solid var(--line); }
   .where-to li strong { color: var(--ink); font-weight: 600; margin-right: 0.5rem; }
   .transparent { font-size: 0.875rem; color: var(--ink-muted); }
   .transparent em { font-style: italic; }

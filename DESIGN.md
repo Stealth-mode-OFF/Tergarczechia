@@ -71,6 +71,12 @@ Every section starts with an eyebrow line in this pattern:
 - **One visual idea per section.** Don't stack a hero + CTA + testimonial + newsletter into one section.
 - Card internal padding: 1.5-1.75rem, not generous hotel-lobby padding.
 
+### Breakpoint logic
+- Treat **960px** as the main desktop transition for layout shifts, nav mode changes and mobile utility patterns.
+- Below 960px the site should still feel like one coherent mobile/tablet experience, not a half-desktop hybrid.
+- CTA stacking should usually switch by **~520px**, not page-by-page randomly.
+- Dense card grids should stay at **2 columns on tablet** and only expand to 3-4 columns on wider desktop (`~1080px+`), otherwise cards become cramped.
+
 ### Mobile rhythm
 - Mobile is the source of truth for vertical pacing.
 - First content section under the sticky header should start **fast**. No giant dead band before the breadcrumb/title block.
@@ -98,6 +104,16 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 | `Divider` | Section breaks (variants: wheel, wave) | Horizontal rules inside lists |
 | `Section` | Outer section wrapper w/ padding + bg | Inner content grids |
 | `Container` | Max-width + padding-inline | Full-bleed content |
+
+### Shared layout patterns
+- **`split-grid`**: default two-column editorial/info layout for teacher, about, contact, feature sections.
+- **`cards-2` / `cards-3` / `cards-4`**: the only approved responsive card grids.
+- `cards-3` and `cards-4` should prefer a **2-up tablet state** before going fully dense on wide desktop.
+- **`panel` + `panel-pad`**: shared surface shell for sidebars, info panels, legal/meta blocks, location cards.
+- **`lined-list`**: canonical vertically-divided list.
+- **`chip-nav`**: jump links, compact choice clusters, non-primary pill navigation.
+- **`action-row`**: canonical CTA cluster with mobile stacking.
+- If a page invents a new grid/list/panel without a strong reason, it is probably wrong.
 
 ### CTA priority model
 - **Primary CTA**: filled saffron button. Max 1 per section/card cluster.
@@ -189,3 +205,5 @@ Reference DESIGN.md files for these brands live in `~/.claude/references/awesome
 - **2026-04-23** — New "Hlasy sanghy" editorial testimonials section on homepage (3 quotes, saffron left rule, middle-card offset on desktop).
 - **2026-04-23** — Audit-driven rules added: stricter CTA ladder, tighter mobile section rhythm, denser footer, and explicit post-deploy screenshot verification.
 - **2026-04-23** — Conversion-first pass: header CTA shifted from donation-first to entry-first, homepage reordered around intent and trust, and a reusable mobile action bar introduced for high-intent pages.
+- **2026-04-24** — Site-wide unification pass: shared `split-grid/cards/panel/chip-nav/action-row` patterns established, detail templates aligned closer to `SectionHeader`, and desktop/mobile breakpoint logic tightened around 960px.
+- **2026-04-24** — Tablet cleanup pass: dense card grids now hold a calmer 2-column rhythm until wide desktop, footer stays lighter on tablet, and CTA rows/time-based tools align to the same responsive rules.

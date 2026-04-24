@@ -86,14 +86,15 @@ const sectionKeys = Object.keys(sections);
   </Section>
 
   <Section size="md">
-    <Container size="prose">
+    <Container>
       {sectionKeys.map((key, idx) => (
         <div class="faq-section">
-          <p class="faq-kicker">
-            <span class="faq-folio">{String(idx + 2).padStart(2, '0')}.</span>
-            <span>{sectionLabels[key] ?? key}</span>
-          </p>
-          <h2 class="faq-title">{sectionLabels[key] ?? key}</h2>
+          <SectionHeader
+            folio={String(idx + 2).padStart(2, '0')}
+            eyebrow={sectionLabels[key] ?? key}
+            title={sectionLabels[key] ?? key}
+            class="faq-head"
+          />
           <div class="faq-list">
             {sections[key].map((f) => (
               <Accordion summary={f.data.question}>
@@ -110,29 +111,10 @@ const sectionKeys = Object.keys(sections);
 <style>
   .faq-section { margin-bottom: 3rem; }
   .faq-section:last-child { margin-bottom: 0; }
-  .faq-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    margin: 0 0 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+  .faq-head {
+    margin-bottom: 1.5rem;
   }
-  .faq-folio {
-    color: var(--accent);
-    padding-right: 0.625rem;
-    border-right: 1px solid var(--line-strong);
-  }
-  .faq-title {
-    margin: 0;
-    font-size: clamp(1.875rem, 5vw, 2.5rem);
-    line-height: 1.12;
-  }
-  .faq-title::after {
+  .faq-head :global(.title)::after {
     content: '';
     display: block;
     width: 5rem;
@@ -140,7 +122,7 @@ const sectionKeys = Object.keys(sections);
     margin-top: 0.75rem;
     background: var(--accent);
   }
-  .faq-list { margin-top: 1rem; }
+  .faq-list { margin-top: 0; }
   .faq-answer :global(strong) { color: var(--ink); font-weight: 700; }
   .faq-list :global(p + p) { margin-top: 0.875rem; }
 </style>

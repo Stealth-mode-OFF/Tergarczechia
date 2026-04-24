@@ -223,7 +223,7 @@ export default function MobileMenu({
           font-size: 0.8125rem;
           font-weight: 600;
         }
-        @media (max-width: 420px) {
+        @media (max-width: 520px) {
           .mm-quick-grid {
             grid-template-columns: 1fr;
           }

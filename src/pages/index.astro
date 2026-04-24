@@ -85,7 +85,7 @@ const voices = (await getCollection('testimonials'))
   jsonLd="home"
 >
   <!-- Hero -->
-  <section class="hero bg-dharma-radiance">
+  <section class="hero sec bg-dharma-radiance">
     <div class="hero-spotlight" aria-hidden="true"></div>
     <svg class="hero-mandala" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
       <g fill="none" stroke="currentColor" stroke-width="1">
@@ -432,7 +432,7 @@ const voices = (await getCollection('testimonials'))
   /* Mandala backdrop — desktop only; on mobile it crowds the text
      and reads as noise. Mobile hero stays clean. */
   .hero-mandala { display: none; }
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .hero-mandala {
       display: block;
       position: absolute;
@@ -462,7 +462,7 @@ const voices = (await getCollection('testimonials'))
     align-items: center;
     padding-bottom: var(--section-md, 8rem);
   }
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .hero-grid {
       grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
       gap: var(--gap-lg);
@@ -474,7 +474,7 @@ const voices = (await getCollection('testimonials'))
   .hero-panel {
     justify-self: stretch;
   }
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .hero-panel {
       justify-self: end;
       max-width: 30rem;
@@ -630,7 +630,7 @@ const voices = (await getCollection('testimonials'))
     margin-bottom: 2.5rem;
   }
   /* Full-width CTA buttons on tight phones — avoids cramped inline pair */
-  @media (max-width: 420px) {
+  @media (max-width: 520px) {
     .hero-cta { gap: 0.625rem; }
     .hero-cta > :global(*) { width: 100%; }
   }
@@ -765,7 +765,7 @@ const voices = (await getCollection('testimonials'))
     gap: var(--gap-md);
     align-items: start;
   }
-  @media (min-width: 900px) { .next-event { grid-template-columns: 1.6fr 1fr; gap: var(--gap-lg); } }
+  @media (min-width: 960px) { .next-event { grid-template-columns: 1.6fr 1fr; gap: var(--gap-lg); } }
   .ne-left h2 { text-wrap: balance; margin-bottom: 1.25rem; }
   .ne-meta {
     display: inline-flex;
@@ -829,7 +829,7 @@ const voices = (await getCollection('testimonials'))
     gap: var(--gap-md);
     align-items: start;
   }
-  @media (min-width: 900px) { .groups-teaser { grid-template-columns: 1.1fr 1fr; gap: var(--gap-lg); } }
+  @media (min-width: 960px) { .groups-teaser { grid-template-columns: 1.1fr 1fr; gap: var(--gap-lg); } }
   .groups-teaser h2 { text-wrap: balance; margin-bottom: 1rem; }
   .groups-lede { color: var(--ink-muted); max-width: 48ch; margin-bottom: 1.5rem; }
   .groups-list {
@@ -900,7 +900,7 @@ const voices = (await getCollection('testimonials'))
     gap: 3rem;
     align-items: center;
   }
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .teacher-grid {
       grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
       gap: 4.5rem;
@@ -913,7 +913,7 @@ const voices = (await getCollection('testimonials'))
     max-width: 260px;
     justify-self: center;
   }
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .teacher-figure { justify-self: start; max-width: 380px; }
   }
   .teacher-img {

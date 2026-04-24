@@ -37,7 +37,7 @@ const breadcrumbs = [
         lede={heroText}
         as="h1"
       />
-      <div class="start-actions">
+      <div class="start-actions action-row">
         <Button href="#zkuste-ted" variant="primary" size="lg">Zkusit 5 minut</Button>
         <Button href="/skupiny" variant="secondary" size="lg">Najít skupinu</Button>
       </div>
@@ -74,7 +74,7 @@ const breadcrumbs = [
           — Mingyur Rinpočhe
         </div>
       </Callout>
-      <div class="cta-row">
+      <div class="cta-row action-row">
         <Button href="/cesta" variant="primary">Cesta Tergar</Button>
         <Button href="/skupiny" variant="secondary">Najít skupinu</Button>
         <Button href="/slovnik" variant="link" class="cta-link">Slovník pojmů</Button>
@@ -92,24 +92,11 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-  .start-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
-  }
+  .start-actions { margin-top: 2rem; }
   .mid-quote { margin: 3rem 0; font-size: 1.375rem; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-start; margin-top: 3rem; }
+  .cta-row { margin-top: 3rem; }
   .cta-link { align-self: center; }
   @media (max-width: 520px) {
-    .start-actions {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .cta-row {
-      flex-direction: column;
-      align-items: stretch;
-    }
     .cta-link {
       align-self: flex-start;
       margin-top: 0.25rem;
@@ -123,7 +110,7 @@ const breadcrumbs = [
     justify-content: flex-start;
     margin-top: 1.5rem;
   }
-  @media (min-width: 800px) {
+  @media (min-width: 960px) {
     .try-dial { justify-content: center; }
   }
 </style>

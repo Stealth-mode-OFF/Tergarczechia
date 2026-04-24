@@ -64,6 +64,7 @@ export default function EventFilter({
             </button>
           ))}
         </div>
+        <span className="ef-scroll-hint">Posuňte pro další volby</span>
       </div>
       <div className="ef-group">
         <span className="ef-label">Pro koho</span>
@@ -86,6 +87,7 @@ export default function EventFilter({
             </button>
           ))}
         </div>
+        <span className="ef-scroll-hint">Posuňte pro další volby</span>
       </div>
       <label className="ef-toggle">
         <input

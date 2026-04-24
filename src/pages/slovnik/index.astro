@@ -48,7 +48,7 @@ const letters = Object.keys(groups).sort();
         eyebrow="Rejstřík"
         title="Přeskočte na písmeno."
       />
-      <nav class="az-jump" aria-label="Přeskočit na písmeno">
+      <nav class="az-jump chip-nav" aria-label="Přeskočit na písmeno">
         {letters.map((l) => <a href={`#l-${l}`}>{l}</a>)}
       </nav>
       <div class="terms">
@@ -58,7 +58,7 @@ const letters = Object.keys(groups).sort();
             <ul>
               {groups[l].map((t) => (
                 <li>
-                  <a href={`/slovnik/${t.id}`} class="term">
+                  <a href={`/slovnik/${t.id}`} class="term panel panel-pad">
                     <div class="term-head">
                       <h3>{t.data.term}</h3>
                       {(t.data.termSanskrit || t.data.termTibetan) && (
@@ -81,25 +81,7 @@ const letters = Object.keys(groups).sort();
 </BaseLayout>
 
 <style>
-  .az-jump {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding: 1rem 1.25rem;
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    margin-bottom: 2.5rem;
-  }
-  .az-jump a {
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-sm);
-  }
-  .az-jump a:hover { background: var(--accent-soft); }
+  .az-jump { margin-bottom: 2.5rem; }
 
   .letter { margin-bottom: 3rem; }
   .letter-head {
@@ -114,14 +96,11 @@ const letters = Object.keys(groups).sort();
 
   .term {
     display: block;
-    padding: 1.25rem;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
     color: inherit;
     text-decoration: none;
-    transition: border-color .15s;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
   }
-  .term:hover { border-color: var(--line-strong); }
+  .term:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); transform: translateY(-1px); }
   .term-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1rem; margin-bottom: 0.5rem; }
   .term-head h3 { font-size: 1.375rem; margin: 0; }
   .term-alt { margin: 0; color: var(--ink-muted); font-size: 0.875rem; }

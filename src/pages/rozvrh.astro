@@ -63,7 +63,7 @@ const breadcrumbs = [
         title="Zkuste jeden z rychlých kroků."
         lede="Zenamu může selhat kvůli blokování cookies, ad-blockeru nebo jen protože vám nesedí. Většina potřebných informací je i u nás přímo na webu."
       />
-      <div class="alt-cta">
+      <div class="alt-cta action-row">
         <Button href="/akce" variant="primary">Kalendář akcí</Button>
         <Button href="/skupiny" variant="secondary">Pravidelné skupiny</Button>
         <Button href="https://app.zenamu.com/tergarczechia?view=schedule" variant="ghost" external>
@@ -77,12 +77,4 @@ const breadcrumbs = [
 <style>
   .note { margin-top: 1rem; color: var(--ink-muted); font-size: 0.875rem; max-width: 60ch; }
   .note a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
-
-  /* CTA row — always flush left to match section rail. No flex-end. */
-  .alt-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.625rem;
-    justify-content: flex-start;
-  }
 </style>
