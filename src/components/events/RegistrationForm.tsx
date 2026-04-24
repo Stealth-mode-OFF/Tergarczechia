@@ -59,7 +59,7 @@ export default function RegistrationForm({ eventId, eventTitle }: Props) {
   return (
     <form className="reg-form" onSubmit={handleSubmit} noValidate>
       <p className="reg-lede">
-        Pošlete nám přihlášku přímo tady. Potvrzení a detaily vám přijdou e-mailem.
+        Vyplňte a odešlete. Detaily přijdou e-mailem do pár minut.
       </p>
       <div className="field">
         <label htmlFor="reg-name">Jméno a příjmení</label>
@@ -95,8 +95,7 @@ export default function RegistrationForm({ eventId, eventTitle }: Props) {
       )}
 
       <p className="reg-privacy">
-        Odesláním formuláře souhlasíte, že vaše jméno, e-mail a případné další údaje
-        použijeme výhradně k organizaci této akce.
+        Údaje použijeme jen k organizaci této akce. Nikam je neprodáváme a po akci je mažeme.
       </p>
     </form>
   );
@@ -105,12 +104,12 @@ export default function RegistrationForm({ eventId, eventTitle }: Props) {
 function errorMessage(code?: string): string {
   switch (code) {
     case 'name_required':
-      return 'Prosím vyplňte jméno.';
+      return 'Chybí jméno.';
     case 'email_invalid':
-      return 'E-mail nevypadá platně — zkontrolujte prosím zápis.';
+      return 'E-mail nevypadá správně. Zkontrolujte zápis.';
     case 'event_required':
-      return 'Chyba: chybí ID akce. Zkuste obnovit stránku.';
+      return 'Systémová chyba. Obnovte stránku a zkuste to znovu.';
     default:
-      return 'Něco se nepovedlo. Zkuste to prosím znovu.';
+      return 'Nepovedlo se to odeslat. Zkuste za chvíli znovu, nebo napište na czech@tergar.org.';
   }
 }

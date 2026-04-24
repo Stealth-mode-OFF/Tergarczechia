@@ -45,9 +45,9 @@ const audiences = [
       <Breadcrumb items={breadcrumbs} />
       <SectionHeader
         folio="01"
-        eyebrow="Akce"
+        eyebrow="Kalendář"
         title="Retreaty, workshopy, přenosy."
-        lede="Kalendář akcí — online i prezenčně, s českými učiteli i s přímým přenosem od Mingyura Rinpočheho."
+        lede="Online i prezenčně. Čeští lektoři, občasné živé přenosy z retreatů s Rinpočhem."
         as="h1"
       />
     </Container>
@@ -57,7 +57,7 @@ const audiences = [
     <Container>
       <SectionHeader
         folio="02"
-        eyebrow="Kalendář 2026"
+        eyebrow="Výběr"
         title="Filtrujte podle formátu a úrovně."
       />
       <EventFilter types={types} audiences={audiences} client:visible />
@@ -104,7 +104,7 @@ const audiences = [
           );
         })}
       </ul>
-      <p id="ef-empty" class="ef-empty" hidden>Žádná akce pro zvolené filtry.</p>
+      <p id="ef-empty" class="ef-empty" hidden>Nic nevyhovuje filtrům. Zkuste úroveň „Všichni" nebo formát „Online".</p>
     </Container>
   </Section>
 

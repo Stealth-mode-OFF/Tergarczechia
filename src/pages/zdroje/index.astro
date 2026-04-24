@@ -109,8 +109,8 @@ const breadcrumbs = [
       <SectionHeader
         folio="01"
         eyebrow="Zdroje"
-        title="Články, videa, knihy — inspirace pro praxi."
-        lede="Sbírka obsahu pro ty, kdo chtějí meditaci prohloubit — vědecké výzkumy, praktické návody, osobní příběhy i tradiční učení."
+        title="Články, videa, knihy."
+        lede="Co čteme, posloucháme a odkazujeme. Čeština i angličtina."
         as="h1"
       />
     </Container>
@@ -120,7 +120,7 @@ const breadcrumbs = [
     <Container>
       <SectionHeader
         folio="02"
-        eyebrow="Všechny zdroje"
+        eyebrow="Výběr"
         title="Filtrujte podle tématu a formátu."
       />
       <CategoryFilter categories={categories} kinds={kinds} client:visible />
@@ -156,7 +156,7 @@ const breadcrumbs = [
           </li>
         ))}
       </ul>
-      <p id="cf-empty" class="cf-empty" hidden>Žádný obsah pro zvolené filtry.</p>
+      <p id="cf-empty" class="cf-empty" hidden>Nic nevyhovuje. Zkuste méně filtrů.</p>
     </Container>
   </Section>
 

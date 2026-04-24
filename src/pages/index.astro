@@ -35,38 +35,38 @@ const groupsPreview = groups
   .sort((a, b) => Number(a.data.city === 'Online') - Number(b.data.city === 'Online') || a.data.city.localeCompare(b.data.city, 'cs'))
   .slice(0, 5);
 
-const heroTitle = 'Meditace, která se hodí do českého života.';
-const heroLede = 'Jsme česká pobočka meditační komunity Tergar vedená Yongey Mingyur Rinpočhem. Učíme dech, uvědomění, soucit — od prvních kroků až po pokročilou praxi.';
+const heroTitle = 'Meditační komunita Tergar v Česku.';
+const heroLede = 'Česká sangha Yongey Mingyur Rinpočheho. Skupiny v Praze, Budějovicích, České Lípě a online. Přijďte si sednout — i když jste nikdy nemeditovali.';
 
 const audienceSegments = [
   {
     label: 'Jsem tu poprvé',
-    meta: '5 minut · bez závazku',
-    title: 'Začínám s meditací',
-    body: 'Projděte krátkou trasu „Co je meditace" a zkuste první vedenou praxi. Bez zkušeností. Bez vybavení. Bez nároků.',
-    cta: { label: 'Začít zdarma', href: '/meditace' },
+    meta: '5 minut · bez účtu',
+    title: 'Nikdy jsem nemeditoval',
+    body: 'Přečtěte si, co meditace v Tergar tradici znamená, a zkuste pět minut s vedením. Žádný účet, žádné vybavení.',
+    cta: { label: 'Zkusit pět minut', href: '/meditace' },
   },
   {
     label: 'Chci prohloubit',
     meta: 'Joy of Living · Path of Liberation',
-    title: 'Pokračuji na cestě',
-    body: 'Prohlédněte si Cestu Tergar — Joy of Living 1–3 a Path of Liberation. Strukturovaný program od tradice přes současnou vědu.',
-    cta: { label: 'Cesta Tergar', href: '/cesta' },
+    title: 'Mám za sebou první měsíce praxe',
+    body: 'Strukturovaný program od Joy of Living 1 po Mahámudru. Absolvujete online, v české skupině nebo na retreatu s Rinpočhem.',
+    cta: { label: 'Celá cesta', href: '/cesta' },
   },
   {
     label: 'Hledám komunitu',
     meta: `${cityCount} měst${onlineCount > 0 ? ` · ${onlineCount} online` : ''}`,
-    title: 'Najdu si skupinu',
+    title: 'Chci potkat ostatní',
     body: 'V Praze, Českých Budějovicích, České Lípě i online. Pravidelná setkání každý týden — přijďte kdykoliv.',
-    cta: { label: 'Skupiny', href: '/skupiny' },
+    cta: { label: 'Najít sanghu', href: '/skupiny' },
   },
 ];
 
 const pathHighlights = [
   { num: '01', title: 'Anytime Anywhere Meditation', sub: 'Úvod do meditace kdykoliv a kdekoliv' },
-  { num: '02', title: 'Joy of Living 1–3', sub: 'Klid · soucit · moudrost' },
-  { num: '03', title: 'Path of Liberation 1–5', sub: 'Tradiční cesta Mahámudry' },
-  { num: '04', title: 'Vajrayana Online', sub: 'Pokročilá praxe pod vedením Rinpočheho' },
+  { num: '02', title: 'Joy of Living 1–3', sub: 'Devítidílný program o práci s myslí, emocemi a soucitem.' },
+  { num: '03', title: 'Path of Liberation 1–5', sub: 'Přípravné praxe (ngöndro) a meditace Mahámudry.' },
+  { num: '04', title: 'Vajrayana Online', sub: 'Pokročilá vajrajánová praxe přímo s Rinpočhem.' },
 ];
 
 const voices = (await getCollection('testimonials'))
@@ -100,7 +100,7 @@ const voices = (await getCollection('testimonials'))
         <div class="hero-text">
           <p class="hero-kicker">
             <span class="kicker-mark" aria-hidden="true"></span>
-            Vítejte v&nbsp;Tergar Czechia
+            Tergar Česko · od roku 2014
           </p>
           <h1 class="hero-title">{heroTitle}</h1>
           <p class="hero-lede">{heroLede}</p>
