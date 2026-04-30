@@ -175,7 +175,7 @@ const breadcrumbs = [
           title="Další videa s Rinpočhem."
           lede="Vybrali jsme z oficiálních kanálů Tergar International a Tergar Czechia. Otevírají se v YouTube."
         />
-        <ul class="video-grid" aria-label="Videa">
+        <ul class="video-grid cards-3" aria-label="Videa">
           {videoItems.slice(1).map((v) => (
             <li>
               <a
@@ -214,7 +214,7 @@ const breadcrumbs = [
           title="Knihy Mingyura Rinpočheho."
           lede="Vše, co vyšlo česky i anglicky. Kde je česká verze, odkazujeme na Maitreu nebo DharmaGaiu; u anglických na vydavatele."
         />
-        <ul class="book-grid" aria-label="Knihy">
+        <ul class="book-grid cards-3" aria-label="Knihy">
           {bookItems.map((b) => (
             <li>
               <a
@@ -260,7 +260,7 @@ const breadcrumbs = [
           eyebrow="Poslech"
           title="Vedené meditace a podcasty."
         />
-        <ul class="audio-list">
+        <ul class="audio-list lined-list">
           {audioItems.map((a) => (
             <li>
               <a
@@ -438,17 +438,8 @@ const breadcrumbs = [
     color: var(--accent);
   }
 
-  /* ──────────── Videos grid ──────────── */
-  .video-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-  @media (min-width: 640px) { .video-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+  /* ──────────── Videos grid — uses .cards-3 utility for layout ──────────── */
+  .video-grid { list-style: none; padding: 0; margin: 0; }
   .video-card {
     display: flex;
     flex-direction: column;
@@ -521,17 +512,8 @@ const breadcrumbs = [
     overflow: hidden;
   }
 
-  /* ──────────── Books grid ──────────── */
-  .book-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  @media (min-width: 640px) { .book-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .book-grid { grid-template-columns: repeat(3, 1fr); } }
+  /* ──────────── Books grid — uses .cards-3 utility for layout ──────────── */
+  .book-grid { list-style: none; padding: 0; margin: 0; }
   .book-card {
     display: grid;
     grid-template-columns: 96px 1fr;
@@ -609,26 +591,16 @@ const breadcrumbs = [
     color: var(--accent);
   }
 
-  /* ──────────── Audio / podcast list ──────────── */
-  .audio-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
+  /* ──────────── Audio / podcast list — uses .lined-list utility ──────────── */
   .audio-row {
     display: grid;
     grid-template-columns: 80px minmax(0, 1fr) auto auto;
     gap: 0.875rem;
     align-items: center;
-    padding: 1rem 0;
-    border-top: 1px solid var(--line);
     color: inherit;
     text-decoration: none;
     transition: color var(--dur-fast) var(--ease-out);
   }
-  .audio-list li:last-child .audio-row { border-bottom: 1px solid var(--line); }
   .audio-row:hover { color: var(--accent); }
   .audio-kind {
     font-family: var(--font-mono);

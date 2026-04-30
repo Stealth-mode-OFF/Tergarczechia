@@ -193,6 +193,144 @@ All live in `src/components/ui/` + `src/components/nav/`. **Always reuse. Never 
 - If screenshots and repo disagree, trust neither blindly. Verify which environment is actually deployed.
 - When a design bug is fixed systemically, update this file, not just the component CSS.
 
+## Quick lookup — kde co najdu
+
+Když potřebuješ něco upravit nebo přidat, jdi sem **první**. Pokud něco vyžaduje
+přidání nového souboru, je to skoro vždycky špatný plán — utility už existuje.
+
+### Stránky
+
+| Co je | Kde to žije | Editovat přes |
+|---|---|---|
+| Homepage | `src/pages/index.astro` | code |
+| Stálé stránky (Co je meditace, O nás, Zapojte se) | `src/content/pages/*.md` | **CMS → Statické stránky** |
+| Cesta Tergar úrovně | `src/content/path/*.mdx` | **CMS → Cesta Tergar** |
+| Akce a retreaty | `src/content/events/*.yaml` | **CMS → Akce a události** |
+| Skupiny + mapa | `src/content/groups/*.yaml` | **CMS → Meditační skupiny** |
+| Blog články | `src/content/blog/*.mdx` | **CMS → Blog** |
+| Zdroje (videa, knihy, audio) | `src/content/resources/*.yaml` | **CMS → Zdroje** |
+| Slovník pojmů | `src/content/glossary/*.mdx` | **CMS → Slovník pojmů** |
+| FAQ | `src/content/faq/*.yaml` | **CMS → Časté dotazy** |
+| Hlasy sanghy (homepage citáty) | `src/content/testimonials/*.yaml` | **CMS → Hlasy sanghy** |
+| Učitelé | `src/content/teachers/*.mdx` | **CMS → Učitelé** |
+| Přihlášky z formulářů | `src/content/registrations/*.yaml` | **CMS → Přihlášky** (read-only seznam) |
+| Hero titulek + lede homepage | `src/content/_settings/homepage.yaml` | **CMS → Homepage** |
+| Číslo účtu, darujme.cz URL | `src/content/_settings/donate.yaml` | **CMS → Daru — nastavení** |
+| Kontaktní e-mail, název webu | `src/content/_settings/site.yaml` | **CMS → Web — obecné** |
+
+### Globální komponenty
+
+| Co | Soubor | Kdy použít |
+|---|---|---|
+| Header (nav + CTA) | `src/components/nav/Header.astro` | nikdy needituj nav položky inline na stránce |
+| Footer | `src/components/nav/Footer.astro` | sloupce + dolní řádek |
+| Mobilní menu | `src/components/nav/MobileMenu.tsx` | mění se s Header.astro `nav` polem |
+| Sekce wrapper | `src/components/ui/Section.astro` | každá `<section>` na stránce |
+| Container | `src/components/ui/Container.astro` | každý vnitřní obsah uvnitř `<Section>` |
+| **SectionHeader** | `src/components/ui/SectionHeader.astro` | **každý** úvod sekce — folio + eyebrow + h2 + lede |
+| Button | `src/components/ui/Button.astro` | každé tlačítko/CTA |
+| Card | `src/components/ui/Card.astro` | každá editorial karta v gridu |
+| Badge | `src/components/ui/Badge.astro` | malé nominální labely |
+| Tag | `src/components/ui/Tag.astro` | filtrovatelné pily |
+| Quote | `src/components/ui/Quote.astro` | pull-quote uvnitř `prose` |
+| Callout | `src/components/ui/Callout.astro` | zdůrazněný textový blok mezi odstavci |
+| Divider | `src/components/ui/Divider.astro` | dharma kolo / vlna mezi sekcemi |
+| Mobilní akční lišta | `src/components/ui/MobileActionBar.astro` | pevný bottom CTA pro key pages |
+| Sociální ikony (IG/FB/YT) | `src/components/ui/SocialIcon.astro` | jediný zdroj brand glyfů |
+| Registrační formulář | `src/components/events/RegistrationForm.tsx` | event detail page bez Zenamu |
+
+### Layout utility (v `src/styles/global.css`)
+
+Tyhle třídy jsou **canonical**. Přidávat novou variantu = potřeba design rozhodnutí, ne styling.
+
+| Třída | Co dělá | Příklady použití |
+|---|---|---|
+| `.split-grid` | 2-sloupcový editorial layout (text + figure) | `/o-nas` učitel/linie, `/kontakt` main+side |
+| `.split-grid.is-reverse` | totéž, ale obrazek vlevo na desktopu | `/o-nas` linie sekce |
+| `.cards-2`, `.cards-3`, `.cards-4` | responsive grid karet (1 → 2 → 3-4) | `/zdroje` videa+knihy, `/programy` trasy |
+| `.panel` | shared surface shell (bg + border + radius) | sidebary, info bloky, glossary item |
+| `.panel-soft` | varianta `.panel` na cream pozadí | `/kontakt` legal sidebar |
+| `.panel-pad` | standardní vnitřní padding pro `.panel` | vždy s `.panel` |
+| `.lined-list` | vertikálně rozdělený seznam (řádky s linkou) | `/daru` "kam peníze jdou", `/o-nas` knihy, `/zdroje` audio |
+| `.chip-nav` | rejstříkové linky / kompaktní pily | `/slovnik` A-Ž, `/kontakt` social linky |
+| `.action-row` | CTA cluster (auto-stackuje pod 520px) | každý sekční CTA blok |
+| `.link-inline` | textový link s saffron underline | uvnitř copy a karet |
+| `.meta-heading` | mono uppercase 11px label | sub-nadpisy v sidebaru |
+| `.detail-grid` | dt/dd grid pro key-value bloky | právní údaje, technické metadata |
+
+### Tokeny (v `src/styles/tokens.css`)
+
+| Co | Token | Použití |
+|---|---|---|
+| Primární brand | `--tergar-navy`, `--accent` | CTA, headings, eyebrows |
+| Pozadí | `--bg`, `--surface` | celá stránka / `<Section surface>` |
+| Text | `--ink`, `--ink-muted`, `--ink-soft` | headings / lede / meta |
+| Borders | `--line`, `--line-strong` | dividers / strong borders |
+| Spacing tokeny | `--gap-tight`, `--gap-default`, `--gap-md`, `--gap-lg` | mezi karty |
+| Section padding | clamp() v `Section.astro` size | nikdy ne inline padding na sekci |
+| Radius | `--radius-sm` (6) / `--radius-md` (10) / `--radius-lg` (16) / `--radius-pill` (999) | viz Radius rules výše |
+| Animace | `--dur-fast` (150ms), `--dur-med` (300ms), `--ease-out` | každý transition |
+| Stíny | `--shadow-sm`, `--shadow-md` | jen na panelech / kartách s hover lift |
+
+### Recipes — jak složit sekci
+
+**Standardní sekce s nadpisem + CTA:**
+```astro
+<Section size="md">
+  <Container>
+    <SectionHeader folio="03" eyebrow="…" title="…" lede="…" />
+    <div class="action-row">
+      <Button variant="primary">…</Button>
+      <Button variant="secondary">…</Button>
+    </div>
+  </Container>
+</Section>
+```
+
+**Editorial 2-col (text + figure):**
+```astro
+<Section size="md" surface>
+  <Container>
+    <SectionHeader … />
+    <div class="split-grid">
+      <div><p>…</p><Button …/></div>
+      <figure>…</figure>
+    </div>
+  </Container>
+</Section>
+```
+
+**Karty 3-up:**
+```astro
+<Section size="md">
+  <Container>
+    <SectionHeader … />
+    <div class="cards-3">
+      <Card>…</Card>
+      <Card>…</Card>
+      <Card>…</Card>
+    </div>
+  </Container>
+</Section>
+```
+
+**Sidebar info panel:**
+```astro
+<aside class="panel panel-soft panel-pad">
+  <h3 class="meta-heading">…</h3>
+  <dl class="detail-grid">
+    <dt>…</dt><dd>…</dd>
+  </dl>
+</aside>
+```
+
+### Když máš pochybnost
+
+- **Nepřidávej nový soubor** — utility už existuje (zkontroluj tabulky výše).
+- **Nepřidávej nový radius/color/font-size** — tokens už pokrývají všechny role.
+- **Nepřidávej inline padding na sekci** — použij `<Section size="…">` variantu.
+- **Pokud něco nesedí**, je to nejspíš špatně designed sekce, ne chybějící utility. Předělej obsah.
+
 ## Reference brands (inspiration, NOT imitation)
 - **Claude** (Anthropic) — warm terracotta, editorial layout, restrained
 - **Linear** — minimalist hierarchy, thin dividers
